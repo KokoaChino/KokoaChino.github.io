@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Mybatis 持久层框架 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Mybatis, 映射器, 配置, 注解, 交互, 事务">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mybatis 持久层框架">
+<meta property="og:url" content="http://example.com/1970/01/07/07%20Mybatis%20%E6%8C%81%E4%B9%85%E5%B1%82%E6%A1%86%E6%9E%B6/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Mybatis, 映射器, 配置, 注解, 交互, 事务">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="1970-01-06T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-11-01T10:11:15.096Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="事务">
+<meta property="article:tag" content="注解">
+<meta property="article:tag" content="交互">
+<meta property="article:tag" content="Mybatis">
+<meta property="article:tag" content="映射器">
+<meta property="article:tag" content="配置">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-07 Mybatis 持久层框架" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/1970/01/07/07%20Mybatis%20%E6%8C%81%E4%B9%85%E5%B1%82%E6%A1%86%E6%9E%B6/" class="article-date">
+  <time class="dt-published" datetime="1970-01-06T16:00:00.000Z" itemprop="datePublished">1970-01-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Mybatis 持久层框架
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>Mybatis, 映射器, 配置, 注解, 交互, 事务</p>
+<span id="more"></span>
+
+
+
+<h1 id="Mybatis"><a href="#Mybatis" class="headerlink" title="Mybatis"></a>Mybatis</h1><blockquote>
+<p>MyBatis 是一个流行的 Java 持久层框架，主要用于简化数据库操作</p>
+<p>它提供了一个半自动化的对象关系映射解决方案，允许开发者通过 XML 或注解方式将 SQL 语句与 Java 对象进行映射</p>
+</blockquote>
+<p>导入依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.5.16<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-spring<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.0.8<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h1><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;版本号&quot;</span> encoding=<span class="string">&quot;编码格式&quot;</span> ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">configuration</span></span></span><br><span class="line"><span class="meta">        <span class="keyword">PUBLIC</span> <span class="string">&quot;-//mybatis.org//DTD Config 3.0//EN&quot;</span></span></span><br><span class="line"><span class="meta">        <span class="string">&quot;http://mybatis.org/dtd/mybatis-3-config.dtd&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 配置 --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">environments</span> <span class="attr">default</span>=<span class="string">&quot;development&quot;</span>&gt;</span>   <span class="comment">&lt;!-- 环境：配置 Mybatis 的环境 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">environment</span> <span class="attr">id</span>=<span class="string">&quot;development&quot;</span>&gt;</span>   <span class="comment">&lt;!-- 环境变量：支持多套环境变量，例如开发环境、生产环境 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">transactionManager</span> <span class="attr">type</span>=<span class="string">&quot;JDBC&quot;</span>/&gt;</span>   <span class="comment">&lt;!-- 事务管理器：默认 JDBC --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dataSource</span> <span class="attr">type</span>=<span class="string">&quot;POOLED&quot;</span>&gt;</span>   <span class="comment">&lt;!-- 数据源：使用连接池，并加载 MySQL 驱动连接数据库 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;driver&quot;</span> <span class="attr">value</span>=<span class="string">&quot;驱动类&quot;</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;url&quot;</span> <span class="attr">value</span>=<span class="string">&quot;数据库连接 URL&quot;</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;username&quot;</span> <span class="attr">value</span>=<span class="string">&quot;用户名&quot;</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span> <span class="attr">value</span>=<span class="string">&quot;密码&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dataSource</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">environment</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">environments</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="映射器"><a href="#映射器" class="headerlink" title="映射器"></a>映射器</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mapper</span> <span class="attr">url</span>=<span class="string">&quot;映射器地址&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">&quot;映射器地址&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mapper</span> <span class="attr">class</span>=<span class="string">&quot;映射器所在类&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">&quot;映射器所在包&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">settings</span>&gt;</span>   <span class="comment">&lt;!-- 设置 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">&quot;logImpl&quot;</span> <span class="attr">value</span>=<span class="string">&quot;JDK_LOGGING&quot;</span> /&gt;</span>   <span class="comment">&lt;!-- 使用 JUL 日志系统输出 Mybatis 的日志信息 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">&quot;mapUnderscoreToCamelCase&quot;</span> <span class="attr">value</span>=<span class="string">&quot;true&quot;</span>/&gt;</span>   <span class="comment">&lt;!-- 开启将下划线映射为驼峰大小写 --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">settings</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="别名"><a href="#别名" class="headerlink" title="别名"></a>别名</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">typeAliases</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">typeAlias</span> <span class="attr">type</span>=<span class="string">&quot;要起别名的类&quot;</span> <span class="attr">alias</span>=<span class="string">&quot;别名&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">&quot;要起别名的包&quot;</span>/&gt;</span>   <span class="comment">&lt;!-- 默认使用类名的小写形式作为别名 --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">typeAliases</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="映射器-1"><a href="#映射器-1" class="headerlink" title="映射器"></a>映射器</h1><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;版本号&quot;</span> encoding=<span class="string">&quot;编码格式&quot;</span> ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">mapper</span></span></span><br><span class="line"><span class="meta">        <span class="keyword">PUBLIC</span> <span class="string">&quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;</span></span></span><br><span class="line"><span class="meta">        <span class="string">&quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">&quot;命名空间&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 映射 --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="映射规则"><a href="#映射规则" class="headerlink" title="映射规则"></a>映射规则</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">&quot;命名空间中用来代表这些映射规则的唯一标识符&quot;</span> <span class="attr">type</span>=<span class="string">&quot;被映射到的类名&quot;</span>&gt;</span>   <span class="comment">&lt;!-- 设定字段的映射规则 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">constructor</span>&gt;</span>   <span class="comment">&lt;!-- 设定字段的构造方法 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">idArg</span> <span class="attr">column</span>=<span class="string">&quot;主键 ID&quot;</span> <span class="attr">javaType</span>=<span class="string">&quot;字段类型&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">arg</span> <span class="attr">column</span>=<span class="string">&quot;字段&quot;</span> <span class="attr">javaType</span>=<span class="string">&quot;字段类型&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">constructor</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;字段&quot;</span> <span class="attr">property</span>=<span class="string">&quot;对应到类的字段&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="DML-操作"><a href="#DML-操作" class="headerlink" title="DML 操作"></a>DML 操作</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">&quot;&quot;</span>&gt;</span></span><br><span class="line">    insert into user(username, email) values(#&#123;username&#125;, #&#123;email&#125;)   <span class="comment">&lt;!-- 通过 #&#123;形参&#125; 来接收外部参数 --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">delete</span> <span class="attr">id</span>=<span class="string">&quot;&quot;</span>&gt;</span></span><br><span class="line">    delete from user where id = #&#123;id&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">delete</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">update</span> <span class="attr">id</span>=<span class="string">&quot;&quot;</span>&gt;</span></span><br><span class="line">    update user set username = #&#123;username&#125;, email = #&#123;email&#125; where id = #&#123;id&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">update</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="查询操作"><a href="#查询操作" class="headerlink" title="查询操作"></a>查询操作</h2><h3 id="一对一"><a href="#一对一" class="headerlink" title="一对一"></a>一对一</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;期望类型的类的完全限定名或别名&quot;</span>&gt;</span></span><br><span class="line">    一对一查询语句</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="一对多"><a href="#一对多" class="headerlink" title="一对多"></a>一对多</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;&quot;</span> <span class="attr">resultMap</span>=<span class="string">&quot;映射规则&quot;</span>&gt;</span></span><br><span class="line">    一对多查询语句</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">&quot;&quot;</span> <span class="attr">type</span>=<span class="string">&quot;被映射到的类名&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">&quot;字段&quot;</span> <span class="attr">property</span>=<span class="string">&quot;对应到类的字段&quot;</span>/&gt;</span>   <span class="comment">&lt;!-- 通过 id 作为唯一标识符 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;字段&quot;</span> <span class="attr">property</span>=<span class="string">&quot;对应到类的字段&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">collection</span> <span class="attr">property</span>=<span class="string">&quot;对应到类的字段&quot;</span> <span class="attr">ofType</span>=<span class="string">&quot;内部对应到类的字段&quot;</span>&gt;</span>   <span class="comment">&lt;!-- 通过 collection 将所有结果合并为一个集合 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">&quot;字段&quot;</span> <span class="attr">property</span>=<span class="string">&quot;对应到类的字段&quot;</span>/&gt;</span>   <span class="comment">&lt;!-- 通过 id 作为唯一标识符 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;字段&quot;</span> <span class="attr">property</span>=<span class="string">&quot;对应到类的字段&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;字段&quot;</span> <span class="attr">property</span>=<span class="string">&quot;对应到类的字段&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">collection</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="多对一"><a href="#多对一" class="headerlink" title="多对一"></a>多对一</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;&quot;</span> <span class="attr">resultMap</span>=<span class="string">&quot;映射规则&quot;</span>&gt;</span></span><br><span class="line">    多对一查询语句</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">&quot;&quot;</span> <span class="attr">type</span>=<span class="string">&quot;被映射到的类名&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">&quot;字段&quot;</span> <span class="attr">property</span>=<span class="string">&quot;对应到类的字段&quot;</span>/&gt;</span>   <span class="comment">&lt;!-- 通过 id 作为唯一标识符 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;字段&quot;</span> <span class="attr">property</span>=<span class="string">&quot;对应到类的字段&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">association</span> <span class="attr">property</span>=<span class="string">&quot;对应到类的字段&quot;</span> <span class="attr">javaType</span>=<span class="string">&quot;字段类型&quot;</span>&gt;</span>   <span class="comment">&lt;!-- 通过使用 association 进行关联，形成多对一的关系 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">&quot;字段&quot;</span> <span class="attr">property</span>=<span class="string">&quot;对应到类的字段&quot;</span>/&gt;</span>   <span class="comment">&lt;!-- 通过 id 作为唯一标识符 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;字段&quot;</span> <span class="attr">property</span>=<span class="string">&quot;对应到类的字段&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">association</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="动态-SQL"><a href="#动态-SQL" class="headerlink" title="动态 SQL"></a>动态 SQL</h2><h3 id="查询操作-1"><a href="#查询操作-1" class="headerlink" title="查询操作"></a>查询操作</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;User&quot;</span>&gt;</span></span><br><span class="line">    select * from user where id = #&#123;id&#125;</span><br><span class="line">    <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">&quot;id &gt; 3&quot;</span>&gt;</span></span><br><span class="line">        and age &gt; 18</span><br><span class="line">    <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;User&quot;</span>&gt;</span></span><br><span class="line">    select * from user where id = #&#123;id&#125;</span><br><span class="line">    <span class="tag">&lt;<span class="name">choose</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">when</span> <span class="attr">test</span>=<span class="string">&quot;id == 1&quot;</span>&gt;</span>   <span class="comment">&lt;!-- 不允许使用 &lt; 或是 &gt; 这种模糊匹配的条件 --&gt;</span></span><br><span class="line">             and age <span class="symbol">&amp;lt;</span>= 18</span><br><span class="line">        <span class="tag">&lt;/<span class="name">when</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">when</span> <span class="attr">test</span>=<span class="string">&quot;id == 2&quot;</span>&gt;</span></span><br><span class="line">            and age = 18</span><br><span class="line">        <span class="tag">&lt;/<span class="name">when</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">otherwise</span>&gt;</span></span><br><span class="line">            and age &gt; 18</span><br><span class="line">        <span class="tag">&lt;/<span class="name">otherwise</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">choose</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Foreach-操作"><a href="#Foreach-操作" class="headerlink" title="Foreach 操作"></a>Foreach 操作</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">delete</span> <span class="attr">id</span>=<span class="string">&quot;&quot;</span>&gt;</span></span><br><span class="line">    delete from user where id in</span><br><span class="line">    <span class="tag">&lt;<span class="name">foreach</span> <span class="attr">collection</span>=<span class="string">&quot;list&quot;</span> <span class="attr">item</span>=<span class="string">&quot;item&quot;</span> <span class="attr">index</span>=<span class="string">&quot;index&quot;</span> <span class="attr">open</span>=<span class="string">&quot;(&quot;</span> <span class="attr">separator</span>=<span class="string">&quot;,&quot;</span> <span class="attr">close</span>=<span class="string">&quot;)&quot;</span>&gt;</span></span><br><span class="line">        #&#123;item&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">foreach</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">delete</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">&quot;&quot;</span>&gt;</span></span><br><span class="line">    insert into user (name, age) values</span><br><span class="line">    <span class="tag">&lt;<span class="name">foreach</span> <span class="attr">collection</span>=<span class="string">&quot;list&quot;</span> <span class="attr">item</span>=<span class="string">&quot;user&quot;</span> <span class="attr">separator</span>=<span class="string">&quot;,&quot;</span>&gt;</span></span><br><span class="line">        (#&#123;user.name&#125;, #&#123;user.age&#125;)</span><br><span class="line">    <span class="tag">&lt;/<span class="name">foreach</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">update</span> <span class="attr">id</span>=<span class="string">&quot;&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">foreach</span> <span class="attr">collection</span>=<span class="string">&quot;list&quot;</span> <span class="attr">item</span>=<span class="string">&quot;user&quot;</span> <span class="attr">separator</span>=<span class="string">&quot;;&quot;</span>&gt;</span></span><br><span class="line">        update user set name = #&#123;user.name&#125;, age = #&#123;user.age&#125; where id = #&#123;user.id&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">foreach</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">update</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>collection</code>：指定要迭代的集合</li>
+<li><code>item</code>：当前迭代的元素</li>
+<li><code>index</code>：当前迭代元素的索引位置</li>
+<li><code>open</code>：在生成的<code>SQL</code>语句中，在开始生成列表元素之前添加的字符串</li>
+<li><code>separator</code>：在迭代元素之间插入的字符串</li>
+<li><code>close</code>：在生成的<code>SQL</code>语句中，在结束生成列表元素之后添加的字符串</li>
+</ul>
+<h2 id="二级缓存"><a href="#二级缓存" class="headerlink" title="二级缓存"></a>二级缓存</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">cache</span> <span class="attr">eviction</span>=<span class="string">&quot;FIFO&quot;</span> <span class="attr">flushInterval</span>=<span class="string">&quot;60000&quot;</span> <span class="attr">size</span>=<span class="string">&quot;512&quot;</span> <span class="attr">readOnly</span>=<span class="string">&quot;true&quot;</span>/&gt;</span>   <span class="comment">&lt;!-- 开启二级缓存 --&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><code>flushInterval</code>：用于控制缓存刷新时间，当到达指定时间时会自动清理所有缓存</p>
+</li>
+<li><p><code>readOnly</code>：是否设置为只读</p>
+</li>
+<li><p><code>size</code>：最大的缓存对象数量，当缓存达到上限时，会根据<code>eviction</code>配置的策略进行清理</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">eviction</th>
+<th align="center">策略</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>LRU</code></td>
+<td align="center">最近最少使用</td>
+<td align="center">移除最长时间不被使用的对象</td>
+</tr>
+<tr>
+<td align="center"><code>FIFO</code></td>
+<td align="center">先进先出</td>
+<td align="center">按对象进入缓存的顺序来移除它们</td>
+</tr>
+<tr>
+<td align="center"><code>SOFT</code></td>
+<td align="center">软引用</td>
+<td align="center">基于垃圾回收器状态和软引用规则移除对象</td>
+</tr>
+<tr>
+<td align="center"><code>WEAK</code></td>
+<td align="center">弱引用</td>
+<td align="center">更积极地基于垃圾收集器状态和弱引用规则移除对象</td>
+</tr>
+</tbody></table>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;&quot;</span> <span class="attr">useCache</span>=<span class="string">&quot;false&quot;</span> <span class="attr">flushCache</span>=<span class="string">&quot;true&quot;</span>&gt;</span></span><br><span class="line">    select 语句</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>useCache</code>：是否启用二级缓存</li>
+<li><code>flushCache</code>：在操作执行完成后，是否直接清除所有缓存</li>
+</ul>
+<h1 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Select(&quot;select 语句&quot;)</span></span><br><span class="line"><span class="meta">@Insert(&quot;insert 语句&quot;)</span></span><br><span class="line"><span class="meta">@Delete(&quot;delete 语句&quot;)</span></span><br><span class="line"><span class="meta">@Update(&quot;update 语句&quot;)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@Param(&quot;字段&quot;)</span> <span class="comment">// 指定参数名称</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@ResultMap(&quot;注解器&quot;)</span></span><br><span class="line"><span class="meta">@Results(&#123; // 自定义映射规则，等价于 resultMap</span></span><br><span class="line"><span class="meta">        @Result(id = true, column=&quot;字段&quot;, property=&quot;对应到类的字段&quot;),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;字段&quot;, property=&quot;对应到类的字段&quot;, many = @Many(select = &quot;Select 注解器&quot;)) // 一对多子查询，等价于 collection</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;字段&quot;, property=&quot;对应到类的字段&quot;, one = @One(select = &quot;Select 注解器&quot;)), // 多对一子查询，等价于 assocation</span></span><br><span class="line"><span class="meta">&#125;)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@ConstructorArgs(&#123; // 指定构造方法，等价于 constructor</span></span><br><span class="line"><span class="meta">        @Arg(column = &quot;字段&quot;, javaType = 字段类型),</span></span><br><span class="line"><span class="meta">        @Arg(column = &quot;字段&quot;, javaType = 字段类型)</span></span><br><span class="line"><span class="meta">&#125;)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@CacheNamespace(size = 512, readWrite = false)</span> <span class="comment">// 控制缓存机制</span></span><br><span class="line"><span class="meta">@Options(flushCache = Options.FlushCachePolicy.TRUE, useCache = false)</span> <span class="comment">// 控制单个操作的缓存机制</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="Java-与-Mybatis"><a href="#Java-与-Mybatis" class="headerlink" title="Java 与 Mybatis"></a>Java 与 Mybatis</h1><h2 id="Mybatis-核心接口"><a href="#Mybatis-核心接口" class="headerlink" title="Mybatis 核心接口"></a>Mybatis 核心接口</h2><p>创建<code>SqlSessionFactory</code>对象</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">SqlSessionFactory</span> <span class="variable">factory</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SqlSessionFactoryBuilder</span>().build(<span class="keyword">new</span> <span class="title class_">FileInputStream</span>(<span class="string">&quot;Mybatis 配置文件地址&quot;</span>))</span><br></pre></td></tr></table></figure>
+
+<p>创建<code>SqlSession</code>对象</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">SqlSession</span> <span class="variable">sqlSession</span> <span class="operator">=</span> factory.openSession(事务是否自动提交)</span><br></pre></td></tr></table></figure>
+
+<h2 id="执行-SQL-语句"><a href="#执行-SQL-语句" class="headerlink" title="执行 SQL 语句"></a>执行 SQL 语句</h2><h3 id="查询操作-2"><a href="#查询操作-2" class="headerlink" title="查询操作"></a>查询操作</h3><p>查询单个数据</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">User</span> <span class="variable">user</span> <span class="operator">=</span> sqlSession.selectOne(<span class="string">&quot;映射器 ID&quot;</span>, params)</span><br></pre></td></tr></table></figure>
+
+<p>查询多个数据</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">List&lt;类&gt; user = sqlSession.selectList(<span class="string">&quot;映射器 ID&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>以键值对的形式获取映射的对象</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String, Object&gt; user = sqlSession.selectOne(<span class="string">&quot;映射器 ID&quot;</span>, params)</span><br><span class="line">List&lt;Map&lt;String, Object&gt;&gt; users = sqlSession.selectList(<span class="string">&quot;映射器 ID&quot;</span>, params)</span><br></pre></td></tr></table></figure>
+
+<h3 id="DML-操作-1"><a href="#DML-操作-1" class="headerlink" title="DML 操作"></a>DML 操作</h3><p>插入数据</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlSession.insert(<span class="string">&quot;映射器 ID&quot;</span>, params)</span><br></pre></td></tr></table></figure>
+
+<p>更新数据</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlSession.update(<span class="string">&quot;映射器 ID&quot;</span>, params)</span><br></pre></td></tr></table></figure>
+
+<p>删除数据</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlSession.delete(<span class="string">&quot;映射器 ID&quot;</span>, params)</span><br></pre></td></tr></table></figure>
+
+<h3 id="事务操作"><a href="#事务操作" class="headerlink" title="事务操作"></a>事务操作</h3><p>提交事务</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlSession.commit()</span><br></pre></td></tr></table></figure>
+
+<p>回滚事务</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlSession.rollback()</span><br></pre></td></tr></table></figure>
+
+<h3 id="批处理操作"><a href="#批处理操作" class="headerlink" title="批处理操作"></a>批处理操作</h3><p>开启批处理</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">SqlSession</span> <span class="variable">session</span> <span class="operator">=</span> factory.openSession(ExecutorType.BATCH, <span class="literal">false</span>)</span><br></pre></td></tr></table></figure>
+
+<p>提交批处理操作</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">session.flushStatements()</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/1970/01/07/07%20Mybatis%20%E6%8C%81%E4%B9%85%E5%B1%82%E6%A1%86%E6%9E%B6/" data-id="cm35nehss004i5ww495yeabp4" data-title="Mybatis 持久层框架" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mybatis/" rel="tag">Mybatis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%8B%E5%8A%A1/" rel="tag">事务</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%A4%E4%BA%92/" rel="tag">交互</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%98%A0%E5%B0%84%E5%99%A8/" rel="tag">映射器</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B3%A8%E8%A7%A3/" rel="tag">注解</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%85%8D%E7%BD%AE/" rel="tag">配置</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/1970/01/08/08%20Spring%20%E6%A1%86%E6%9E%B6/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Spring 框架
+        
+      </div>
+    </a>
+  
+  
+    <a href="/1970/01/06/06%20JavaWeb%20%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">JavaWeb 后端开发</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AOP/" rel="tag">AOP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/API/" rel="tag">API</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Axios/" rel="tag">Axios</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Banner/" rel="tag">Banner</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bean/" rel="tag">Bean</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bean-Aware/" rel="tag">Bean Aware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Boot/" rel="tag">Boot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Controller/" rel="tag">Controller</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cookie/" rel="tag">Cookie</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Document/" rel="tag">Document</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Element/" rel="tag">Element</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Element-plus/" rel="tag">Element-plus</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Filter/" rel="tag">Filter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GUI/" rel="tag">GUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HikariCP/" rel="tag">HikariCP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HttpClient/" rel="tag">HttpClient</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HttpFilter/" rel="tag">HttpFilter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HttpServlet/" rel="tag">HttpServlet</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Interceptor/" rel="tag">Interceptor</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JDBC/" rel="tag">JDBC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JNI/" rel="tag">JNI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JPA/" rel="tag">JPA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JRE/" rel="tag">JRE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/" rel="tag">JSON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JUL/" rel="tag">JUL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JUnit/" rel="tag">JUnit</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lambda/" rel="tag">Lambda</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lombok/" rel="tag">Lombok</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Matlab/" rel="tag">Matlab</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/" rel="tag">Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mvc/" rel="tag">Mvc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mybatis/" rel="tag">Mybatis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MybatisPlus/" rel="tag">MybatisPlus</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Optional/" rel="tag">Optional</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Promise/" rel="tag">Promise</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Properties/" rel="tag">Properties</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RestFul/" rel="tag">RestFul</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Robot/" rel="tag">Robot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Security/" rel="tag">Security</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Servlet/" rel="tag">Servlet</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ServletContext/" rel="tag">ServletContext</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Session/" rel="tag">Session</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Slf4j/" rel="tag">Slf4j</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringEL/" rel="tag">SpringEL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Stream-%E6%B5%81/" rel="tag">Stream 流</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Thymeleaf/" rel="tag">Thymeleaf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Token/" rel="tag">Token</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vim/" rel="tag">Vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vuex/" rel="tag">Vuex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/" rel="tag">Web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XHR/" rel="tag">XHR</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XML/" rel="tag">XML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/router/" rel="tag">router</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/switch/" rel="tag">switch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%8B%E4%BB%B6/" rel="tag">事件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%8B%E5%8A%A1/" rel="tag">事务</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%A4%E4%BA%92/" rel="tag">交互</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6/" rel="tag">任务调度</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" rel="tag">内存管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%87%BD%E6%95%B0/" rel="tag">函数</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3/" rel="tag">函数式接口</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%86%E6%94%AF/" rel="tag">分支</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%8D%E5%B0%84/" rel="tag">反射</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%91%BD%E4%BB%A4/" rel="tag">命令</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E5%83%8F%E7%BB%98%E5%88%B6/" rel="tag">图像绘制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/" rel="tag">垃圾回收机制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/" rel="tag">存储过程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9A%E6%97%B6%E5%99%A8/" rel="tag">定时器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AF%B9%E8%AF%9D%E6%A1%86/" rel="tag">对话框</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B1%9E%E6%80%A7/" rel="tag">属性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B8%83%E5%B1%80/" rel="tag">布局</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E5%99%A8/" rel="tag">异常处理器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/" rel="tag">引用类型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" rel="tag">性能优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8C%81%E4%B9%85%E5%8C%96/" rel="tag">持久化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" rel="tag">数据类型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1%E4%B8%8E%E8%AE%A1%E7%AE%97/" rel="tag">数据统计与计算</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6/" rel="tag">文件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93/" rel="tag">文件传输</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E6%9C%AC%E5%9D%97/" rel="tag">文本块</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" rel="tag">新特性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%98%A0%E5%B0%84%E5%99%A8/" rel="tag">映射器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A8%A1%E5%9D%97/" rel="tag">模块</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AD%A3%E5%88%99%E5%8C%B9%E9%85%8D/" rel="tag">正则匹配</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B3%A8%E8%A7%A3/" rel="tag">注解</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B8%B8%E6%A0%87/" rel="tag">游标</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9B%91%E5%90%AC%E5%99%A8/" rel="tag">监听器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AA%97%E5%8F%A3/" rel="tag">窗口</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%A6%E5%8F%B7%E5%AF%B9%E8%B1%A1/" rel="tag">符号对象</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B1%BB%E4%B8%8E%E7%B1%BB%E5%8A%A0%E8%BD%BD/" rel="tag">类与类加载</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B4%A2%E5%BC%95/" rel="tag">索引</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%84%E4%BB%B6/" rel="tag">组件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%8F%9C%E5%8D%95/" rel="tag">菜单</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%86%E5%9B%BE/" rel="tag">视图</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%A6%E5%8F%91%E5%99%A8/" rel="tag">触发器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%AD%E6%B3%95/" rel="tag">语法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/" rel="tag">远程仓库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%89%E6%8B%A9%E5%99%A8/" rel="tag">选择器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%85%8D%E7%BD%AE/" rel="tag">配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%94%81/" rel="tag">锁</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E6%9D%BF/" rel="tag">面板</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AOP/" style="font-size: 10px;">AOP</a> <a href="/tags/API/" style="font-size: 10px;">API</a> <a href="/tags/Axios/" style="font-size: 10px;">Axios</a> <a href="/tags/Banner/" style="font-size: 10px;">Banner</a> <a href="/tags/Bean/" style="font-size: 12px;">Bean</a> <a href="/tags/Bean-Aware/" style="font-size: 10px;">Bean Aware</a> <a href="/tags/Boot/" style="font-size: 10px;">Boot</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/Controller/" style="font-size: 10px;">Controller</a> <a href="/tags/Cookie/" style="font-size: 10px;">Cookie</a> <a href="/tags/Document/" style="font-size: 10px;">Document</a> <a href="/tags/Element/" style="font-size: 10px;">Element</a> <a href="/tags/Element-plus/" style="font-size: 10px;">Element-plus</a> <a href="/tags/Filter/" style="font-size: 10px;">Filter</a> <a href="/tags/GUI/" style="font-size: 10px;">GUI</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/HikariCP/" style="font-size: 10px;">HikariCP</a> <a href="/tags/HttpClient/" style="font-size: 10px;">HttpClient</a> <a href="/tags/HttpFilter/" style="font-size: 10px;">HttpFilter</a> <a href="/tags/HttpServlet/" style="font-size: 10px;">HttpServlet</a> <a href="/tags/Interceptor/" style="font-size: 10px;">Interceptor</a> <a href="/tags/JDBC/" style="font-size: 10px;">JDBC</a> <a href="/tags/JNI/" style="font-size: 10px;">JNI</a> <a href="/tags/JPA/" style="font-size: 10px;">JPA</a> <a href="/tags/JRE/" style="font-size: 10px;">JRE</a> <a href="/tags/JSON/" style="font-size: 10px;">JSON</a> <a href="/tags/JUL/" style="font-size: 10px;">JUL</a> <a href="/tags/JUnit/" style="font-size: 12px;">JUnit</a> <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/Lambda/" style="font-size: 10px;">Lambda</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Lombok/" style="font-size: 10px;">Lombok</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/Matlab/" style="font-size: 10px;">Matlab</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/Mvc/" style="font-size: 10px;">Mvc</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Mybatis/" style="font-size: 10px;">Mybatis</a> <a href="/tags/MybatisPlus/" style="font-size: 10px;">MybatisPlus</a> <a href="/tags/Optional/" style="font-size: 10px;">Optional</a> <a href="/tags/Promise/" style="font-size: 10px;">Promise</a> <a href="/tags/Properties/" style="font-size: 10px;">Properties</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/RestFul/" style="font-size: 10px;">RestFul</a> <a href="/tags/Robot/" style="font-size: 10px;">Robot</a> <a href="/tags/Security/" style="font-size: 10px;">Security</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/ServletContext/" style="font-size: 10px;">ServletContext</a> <a href="/tags/Session/" style="font-size: 12px;">Session</a> <a href="/tags/Slf4j/" style="font-size: 10px;">Slf4j</a> <a href="/tags/Spring/" style="font-size: 16px;">Spring</a> <a href="/tags/SpringEL/" style="font-size: 10px;">SpringEL</a> <a href="/tags/Stream-%E6%B5%81/" style="font-size: 10px;">Stream 流</a> <a href="/tags/Thymeleaf/" style="font-size: 10px;">Thymeleaf</a> <a href="/tags/Token/" style="font-size: 10px;">Token</a> <a href="/tags/Vim/" style="font-size: 10px;">Vim</a> <a href="/tags/Vue/" style="font-size: 10px;">Vue</a> <a href="/tags/Vuex/" style="font-size: 10px;">Vuex</a> <a href="/tags/Web/" style="font-size: 20px;">Web</a> <a href="/tags/XHR/" style="font-size: 10px;">XHR</a> <a href="/tags/XML/" style="font-size: 12px;">XML</a> <a href="/tags/router/" style="font-size: 10px;">router</a> <a href="/tags/switch/" style="font-size: 10px;">switch</a> <a href="/tags/%E4%BA%8B%E4%BB%B6/" style="font-size: 12px;">事件</a> <a href="/tags/%E4%BA%8B%E5%8A%A1/" style="font-size: 16px;">事务</a> <a href="/tags/%E4%BA%A4%E4%BA%92/" style="font-size: 16px;">交互</a> <a href="/tags/%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6/" style="font-size: 10px;">任务调度</a> <a href="/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" style="font-size: 10px;">内存管理</a> <a href="/tags/%E5%87%BD%E6%95%B0/" style="font-size: 16px;">函数</a> <a href="/tags/%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3/" style="font-size: 10px;">函数式接口</a> <a href="/tags/%E5%88%86%E6%94%AF/" style="font-size: 10px;">分支</a> <a href="/tags/%E5%8F%8D%E5%B0%84/" style="font-size: 10px;">反射</a> <a href="/tags/%E5%91%BD%E4%BB%A4/" style="font-size: 12px;">命令</a> <a href="/tags/%E5%9B%BE%E5%83%8F%E7%BB%98%E5%88%B6/" style="font-size: 10px;">图像绘制</a> <a href="/tags/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/" style="font-size: 10px;">垃圾回收机制</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 10px;">多线程</a> <a href="/tags/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/" style="font-size: 10px;">存储过程</a> <a href="/tags/%E5%AE%9A%E6%97%B6%E5%99%A8/" style="font-size: 12px;">定时器</a> <a href="/tags/%E5%AF%B9%E8%AF%9D%E6%A1%86/" style="font-size: 10px;">对话框</a> <a href="/tags/%E5%B1%9E%E6%80%A7/" style="font-size: 12px;">属性</a> <a href="/tags/%E5%B8%83%E5%B1%80/" style="font-size: 10px;">布局</a> <a href="/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E5%99%A8/" style="font-size: 10px;">异常处理器</a> <a href="/tags/%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/" style="font-size: 10px;">引用类型</a> <a href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" style="font-size: 10px;">性能优化</a> <a href="/tags/%E6%8C%81%E4%B9%85%E5%8C%96/" style="font-size: 10px;">持久化</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 12px;">数学</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 12px;">数据库</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" style="font-size: 16px;">数据类型</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1%E4%B8%8E%E8%AE%A1%E7%AE%97/" style="font-size: 10px;">数据统计与计算</a> <a href="/tags/%E6%96%87%E4%BB%B6/" style="font-size: 10px;">文件</a> <a href="/tags/%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93/" style="font-size: 12px;">文件传输</a> <a href="/tags/%E6%96%87%E6%9C%AC%E5%9D%97/" style="font-size: 10px;">文本块</a> <a href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" style="font-size: 10px;">新特性</a> <a href="/tags/%E6%98%A0%E5%B0%84%E5%99%A8/" style="font-size: 10px;">映射器</a> <a href="/tags/%E6%A8%A1%E5%9D%97/" style="font-size: 12px;">模块</a> <a href="/tags/%E6%AD%A3%E5%88%99%E5%8C%B9%E9%85%8D/" style="font-size: 10px;">正则匹配</a> <a href="/tags/%E6%B3%A8%E8%A7%A3/" style="font-size: 18px;">注解</a> <a href="/tags/%E6%B8%B8%E6%A0%87/" style="font-size: 10px;">游标</a> <a href="/tags/%E7%9B%91%E5%90%AC%E5%99%A8/" style="font-size: 14px;">监听器</a> <a href="/tags/%E7%AA%97%E5%8F%A3/" style="font-size: 10px;">窗口</a> <a href="/tags/%E7%AC%A6%E5%8F%B7%E5%AF%B9%E8%B1%A1/" style="font-size: 10px;">符号对象</a> <a href="/tags/%E7%B1%BB%E4%B8%8E%E7%B1%BB%E5%8A%A0%E8%BD%BD/" style="font-size: 10px;">类与类加载</a> <a href="/tags/%E7%B4%A2%E5%BC%95/" style="font-size: 10px;">索引</a> <a href="/tags/%E7%BB%84%E4%BB%B6/" style="font-size: 12px;">组件</a> <a href="/tags/%E8%8F%9C%E5%8D%95/" style="font-size: 10px;">菜单</a> <a href="/tags/%E8%A7%86%E5%9B%BE/" style="font-size: 10px;">视图</a> <a href="/tags/%E8%A7%A6%E5%8F%91%E5%99%A8/" style="font-size: 10px;">触发器</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">设计模式</a> <a href="/tags/%E8%AF%AD%E6%B3%95/" style="font-size: 20px;">语法</a> <a href="/tags/%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/" style="font-size: 10px;">远程仓库</a> <a href="/tags/%E9%80%89%E6%8B%A9%E5%99%A8/" style="font-size: 10px;">选择器</a> <a href="/tags/%E9%85%8D%E7%BD%AE/" style="font-size: 12px;">配置</a> <a href="/tags/%E9%94%81/" style="font-size: 14px;">锁</a> <a href="/tags/%E9%9D%A2%E6%9D%BF/" style="font-size: 10px;">面板</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/1970/04/">April 1970</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/1970/03/">March 1970</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/1970/02/">February 1970</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/1970/01/">January 1970</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/1970/04/02/02%20Matlab/">Matlab</a>
+          </li>
+        
+          <li>
+            <a href="/1970/04/01/01%20Markdown%20%E8%AF%AD%E6%B3%95/">Markdown 语法</a>
+          </li>
+        
+          <li>
+            <a href="/1970/03/04/04%20Redis%20%E6%95%B0%E6%8D%AE%E5%BA%93/">Redis 数据库</a>
+          </li>
+        
+          <li>
+            <a href="/1970/03/03/03%20Linux%20%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">Linux 操作系统</a>
+          </li>
+        
+          <li>
+            <a href="/1970/03/02/02%20Git%20%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/">Git 版本控制</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

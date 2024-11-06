@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>MySQL 数据库 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="MySQL, 数据库, 存储过程, 事务, 游标, 视图, 异常处理器, 索引, 触发器, 锁, 语法, 函数, 数据类型">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL 数据库">
+<meta property="og:url" content="http://example.com/1970/03/01/01%20MySQL%20%E6%95%B0%E6%8D%AE%E5%BA%93/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="MySQL, 数据库, 存储过程, 事务, 游标, 视图, 异常处理器, 索引, 触发器, 锁, 语法, 函数, 数据类型">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="1970-02-28T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-11-01T10:11:15.082Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="语法">
+<meta property="article:tag" content="MySQL">
+<meta property="article:tag" content="数据库">
+<meta property="article:tag" content="存储过程">
+<meta property="article:tag" content="事务">
+<meta property="article:tag" content="游标">
+<meta property="article:tag" content="视图">
+<meta property="article:tag" content="异常处理器">
+<meta property="article:tag" content="索引">
+<meta property="article:tag" content="触发器">
+<meta property="article:tag" content="锁">
+<meta property="article:tag" content="函数">
+<meta property="article:tag" content="数据类型">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-01 MySQL 数据库" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/1970/03/01/01%20MySQL%20%E6%95%B0%E6%8D%AE%E5%BA%93/" class="article-date">
+  <time class="dt-published" datetime="1970-02-28T16:00:00.000Z" itemprop="datePublished">1970-03-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      MySQL 数据库
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>MySQL, 数据库, 存储过程, 事务, 游标, 视图, 异常处理器, 索引, 触发器, 锁, 语法, 函数, 数据类型</p>
+<span id="more"></span>
+
+
+
+<h1 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h1><h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><table>
+<thead>
+<tr>
+<th align="center">数据类型</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">char(长度)</td>
+<td align="center">长度固定为设定值。如果插入的长度小于设定长度时，则用空格填充</td>
+</tr>
+<tr>
+<td align="center">varchar(长度)</td>
+<td align="center">长度不固定，但不能超过设定值。不会用空格填充</td>
+</tr>
+<tr>
+<td align="center">tinytext</td>
+<td align="center">极短文本字符串</td>
+</tr>
+<tr>
+<td align="center">text</td>
+<td align="center">短文本字符串</td>
+</tr>
+<tr>
+<td align="center">mediumtext</td>
+<td align="center">中等文本字符串</td>
+</tr>
+<tr>
+<td align="center">longtext</td>
+<td align="center">长文本字符串</td>
+</tr>
+<tr>
+<td align="center">tinyblob</td>
+<td align="center">极短二进制字符串</td>
+</tr>
+<tr>
+<td align="center">blob</td>
+<td align="center">短二进制字符串</td>
+</tr>
+<tr>
+<td align="center">mediumblob</td>
+<td align="center">中等二进制字符串</td>
+</tr>
+<tr>
+<td align="center">longblob</td>
+<td align="center">长二进制字符串</td>
+</tr>
+</tbody></table>
+<h2 id="整数"><a href="#整数" class="headerlink" title="整数"></a>整数</h2><table>
+<thead>
+<tr>
+<th align="center">数据类型</th>
+<th align="center">说明</th>
+<th align="center">占字节数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">signed</td>
+<td align="center">有符号整数，默认</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">unsigned</td>
+<td align="center">无符号整数</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">tinyint</td>
+<td align="center">极小范围整数</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">smallint</td>
+<td align="center">小范围整数</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td align="center">int</td>
+<td align="center">一般范围整数</td>
+<td align="center">4</td>
+</tr>
+<tr>
+<td align="center">bigint</td>
+<td align="center">大范围整数</td>
+<td align="center">8</td>
+</tr>
+</tbody></table>
+<h2 id="小数"><a href="#小数" class="headerlink" title="小数"></a>小数</h2><table>
+<thead>
+<tr>
+<th align="center">数据类型</th>
+<th align="center">说明</th>
+<th align="center">占字节数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">float</td>
+<td align="center">单精度小数</td>
+<td align="center">4</td>
+</tr>
+<tr>
+<td align="center">double</td>
+<td align="center">双精度小数</td>
+<td align="center">8</td>
+</tr>
+</tbody></table>
+<h2 id="时间"><a href="#时间" class="headerlink" title="时间"></a>时间</h2><table>
+<thead>
+<tr>
+<th align="center">数据类型</th>
+<th align="center">说明</th>
+<th align="center">占字节数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">date</td>
+<td align="center">日期</td>
+<td align="center">3</td>
+</tr>
+<tr>
+<td align="center">time</td>
+<td align="center">时间</td>
+<td align="center">3</td>
+</tr>
+<tr>
+<td align="center">year</td>
+<td align="center">年份</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">datetime</td>
+<td align="center">日期 + 时间</td>
+<td align="center">8</td>
+</tr>
+</tbody></table>
+<h1 id="条件"><a href="#条件" class="headerlink" title="条件"></a>条件</h1><h2 id="查询条件"><a href="#查询条件" class="headerlink" title="查询条件"></a>查询条件</h2><ul>
+<li><strong>一般的比较运算符：</strong><code>=</code> <code>&gt;</code> <code>&lt;</code> <code>&gt;=</code> <code>&lt;=</code> <code>!=</code> </li>
+<li><strong>是否在集合中：</strong><code>in</code> <code>not in</code></li>
+<li><strong>字符模糊匹配：</strong><code>like</code> <code>not like</code></li>
+<li><strong>多重条件连接查询：</strong><code>and </code> <code>or</code> <code>not</code></li>
+</ul>
+<h2 id="约束条件"><a href="#约束条件" class="headerlink" title="约束条件"></a>约束条件</h2><h3 id="列级约束条件"><a href="#列级约束条件" class="headerlink" title="列级约束条件"></a>列级约束条件</h3><table>
+<thead>
+<tr>
+<th align="center">约束条件</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">primary key</td>
+<td align="center">主键</td>
+</tr>
+<tr>
+<td align="center">foreign key</td>
+<td align="center">外键</td>
+</tr>
+<tr>
+<td align="center">unique</td>
+<td align="center">唯一</td>
+</tr>
+<tr>
+<td align="center">check</td>
+<td align="center">检查</td>
+</tr>
+<tr>
+<td align="center">default</td>
+<td align="center">默认</td>
+</tr>
+<tr>
+<td align="center">null</td>
+<td align="center">空值</td>
+</tr>
+<tr>
+<td align="center">not null</td>
+<td align="center">非空</td>
+</tr>
+</tbody></table>
+<h3 id="表级约束条件"><a href="#表级约束条件" class="headerlink" title="表级约束条件"></a>表级约束条件</h3><table>
+<thead>
+<tr>
+<th align="center">约束条件</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">primary key</td>
+<td align="center">主键</td>
+</tr>
+<tr>
+<td align="center">foreign key</td>
+<td align="center">外键</td>
+</tr>
+<tr>
+<td align="center">unique</td>
+<td align="center">唯一</td>
+</tr>
+<tr>
+<td align="center">check</td>
+<td align="center">检查</td>
+</tr>
+</tbody></table>
+<h1 id="数据库语言"><a href="#数据库语言" class="headerlink" title="数据库语言"></a>数据库语言</h1><h2 id="数据库定义语言"><a href="#数据库定义语言" class="headerlink" title="数据库定义语言"></a>数据库定义语言</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">创建数据库：create database 数据库名</span><br><span class="line">删除数据库：drop database 数据库名</span><br><span class="line"></span><br><span class="line">创建表：create table 表名(列名 数据类型 列级约束条件,</span><br><span class="line">                        列名 数据类型 列级约束条件,</span><br><span class="line">                        ...</span><br><span class="line">                        列名 数据类型 列级约束条件)</span><br><span class="line">删除表：drop table 表名 [restrict|cascade]</span><br><span class="line">增加列：alter table 表名 add 新列名 数据类型 列级约束条件</span><br><span class="line">删除列：alter table 表名 drop column 列名 [restrict|cascade]</span><br><span class="line">修改列的数据类型：alter table 表名 alter column 列名 新数据类型</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>restrict</code>：如果该元素被其他表的约束或视图引用时，将无法删除。默认选项</li>
+<li><code>cascade</code>：强制连带引用该元素的约束、视图一起删除</li>
+</ul>
+<h2 id="数据库操纵语言"><a href="#数据库操纵语言" class="headerlink" title="数据库操纵语言"></a>数据库操纵语言</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">插入数据：insert into 表名 values(值1, 值2, 值3)</span><br><span class="line">         insert into 表名(列名1, 列名2) values(值1, 值2)</span><br><span class="line">         insert into 表名(列名1, 列名2) values(值1, 值2), (值1, 值2), (值1, 值2)</span><br><span class="line">修改数据：update 表名 set 列名1=值1, 列名2=值2, ... where 条件</span><br><span class="line">删除数据：delete from 表名 where 条件</span><br></pre></td></tr></table></figure>
+
+<h2 id="数据库查询语言"><a href="#数据库查询语言" class="headerlink" title="数据库查询语言"></a>数据库查询语言</h2><h3 id="单表查询"><a href="#单表查询" class="headerlink" title="单表查询"></a>单表查询</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">查询所有列的数据：select * from 表名 where 条件</span><br><span class="line">查询某些列的数据：select 列名1, 列名2 from 表名 where 条件</span><br><span class="line">对某列的值进行去重：select 列名1 distinct 列名2 from 表名 where 条件</span><br><span class="line">以别名显示列的数据：select 列名1 别名1, 列名2 别名2 from 表名 where 条件</span><br><span class="line">对查询结果进行排序：select 列名1, 列名2 from 表名 where 条件 order by 列名1 [asc|desc], 列名2 [asc|desc]</span><br><span class="line">模糊查询：select * from 表名 where 列名 like 匹配字符串</span><br><span class="line">使用全文索引进行模糊查询：select * from 表名 where match (列名) against (匹配字符串)</span><br><span class="line">分组查询：select 聚集函数 from 表名 where 条件 group by 列名 having 约束条件</span><br><span class="line">分页查询：select * from 表名 limit 数量</span><br><span class="line">         select * from 表名 limit 起始位置, 数量</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>asc</code>：升序排序，默认选项</li>
+<li><code>desc</code>：逆序排序</li>
+</ul>
+<h3 id="多表查询"><a href="#多表查询" class="headerlink" title="多表查询"></a>多表查询</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">多表查询：select * from 表名1, 表名2 where 条件</span><br><span class="line">自连接查询：select * from 表名 别名1, 表名 别名2 where 条件</span><br><span class="line">外连接查询：select * from 表名1 [inner|left|right] join 表名2 on 约束条件</span><br><span class="line">嵌套查询：select * from 表名 where 列名 = (select 列名 from 表名 where 条件)</span><br></pre></td></tr></table></figure>
+
+<h2 id="数据库控制语言"><a href="#数据库控制语言" class="headerlink" title="数据库控制语言"></a>数据库控制语言</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">创建用户：create user 用户名 identified by 密码</span><br><span class="line">查看当前用户能访问的数据库：show databases</span><br><span class="line">给予用户权限：grant all 权限1, 权限2, 权限3 on 数据库.表 to 用户 [with grant option]</span><br><span class="line">回收用户权限：revoke all 权限1, 权限2, 权限3 on 数据库.表 from 用户</span><br></pre></td></tr></table></figure>
+
+<p><code>with grant option</code>：使被授权的用户还能将已获得的权限继续授权给其他用户</p>
+<h1 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h1><h2 id="聚集函数"><a href="#聚集函数" class="headerlink" title="聚集函数"></a>聚集函数</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">求一列的行数：select count(列名) from 表名 where 条件</span><br><span class="line">求一列的和：select sum(列名) from 表名 where 条件</span><br><span class="line">求一列的平均值：select avg(列名) from 表名 where 条件</span><br><span class="line">求一列的最小值：select min(列名) from 表名 where 条件</span><br><span class="line">求一列的最大值：select max(列名) from 表名 where 条件</span><br></pre></td></tr></table></figure>
+
+<h2 id="类型转换函数"><a href="#类型转换函数" class="headerlink" title="类型转换函数"></a>类型转换函数</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">显示类型转换：cast(数据 as 数据类型)</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="center">数据类型</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">char [(n)]</td>
+<td align="center">字符串，转换后长度小于 n 个字符</td>
+</tr>
+<tr>
+<td align="center">binary [(n)]</td>
+<td align="center">二进制字符串，转换后长度小于 n 个字节</td>
+</tr>
+<tr>
+<td align="center">signed</td>
+<td align="center">有符号整数</td>
+</tr>
+<tr>
+<td align="center">unsigned</td>
+<td align="center">无符号整数</td>
+</tr>
+<tr>
+<td align="center">decimal [(m [, n])]</td>
+<td align="center">浮点数，m 为数字的总位数，n 为小数点后的位数</td>
+</tr>
+<tr>
+<td align="center">date</td>
+<td align="center">日期</td>
+</tr>
+<tr>
+<td align="center">time</td>
+<td align="center">时间</td>
+</tr>
+<tr>
+<td align="center">datetime</td>
+<td align="center">日期时间</td>
+</tr>
+</tbody></table>
+<h2 id="流程控制函数"><a href="#流程控制函数" class="headerlink" title="流程控制函数"></a>流程控制函数</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">if(条件表达式，值1，值2)：三目运算符</span><br><span class="line">isnull(值)：判断值是否为空</span><br><span class="line">ifnull(值1，值2)：值1为空时返回值2，否则返回值1</span><br><span class="line">nullif(值1，值2)：两值相等时返回null，否则返回值1</span><br><span class="line"></span><br><span class="line">sleep(秒)：程序睡眠</span><br></pre></td></tr></table></figure>
+
+<h2 id="字符串函数"><a href="#字符串函数" class="headerlink" title="字符串函数"></a>字符串函数</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">截取字符串：substring(字符串，起始位置，结束位置)</span><br><span class="line">从最左边向右截取字符串：left(字符串，长度)</span><br><span class="line">从最右边向左截取字符串：right(字符串，长度)</span><br><span class="line"></span><br><span class="line">转换为大写字母：upper(字符串)</span><br><span class="line">转换为小写字母：lower(字符串)</span><br><span class="line"></span><br><span class="line">替换字符串：replace(字符串，原文，替换文)</span><br><span class="line">字符串拼接：concat(字符串1，字符串2)</span><br><span class="line">分组字符串拼接：group_concat(字段1, 字段2 ... separator 分隔符)</span><br><span class="line">获取字符串长度：char_length(字符串)</span><br></pre></td></tr></table></figure>
+
+<h2 id="数学函数"><a href="#数学函数" class="headerlink" title="数学函数"></a>数学函数</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">绝对值：abs(值)</span><br><span class="line">向上取整：ceiling(值)</span><br><span class="line">向下取整：floor(值)</span><br><span class="line">四舍五入：round(值)</span><br><span class="line">自然对数：log(值)</span><br><span class="line">平方根：sqrt(值)</span><br><span class="line"></span><br><span class="line">正弦函数：sin(值)</span><br><span class="line">余弦函数：cos(值)</span><br><span class="line">正切函数：tan(值)</span><br><span class="line"></span><br><span class="line">x 的 n 次方：power(x，n)</span><br><span class="line">[0, 1)之间的随机数：rand()</span><br><span class="line">π：pi()</span><br></pre></td></tr></table></figure>
+
+<h2 id="日期函数"><a href="#日期函数" class="headerlink" title="日期函数"></a>日期函数</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">获取当前的日期：curdate()</span><br><span class="line">获取当前的时间：curtime()</span><br><span class="line">获取当前的日期 + 时间：now()</span><br><span class="line"></span><br><span class="line">获取日期是几号：day(日期)</span><br><span class="line">获取日期是几月：month(日期)</span><br><span class="line">获取日期是哪年：year(日期)</span><br><span class="line"></span><br><span class="line">将日期增加 x 单位：date_add(日期，interval 增量 [year|month|day|hour|minute|second])</span><br><span class="line">计算日期之间的的间隔天数：datediff(日期1，日期2)</span><br></pre></td></tr></table></figure>
+
+<h2 id="自定义函数"><a href="#自定义函数" class="headerlink" title="自定义函数"></a>自定义函数</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">create function 函数名([参数列表]) return 返回值类型</span><br><span class="line">       begin</span><br><span class="line">       (函数主体)</span><br><span class="line">             return 返回值</span><br><span class="line">       end</span><br></pre></td></tr></table></figure>
+
+<h1 id="存储过程"><a href="#存储过程" class="headerlink" title="存储过程"></a>存储过程</h1><h2 id="存储过程-1"><a href="#存储过程-1" class="headerlink" title="存储过程"></a>存储过程</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">create procedure 存储过程名([参数列表])</span><br><span class="line">       begin</span><br><span class="line">       (语句集合)</span><br><span class="line">       end</span><br></pre></td></tr></table></figure>
+
+<p><strong>调用格式：</strong><code>call 过程名([参数列表])</code></p>
+<h2 id="存储过程中的参数传递"><a href="#存储过程中的参数传递" class="headerlink" title="存储过程中的参数传递"></a>存储过程中的参数传递</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">create procedure 存储过程名(in 参数名 数据类型)：只传入数据，无法为其赋值。默认方式</span><br><span class="line">create procedure 存储过程名(out 参数名 数据类型)：只传出数据，无法访问其值</span><br><span class="line">create procedure 存储过程名(inout 参数名 数据类型)：双向</span><br></pre></td></tr></table></figure>
+
+<h1 id="语句"><a href="#语句" class="headerlink" title="语句"></a>语句</h1><h2 id="变量定义赋值语句"><a href="#变量定义赋值语句" class="headerlink" title="变量定义赋值语句"></a>变量定义赋值语句</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">局部变量定义：declare 变量名 数据类型 [default 默认值]</span><br><span class="line">全局变量定义：set @全局变量名 = 值</span><br><span class="line">变量赋值：set 变量名 = 值</span><br><span class="line">将数据赋值给变量：select 函数() into 变量名 from 表名</span><br></pre></td></tr></table></figure>
+
+<h2 id="流程控制语句"><a href="#流程控制语句" class="headerlink" title="流程控制语句"></a>流程控制语句</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if 条件表达式 then 语句1</span><br><span class="line">else if 条件表达式 then 语句2</span><br><span class="line">else 语句3</span><br><span class="line">end if</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">case 变量名</span><br><span class="line">    when 条件表达式 then 语句1</span><br><span class="line">    when 条件表达式 then 语句2</span><br><span class="line">    else 语句3</span><br><span class="line">end case</span><br></pre></td></tr></table></figure>
+
+<h2 id="循环语句"><a href="#循环语句" class="headerlink" title="循环语句"></a>循环语句</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">while 循环条件 do</span><br><span class="line">    语句</span><br><span class="line">end while</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">标签名: loop</span><br><span class="line">    语句</span><br><span class="line">    if 条件表达式 then</span><br><span class="line">        leave 标签名</span><br><span class="line">    end if</span><br><span class="line">end loop 标签名</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">repeat</span><br><span class="line">    语句</span><br><span class="line">until 循环条件</span><br><span class="line">end repeat</span><br></pre></td></tr></table></figure>
+
+<h2 id="explain-语句"><a href="#explain-语句" class="headerlink" title="explain 语句"></a>explain 语句</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">分析 select 语句的执行计划：explain select语句</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="center">返回的结果</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">select_type</td>
+<td align="center">查询的类型</td>
+</tr>
+<tr>
+<td align="center">table</td>
+<td align="center">查询的表</td>
+</tr>
+<tr>
+<td align="center">type</td>
+<td align="center">MySQL决定如何查找对应的记录，效率从高到低：system &gt; const &gt; eq_ref &gt; ref &gt; range &gt; index &gt; all</td>
+</tr>
+<tr>
+<td align="center">possible_keys</td>
+<td align="center">执行查询时可能会用到的索引</td>
+</tr>
+<tr>
+<td align="center">key</td>
+<td align="center">实际使用的索引</td>
+</tr>
+<tr>
+<td align="center">key_len</td>
+<td align="center">MySQL在索引里使用的字节数，字段的最大可能长度</td>
+</tr>
+<tr>
+<td align="center">rows</td>
+<td align="center">扫描的行数</td>
+</tr>
+<tr>
+<td align="center">extra</td>
+<td align="center">附加说明</td>
+</tr>
+</tbody></table>
+<h1 id="异常处理器"><a href="#异常处理器" class="headerlink" title="异常处理器"></a>异常处理器</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">declear [continue|exit] handler for 异常ID 语句</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>continue</code>：异常被捕获后，程序将继续执行下一个语句，而不会跳出当前的代码块</li>
+<li><code>exit</code>：异常被捕获后，程序将跳出当前代码块，继续执行后续的代码</li>
+</ul>
+<h1 id="游标"><a href="#游标" class="headerlink" title="游标"></a>游标</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">定义游标：declare 游标名 cursor for 表名</span><br><span class="line">开启游标：open 游标名</span><br><span class="line">获取游标信息：fetch 游标名 into 变量1，变量2，...</span><br><span class="line">关闭游标：close 游标名</span><br></pre></td></tr></table></figure>
+
+<h1 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">创建视图：cerate view 视图名(列名) as 子查询语句 [with check option]</span><br><span class="line">删除视图：drop view 视图名</span><br></pre></td></tr></table></figure>
+
+<p><code>with check option</code>：是指当视图创建后，如果更新视图中的数据，是否要满足子查询中的条件表达式</p>
+<h1 id="触发器"><a href="#触发器" class="headerlink" title="触发器"></a>触发器</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">创建触发器：cerate trigger 触发器名 [before|after] [insert|update|delete] on 表名/视图名 for each row 子语句</span><br><span class="line">查看触发器：show triggers</span><br><span class="line">删除触发器：drop trigger 触发器名</span><br></pre></td></tr></table></figure>
+
+<h1 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">创建索引：cerate 索引类型 index 索引名 on 表名(列名)</span><br><span class="line">删除索引：drop index 索引名 on 表名(列名)</span><br><span class="line">查看表中的索引：show index from 表名</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="center">索引类型</th>
+<th align="center">索引类型</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">normal</td>
+<td align="center">普通索引</td>
+<td align="center">完完全全相当于一本书的目录</td>
+</tr>
+<tr>
+<td align="center">unique</td>
+<td align="center">唯一索引</td>
+<td align="center">一旦建立，那么整列中将不允许出现重复数据</td>
+</tr>
+<tr>
+<td align="center">spatial</td>
+<td align="center">空间索引</td>
+<td align="center">是对空间数据类型的字段建立的索引</td>
+</tr>
+<tr>
+<td align="center">fulltext</td>
+<td align="center">全文索引</td>
+<td align="center">是模糊匹配的一种更好的解决方案，它的效率要比使用 like % 更高，并且它还支持多种匹配方式</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>空间数据类型：</strong><code>GEOMETRY</code> <code>POINT</code> <code>LINESTRING</code> <code>POLYGON</code></li>
+<li><strong>只有字段的数据类型为</strong><code>char</code> <code>varchar</code> <code>text</code><strong>及其系列才可以建全文索引</strong></li>
+</ul>
+<h1 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">开始事务：begin</span><br><span class="line">提交事务：commit</span><br><span class="line">回滚事务：rollback</span><br><span class="line">创建回滚点：savepoint 回滚点</span><br><span class="line">回滚到指定回滚点：rollback to 回滚点</span><br></pre></td></tr></table></figure>
+
+<p><strong>设置当前会话的事务隔离级别：</strong><code>set session transaction isolation level 隔离级别</code></p>
+<table>
+<thead>
+<tr>
+<th align="center">事务隔离级别</th>
+<th align="center">含义</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Read Uncommitted</td>
+<td align="center">读未提交</td>
+<td align="center">能够读取到其他事务中未提交的内容，存在脏读问题</td>
+</tr>
+<tr>
+<td align="center">Read Committed</td>
+<td align="center">读已提交</td>
+<td align="center">只能读取其他事务已经提交的内容，存在不可重复读问题</td>
+</tr>
+<tr>
+<td align="center">Repeated Read</td>
+<td align="center">可重复读（默认选项）</td>
+<td align="center">在读取某行后不允许其他事务操作此行，直到事务结束</td>
+</tr>
+<tr>
+<td align="center">Serializable</td>
+<td align="center">串行读</td>
+<td align="center">一个事务的开始必须等待另一个事务的完成</td>
+</tr>
+</tbody></table>
+<h1 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h1><h2 id="锁的类型"><a href="#锁的类型" class="headerlink" title="锁的类型"></a>锁的类型</h2><ul>
+<li><strong>从对数据的操作类型上来划分</strong><ul>
+<li><strong>读锁（read lock，共享锁）：</strong>当一个事务添加了读锁后，其他的事务也可以添加读锁或是读取数据，但是不能进行写操作，只能等到所有的读锁全部释放</li>
+<li><strong>写锁（write lock，排它锁）：</strong>当一个事务添加了写锁后，其他事务不能读不能写也不能添加任何锁，只能等待当前事务释放锁</li>
+</ul>
+</li>
+<li><strong>从锁的作用范围上来划分</strong><ul>
+<li><strong>全局锁：</strong>作用于整个数据库</li>
+<li><strong>表锁：</strong>作用于整个表</li>
+<li><strong>行锁：</strong>作用于某些行，又可以细分为以下几种：<ul>
+<li><strong>记录锁 Record Locks</strong><br>                            仅仅锁住索引记录的一行，在单条索引记录上加锁</li>
+<li><strong>间隙锁 Gap Locks</strong><br>                            仅仅锁住一个索引区间（开区间，不包括双端端点）</li>
+<li><strong>临键锁 Next-Key Locks</strong><br>                            仅仅锁住一个索引区间（左开右闭区间），默认选项</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">上全局锁：flush tables with 锁的类型</span><br><span class="line">上表锁：lock table 表名 锁的类型</span><br><span class="line">上行的读锁：select * from 表名 where 条件 lock in share mode</span><br><span class="line">上行的写锁：select * from 表名 where 条件 for update</span><br><span class="line"></span><br><span class="line">释放当前会话的全部锁：unlock tables</span><br></pre></td></tr></table></figure>
+
+<p>除了手动释放锁之外，当我们的会话结束后，锁也会被自动释放</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/1970/03/01/01%20MySQL%20%E6%95%B0%E6%8D%AE%E5%BA%93/" data-id="cm35nehr5000m5ww4dvti8gs2" data-title="MySQL 数据库" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%8B%E5%8A%A1/" rel="tag">事务</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%87%BD%E6%95%B0/" rel="tag">函数</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/" rel="tag">存储过程</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E5%99%A8/" rel="tag">异常处理器</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" rel="tag">数据类型</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B8%B8%E6%A0%87/" rel="tag">游标</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%B4%A2%E5%BC%95/" rel="tag">索引</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%A7%86%E5%9B%BE/" rel="tag">视图</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%A7%A6%E5%8F%91%E5%99%A8/" rel="tag">触发器</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AF%AD%E6%B3%95/" rel="tag">语法</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%94%81/" rel="tag">锁</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/1970/03/02/02%20Git%20%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Git 版本控制
+        
+      </div>
+    </a>
+  
+  
+    <a href="/1970/02/04/04%20Vue/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Vue</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AOP/" rel="tag">AOP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/API/" rel="tag">API</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Axios/" rel="tag">Axios</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Banner/" rel="tag">Banner</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bean/" rel="tag">Bean</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bean-Aware/" rel="tag">Bean Aware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Boot/" rel="tag">Boot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Controller/" rel="tag">Controller</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cookie/" rel="tag">Cookie</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Document/" rel="tag">Document</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Element/" rel="tag">Element</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Element-plus/" rel="tag">Element-plus</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Filter/" rel="tag">Filter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GUI/" rel="tag">GUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HikariCP/" rel="tag">HikariCP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HttpClient/" rel="tag">HttpClient</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HttpFilter/" rel="tag">HttpFilter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HttpServlet/" rel="tag">HttpServlet</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Interceptor/" rel="tag">Interceptor</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JDBC/" rel="tag">JDBC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JNI/" rel="tag">JNI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JPA/" rel="tag">JPA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JRE/" rel="tag">JRE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/" rel="tag">JSON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JUL/" rel="tag">JUL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JUnit/" rel="tag">JUnit</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lambda/" rel="tag">Lambda</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lombok/" rel="tag">Lombok</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Matlab/" rel="tag">Matlab</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/" rel="tag">Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mvc/" rel="tag">Mvc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mybatis/" rel="tag">Mybatis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MybatisPlus/" rel="tag">MybatisPlus</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Optional/" rel="tag">Optional</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Promise/" rel="tag">Promise</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Properties/" rel="tag">Properties</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RestFul/" rel="tag">RestFul</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Robot/" rel="tag">Robot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Security/" rel="tag">Security</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Servlet/" rel="tag">Servlet</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ServletContext/" rel="tag">ServletContext</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Session/" rel="tag">Session</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Slf4j/" rel="tag">Slf4j</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringEL/" rel="tag">SpringEL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Stream-%E6%B5%81/" rel="tag">Stream 流</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Thymeleaf/" rel="tag">Thymeleaf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Token/" rel="tag">Token</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vim/" rel="tag">Vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vuex/" rel="tag">Vuex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/" rel="tag">Web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XHR/" rel="tag">XHR</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XML/" rel="tag">XML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/router/" rel="tag">router</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/switch/" rel="tag">switch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%8B%E4%BB%B6/" rel="tag">事件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%8B%E5%8A%A1/" rel="tag">事务</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%A4%E4%BA%92/" rel="tag">交互</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6/" rel="tag">任务调度</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" rel="tag">内存管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%87%BD%E6%95%B0/" rel="tag">函数</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3/" rel="tag">函数式接口</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%86%E6%94%AF/" rel="tag">分支</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%8D%E5%B0%84/" rel="tag">反射</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%91%BD%E4%BB%A4/" rel="tag">命令</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E5%83%8F%E7%BB%98%E5%88%B6/" rel="tag">图像绘制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/" rel="tag">垃圾回收机制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/" rel="tag">存储过程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9A%E6%97%B6%E5%99%A8/" rel="tag">定时器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AF%B9%E8%AF%9D%E6%A1%86/" rel="tag">对话框</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B1%9E%E6%80%A7/" rel="tag">属性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B8%83%E5%B1%80/" rel="tag">布局</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E5%99%A8/" rel="tag">异常处理器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/" rel="tag">引用类型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" rel="tag">性能优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8C%81%E4%B9%85%E5%8C%96/" rel="tag">持久化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" rel="tag">数据类型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1%E4%B8%8E%E8%AE%A1%E7%AE%97/" rel="tag">数据统计与计算</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6/" rel="tag">文件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93/" rel="tag">文件传输</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E6%9C%AC%E5%9D%97/" rel="tag">文本块</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" rel="tag">新特性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%98%A0%E5%B0%84%E5%99%A8/" rel="tag">映射器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A8%A1%E5%9D%97/" rel="tag">模块</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AD%A3%E5%88%99%E5%8C%B9%E9%85%8D/" rel="tag">正则匹配</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B3%A8%E8%A7%A3/" rel="tag">注解</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B8%B8%E6%A0%87/" rel="tag">游标</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9B%91%E5%90%AC%E5%99%A8/" rel="tag">监听器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AA%97%E5%8F%A3/" rel="tag">窗口</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%A6%E5%8F%B7%E5%AF%B9%E8%B1%A1/" rel="tag">符号对象</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B1%BB%E4%B8%8E%E7%B1%BB%E5%8A%A0%E8%BD%BD/" rel="tag">类与类加载</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B4%A2%E5%BC%95/" rel="tag">索引</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%84%E4%BB%B6/" rel="tag">组件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%8F%9C%E5%8D%95/" rel="tag">菜单</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%86%E5%9B%BE/" rel="tag">视图</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%A6%E5%8F%91%E5%99%A8/" rel="tag">触发器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%AD%E6%B3%95/" rel="tag">语法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/" rel="tag">远程仓库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%89%E6%8B%A9%E5%99%A8/" rel="tag">选择器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%85%8D%E7%BD%AE/" rel="tag">配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%94%81/" rel="tag">锁</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E6%9D%BF/" rel="tag">面板</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AOP/" style="font-size: 10px;">AOP</a> <a href="/tags/API/" style="font-size: 10px;">API</a> <a href="/tags/Axios/" style="font-size: 10px;">Axios</a> <a href="/tags/Banner/" style="font-size: 10px;">Banner</a> <a href="/tags/Bean/" style="font-size: 12px;">Bean</a> <a href="/tags/Bean-Aware/" style="font-size: 10px;">Bean Aware</a> <a href="/tags/Boot/" style="font-size: 10px;">Boot</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/Controller/" style="font-size: 10px;">Controller</a> <a href="/tags/Cookie/" style="font-size: 10px;">Cookie</a> <a href="/tags/Document/" style="font-size: 10px;">Document</a> <a href="/tags/Element/" style="font-size: 10px;">Element</a> <a href="/tags/Element-plus/" style="font-size: 10px;">Element-plus</a> <a href="/tags/Filter/" style="font-size: 10px;">Filter</a> <a href="/tags/GUI/" style="font-size: 10px;">GUI</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/HikariCP/" style="font-size: 10px;">HikariCP</a> <a href="/tags/HttpClient/" style="font-size: 10px;">HttpClient</a> <a href="/tags/HttpFilter/" style="font-size: 10px;">HttpFilter</a> <a href="/tags/HttpServlet/" style="font-size: 10px;">HttpServlet</a> <a href="/tags/Interceptor/" style="font-size: 10px;">Interceptor</a> <a href="/tags/JDBC/" style="font-size: 10px;">JDBC</a> <a href="/tags/JNI/" style="font-size: 10px;">JNI</a> <a href="/tags/JPA/" style="font-size: 10px;">JPA</a> <a href="/tags/JRE/" style="font-size: 10px;">JRE</a> <a href="/tags/JSON/" style="font-size: 10px;">JSON</a> <a href="/tags/JUL/" style="font-size: 10px;">JUL</a> <a href="/tags/JUnit/" style="font-size: 12px;">JUnit</a> <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/Lambda/" style="font-size: 10px;">Lambda</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Lombok/" style="font-size: 10px;">Lombok</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/Matlab/" style="font-size: 10px;">Matlab</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/Mvc/" style="font-size: 10px;">Mvc</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Mybatis/" style="font-size: 10px;">Mybatis</a> <a href="/tags/MybatisPlus/" style="font-size: 10px;">MybatisPlus</a> <a href="/tags/Optional/" style="font-size: 10px;">Optional</a> <a href="/tags/Promise/" style="font-size: 10px;">Promise</a> <a href="/tags/Properties/" style="font-size: 10px;">Properties</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/RestFul/" style="font-size: 10px;">RestFul</a> <a href="/tags/Robot/" style="font-size: 10px;">Robot</a> <a href="/tags/Security/" style="font-size: 10px;">Security</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/ServletContext/" style="font-size: 10px;">ServletContext</a> <a href="/tags/Session/" style="font-size: 12px;">Session</a> <a href="/tags/Slf4j/" style="font-size: 10px;">Slf4j</a> <a href="/tags/Spring/" style="font-size: 16px;">Spring</a> <a href="/tags/SpringEL/" style="font-size: 10px;">SpringEL</a> <a href="/tags/Stream-%E6%B5%81/" style="font-size: 10px;">Stream 流</a> <a href="/tags/Thymeleaf/" style="font-size: 10px;">Thymeleaf</a> <a href="/tags/Token/" style="font-size: 10px;">Token</a> <a href="/tags/Vim/" style="font-size: 10px;">Vim</a> <a href="/tags/Vue/" style="font-size: 10px;">Vue</a> <a href="/tags/Vuex/" style="font-size: 10px;">Vuex</a> <a href="/tags/Web/" style="font-size: 20px;">Web</a> <a href="/tags/XHR/" style="font-size: 10px;">XHR</a> <a href="/tags/XML/" style="font-size: 12px;">XML</a> <a href="/tags/router/" style="font-size: 10px;">router</a> <a href="/tags/switch/" style="font-size: 10px;">switch</a> <a href="/tags/%E4%BA%8B%E4%BB%B6/" style="font-size: 12px;">事件</a> <a href="/tags/%E4%BA%8B%E5%8A%A1/" style="font-size: 16px;">事务</a> <a href="/tags/%E4%BA%A4%E4%BA%92/" style="font-size: 16px;">交互</a> <a href="/tags/%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6/" style="font-size: 10px;">任务调度</a> <a href="/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" style="font-size: 10px;">内存管理</a> <a href="/tags/%E5%87%BD%E6%95%B0/" style="font-size: 16px;">函数</a> <a href="/tags/%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3/" style="font-size: 10px;">函数式接口</a> <a href="/tags/%E5%88%86%E6%94%AF/" style="font-size: 10px;">分支</a> <a href="/tags/%E5%8F%8D%E5%B0%84/" style="font-size: 10px;">反射</a> <a href="/tags/%E5%91%BD%E4%BB%A4/" style="font-size: 12px;">命令</a> <a href="/tags/%E5%9B%BE%E5%83%8F%E7%BB%98%E5%88%B6/" style="font-size: 10px;">图像绘制</a> <a href="/tags/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/" style="font-size: 10px;">垃圾回收机制</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 10px;">多线程</a> <a href="/tags/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/" style="font-size: 10px;">存储过程</a> <a href="/tags/%E5%AE%9A%E6%97%B6%E5%99%A8/" style="font-size: 12px;">定时器</a> <a href="/tags/%E5%AF%B9%E8%AF%9D%E6%A1%86/" style="font-size: 10px;">对话框</a> <a href="/tags/%E5%B1%9E%E6%80%A7/" style="font-size: 12px;">属性</a> <a href="/tags/%E5%B8%83%E5%B1%80/" style="font-size: 10px;">布局</a> <a href="/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E5%99%A8/" style="font-size: 10px;">异常处理器</a> <a href="/tags/%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/" style="font-size: 10px;">引用类型</a> <a href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" style="font-size: 10px;">性能优化</a> <a href="/tags/%E6%8C%81%E4%B9%85%E5%8C%96/" style="font-size: 10px;">持久化</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 12px;">数学</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 12px;">数据库</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" style="font-size: 16px;">数据类型</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1%E4%B8%8E%E8%AE%A1%E7%AE%97/" style="font-size: 10px;">数据统计与计算</a> <a href="/tags/%E6%96%87%E4%BB%B6/" style="font-size: 10px;">文件</a> <a href="/tags/%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93/" style="font-size: 12px;">文件传输</a> <a href="/tags/%E6%96%87%E6%9C%AC%E5%9D%97/" style="font-size: 10px;">文本块</a> <a href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" style="font-size: 10px;">新特性</a> <a href="/tags/%E6%98%A0%E5%B0%84%E5%99%A8/" style="font-size: 10px;">映射器</a> <a href="/tags/%E6%A8%A1%E5%9D%97/" style="font-size: 12px;">模块</a> <a href="/tags/%E6%AD%A3%E5%88%99%E5%8C%B9%E9%85%8D/" style="font-size: 10px;">正则匹配</a> <a href="/tags/%E6%B3%A8%E8%A7%A3/" style="font-size: 18px;">注解</a> <a href="/tags/%E6%B8%B8%E6%A0%87/" style="font-size: 10px;">游标</a> <a href="/tags/%E7%9B%91%E5%90%AC%E5%99%A8/" style="font-size: 14px;">监听器</a> <a href="/tags/%E7%AA%97%E5%8F%A3/" style="font-size: 10px;">窗口</a> <a href="/tags/%E7%AC%A6%E5%8F%B7%E5%AF%B9%E8%B1%A1/" style="font-size: 10px;">符号对象</a> <a href="/tags/%E7%B1%BB%E4%B8%8E%E7%B1%BB%E5%8A%A0%E8%BD%BD/" style="font-size: 10px;">类与类加载</a> <a href="/tags/%E7%B4%A2%E5%BC%95/" style="font-size: 10px;">索引</a> <a href="/tags/%E7%BB%84%E4%BB%B6/" style="font-size: 12px;">组件</a> <a href="/tags/%E8%8F%9C%E5%8D%95/" style="font-size: 10px;">菜单</a> <a href="/tags/%E8%A7%86%E5%9B%BE/" style="font-size: 10px;">视图</a> <a href="/tags/%E8%A7%A6%E5%8F%91%E5%99%A8/" style="font-size: 10px;">触发器</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">设计模式</a> <a href="/tags/%E8%AF%AD%E6%B3%95/" style="font-size: 20px;">语法</a> <a href="/tags/%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/" style="font-size: 10px;">远程仓库</a> <a href="/tags/%E9%80%89%E6%8B%A9%E5%99%A8/" style="font-size: 10px;">选择器</a> <a href="/tags/%E9%85%8D%E7%BD%AE/" style="font-size: 12px;">配置</a> <a href="/tags/%E9%94%81/" style="font-size: 14px;">锁</a> <a href="/tags/%E9%9D%A2%E6%9D%BF/" style="font-size: 10px;">面板</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/1970/04/">April 1970</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/1970/03/">March 1970</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/1970/02/">February 1970</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/1970/01/">January 1970</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/1970/04/02/02%20Matlab/">Matlab</a>
+          </li>
+        
+          <li>
+            <a href="/1970/04/01/01%20Markdown%20%E8%AF%AD%E6%B3%95/">Markdown 语法</a>
+          </li>
+        
+          <li>
+            <a href="/1970/03/04/04%20Redis%20%E6%95%B0%E6%8D%AE%E5%BA%93/">Redis 数据库</a>
+          </li>
+        
+          <li>
+            <a href="/1970/03/03/03%20Linux%20%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">Linux 操作系统</a>
+          </li>
+        
+          <li>
+            <a href="/1970/03/02/02%20Git%20%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/">Git 版本控制</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

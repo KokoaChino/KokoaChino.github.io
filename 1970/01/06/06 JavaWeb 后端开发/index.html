@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>JavaWeb 后端开发 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Java, Web, JUL, Properties, Maven, JUnit, JDBC, Servlet, HttpServlet, XHR, ServletContext, Cookie, Session, Filter, HttpFilter, Thymeleaf, 文件传输">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaWeb 后端开发">
+<meta property="og:url" content="http://example.com/1970/01/06/06%20JavaWeb%20%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Java, Web, JUL, Properties, Maven, JUnit, JDBC, Servlet, HttpServlet, XHR, ServletContext, Cookie, Session, Filter, HttpFilter, Thymeleaf, 文件传输">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="1970-01-05T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-11-01T10:11:15.095Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Web">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="JUL">
+<meta property="article:tag" content="Properties">
+<meta property="article:tag" content="Maven">
+<meta property="article:tag" content="JUnit">
+<meta property="article:tag" content="JDBC">
+<meta property="article:tag" content="Servlet">
+<meta property="article:tag" content="HttpServlet">
+<meta property="article:tag" content="XHR">
+<meta property="article:tag" content="ServletContext">
+<meta property="article:tag" content="Cookie">
+<meta property="article:tag" content="Session">
+<meta property="article:tag" content="Filter">
+<meta property="article:tag" content="HttpFilter">
+<meta property="article:tag" content="Thymeleaf">
+<meta property="article:tag" content="文件传输">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-06 JavaWeb 后端开发" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/1970/01/06/06%20JavaWeb%20%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" class="article-date">
+  <time class="dt-published" datetime="1970-01-05T16:00:00.000Z" itemprop="datePublished">1970-01-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      JavaWeb 后端开发
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>Java, Web, JUL, Properties, Maven, JUnit, JDBC, Servlet, HttpServlet, XHR, ServletContext, Cookie, Session, Filter, HttpFilter, Thymeleaf, 文件传输</p>
+<span id="more"></span>
+
+
+
+<h1 id="JUL-日志系统"><a href="#JUL-日志系统" class="headerlink" title="JUL 日志系统"></a>JUL 日志系统</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">获取日志管理器：<span class="type">LogManager</span> <span class="variable">manager</span> <span class="operator">=</span> LogManager.getLogManager()</span><br><span class="line">读取自定义配置文件：manager.readConfiguration(<span class="keyword">new</span> <span class="title class_">FileInputStream</span>(<span class="string">&quot;文件地址&quot;</span>))</span><br><span class="line"></span><br><span class="line">获取日志打印器（控制台）：<span class="type">Logger</span> <span class="variable">logger</span> <span class="operator">=</span> Logger.getLogger(当前类.class.getName())</span><br><span class="line">获取日志打印器（本地文件）：<span class="type">FileHandler</span> <span class="variable">fileHandler</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileHandler</span>(<span class="keyword">new</span> <span class="title class_">FileInputStream</span>(<span class="string">&quot;文件地址&quot;</span>))</span><br><span class="line">获取其父类的日志打印器：logger.getParent().getClass()</span><br><span class="line"></span><br><span class="line">设置日志过滤器：logger.setFilter(断言型函数)</span><br><span class="line">修改日志级别：logger.setLevel(日志级别)</span><br><span class="line">不使用父类的日志处理器：logger.setUseParentHandlers(<span class="literal">false</span>)</span><br><span class="line"></span><br><span class="line">新建日志处理器：<span class="type">ConsoleHandler</span> <span class="variable">handler</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ConsoleHandler</span>()</span><br><span class="line">设置日志的打印格式：handler.setFormatter(打印格式)</span><br><span class="line">使用自定义日志处理器：logger.addHandler(handler)</span><br></pre></td></tr></table></figure>
+
+<h2 id="JUL-日志级别"><a href="#JUL-日志级别" class="headerlink" title="JUL 日志级别"></a>JUL 日志级别</h2><table>
+<thead>
+<tr>
+<th align="center">JUL 日志级别</th>
+<th align="center">含义</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>Level.SEVERE</code></td>
+<td align="center">严重</td>
+<td align="center">严重的错误</td>
+</tr>
+<tr>
+<td align="center"><code>Level.WARNING</code></td>
+<td align="center">警告</td>
+<td align="center">警告的内容</td>
+</tr>
+<tr>
+<td align="center"><code>Level.INFO</code></td>
+<td align="center">信息</td>
+<td align="center">普通的信息</td>
+</tr>
+<tr>
+<td align="center"><code>Level.CONFIG</code></td>
+<td align="center">配置</td>
+<td align="center">普通的配置</td>
+</tr>
+<tr>
+<td align="center"><code>Level.FINE</code></td>
+<td align="center">详细</td>
+<td align="center">详细的信息</td>
+</tr>
+<tr>
+<td align="center"><code>Level.FINER</code></td>
+<td align="center">较详细</td>
+<td align="center">较详细的信息</td>
+</tr>
+<tr>
+<td align="center"><code>Level.FINEST</code></td>
+<td align="center">非常详细</td>
+<td align="center">非常详细的信息</td>
+</tr>
+</tbody></table>
+<h2 id="JUL-打印格式"><a href="#JUL-打印格式" class="headerlink" title="JUL 打印格式"></a>JUL 打印格式</h2><table>
+<thead>
+<tr>
+<th align="center">JUL 打印格式</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>new SimpleFormatter()</code></td>
+<td align="center">默认格式</td>
+</tr>
+<tr>
+<td align="center"><code>new XMLFormatter()</code></td>
+<td align="center">XML 格式</td>
+</tr>
+<tr>
+<td align="center"><code>new Formatter()</code></td>
+<td align="center">自定义格式</td>
+</tr>
+</tbody></table>
+<h1 id="Properties"><a href="#Properties" class="headerlink" title="Properties"></a>Properties</h1><h2 id="Properties-配置文件"><a href="#Properties-配置文件" class="headerlink" title="Properties 配置文件"></a>Properties 配置文件</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">书写格式：配置项 = 配置值</span><br><span class="line">指定默认日志级别：java.util.logging.ConsoleHandler.level = 日志级别</span><br><span class="line">指定默认日志格式：java.util.logging.ConsoleHandler.formatter = 日志格式</span><br><span class="line">指定默认的字符集：java.util.logging.ConsoleHandler.encoding = 字符集</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">获取 Properties 对象：<span class="type">Properties</span> <span class="variable">properties</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Properties</span>()</span><br><span class="line">读取 Properties 文件配置：properties.load(<span class="keyword">new</span> <span class="title class_">FileInputStream</span>(<span class="string">&quot;文件地址&quot;</span>))</span><br><span class="line">添加配置：properties.put(配置项, 配置值)</span><br><span class="line">删除配置：properties.remove(配置项, 配置值)</span><br><span class="line">保存 Properties 对象为文件：properties.store(<span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(<span class="string">&quot;文件地址&quot;</span>))</span><br></pre></td></tr></table></figure>
+
+<h1 id="Maven"><a href="#Maven" class="headerlink" title="Maven"></a>Maven</h1><h2 id="Maven-配置文件"><a href="#Maven-配置文件" class="headerlink" title="Maven 配置文件"></a>Maven 配置文件</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;版本号&quot;</span> encoding=<span class="string">&quot;解码格式&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://maven.apache.org/POM/4.0.0&quot;</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>当前模型的版本<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 父类项目的位置 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>组的名称<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>项目在当前组中的唯一名称<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>项目版本<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>组的名称<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>项目在当前组中的唯一名称<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>项目版本<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 一些变量和选项的配置 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">maven.compiler.source</span>&gt;</span>8<span class="tag">&lt;/<span class="name">maven.compiler.source</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">maven.compiler.target</span>&gt;</span>8<span class="tag">&lt;/<span class="name">maven.compiler.target</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">project.build.sourceEncoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="name">project.build.sourceEncoding</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 导入依赖 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>组的名称<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>项目在当前组中的唯一名称<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>项目版本<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></span><br><span class="line">                <span class="comment">&lt;!-- 移除指定依赖 --&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>组的名称<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>项目在当前组中的唯一名称<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>组的名称<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>项目在当前组中的唯一名称<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>项目版本<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependencyManagement</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 管理依赖 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>组的名称<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>项目在当前组中的唯一名称<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">version</span>&gt;</span>项目版本<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencyManagement</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Maven-依赖字段"><a href="#Maven-依赖字段" class="headerlink" title="Maven 依赖字段"></a>Maven 依赖字段</h2><table>
+<thead>
+<tr>
+<th align="center">Maven 依赖字段</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>groupId</code></td>
+<td align="center">组的名称</td>
+</tr>
+<tr>
+<td align="center"><code>artifactId</code></td>
+<td align="center">项目在当前组中的唯一名称</td>
+</tr>
+<tr>
+<td align="center"><code>version</code></td>
+<td align="center">项目版本</td>
+</tr>
+<tr>
+<td align="center"><code>type</code></td>
+<td align="center">依赖的类型</td>
+</tr>
+<tr>
+<td align="center"><code>scope</code></td>
+<td align="center">依赖的作用域</td>
+</tr>
+<tr>
+<td align="center"><code>optional</code></td>
+<td align="center">标记依赖是否可选</td>
+</tr>
+<tr>
+<td align="center"><code>exclusions</code></td>
+<td align="center">用来排除传递性依赖</td>
+</tr>
+</tbody></table>
+<h2 id="Maven-依赖的作用域"><a href="#Maven-依赖的作用域" class="headerlink" title="Maven 依赖的作用域"></a>Maven 依赖的作用域</h2><table>
+<thead>
+<tr>
+<th align="center">Maven 依赖的作用域</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>compile</code></td>
+<td align="center">在编译、运行、测试时均有效【默认选项】</td>
+</tr>
+<tr>
+<td align="center"><code>provided</code></td>
+<td align="center">在编译、测试时有效，但是在运行时无效</td>
+</tr>
+<tr>
+<td align="center"><code>runtime</code></td>
+<td align="center">在运行、测试时有效，但是在编译代码时无效</td>
+</tr>
+<tr>
+<td align="center"><code>test</code></td>
+<td align="center">只在测试时有效</td>
+</tr>
+</tbody></table>
+<h2 id="Maven-常用命令"><a href="#Maven-常用命令" class="headerlink" title="Maven 常用命令"></a>Maven 常用命令</h2><table>
+<thead>
+<tr>
+<th align="center">Maven 常用命令</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>clean</code></td>
+<td align="center">清理整个目标文件夹</td>
+</tr>
+<tr>
+<td align="center"><code>validate</code></td>
+<td align="center">验证项目的可用性</td>
+</tr>
+<tr>
+<td align="center"><code>compile</code></td>
+<td align="center">将项目编译为 .class 文件</td>
+</tr>
+<tr>
+<td align="center"><code>install</code></td>
+<td align="center">将当前项目安装到本地仓库</td>
+</tr>
+<tr>
+<td align="center"><code>verify</code></td>
+<td align="center">按顺序执行每个默认生命周期阶段</td>
+</tr>
+<tr>
+<td align="center"><code>test</code></td>
+<td align="center">一键测试所有位于 test 目录下的测试案例</td>
+</tr>
+<tr>
+<td align="center"><code>package</code></td>
+<td align="center">直接对项目的代码进行打包，生成 jar 文件</td>
+</tr>
+</tbody></table>
+<h1 id="JUnit-测试框架"><a href="#JUnit-测试框架" class="headerlink" title="JUnit 测试框架"></a>JUnit 测试框架</h1><p>导入依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.junit.jupiter<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junit-jupiter-engine<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.8.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.junit.jupiter<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junit-jupiter-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.8.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.junit.vintage<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junit-vintage-engine<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.8.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>注解</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span>：将一个方法标记为测试案例</span><br><span class="line"><span class="meta">@RepeatedTest(n)</span>：将一个方法标记为测试案例，执行多次测试</span><br><span class="line"><span class="meta">@DisplayName(&quot;测试名称&quot;)</span>：自定义测试名称</span><br><span class="line"></span><br><span class="line"><span class="meta">@BeforeAll</span>：添加测试用例开始之前的前置操作，对于全部的测试用例，只会执行一次</span><br><span class="line"><span class="meta">@BeforeEach</span>：添加测试用例开始之前的前置操作，对于每个测试用例，都会执行一次</span><br><span class="line"><span class="meta">@AfterAll</span>：添加测试用例开始之后的收尾操作，对于全部的测试用例，只会执行一次</span><br><span class="line"><span class="meta">@AfterEach</span>：添加测试用例开始之后的收尾操作，对于每个测试用例，都会执行一次</span><br></pre></td></tr></table></figure>
+
+<p><strong>断言语句</strong></p>
+<ul>
+<li><code>Assert.assertEquals(期盼值, 实际值)</code></li>
+<li><code>Assert.assertArrayEquals(期盼值, 实际值)</code></li>
+</ul>
+<h1 id="JDBC"><a href="#JDBC" class="headerlink" title="JDBC"></a>JDBC</h1><h2 id="获得数据库连接"><a href="#获得数据库连接" class="headerlink" title="获得数据库连接"></a>获得数据库连接</h2><p>通过<code>DriverManager </code>来获得数据库连接</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Connection</span> <span class="variable">connection</span> <span class="operator">=</span> DriverManager.getConnection(连接URL，用户名，密码)</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建用于执行-SQL-语句的对象"><a href="#创建用于执行-SQL-语句的对象" class="headerlink" title="创建用于执行 SQL 语句的对象"></a>创建用于执行 SQL 语句的对象</h2><p>创建一个用于执行<code>SQL</code>的<code>Statement</code>对象</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Statement</span> <span class="variable">statement</span> <span class="operator">=</span> connection.createStatement()</span><br></pre></td></tr></table></figure>
+
+<p>预编译一个<code>SQL</code>语句，通过直接将内容进行替换的方式来填写数据</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">PreparedStatement</span> <span class="variable">statement</span> <span class="operator">=</span> connection.prepareStatement(SQL语句格式)</span><br></pre></td></tr></table></figure>
+
+<h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">connection.setAutoCommit(<span class="literal">false</span>)：关闭事务自动提交</span><br><span class="line">connection.commit()：提交事务</span><br><span class="line"><span class="type">Savepoint</span> <span class="variable">savepoint</span> <span class="operator">=</span> connection.setSavepoint()：创建回滚点</span><br><span class="line">connection.rollback(回滚点)：回滚至指定回滚点</span><br></pre></td></tr></table></figure>
+
+<h2 id="执行-SQL-语句"><a href="#执行-SQL-语句" class="headerlink" title="执行 SQL 语句"></a>执行 SQL 语句</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">boolean</span> <span class="variable">b</span> <span class="operator">=</span> statement.excute(SQL语句)：执行任意的 SQL 语句</span><br><span class="line"></span><br><span class="line"><span class="type">ResultSet</span> <span class="variable">set</span> <span class="operator">=</span> statement.executeQuery(数据库查询语句)：执行 SQL 语句，并得到结果集</span><br><span class="line">set.next()：结果集迭代指针下移</span><br><span class="line">set.getXXX(列号)：获取结果集数据</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="variable">x</span> <span class="operator">=</span> statement.executeUpdate(数据库操纵语句 / 数据库定义语句)：执行 SQL 语句，并得到生效的行数</span><br><span class="line">statement.addBatch(数据库操纵语句 / 数据库定义语句)：将该 SQL 语句缓存起来先</span><br><span class="line">statement.executeBatch()：将之前缓存的全部 SQL 语句一起执行</span><br></pre></td></tr></table></figure>
+
+<h1 id="Servlet"><a href="#Servlet" class="headerlink" title="Servlet"></a>Servlet</h1><p><strong><code>C/S</code>数据交互的中间接口</strong></p>
+<h2 id="创建一个类来实现它"><a href="#创建一个类来实现它" class="headerlink" title="创建一个类来实现它"></a>创建一个类来实现它</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebServlet(&quot;路径&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TestServlet</span> <span class="keyword">implements</span> <span class="title class_">Servlet</span> &#123;</span><br><span class="line">    ...实现接口方法</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Servlet-接口的方法"><a href="#Servlet-接口的方法" class="headerlink" title="Servlet 接口的方法"></a>Servlet 接口的方法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">init</span><span class="params">(ServletConfig servletConfig)</span> <span class="keyword">throws</span> ServletException &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;初始化的方法&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">service</span><span class="params">(ServletRequest servletRequest, ServletResponse servletResponse)</span> <span class="keyword">throws</span> ServletException, IOException &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;响应交互的方法【重点】&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">destroy</span><span class="params">()</span> &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;回收处理前的方法&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="ServletRequest"><a href="#ServletRequest" class="headerlink" title="ServletRequest"></a>ServletRequest</h2><p><strong>包含了 HTTP 请求报文中的所有内容</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">HttpServletRequest</span> <span class="variable">request</span> <span class="operator">=</span> (HttpServletRequest) servletRequest <span class="comment">// 向下转型</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">获取协议版本：request.getProtocol()</span><br><span class="line">获取访问者的IP地址：request.getRemoteAddr()</span><br><span class="line">获取请求方法：request.getMethod()</span><br><span class="line">获取头部信息：</span><br><span class="line">        Enumeration&lt;String&gt; enumeration = request.getHeaderNames()</span><br><span class="line">        <span class="keyword">while</span> (enumeration.hasMoreElements())&#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">name</span> <span class="operator">=</span> enumeration.nextElement()</span><br><span class="line">            System.out.println(name + <span class="string">&quot;: &quot;</span> + request.getHeader(name))</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="ServletResponse"><a href="#ServletResponse" class="headerlink" title="ServletResponse"></a>ServletResponse</h2><p><strong>包含了 HTTP 响应报文中的所有内容</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">HttpServletResponse</span> <span class="variable">response</span> <span class="operator">=</span> (HttpServletResponse) servletResponse <span class="comment">// 向下转型</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">设置首部字节：response.setHeader(<span class="string">&quot;Content-type&quot;</span>, <span class="string">&quot;text/html;charset=UTF-8&quot;</span>)</span><br><span class="line">向浏览器输入内容：response.getWriter().write(<span class="string">&quot;输入内容&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h1 id="HttpServlet"><a href="#HttpServlet" class="headerlink" title="HttpServlet"></a>HttpServlet</h1><p><strong>它根据 HTTP 协议的规则，完善了<code>service</code>方法</strong></p>
+<h2 id="创建一个-HttpServlet-的子类"><a href="#创建一个-HttpServlet-的子类" class="headerlink" title="创建一个 HttpServlet 的子类"></a>创建一个 HttpServlet 的子类</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebServlet(&quot;路径&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TestServlet</span> <span class="keyword">extends</span> <span class="title class_">HttpServlet</span> &#123;&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="处理请求的方法：doGet"><a href="#处理请求的方法：doGet" class="headerlink" title="处理请求的方法：doGet"></a>处理请求的方法：doGet</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">doGet</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> ServletException, IOException &#123;</span><br><span class="line">    重定向：resp.sendRedirect(<span class="string">&quot;路径&quot;</span>)</span><br><span class="line">    设置转发的参数：req.setAttribute(<span class="string">&quot;test&quot;</span>, <span class="string">&quot;我是请求转发前的数据&quot;</span>)</span><br><span class="line">    请求转发给另一个 Servlet 对象：req.getRequestDispatcher(<span class="string">&quot;路径&quot;</span>).forward(req, resp)</span><br><span class="line">    接收转发的参数：req.getAttribute(<span class="string">&quot;test&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="处理响应的方法：doPost"><a href="#处理响应的方法：doPost" class="headerlink" title="处理响应的方法：doPost"></a>处理响应的方法：doPost</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">doPost</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> ServletException, IOException &#123;</span><br><span class="line">    获取响应的表单数据：</span><br><span class="line">    req.getParameterMap().forEach((k, v) -&gt; &#123;</span><br><span class="line">        System.out.println(k + <span class="string">&quot;: &quot;</span> + Arrays.toString(v))</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="文件的上传与下载"><a href="#文件的上传与下载" class="headerlink" title="文件的上传与下载"></a>文件的上传与下载</h1><h2 id="上传文件"><a href="#上传文件" class="headerlink" title="上传文件"></a>上传文件</h2><ol>
+<li><strong>前端中添加用于上传文件的表单</strong></li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">method</span>=<span class="string">&quot;post&quot;</span> <span class="attr">action</span>=<span class="string">&quot;file&quot;</span> <span class="attr">enctype</span>=<span class="string">&quot;multipart/form-data&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;file&quot;</span> <span class="attr">name</span>=<span class="string">&quot;test-file&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">button</span>&gt;</span>上传文件<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li><strong>编写一个<code>Servlet</code>用于处理文件的上传</strong></li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@MultipartConfig</span></span><br><span class="line"><span class="meta">@WebServlet(&quot;路径&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TestServlet</span> <span class="keyword">extends</span> <span class="title class_">HttpServlet</span> &#123;</span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">doPost</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> ServletException, IOException &#123;</span><br><span class="line">        <span class="keyword">try</span>(<span class="type">FileOutputStream</span> <span class="variable">stream</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(<span class="string">&quot;文件地址&quot;</span>)) &#123;</span><br><span class="line">            <span class="type">Part</span> <span class="variable">part</span> <span class="operator">=</span> req.getPart(<span class="string">&quot;test-file&quot;</span>)</span><br><span class="line">            拷贝输入流到输出流中：IOUtils.copy(part.getInputStream(), stream)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="下载文件"><a href="#下载文件" class="headerlink" title="下载文件"></a>下载文件</h2><ol>
+<li><strong>前端中添加用于下载文件的链接</strong></li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;file&quot;</span> <span class="attr">download</span>=<span class="string">&quot;icon.png&quot;</span>&gt;</span>点我下载高清资源<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><strong>编写一个<code>Servlet</code>用于处理文件的下载</strong></li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebServlet(&quot;路径&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TestServlet</span> <span class="keyword">extends</span> <span class="title class_">HttpServlet</span> &#123;</span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">doGet</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> ServletException, IOException &#123;</span><br><span class="line">        设置下载文件的类型：resp.setContentType(<span class="string">&quot;image/png&quot;</span>)</span><br><span class="line">        浏览器的文件输出流（指向本地文件）：<span class="type">OutputStream</span> <span class="variable">outputStream</span> <span class="operator">=</span> resp.getOutputStream()</span><br><span class="line">        本地的文件输入流（指向本地文件）：<span class="type">InputStream</span> <span class="variable">inputStream</span> <span class="operator">=</span> Resources.getResourceAsStream(<span class="string">&quot;icon.png&quot;</span>)</span><br><span class="line">        拷贝输出流到输入流中：IOUtils.copy(inputStream, outputStream)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="使用-XHR-请求数据"><a href="#使用-XHR-请求数据" class="headerlink" title="使用 XHR 请求数据"></a>使用 XHR 请求数据</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">updateTime</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> xhr = <span class="keyword">new</span> <span class="title class_">XMLHttpRequest</span>()</span><br><span class="line">    xhr.<span class="property">onreadystatechange</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (xhr.<span class="property">readyState</span> === <span class="number">4</span> &amp;&amp; xhr.<span class="property">status</span> === <span class="number">200</span>) &#123;</span><br><span class="line">            <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;time&quot;</span>).<span class="property">innerText</span> = xhr.<span class="property">responseText</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    开启请求：xhr.<span class="title function_">open</span>(<span class="string">&#x27;GET&#x27;</span>, <span class="string">&#x27;time&#x27;</span>, <span class="literal">true</span>)</span><br><span class="line">    发送请求：xhr.<span class="title function_">send</span>()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>该<code>GET</code>请求，会使得<code>Servlet</code>执行一次<code>doGet</code>方法</p>
+<h1 id="ServletContext"><a href="#ServletContext" class="headerlink" title="ServletContext"></a>ServletContext</h1><p><strong>作用于整个 Web 程序的单例对象</strong></p>
+<p>获取该对象</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">ServletContext</span> <span class="variable">context</span> <span class="operator">=</span> getServletContext()</span><br></pre></td></tr></table></figure>
+
+<p>设置存储的键值对</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">context.setAttribute(<span class="string">&quot;K&quot;</span>, <span class="string">&quot;V&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>获取初始化参数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">context.getInitParameter(<span class="string">&quot;K&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="Servlet-初始化参数"><a href="#Servlet-初始化参数" class="headerlink" title="Servlet 初始化参数"></a>Servlet 初始化参数</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebServlet(value = &quot;/login&quot;, initParams = &#123;</span></span><br><span class="line"><span class="meta">    @WebInitParam(name = &quot;K&quot;, value = &quot;V&quot;)</span></span><br><span class="line"><span class="meta">&#125;)</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="全局初始化参数"><a href="#全局初始化参数" class="headerlink" title="全局初始化参数"></a>全局初始化参数</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">context-param</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>K<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>V<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">context-param</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h1><p><strong>Web 程序用来保存数据的容器</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">创建一个 Cookie 对象：<span class="type">Cookie</span> <span class="variable">cookie</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Cookie</span>(<span class="string">&quot;test&quot;</span>, <span class="string">&quot;yyds&quot;</span>)</span><br><span class="line">设置 Cookie 对象的生效时长：cookie.setMaxAge(<span class="number">20</span>)</span><br><span class="line">添加进响应报文中：resp.addCookie(cookie)</span><br><span class="line">重定向后，该数据依然存在：resp.sendRedirect(<span class="string">&quot;time&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="Cookie-字段"><a href="#Cookie-字段" class="headerlink" title="Cookie 字段"></a>Cookie 字段</h2><table>
+<thead>
+<tr>
+<th align="center">Cookie 字段</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>name</code></td>
+<td align="center">名称</td>
+</tr>
+<tr>
+<td align="center"><code>value</code></td>
+<td align="center">值</td>
+</tr>
+<tr>
+<td align="center"><code>maxAge</code></td>
+<td align="center">失效的时间，单位：秒</td>
+</tr>
+</tbody></table>
+<p><strong><code>maxAge</code>说明：</strong></p>
+<ul>
+<li><code>&gt; 0</code>，在<code>maxAge</code>秒后失效</li>
+<li><code>&lt; 0</code>，关闭浏览器即失效</li>
+<li><code>= 0</code>，删除该<code>Cookie</code></li>
+<li><code>= -1</code>，默认选项</li>
+</ul>
+<h2 id="遍历-Cookies-的键值对"><a href="#遍历-Cookies-的键值对" class="headerlink" title="遍历 Cookies 的键值对"></a>遍历 Cookies 的键值对</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (Cookie cookie : req.getCookies()) &#123;</span><br><span class="line">    System.out.println(cookie.getName() + <span class="string">&quot;: &quot;</span> + cookie.getValue())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h1><p><strong>管理当前 Web 程序会话的对象</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">获取 HttpSession 对象：<span class="type">HttpSession</span> <span class="variable">session</span> <span class="operator">=</span> req.getSession()</span><br><span class="line">设定值：session.setAttribute(<span class="string">&quot;user&quot;</span>, user)</span><br><span class="line">立即销毁该 Session 对象：session.invalidate()</span><br></pre></td></tr></table></figure>
+
+<p>设定<code>Session</code>对象的过期时间（默认 30 分钟）</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">session-config</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">session-timeout</span>&gt;</span>30<span class="tag">&lt;/<span class="name">session-timeout</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">session-config</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="Filter"><a href="#Filter" class="headerlink" title="Filter"></a>Filter</h1><p><strong>Web 服务器跟 Web 资源之间的过滤器</strong></p>
+<p>添加一个过滤器</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebFilter(&quot;路径&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TestFilter</span> <span class="keyword">implements</span> <span class="title class_">Filter</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doFilter</span><span class="params">(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)</span> <span class="keyword">throws</span> IOException, ServletException &#123;</span><br><span class="line">        放行给下一级的过滤器：filterChain.doFilter(servletRequest, servletResponse)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="HttpFilter"><a href="#HttpFilter" class="headerlink" title="HttpFilter"></a>HttpFilter</h1><p><strong>专用于 HTTP 的 Web 服务器跟 Web 资源之间的过滤器</strong></p>
+<p>添加一个过滤器</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebFilter(&quot;路径&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TestFilter</span> <span class="keyword">extends</span> <span class="title class_">HttpFilter</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doFilter</span><span class="params">(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)</span> <span class="keyword">throws</span> IOException, ServletException &#123;</span><br><span class="line">        放行给下一级的过滤器：chain.doFilter(servletRequest, servletResponse)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Thymeleaf-模板引擎"><a href="#Thymeleaf-模板引擎" class="headerlink" title="Thymeleaf 模板引擎"></a>Thymeleaf 模板引擎</h1><p>导入依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.thymeleaf<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>thymeleaf<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.1.14.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.thymeleaf<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>thymeleaf-spring5<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.1.14.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="前端配置"><a href="#前端配置" class="headerlink" title="前端配置"></a>前端配置</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">统一格式：th:属性名称=&quot;$&#123;参数名&#125;&quot;</span><br><span class="line">普通文本：<span class="tag">&lt;<span class="name">div</span> <span class="attr">th:text</span>=<span class="string">&quot;$&#123;title&#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">HTML语言文本：<span class="tag">&lt;<span class="name">div</span> <span class="attr">th:utext</span>=<span class="string">&quot;$&#123;title.toLowerCase()&#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="后端配置"><a href="#后端配置" class="headerlink" title="后端配置"></a>后端配置</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">TemplateEngine engine <span class="comment">// 需要用到这个对象</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">init</span><span class="params">()</span> <span class="keyword">throws</span> ServletException &#123;</span><br><span class="line">    engine = <span class="keyword">new</span> <span class="title class_">TemplateEngine</span>()</span><br><span class="line">    engine.setTemplateResolver(<span class="keyword">new</span> <span class="title class_">ClassLoaderTemplateResolver</span>())</span><br><span class="line">    <span class="comment">// 设定模板解析器决定了从哪里获取模板文件，这里直接使用 ClassLoaderTemplateResolver 表示加载内部资源文件</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">doGet</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> ServletException, IOException &#123;</span><br><span class="line">    <span class="type">Context</span> <span class="variable">context</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Context</span>()</span><br><span class="line">    context.setVariable(<span class="string">&quot;title&quot;</span>, <span class="string">&quot;&lt;h1&gt;我是标题&lt;/h1&gt;&quot;</span>) <span class="comment">// 直接替换前端的参数</span></span><br><span class="line">    engine.process(<span class="string">&quot;test.html&quot;</span>, context, resp.getWriter()) <span class="comment">// 配置</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Thymeleaf-流程控制语法"><a href="#Thymeleaf-流程控制语法" class="headerlink" title="Thymeleaf 流程控制语法"></a>Thymeleaf 流程控制语法</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">th:if</span>=<span class="string">&quot;$&#123;eval&#125;&quot;</span>&gt;</span>我是判断条件标签<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">th:unless</span>=<span class="string">&quot;$&#123;eval&#125;&quot;</span>&gt;</span>我是判断条件标签<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">th:switch</span>=<span class="string">&quot;$&#123;eval&#125;&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">th:case</span>=<span class="string">&quot;1&quot;</span>&gt;</span>我是1<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">th:case</span>=<span class="string">&quot;2&quot;</span>&gt;</span>我是2<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">th:case</span>=<span class="string">&quot;3&quot;</span>&gt;</span>我是3<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Thymeleaf-遍历语法"><a href="#Thymeleaf-遍历语法" class="headerlink" title="Thymeleaf 遍历语法"></a>Thymeleaf 遍历语法</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">th:each</span>=<span class="string">&quot;title, iterStat : $&#123;list&#125;&quot;</span> <span class="attr">th:text</span>=<span class="string">&quot;$&#123;iterStat.index&#125;+&#x27;.《&#x27;+$&#123;title&#125;+&#x27;》&#x27;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="对前端内容进行替换"><a href="#对前端内容进行替换" class="headerlink" title="对前端内容进行替换"></a>对前端内容进行替换</h2><ol>
+<li>单独编写一个<code>head.html</code>来存放重复部分</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">xmlns:th</span>=<span class="string">&quot;http://www.thymeleaf.org&quot;</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;head&quot;</span> <span class="attr">th:fragment</span>=<span class="string">&quot;head-title&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">h1</span>&gt;</span>我是标题内容，每个页面都有<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">hr</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>直接将页面中的内容快速替换</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">th:include</span>=<span class="string">&quot;head.html::head-title&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;body&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span> <span class="attr">th:each</span>=<span class="string">&quot;title, iterStat : $&#123;list&#125;&quot;</span> <span class="attr">th:text</span>=<span class="string">&quot;$&#123;iterStat.index&#125;+&#x27;.《&#x27;+$&#123;title&#125;+&#x27;》&#x27;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="替换方式"><a href="#替换方式" class="headerlink" title="替换方式"></a>替换方式</h2><table>
+<thead>
+<tr>
+<th align="center">替换方式</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>th:insert</code></td>
+<td align="center">只插入指定的片段作为标签的主体</td>
+</tr>
+<tr>
+<td align="center"><code>th:replace</code></td>
+<td align="center">将标签直接替换为指定的片段</td>
+</tr>
+<tr>
+<td align="center"><code>th:include</code></td>
+<td align="center">只插入此片段的内容</td>
+</tr>
+</tbody></table>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/1970/01/06/06%20JavaWeb%20%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" data-id="cm35nehsr004g5ww4b88l55l9" data-title="JavaWeb 后端开发" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cookie/" rel="tag">Cookie</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Filter/" rel="tag">Filter</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HttpFilter/" rel="tag">HttpFilter</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HttpServlet/" rel="tag">HttpServlet</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JDBC/" rel="tag">JDBC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JUL/" rel="tag">JUL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JUnit/" rel="tag">JUnit</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Maven/" rel="tag">Maven</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Properties/" rel="tag">Properties</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Servlet/" rel="tag">Servlet</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ServletContext/" rel="tag">ServletContext</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Session/" rel="tag">Session</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Thymeleaf/" rel="tag">Thymeleaf</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/" rel="tag">Web</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/XHR/" rel="tag">XHR</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93/" rel="tag">文件传输</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/1970/01/07/07%20Mybatis%20%E6%8C%81%E4%B9%85%E5%B1%82%E6%A1%86%E6%9E%B6/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Mybatis 持久层框架
+        
+      </div>
+    </a>
+  
+  
+    <a href="/1970/01/05/05%20JavaGUI%20%E5%8F%AF%E8%A7%86%E5%8C%96%E5%BC%80%E5%8F%91/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">JavaGUI 可视化开发</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AOP/" rel="tag">AOP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/API/" rel="tag">API</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Axios/" rel="tag">Axios</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Banner/" rel="tag">Banner</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bean/" rel="tag">Bean</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bean-Aware/" rel="tag">Bean Aware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Boot/" rel="tag">Boot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Controller/" rel="tag">Controller</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cookie/" rel="tag">Cookie</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Document/" rel="tag">Document</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Element/" rel="tag">Element</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Element-plus/" rel="tag">Element-plus</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Filter/" rel="tag">Filter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GUI/" rel="tag">GUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HikariCP/" rel="tag">HikariCP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HttpClient/" rel="tag">HttpClient</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HttpFilter/" rel="tag">HttpFilter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HttpServlet/" rel="tag">HttpServlet</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Interceptor/" rel="tag">Interceptor</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JDBC/" rel="tag">JDBC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JNI/" rel="tag">JNI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JPA/" rel="tag">JPA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JRE/" rel="tag">JRE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/" rel="tag">JSON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JUL/" rel="tag">JUL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JUnit/" rel="tag">JUnit</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lambda/" rel="tag">Lambda</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lombok/" rel="tag">Lombok</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Matlab/" rel="tag">Matlab</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/" rel="tag">Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mvc/" rel="tag">Mvc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mybatis/" rel="tag">Mybatis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MybatisPlus/" rel="tag">MybatisPlus</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Optional/" rel="tag">Optional</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Promise/" rel="tag">Promise</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Properties/" rel="tag">Properties</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RestFul/" rel="tag">RestFul</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Robot/" rel="tag">Robot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Security/" rel="tag">Security</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Servlet/" rel="tag">Servlet</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ServletContext/" rel="tag">ServletContext</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Session/" rel="tag">Session</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Slf4j/" rel="tag">Slf4j</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringEL/" rel="tag">SpringEL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Stream-%E6%B5%81/" rel="tag">Stream 流</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Thymeleaf/" rel="tag">Thymeleaf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Token/" rel="tag">Token</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vim/" rel="tag">Vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vuex/" rel="tag">Vuex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/" rel="tag">Web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XHR/" rel="tag">XHR</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XML/" rel="tag">XML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/router/" rel="tag">router</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/switch/" rel="tag">switch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%8B%E4%BB%B6/" rel="tag">事件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%8B%E5%8A%A1/" rel="tag">事务</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%A4%E4%BA%92/" rel="tag">交互</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6/" rel="tag">任务调度</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" rel="tag">内存管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%87%BD%E6%95%B0/" rel="tag">函数</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3/" rel="tag">函数式接口</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%86%E6%94%AF/" rel="tag">分支</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%8D%E5%B0%84/" rel="tag">反射</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%91%BD%E4%BB%A4/" rel="tag">命令</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E5%83%8F%E7%BB%98%E5%88%B6/" rel="tag">图像绘制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/" rel="tag">垃圾回收机制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/" rel="tag">存储过程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9A%E6%97%B6%E5%99%A8/" rel="tag">定时器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AF%B9%E8%AF%9D%E6%A1%86/" rel="tag">对话框</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B1%9E%E6%80%A7/" rel="tag">属性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B8%83%E5%B1%80/" rel="tag">布局</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E5%99%A8/" rel="tag">异常处理器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/" rel="tag">引用类型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" rel="tag">性能优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8C%81%E4%B9%85%E5%8C%96/" rel="tag">持久化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" rel="tag">数据类型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1%E4%B8%8E%E8%AE%A1%E7%AE%97/" rel="tag">数据统计与计算</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6/" rel="tag">文件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93/" rel="tag">文件传输</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E6%9C%AC%E5%9D%97/" rel="tag">文本块</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" rel="tag">新特性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%98%A0%E5%B0%84%E5%99%A8/" rel="tag">映射器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A8%A1%E5%9D%97/" rel="tag">模块</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AD%A3%E5%88%99%E5%8C%B9%E9%85%8D/" rel="tag">正则匹配</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B3%A8%E8%A7%A3/" rel="tag">注解</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B8%B8%E6%A0%87/" rel="tag">游标</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9B%91%E5%90%AC%E5%99%A8/" rel="tag">监听器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AA%97%E5%8F%A3/" rel="tag">窗口</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%A6%E5%8F%B7%E5%AF%B9%E8%B1%A1/" rel="tag">符号对象</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B1%BB%E4%B8%8E%E7%B1%BB%E5%8A%A0%E8%BD%BD/" rel="tag">类与类加载</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B4%A2%E5%BC%95/" rel="tag">索引</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%84%E4%BB%B6/" rel="tag">组件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%8F%9C%E5%8D%95/" rel="tag">菜单</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%86%E5%9B%BE/" rel="tag">视图</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%A6%E5%8F%91%E5%99%A8/" rel="tag">触发器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%AD%E6%B3%95/" rel="tag">语法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/" rel="tag">远程仓库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%89%E6%8B%A9%E5%99%A8/" rel="tag">选择器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%85%8D%E7%BD%AE/" rel="tag">配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%94%81/" rel="tag">锁</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E6%9D%BF/" rel="tag">面板</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AOP/" style="font-size: 10px;">AOP</a> <a href="/tags/API/" style="font-size: 10px;">API</a> <a href="/tags/Axios/" style="font-size: 10px;">Axios</a> <a href="/tags/Banner/" style="font-size: 10px;">Banner</a> <a href="/tags/Bean/" style="font-size: 12px;">Bean</a> <a href="/tags/Bean-Aware/" style="font-size: 10px;">Bean Aware</a> <a href="/tags/Boot/" style="font-size: 10px;">Boot</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/Controller/" style="font-size: 10px;">Controller</a> <a href="/tags/Cookie/" style="font-size: 10px;">Cookie</a> <a href="/tags/Document/" style="font-size: 10px;">Document</a> <a href="/tags/Element/" style="font-size: 10px;">Element</a> <a href="/tags/Element-plus/" style="font-size: 10px;">Element-plus</a> <a href="/tags/Filter/" style="font-size: 10px;">Filter</a> <a href="/tags/GUI/" style="font-size: 10px;">GUI</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/HikariCP/" style="font-size: 10px;">HikariCP</a> <a href="/tags/HttpClient/" style="font-size: 10px;">HttpClient</a> <a href="/tags/HttpFilter/" style="font-size: 10px;">HttpFilter</a> <a href="/tags/HttpServlet/" style="font-size: 10px;">HttpServlet</a> <a href="/tags/Interceptor/" style="font-size: 10px;">Interceptor</a> <a href="/tags/JDBC/" style="font-size: 10px;">JDBC</a> <a href="/tags/JNI/" style="font-size: 10px;">JNI</a> <a href="/tags/JPA/" style="font-size: 10px;">JPA</a> <a href="/tags/JRE/" style="font-size: 10px;">JRE</a> <a href="/tags/JSON/" style="font-size: 10px;">JSON</a> <a href="/tags/JUL/" style="font-size: 10px;">JUL</a> <a href="/tags/JUnit/" style="font-size: 12px;">JUnit</a> <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/Lambda/" style="font-size: 10px;">Lambda</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Lombok/" style="font-size: 10px;">Lombok</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/Matlab/" style="font-size: 10px;">Matlab</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/Mvc/" style="font-size: 10px;">Mvc</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Mybatis/" style="font-size: 10px;">Mybatis</a> <a href="/tags/MybatisPlus/" style="font-size: 10px;">MybatisPlus</a> <a href="/tags/Optional/" style="font-size: 10px;">Optional</a> <a href="/tags/Promise/" style="font-size: 10px;">Promise</a> <a href="/tags/Properties/" style="font-size: 10px;">Properties</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/RestFul/" style="font-size: 10px;">RestFul</a> <a href="/tags/Robot/" style="font-size: 10px;">Robot</a> <a href="/tags/Security/" style="font-size: 10px;">Security</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/ServletContext/" style="font-size: 10px;">ServletContext</a> <a href="/tags/Session/" style="font-size: 12px;">Session</a> <a href="/tags/Slf4j/" style="font-size: 10px;">Slf4j</a> <a href="/tags/Spring/" style="font-size: 16px;">Spring</a> <a href="/tags/SpringEL/" style="font-size: 10px;">SpringEL</a> <a href="/tags/Stream-%E6%B5%81/" style="font-size: 10px;">Stream 流</a> <a href="/tags/Thymeleaf/" style="font-size: 10px;">Thymeleaf</a> <a href="/tags/Token/" style="font-size: 10px;">Token</a> <a href="/tags/Vim/" style="font-size: 10px;">Vim</a> <a href="/tags/Vue/" style="font-size: 10px;">Vue</a> <a href="/tags/Vuex/" style="font-size: 10px;">Vuex</a> <a href="/tags/Web/" style="font-size: 20px;">Web</a> <a href="/tags/XHR/" style="font-size: 10px;">XHR</a> <a href="/tags/XML/" style="font-size: 12px;">XML</a> <a href="/tags/router/" style="font-size: 10px;">router</a> <a href="/tags/switch/" style="font-size: 10px;">switch</a> <a href="/tags/%E4%BA%8B%E4%BB%B6/" style="font-size: 12px;">事件</a> <a href="/tags/%E4%BA%8B%E5%8A%A1/" style="font-size: 16px;">事务</a> <a href="/tags/%E4%BA%A4%E4%BA%92/" style="font-size: 16px;">交互</a> <a href="/tags/%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6/" style="font-size: 10px;">任务调度</a> <a href="/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" style="font-size: 10px;">内存管理</a> <a href="/tags/%E5%87%BD%E6%95%B0/" style="font-size: 16px;">函数</a> <a href="/tags/%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3/" style="font-size: 10px;">函数式接口</a> <a href="/tags/%E5%88%86%E6%94%AF/" style="font-size: 10px;">分支</a> <a href="/tags/%E5%8F%8D%E5%B0%84/" style="font-size: 10px;">反射</a> <a href="/tags/%E5%91%BD%E4%BB%A4/" style="font-size: 12px;">命令</a> <a href="/tags/%E5%9B%BE%E5%83%8F%E7%BB%98%E5%88%B6/" style="font-size: 10px;">图像绘制</a> <a href="/tags/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/" style="font-size: 10px;">垃圾回收机制</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 10px;">多线程</a> <a href="/tags/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/" style="font-size: 10px;">存储过程</a> <a href="/tags/%E5%AE%9A%E6%97%B6%E5%99%A8/" style="font-size: 12px;">定时器</a> <a href="/tags/%E5%AF%B9%E8%AF%9D%E6%A1%86/" style="font-size: 10px;">对话框</a> <a href="/tags/%E5%B1%9E%E6%80%A7/" style="font-size: 12px;">属性</a> <a href="/tags/%E5%B8%83%E5%B1%80/" style="font-size: 10px;">布局</a> <a href="/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E5%99%A8/" style="font-size: 10px;">异常处理器</a> <a href="/tags/%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/" style="font-size: 10px;">引用类型</a> <a href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" style="font-size: 10px;">性能优化</a> <a href="/tags/%E6%8C%81%E4%B9%85%E5%8C%96/" style="font-size: 10px;">持久化</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 12px;">数学</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 12px;">数据库</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" style="font-size: 16px;">数据类型</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1%E4%B8%8E%E8%AE%A1%E7%AE%97/" style="font-size: 10px;">数据统计与计算</a> <a href="/tags/%E6%96%87%E4%BB%B6/" style="font-size: 10px;">文件</a> <a href="/tags/%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93/" style="font-size: 12px;">文件传输</a> <a href="/tags/%E6%96%87%E6%9C%AC%E5%9D%97/" style="font-size: 10px;">文本块</a> <a href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" style="font-size: 10px;">新特性</a> <a href="/tags/%E6%98%A0%E5%B0%84%E5%99%A8/" style="font-size: 10px;">映射器</a> <a href="/tags/%E6%A8%A1%E5%9D%97/" style="font-size: 12px;">模块</a> <a href="/tags/%E6%AD%A3%E5%88%99%E5%8C%B9%E9%85%8D/" style="font-size: 10px;">正则匹配</a> <a href="/tags/%E6%B3%A8%E8%A7%A3/" style="font-size: 18px;">注解</a> <a href="/tags/%E6%B8%B8%E6%A0%87/" style="font-size: 10px;">游标</a> <a href="/tags/%E7%9B%91%E5%90%AC%E5%99%A8/" style="font-size: 14px;">监听器</a> <a href="/tags/%E7%AA%97%E5%8F%A3/" style="font-size: 10px;">窗口</a> <a href="/tags/%E7%AC%A6%E5%8F%B7%E5%AF%B9%E8%B1%A1/" style="font-size: 10px;">符号对象</a> <a href="/tags/%E7%B1%BB%E4%B8%8E%E7%B1%BB%E5%8A%A0%E8%BD%BD/" style="font-size: 10px;">类与类加载</a> <a href="/tags/%E7%B4%A2%E5%BC%95/" style="font-size: 10px;">索引</a> <a href="/tags/%E7%BB%84%E4%BB%B6/" style="font-size: 12px;">组件</a> <a href="/tags/%E8%8F%9C%E5%8D%95/" style="font-size: 10px;">菜单</a> <a href="/tags/%E8%A7%86%E5%9B%BE/" style="font-size: 10px;">视图</a> <a href="/tags/%E8%A7%A6%E5%8F%91%E5%99%A8/" style="font-size: 10px;">触发器</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">设计模式</a> <a href="/tags/%E8%AF%AD%E6%B3%95/" style="font-size: 20px;">语法</a> <a href="/tags/%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/" style="font-size: 10px;">远程仓库</a> <a href="/tags/%E9%80%89%E6%8B%A9%E5%99%A8/" style="font-size: 10px;">选择器</a> <a href="/tags/%E9%85%8D%E7%BD%AE/" style="font-size: 12px;">配置</a> <a href="/tags/%E9%94%81/" style="font-size: 14px;">锁</a> <a href="/tags/%E9%9D%A2%E6%9D%BF/" style="font-size: 10px;">面板</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/1970/04/">April 1970</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/1970/03/">March 1970</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/1970/02/">February 1970</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/1970/01/">January 1970</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/1970/04/02/02%20Matlab/">Matlab</a>
+          </li>
+        
+          <li>
+            <a href="/1970/04/01/01%20Markdown%20%E8%AF%AD%E6%B3%95/">Markdown 语法</a>
+          </li>
+        
+          <li>
+            <a href="/1970/03/04/04%20Redis%20%E6%95%B0%E6%8D%AE%E5%BA%93/">Redis 数据库</a>
+          </li>
+        
+          <li>
+            <a href="/1970/03/03/03%20Linux%20%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">Linux 操作系统</a>
+          </li>
+        
+          <li>
+            <a href="/1970/03/02/02%20Git%20%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/">Git 版本控制</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
