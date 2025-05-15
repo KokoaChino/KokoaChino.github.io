@@ -1,0 +1,1201 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>JavaSE | 星开祈灵的个人博客</title><meta name="keywords" content="Java,API,函数式接口,Stream 流,正则匹配,文件,多线程,注解,反射,锁,定时器"><meta name="author" content="星开祈灵"><meta name="copyright" content="星开祈灵"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="JavaSE"><meta name="application-name" content="JavaSE"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="JavaSE"><meta property="og:url" content="https://kokoachino.github.io/2023/07/12/01%20JavaSE/index.html"><meta property="og:site_name" content="星开祈灵的个人博客"><meta property="og:description" content="API记录了我曾经在JavaSE阶段学习过的类和接口，Object不算在其中 类 Boolean  Character  String  StringBuilder  StringBuffer  Number  Byte Short Integer BigInteger Long Float D"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://gitee.com/kokoachino/picture-bed/raw/master/%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87.jpg?_r_=86b497bf-c817-03b8-11c3-92bf1525deb5"><meta property="article:author" content="星开祈灵"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://gitee.com/kokoachino/picture-bed/raw/master/%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87.jpg?_r_=86b497bf-c817-03b8-11c3-92bf1525deb5"><meta name="description" content="API记录了我曾经在JavaSE阶段学习过的类和接口，Object不算在其中 类 Boolean  Character  String  StringBuilder  StringBuffer  Number  Byte Short Integer BigInteger Long Float D"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://kokoachino.github.io/2023/07/12/01%20JavaSE/"><link rel="preconnect" href="//cdn.cbd.int"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: undefined,
+  postHeadAiDescription: {"enable":true,"gptName":"AnZhiYu","mode":"local","switchBtn":false,"btnLink":"https://afdian.net/item/886a79d4db6711eda42a52540025c377","randomNum":3,"basicWordCount":1000,"key":"xxxx","Referer":"https://xx.xx/"},
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: undefined,
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  music_page_default: "nav_music",
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: false,
+  mainTone: undefined,
+  authorStatus: undefined,
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":100,"languages":{"author":"作者: 星开祈灵","link":"链接: ","source":"来源: 星开祈灵的个人博客","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: '星开祈灵的个人博客',
+  title: 'JavaSE',
+  postAI: '',
+  pageFillDescription: 'API, 类, 接口, 输入输出, 输入, 输出, 函数式接口, 供给型接口, 消费型接口, 函数型接口, 断言型接口, Stream 流, 流的创建, 中间操作, 终结操作, 正则匹配, 正则表达式, 非打印字符, 特殊字符, 字符类, 限定符, 定位符, Pattern, Matcher, 文件, 路径, 绝对路径, 相对路径, 文件对象, 路径对象, 文件字节流, 文件字符流, 缓冲流, 转换流, 数据流, 对象流, 打印流, 多线程, 线程的创建和启动, 线程的优先级, 线程的休眠和中断, 线程的礼让和加入, ThreadLocal, 守护线程, 线程锁和线程同步, 死锁, wait 和 notify 方法, 定时器, 延迟执行, 定时重复, 注解, 预设注解, 元注解, 自定义注解, 反射, Class 类, 创建类对象, 调用类方法, 修改类属性, 获取类注解, 类加载器, 双亲委派机制, 自定义类加载器记录了我曾经在阶段学习过的类和接口不算在其中类接口输入输出输入从控制台获取输入路径文件对象从文件获取输入读取整行文本包括空格读取下一个单词以空格为分隔符读取下一个整数读取下一个双精度浮点数读取下一个布尔值检查是否还有下一个输入检查下一个输入是否为整数检查下一个输入是否为浮点数检查下一个输入是否为浮点数输出输出到控制台路径文件对象输出到文件不换行输出换行输出格式化输出函数式接口供给型接口表示一个无参数的函数返回一个结果获取返回值消费型接口表示一个接受一个参数并对其执行某些操作的函数不返回结果执行操作链接多个打印结果函数型接口表示一个接受一个参数并返回一个结果的函数链接多个先执行再执行链接多个先执行再执行断言型接口表示一个接受一个参数并返回布尔值的函数对结果进行取反组合多个逻辑为组合多个逻辑为流用于以声明性和函数式的方式处理集合数据简化了复杂的数据操作如过滤映射和聚合流的创建元素元素创建流元素创建单个元素的流为空返回初始值结束值返回范围为初始值结束值的等差数列所组成的有限流供给型函数返回由该函数所生成的无限流初始值迭代函数返回从初始值开始依据迭代函数生成的无限序列所组成的流中间操作比较器排序去重断言型函数过滤掉不符合该断言的元素最大长度限制流的最大长度值丢弃前个元素消费型函数消费每个元素但不中断流将元素类型转换为其包装类型转换为流元素类型转换为转换为流元素类型转换为流流组合两个流返回一个空的流函数型函数返回一个将此函数作用于该流上的流函数型函数返回一个将此函数作用于该流上的流函数型函数返回一个将此函数作用于该流上的流函数型函数返回一个将此函数作用于该流上的流函数型函数返回一个将此函数作用于每个元素所组成的流函数型函数返回一个将此函数作用于每个元素所组成的流函数型函数返回一个将此函数作用于每个元素所组成的流函数型函数返回一个将此函数作用于每个元素所组成的流终结操作消费型函数消费每个元素消费型函数按照原始顺序消费每个元素求和比较器求最小值比较器求最大值求平均值求元素数量返回第一个元素返回任意一个元素断言型函数判断全部元素是否都满足该断言断言型函数判断是否存在一个元素满足该断言累计函数对元素逐个累积计算保留最后一次迭代的值返回构造器转换为数组集合类将全部元素存入该集合中正则匹配正则表达式用于匹配字符串中字符组合的模式非打印字符在文本输出中不会直接显示为可见字符的字符非打印字符描述换行符回车符制表符垂直制表符换页符退格符空字符字符在字符串中使用这些转义序列时需要特别注意反斜杠的转义例如要在字符串中表示需要写成特殊字符在代码或字符串中具有特定含义的字符若要匹配这些特殊字符必须要使用进行转义特殊字符描述标记一个转义字符匹配除换行符以外的任意字符标记捕获组的开始标记捕获组的结束标记字符类的开始标记字符类的结束标记限定符的开始标记限定符的结束字符类用于定义一组字符以匹配单个字符字符类描述字符匹配指定字符匹配除换行符以外的任意字符匹配任意数字匹配任意非数字匹配任意小写字母匹配任意非小写字母匹配任意大写字母匹配任意非大写字母匹配任意汉字匹配任意非汉字匹配任意空白字符包括空格制表符换行符等匹配任意非空白字符匹配任意数字等同于匹配任意非数字等同于匹配任意字母数字或下划线等同于匹配任意非字母数字或下划线等同于限定符用于指定模式中某个元素出现的次数限定符描述精确匹配前面的表达式次匹配前面的表达式至少次匹配前面的表达式至少次但不超过次匹配前面的表达式零次或多次等同于匹配前面的表达式一次或多次等同于匹配前面的表达式零次或一次等同于定位符用于定义模式在字符串中的位置定位符描述匹配字符串的开始位置匹配字符串的结束位置匹配字符串的绝对开始位置匹配字符串的绝对结束位置匹配单词的边界即字母和非字母之间的位置匹配非单词边界即字母与字母或数字与数字之间的位置和是用于匹配整个字符串的开始和结束始终匹配文本的第一和最后部分而和在多行模式下可以匹配每行的开始和结束正则表达式字符串判断是否还有下一个匹配的子字符串如果找到了匹配会将匹配器的状态更新为匹配的子字符串判断是否还有下一个匹配的子字符串它不会改变匹配器的状态只是检查是否存在下一个匹配项返回最后一次匹配的子字符串组返回指定组的匹配子字符串返回当前匹配的起始索引返回当前匹配的结束索引检查字符串的开头是否与正则表达式匹配尝试将整个字符串与模式进行匹配字符串用指定的字符串替换所有匹配的子字符串字符串用指定的字符串替换第一个匹配的子字符串新字符串重置匹配器以准备匹配新字符串文件路径绝对路径绝对路径是指文件或目录在文件系统中的完整地址它从根目录开始描述了文件或目录的确切位置是一个绝对路径相对路径相对路径是基于当前工作目录开始的当前工作目录通常是运行程序时的目录获取当前工作目录比如如果当前工作目录是而使用相对路径那么实际访问的文件路径就是文件对象用于表示文件和目录路径的一个重要类它属于包提供了与文件系统交互的方法尽管对象本身并不直接用于读取或写入文件内容但它为处理文件和目录提供了许多有用的方法路径文件是否存在文件是否可读文件是否可写文件是否可执行文件是否为一个文件夹获取文件的大小字节数获取文件夹内部的文件列表获取文件的绝对路径获取文件或文件夹的名称获取文件的路径获取文件的父目录路径创建新文件如果文件已存在则返回删除文件或空目录创建单个目录创建多级目录文件对象重命名文件或目录获取文件的最后修改时间路径对象中用于表示文件和目录路径的一个重要类它提供了一种更灵活和强大的方式来处理文件系统中的路径路径父目录子目录将转换为对象文件是否存在获取文件的绝对路径获取文件或目录的名称获取文件的父目录路径获取路径的根部分检查文件是否存在检查文件是否可读检查文件是否可写检查文件是否可执行检查路径是否为一个文件夹获取文件的大小字节数获取文件夹内部的文件列表创建新文件如果已存在则抛出异常删除文件或空目录创建单个目录创建多级目录重命名文件或目录获取文件的最后修改时间文件字节流以字节为单位对文件进行读写操作的一种数据流它允许程序以原始字节的形式处理文件中的数据适合处理所有类型的文件包括文本文件图像音频和视频等输入路径文件对象读取一个字节为空时返回数组读取数组大小的字节数存到数组中为空时返回数组起始位置读取数量读取指定字节数存到数组中为空时返回查看当前可读的剩余字节数量字节数跳过指定数量的字节输出路径文件对象路径文件对象开启追加写入模式字节写入一个字节数组写入一个数组数组起始位置写入数量写入一个数组刷新输出流文件字符流以字符为单位对文本文件进行读写操作的一种数据流它主要用于处理字符数据适合读取和写入文本文件能够自动处理字符编码输入路径文件对象读取一个字符为空时返回数组读取数组大小的字符数存到数组中为空时返回数组起始位置读取数量读取指定字符数存到数组中为空时返回查看当前可读的剩余字符数量字符数跳过指定数量的字符输出路径文件对象路径文件对象开启追加写入模式字符写入一个字符数组写入一个数组数组起始位置写入数量写入一个数组刷新输出流获取编码缓冲流中处理输入和输出的一个重要概念主要用于提高文件读写操作的效率通过在内存中使用缓冲区缓冲流能够减少频繁的磁盘操作从而提升性能路径文件对象路径文件对象路径文件对象路径文件对象路径文件对象缓冲区大小路径文件对象缓冲区大小路径文件对象缓冲区大小路径文件对象缓冲区大小缓冲流与其他文件流之间的关系可以被视为一种封装关系可以使用其他文件流原本的全部方法并且提供了一些额外的方法对于额外的方法如下限制大小标记当前流的位置调用此方法后可以在流中随便读取数据直到读取的数据量达到指定的限制将流的位置重置回上一个调用方法时的位置对于额外的方法如下限制大小标记当前流的位置调用此方法后可以在流中随便读取数据直到读取的数据量达到指定的限制将流的位置重置回上一个调用方法时的位置读取一行返回一个流该流按行读取文本文件对于额外的方法如下字符串写入一个字符串写入平台默认的换行符转换流中的一种流用于在字节流和字符流之间进行转换它们主要用于处理字符编码问题使得对文本文件的读取和写入变得更加灵活和方便输入路径文件对象编码格式将字节流转换为字符流可以指定字符编码格式输出路径文件对象编码格式将字符流转换为字节流可以指定字符编码格式数据流用于处理基本数据类型的流类允许以机器无关的方式读取和写入二进制数据这些类通常用于从文件或网络流中输入和输出原始数据类型输入路径文件对象输出路径文件对象对象流用于对象序列化和反序列化的类输入路径文件对象读取为对象输出路径文件对象以对象的形式输入打印流系统中的一种特定类型的输出流专门用于将数据以文本格式写入输出设备可以自动刷新流并且支持输出不同类型的数据输出到控制台路径文件对象输出到文件不换行输出换行输出格式化输出多线程线程的创建和启动函数创建线程获取当前线程启动线程线程的优先级线程的优先级说明最低优先级最高优先级常规优先级线程优先级设定线程的优先级线程的休眠和中断毫秒休眠当前线程终止线程不推荐中断线程判断线程是否有中断标志立即清除当前线程的中断标记暂停线程恢复暂停的线程线程的礼让和加入将当前资源让位给其他同优先级线程加入线程等待新加入的线程的待执行内容全部执行完成之后再继续执行原线程的内容用于线程局部存储的类每个线程都拥有自己的独立变量副本其他线程无法访问允许子线程继承父线程的值值设置值获取值守护线程一个在后台运行的线程提供服务或支持其他线程的操作它的存在并不阻碍程序的终止守护线程正在运行设置为守护线程必须要在开始之前而且中途是不允许转换的主线程正在运行主线程主线程结束当主线程结束时守护线程会被终止线程锁和线程同步能够确保多个线程之间安全地共享资源避免竞争条件和数据不一致的问题实例类将代码块加锁对于使用同一个锁的多个代码块会保证其代码块同步代码块也可以加在方法上调用此方法时也会保证其代码块同步代码块死锁两个或多个线程在执行过程中因为争夺资源而造成的一种互相等待的状态导致它们无法继续执行获取到这个锁想要获取这个锁但是获取不到因为已经被线程拥有只能等待线程释放锁线程获取到这个锁想要获取这个锁但是获取不到因为已经被线程拥有只能等待线程释放锁线程和方法用于实现线程的协作与同步以确保线程在访问共享资源时的协调进入等待状态并释放锁唤醒处于等待状态的线程随机选择一个唤醒处于等待状态的线程全部定时器延迟执行创建定时器对象创建一个任务任务执行延迟执行延迟时间毫秒执行任务关闭定时器可以取消任务定时重复创建定时器对象创建一个任务任务执行定时重复执行延迟时间毫秒间隔时间毫秒执行任务关闭定时器可以取消任务注解一种特殊类型的标记可以被附加到代码的各个元素上如类方法字段参数等它提供了一种为程序元素添加元数据的方式这些元数据可以在编译时类加载时或运行时被读取和处理预设注解在语言中定义的标准注解用于指示一个方法覆盖超类中的方法编译器会检查此注解所标记的方法是否确实重写了超类中的方法如果没有将会抛出编译错误标记一个方法类或字段为不推荐使用这意味着该元素在未来的版本中可能会被移除或不再支持使用这个注解的元素通常有替代方案编译器在使用该元素时会发出警告标记一个接口为函数式接口即该接口只能有一个抽象方法函数式接口可以被隐式转换为表达式或方法引用使得代码更加简洁和可读用于指示编译器忽略特定的警告信息它可以用来压制多种类型的警告如未使用的变量类型转换等通过指定警告的名称可以控制编译器在编译时的行为以提高代码的可读性和可维护性用于标记一个方法的可变参数是安全的通常用于静态方法或实例方法中防止出现类型安全的问题当使用泛型时编译器会检查类型安全性而使用此注解可以告知编译器该方法不会导致不安全的操作元注解用于描述其他注解的注解标识这个注解的生命周期确定注解的可见性值值说明注解只在源代码中存在编译后会被丢弃注解在编译后会保留在文件中但在运行时不可用注解在运行时仍然可用可以通过反射访问标记注解可以应用于哪些成员限制注解的使用范围值说明可以应用于类接口或枚举可以应用于字段可以应用于方法可以应用于方法参数可以应用于构造器可以应用于局部变量可以应用于注解类型可以应用于包标记一个注解可以被子类继承如果一个注解被标记为那么如果父类使用了这个注解子类在未显式声明的情况下也会继承这个注解标记这些注解是否包含在用户文档中允许同一个注解可以在同一声明上使用多次自定义注解元注解自定义注解默认值使用自定义注解反射允许程序在运行时检查和操作类及其成员如字段方法和构造函数通过反射程序能够动态加载类创建对象调用方法和访问字段而无需在编译时知道这些类的详细信息类中的一个核心类提供了关于类和对象的信息在中每个类在运行时都有一个对应的对象可以通过这个对象来获取类的元数据包括类的名称父类实现的接口字段方法等获取类对象以类为例通过类名获取通过包名类名获取通过实例对象获取获取类的简单名称不包括包名获取该类的父类对象获取该类实现的所有接口获取该类声明的所有字段获取该类声明的所有方法获取该类声明的所有构造函数判断该类是否是数组类判断该类是否是基本数据类型对象将对象强制转换为该类子类将对象转换为指定子类类型获取加载该类的类加载器创建类对象获取类的对象使用反射获取构造函数并创建该对象获取指定参数类型的构造函数通过获取到的构造函数实例化一个对象获取类的对象使用反射获取构造函数设置构造函数可访问通过构造函数创建该对象获取指定参数类型的非构造函数设置为时表示允许访问具有非权限的成员包括构造函数方法和字段调用类方法获取类的对象获取方法指定参数类型为调用方法传入参数获取指定名称和参数类型的方法在指定对象上调用该方法获取类的对象获取私有方法设置方法可访问调用方法传入参数获取指定名称和参数类型的非方法修改类属性获取类的对象使用获取公共字段将的值修改为获取指定名称的字段的对象修改指定对象的类型字段的值其他数据类型同理也可直接用获取类的对象使用获取私有字段设置字段可访问去除标记将的值修改为获取类注解检查是否有注解获取注解获取注解的值类加载器双亲委派机制类加载的一种机制用于确保类加载的安全性和效率它的核心思想是当一个类加载器接收到类加载请求时它并不会自己直接去加载这个类而是会把这个请求委派给它的父加载器去处理只有在父加载器无法找到该类的情况下当前加载器才会尝试加载该类工作原理类加载器层次结构在中类加载器是以层次结构组织的每个类加载器都有一个父类加载器通常是的根类加载器是层次结构的最上层加载流程当一个类加载器接收到类加载请求时它首先将请求转发给父加载器父加载器尝试加载这个类如果父加载器能够加载该类则返回这个类如果父加载器无法加载该类当前类加载器才会尝试去加载这个类例子假设我们有一个类它被定义在用户项目中同时也存在于核心库中按照双亲委派机制加载的请求会首先被委派给根类加载器根类加载器会查找核心库中的类如果找到了加载器就会返回这个类如果没有找到委派给应用程序类加载器然后才会去加载用户自定义的类总结双亲委派机制是类加载的基础确保了类加载过程的安全性和高效性通过这一机制能够有效地管理类的加载和使用维护应用程序的稳定性自定义类加载器通过命令手动编译一个文件编写自定义类加载器自定义类加载器调用方法支持载入外部文件类名必须和定义的保持一致成功加载外部文件',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-05-15 17:48:23',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://gitee.com/kokoachino/picture-bed/raw/master/%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/head.jpg"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><a id="site-name" href="/" accesskey="h"><div class="title">星开祈灵的个人博客</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="http://8.138.214.176:5174/%E9%A1%B9%E7%9B%AE%E5%9B%BE%E5%BA%8A/%E6%98%9F%E5%BC%80%E7%A5%88%E7%81%B5%E7%99%BE%E5%AE%9D%E7%AE%B1%20%E9%A1%B9%E7%9B%AE%E6%96%87%E6%A1%A3-29.png" target="_blank"><img class="post-qr-code-img" alt="微信" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="http://8.138.214.176:5174/%E9%A1%B9%E7%9B%AE%E5%9B%BE%E5%BA%8A/%E6%98%9F%E5%BC%80%E7%A5%88%E7%81%B5%E7%99%BE%E5%AE%9D%E7%AE%B1%20%E9%A1%B9%E7%9B%AE%E6%96%87%E6%A1%A3-29.png"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png" target="_blank"><img class="post-qr-code-img" alt="支付宝" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/API/" style="font-size: 1.05rem;">API<sup>1</sup></a><a href="/tags/CSS/" style="font-size: 1.05rem;">CSS<sup>1</sup></a><a href="/tags/Git/" style="font-size: 1.05rem;">Git<sup>1</sup></a><a href="/tags/HTML/" style="font-size: 1.05rem;">HTML<sup>1</sup></a><a href="/tags/Java/" style="font-size: 1.05rem;">Java<sup>7</sup></a><a href="/tags/Lambda/" style="font-size: 1.05rem;">Lambda<sup>1</sup></a><a href="/tags/Matlab/" style="font-size: 1.05rem;">Matlab<sup>1</sup></a><a href="/tags/MySQL/" style="font-size: 1.05rem;">MySQL<sup>1</sup></a><a href="/tags/Optional/" style="font-size: 1.05rem;">Optional<sup>1</sup></a><a href="/tags/Stream-%E6%B5%81/" style="font-size: 1.05rem;">Stream 流<sup>1</sup></a><a href="/tags/Web/" style="font-size: 1.05rem;">Web<sup>6</sup></a><a href="/tags/%E4%BA%8B%E5%8A%A1/" style="font-size: 1.05rem;">事务<sup>4</sup></a><a href="/tags/%E5%87%BD%E6%95%B0/" style="font-size: 1.05rem;">函数<sup>4</sup></a><a href="/tags/%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3/" style="font-size: 1.05rem;">函数式接口<sup>1</sup></a><a href="/tags/%E5%88%86%E6%94%AF/" style="font-size: 1.05rem;">分支<sup>1</sup></a><a href="/tags/%E5%8F%8D%E5%B0%84/" style="font-size: 1.05rem;">反射<sup>1</sup></a><a href="/tags/%E5%91%BD%E4%BB%A4/" style="font-size: 1.05rem;">命令<sup>2</sup></a><a href="/tags/%E5%9B%BE%E5%83%8F%E7%BB%98%E5%88%B6/" style="font-size: 1.05rem;">图像绘制<sup>1</sup></a><a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 1.05rem;">多线程<sup>1</sup></a><a href="/tags/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/" style="font-size: 1.05rem;">存储过程<sup>1</sup></a><a href="/tags/%E5%AE%9A%E6%97%B6%E5%99%A8/" style="font-size: 1.05rem;">定时器<sup>2</sup></a><a href="/tags/%E5%B1%9E%E6%80%A7/" style="font-size: 1.05rem;">属性<sup>2</sup></a><a href="/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E5%99%A8/" style="font-size: 1.05rem;">异常处理器<sup>1</sup></a><a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 1.05rem;">数学<sup>2</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 1.05rem;">数据库<sup>2</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" style="font-size: 1.05rem;">数据类型<sup>4</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1%E4%B8%8E%E8%AE%A1%E7%AE%97/" style="font-size: 1.05rem;">数据统计与计算<sup>1</sup></a><a href="/tags/%E6%96%87%E4%BB%B6/" style="font-size: 1.05rem;">文件<sup>1</sup></a><a href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" style="font-size: 1.05rem;">新特性<sup>1</sup></a><a href="/tags/%E6%AD%A3%E5%88%99%E5%8C%B9%E9%85%8D/" style="font-size: 1.05rem;">正则匹配<sup>1</sup></a><a href="/tags/%E6%B3%A8%E8%A7%A3/" style="font-size: 1.05rem;">注解<sup>5</sup></a><a href="/tags/%E6%B8%B8%E6%A0%87/" style="font-size: 1.05rem;">游标<sup>1</sup></a><a href="/tags/%E7%AC%A6%E5%8F%B7%E5%AF%B9%E8%B1%A1/" style="font-size: 1.05rem;">符号对象<sup>1</sup></a><a href="/tags/%E7%B4%A2%E5%BC%95/" style="font-size: 1.05rem;">索引<sup>1</sup></a><a href="/tags/%E8%A7%86%E5%9B%BE/" style="font-size: 1.05rem;">视图<sup>1</sup></a><a href="/tags/%E8%A7%A6%E5%8F%91%E5%99%A8/" style="font-size: 1.05rem;">触发器<sup>1</sup></a><a href="/tags/%E8%AF%AD%E6%B3%95/" style="font-size: 1.05rem;">语法<sup>8</sup></a><a href="/tags/%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/" style="font-size: 1.05rem;">远程仓库<sup>1</sup></a><a href="/tags/%E9%80%89%E6%8B%A9%E5%99%A8/" style="font-size: 1.05rem;">选择器<sup>1</sup></a><a href="/tags/%E9%94%81/" style="font-size: 1.05rem;">锁<sup>4</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/05/"><span class="card-archive-list-date">五月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/04/"><span class="card-archive-list-date">四月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/12/"><span class="card-archive-list-date">十二月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/11/"><span class="card-archive-list-date">十一月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/09/"><span class="card-archive-list-date">九月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/08/"><span class="card-archive-list-date">八月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/07/"><span class="card-archive-list-date">七月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/06/"><span class="card-archive-list-date">六月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">3</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%90%8E%E7%AB%AF/" itemprop="url">后端</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/Java/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Java</span></a><a class="article-meta__tags" href="/tags/API/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>API</span></a><a class="article-meta__tags" href="/tags/%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>函数式接口</span></a><a class="article-meta__tags" href="/tags/Stream-%E6%B5%81/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Stream 流</span></a><a class="article-meta__tags" href="/tags/%E6%AD%A3%E5%88%99%E5%8C%B9%E9%85%8D/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>正则匹配</span></a><a class="article-meta__tags" href="/tags/%E6%96%87%E4%BB%B6/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>文件</span></a><a class="article-meta__tags" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>多线程</span></a><a class="article-meta__tags" href="/tags/%E6%B3%A8%E8%A7%A3/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>注解</span></a><a class="article-meta__tags" href="/tags/%E5%8F%8D%E5%B0%84/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>反射</span></a><a class="article-meta__tags" href="/tags/%E9%94%81/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>锁</span></a><a class="article-meta__tags" href="/tags/%E5%AE%9A%E6%97%B6%E5%99%A8/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>定时器</span></a></span></div></div><h1 class="post-title" itemprop="name headline">JavaSE</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2023-07-11T16:00:00.000Z" title="发表于 2023-07-12 00:00:00">2023-07-12</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2025-05-15T09:48:23.376Z" title="更新于 2025-05-15 17:48:23">2025-05-15</time></span></div><div class="meta-secondline"><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为广州"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>广州</span></div></div></div><article class="post-content" id="article-container" itemscope itemtype="https://kokoachino.github.io/2023/07/12/01%20JavaSE/"><header><a class="post-meta-categories" href="/categories/%E5%90%8E%E7%AB%AF/" itemprop="url">后端</a><a href="/tags/Java/" tabindex="-1" itemprop="url">Java</a><a href="/tags/API/" tabindex="-1" itemprop="url">API</a><a href="/tags/%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3/" tabindex="-1" itemprop="url">函数式接口</a><a href="/tags/Stream-%E6%B5%81/" tabindex="-1" itemprop="url">Stream 流</a><a href="/tags/%E6%AD%A3%E5%88%99%E5%8C%B9%E9%85%8D/" tabindex="-1" itemprop="url">正则匹配</a><a href="/tags/%E6%96%87%E4%BB%B6/" tabindex="-1" itemprop="url">文件</a><a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" tabindex="-1" itemprop="url">多线程</a><a href="/tags/%E6%B3%A8%E8%A7%A3/" tabindex="-1" itemprop="url">注解</a><a href="/tags/%E5%8F%8D%E5%B0%84/" tabindex="-1" itemprop="url">反射</a><a href="/tags/%E9%94%81/" tabindex="-1" itemprop="url">锁</a><a href="/tags/%E5%AE%9A%E6%97%B6%E5%99%A8/" tabindex="-1" itemprop="url">定时器</a><h1 id="CrawlerTitle" itemprop="name headline">JavaSE</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">星开祈灵</span><time itemprop="dateCreated datePublished" datetime="2023-07-11T16:00:00.000Z" title="发表于 2023-07-12 00:00:00">2023-07-12</time><time itemprop="dateCreated datePublished" datetime="2025-05-15T09:48:23.376Z" title="更新于 2025-05-15 17:48:23">2025-05-15</time></header><span id="more"></span>
+
+<h1 id="API"><a href="#API" class="headerlink" title="API"></a>API</h1><p>记录了我曾经在<code>JavaSE</code>阶段学习过的类和接口，<code>Object</code>不算在其中</p>
+<h2 id="类"><a href="#类" class="headerlink" title="类"></a>类</h2><ul>
+<li><p><code>Boolean</code></p>
+</li>
+<li><p><code>Character</code></p>
+</li>
+<li><p><code>String</code></p>
+</li>
+<li><p><code>StringBuilder</code></p>
+</li>
+<li><p><code>StringBuffer</code></p>
+</li>
+<li><p><code>Number</code></p>
+<ul>
+<li><code>Byte</code></li>
+<li><code>Short</code></li>
+<li><code>Integer</code></li>
+<li><code>BigInteger</code></li>
+<li><code>Long</code></li>
+<li><code>Float</code></li>
+<li><code>Double</code></li>
+<li><code>BigDecimal</code></li>
+</ul>
+</li>
+<li><p><code>Math</code></p>
+</li>
+<li><p><code>Arrays</code></p>
+</li>
+<li><p><code>Collections</code></p>
+</li>
+<li><p><code>AbstractCollection</code></p>
+<ul>
+<li><p><code>ArrayDeque</code></p>
+</li>
+<li><p><code>AbstractQueue</code></p>
+<ul>
+<li><code>PriorityQueue</code></li>
+</ul>
+</li>
+<li><p><code>AbstractList</code></p>
+<ul>
+<li><code>ArrayList</code></li>
+<li><code>AbstractSequentialList</code><ul>
+<li><code>LinkedList</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code>AbstractSet</code></p>
+<ul>
+<li><code>HashSet</code></li>
+<li><code>TreeSet</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code>AbstractMap</code></p>
+<ul>
+<li><code>HashMap</code></li>
+<li><code>TreeMap</code></li>
+</ul>
+</li>
+<li><p><code>File</code></p>
+</li>
+<li><p><code>InputStream</code></p>
+<ul>
+<li><code>FileInputStream</code></li>
+<li><code>ObjectInputStream</code></li>
+<li><code>FilterInputStream</code><ul>
+<li><code>BufferedInputStream</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code>OutputStream</code></p>
+<ul>
+<li><code>FileOutputStream</code></li>
+<li><code>ObjectOutputStream</code></li>
+<li><code>FilterOutputStream</code><ul>
+<li><code>BufferedOutputStream</code></li>
+<li><code>PrintStream</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code>Scanner</code></p>
+</li>
+<li><p><code>Reader</code></p>
+<ul>
+<li><code>BufferedReader</code></li>
+<li><code>InputStreamReader</code><ul>
+<li><code>FileReader</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code>Writer</code></p>
+<ul>
+<li><code>BufferedWriter</code></li>
+<li><code>OutputStreamWriter</code><ul>
+<li><code>FileWriter</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code>Throwable</code></p>
+<ul>
+<li><code>Error</code><ul>
+<li><code>IOError</code></li>
+</ul>
+</li>
+<li><code>Exception</code><ul>
+<li><code>IOException</code></li>
+<li><code>RuntimeException</code><ul>
+<li><code>NullPointerException</code></li>
+<li><code>IndexOutOfBoundsException</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code>Thread</code></p>
+</li>
+<li><p><code>ThreadLocal</code></p>
+</li>
+<li><p><code>Random</code></p>
+</li>
+<li><p><code>Optional</code></p>
+</li>
+<li><p><code>Patter</code></p>
+</li>
+<li><p><code>Matcher</code></p>
+</li>
+<li><p><code>Class</code></p>
+</li>
+</ul>
+<h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><ul>
+<li><code>Stream</code></li>
+<li><code>IntStream</code></li>
+<li><code>LongStream</code></li>
+<li><code>DoubleStream</code></li>
+<li><code>Iterable</code></li>
+<li><code>Cloneable</code></li>
+<li><code>Consumer</code></li>
+<li><code>Supplier</code></li>
+<li><code>Function</code></li>
+<li><code>Predicate</code></li>
+</ul>
+<h1 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h1><h2 id="输入"><a href="#输入" class="headerlink" title="输入"></a>输入</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Scanner</span> <span class="variable">scanner</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in) <span class="comment">// 从控制台获取输入</span></span><br><span class="line"><span class="type">Scanner</span> <span class="variable">scanner</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(<span class="keyword">new</span> <span class="title class_">FileInputStream</span>(<span class="string">&quot;路径 / 文件对象&quot;</span>)) <span class="comment">// 从文件获取输入</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">scanner.nextLine() <span class="comment">// 读取整行文本（包括空格）</span></span><br><span class="line"></span><br><span class="line">scanner.next() <span class="comment">// 读取下一个单词（以空格为分隔符）</span></span><br><span class="line">scanner.nextInt() <span class="comment">// 读取下一个整数</span></span><br><span class="line">scanner.nextDouble() <span class="comment">// 读取下一个双精度浮点数</span></span><br><span class="line">scanner.nextBoolean() <span class="comment">// 读取下一个布尔值</span></span><br><span class="line"></span><br><span class="line">scanner.hasNext() <span class="comment">// 检查是否还有下一个输入</span></span><br><span class="line">scanner.hasNextInt() <span class="comment">// 检查下一个输入是否为整数</span></span><br><span class="line">scanner.hasNextDouble() <span class="comment">// 检查下一个输入是否为浮点数</span></span><br><span class="line">scanner.hasNextBoolean() <span class="comment">// 检查下一个输入是否为浮点数</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">PrintStream</span> <span class="variable">ps</span> <span class="operator">=</span> System.out <span class="comment">// 输出到控制台</span></span><br><span class="line"><span class="keyword">try</span> (<span class="type">PrintStream</span> <span class="variable">ps</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">PrintStream</span>(<span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(<span class="string">&quot;路径 / 文件对象&quot;</span>))) &#123; <span class="comment">// 输出到文件</span></span><br><span class="line">    </span><br><span class="line">&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ps.print(<span class="string">&quot;Hello, &quot;</span>); <span class="comment">// 不换行输出</span></span><br><span class="line">ps.println(<span class="string">&quot;World!&quot;</span>); <span class="comment">// 换行输出</span></span><br><span class="line">ps.printf(<span class="string">&quot;%.2f\n&quot;</span>, <span class="number">3.14159</span>); <span class="comment">// 格式化输出</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="函数式接口"><a href="#函数式接口" class="headerlink" title="函数式接口"></a>函数式接口</h1><h2 id="供给型接口"><a href="#供给型接口" class="headerlink" title="供给型接口"></a>供给型接口</h2><blockquote>
+<p><strong>Supplier&lt;T&gt;</strong></p>
+<p>表示一个无参数的函数，返回一个结果</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Supplier&lt;Double&gt; randomSupplier = Math::random;</span><br><span class="line"></span><br><span class="line">randomSupplier.get(); <span class="comment">// 获取返回值</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="消费型接口"><a href="#消费型接口" class="headerlink" title="消费型接口"></a>消费型接口</h2><blockquote>
+<p><strong>Consumer&lt;T&gt;</strong></p>
+<p>表示一个接受一个参数并对其执行某些操作的函数，不返回结果</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Consumer&lt;String&gt; print = System.out::println;</span><br><span class="line"></span><br><span class="line">print.accept(<span class="string">&quot;Hello, World!&quot;</span>); <span class="comment">// 执行操作</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Consumer&lt;String&gt; a = () -&gt; System.out.print(<span class="string">&quot;AAA&quot;</span>);</span><br><span class="line">Consumer&lt;String&gt; b = () -&gt; System.out.println(<span class="string">&quot;BBB&quot;</span>);</span><br><span class="line">Consumer&lt;String&gt; ab = a.andThen(b); <span class="comment">// 链接多个 Consumers</span></span><br><span class="line"></span><br><span class="line">ab.accept(); <span class="comment">// 打印结果：AAABBB</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="函数型接口"><a href="#函数型接口" class="headerlink" title="函数型接口"></a>函数型接口</h2><blockquote>
+<p><strong>Function&lt;T, R&gt;</strong></p>
+<p>表示一个接受一个参数并返回一个结果的函数</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Function&lt;String, Integer&gt; lengthFunction = (s) -&gt; s.length();</span><br><span class="line"></span><br><span class="line">lengthFunction.apply(<span class="string">&quot;AAA&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Function&lt;Integer, String&gt; a = (n) -&gt; <span class="string">&quot;Number：&quot;</span> + n;</span><br><span class="line">Function&lt;String, String&gt; b = (s) -&gt; s.toUpperCase();</span><br><span class="line">Function&lt;Integer, String&gt; ab = a.andThen(b); <span class="comment">// 链接多个 Functions</span></span><br><span class="line"></span><br><span class="line">ab.apply(<span class="number">10</span>); <span class="comment">// NUMBER：10（先执行 a，再执行 b）</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Function&lt;String, Integer&gt; a = (s) -&gt; Integer.parseInt(s);</span><br><span class="line">Function&lt;String, String&gt; b = (s) -&gt; s + <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">Function&lt;String, Integer&gt; ab = a.compose(b); <span class="comment">// 链接多个 Functions</span></span><br><span class="line"></span><br><span class="line">ab.apply(<span class="string">&quot;10&quot;</span>); <span class="comment">// 100（先执行 b，再执行 a）</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="断言型接口"><a href="#断言型接口" class="headerlink" title="断言型接口"></a>断言型接口</h2><blockquote>
+<p><strong>Predicate&lt;T&gt;</strong></p>
+<p>表示一个接受一个参数并返回布尔值的函数</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Predicate&lt;Integer&gt; isEven = (n) -&gt; n % <span class="number">2</span> == <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">isEven.test(<span class="number">4</span>); <span class="comment">// true</span></span><br><span class="line">isEven.negate(<span class="number">4</span>); <span class="comment">// false（对结果进行取反）</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Predicate&lt;Integer&gt; a = (n) -&gt; n % <span class="number">2</span> == <span class="number">0</span>;</span><br><span class="line">Predicate&lt;Integer&gt; b = (n) -&gt; n &gt; <span class="number">0</span>;</span><br><span class="line">Predicate&lt;Integer&gt; and = a.and(b); <span class="comment">// 组合多个 Predicate，逻辑为 and</span></span><br><span class="line">Predicate&lt;Integer&gt; or = a.or(b); <span class="comment">// 组合多个 Predicate，逻辑为 or</span></span><br><span class="line"></span><br><span class="line">and.test(<span class="number">3</span>); <span class="comment">// false</span></span><br><span class="line">or.test(<span class="number">3</span>); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="Stream-流"><a href="#Stream-流" class="headerlink" title="Stream 流"></a>Stream 流</h1><blockquote>
+<p>用于以声明性和函数式的方式处理集合数据，简化了复杂的数据操作如过滤、映射和聚合</p>
+</blockquote>
+<h2 id="流的创建"><a href="#流的创建" class="headerlink" title="流的创建"></a>流的创建</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">of(元素<span class="number">1</span>，元素<span class="number">2</span>，...)：创建流</span><br><span class="line">ofNullable(元素)：创建单个元素的流，为空返回 Optional</span><br><span class="line"><span class="title function_">range</span><span class="params">(初始值，结束值)</span>：返回范围为 [初始值，结束值) 的等差数列所组成的有限流</span><br><span class="line">generate(供给型函数)：返回由该函数所生成的无限流</span><br><span class="line">iterate(初始值，迭代函数)：返回从初始值开始，依据迭代函数生成的无限序列所组成的流</span><br></pre></td></tr></table></figure>
+
+<h2 id="中间操作"><a href="#中间操作" class="headerlink" title="中间操作"></a>中间操作</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">sorted(比较器)：排序</span><br><span class="line">distinct()：去重</span><br><span class="line">filter(断言型函数)：过滤掉不符合该断言的元素</span><br><span class="line">limit(最大长度)：限制流的最大长度</span><br><span class="line">skip(值)：丢弃前 n 个元素</span><br><span class="line">peek(消费型函数)：消费每个元素，但不中断流</span><br><span class="line"></span><br><span class="line">boxed()：将元素类型转换为其包装类型</span><br><span class="line">asLongStream()：转换为 LongStream 流，元素类型转换为 <span class="type">long</span></span><br><span class="line"><span class="title function_">asDoubleStream</span><span class="params">()</span>：转换为 DoubleStream 流，元素类型转换为 <span class="type">double</span></span><br><span class="line"><span class="title function_">concat</span><span class="params">(流<span class="number">1</span>，流<span class="number">2</span>)</span>：组合两个流</span><br><span class="line"></span><br><span class="line">empty()：返回一个空的流</span><br><span class="line">map(函数型函数)：返回一个将此函数作用于该流上的流</span><br><span class="line">mapToDouble(函数型函数)：返回一个将此函数作用于该流上的流</span><br><span class="line">mapToInt(函数型函数)：返回一个将此函数作用于该流上的流</span><br><span class="line">mapToLong(函数型函数)：返回一个将此函数作用于该流上的流</span><br><span class="line">flatMap(函数型函数)：返回一个将此函数作用于每个元素所组成的流</span><br><span class="line">flatMapToDouble(函数型函数)：返回一个将此函数作用于每个元素所组成的流</span><br><span class="line">flatMapToInt(函数型函数)：返回一个将此函数作用于每个元素所组成的流</span><br><span class="line">flatMapToLong(函数型函数)：返回一个将此函数作用于每个元素所组成的流</span><br></pre></td></tr></table></figure>
+
+<h2 id="终结操作"><a href="#终结操作" class="headerlink" title="终结操作"></a>终结操作</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">forEach(消费型函数)：消费每个元素</span><br><span class="line">forEachOrdered(消费型函数)：按照原始顺序，消费每个元素</span><br><span class="line"></span><br><span class="line">sum()：求和</span><br><span class="line">min(比较器)：求最小值</span><br><span class="line">max(比较器)：求最大值</span><br><span class="line">average()：求平均值</span><br><span class="line">count()：求元素数量</span><br><span class="line"></span><br><span class="line">findFirst()：返回第一个元素</span><br><span class="line">findAny()：返回任意一个元素</span><br><span class="line">allMatch(断言型函数)：判断全部元素是否都满足该断言</span><br><span class="line">anyMatch(断言型函数)：判断是否存在一个元素满足该断言</span><br><span class="line">reduce(累计函数)：对元素逐个累积计算，保留最后一次迭代的值</span><br><span class="line"></span><br><span class="line">builder()：返回构造器</span><br><span class="line">toArray()：转换为数组</span><br><span class="line">collect(集合类)：将全部元素存入该集合中</span><br></pre></td></tr></table></figure>
+
+<h1 id="正则匹配"><a href="#正则匹配" class="headerlink" title="正则匹配"></a>正则匹配</h1><h2 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h2><blockquote>
+<p>用于匹配字符串中字符组合的模式</p>
+</blockquote>
+<h3 id="非打印字符"><a href="#非打印字符" class="headerlink" title="非打印字符"></a>非打印字符</h3><blockquote>
+<p>在文本输出中不会直接显示为可见字符的字符</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="center">非打印字符</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>\n</code></td>
+<td align="center">换行符</td>
+</tr>
+<tr>
+<td align="center"><code>\r</code></td>
+<td align="center">回车符</td>
+</tr>
+<tr>
+<td align="center"><code>\t</code></td>
+<td align="center">制表符</td>
+</tr>
+<tr>
+<td align="center"><code>\v</code></td>
+<td align="center">垂直制表符</td>
+</tr>
+<tr>
+<td align="center"><code>\f</code></td>
+<td align="center">换页符</td>
+</tr>
+<tr>
+<td align="center"><code>\b</code></td>
+<td align="center">退格符</td>
+</tr>
+<tr>
+<td align="center"><code>\0</code></td>
+<td align="center">空字符</td>
+</tr>
+<tr>
+<td align="center"><code>\uXXXX</code></td>
+<td align="center">Unicode 字符</td>
+</tr>
+</tbody></table>
+<ul>
+<li><p>在字符串中使用这些转义序列时，需要特别注意反斜杠的转义</p>
+<p>例如，要在<code>Java</code>字符串中表示<code>\n</code>，需要写成<code>\\n</code></p>
+</li>
+</ul>
+<h3 id="特殊字符"><a href="#特殊字符" class="headerlink" title="特殊字符"></a>特殊字符</h3><blockquote>
+<p>在代码或字符串中具有特定含义的字符</p>
+<p>若要匹配这些特殊字符，必须要使用<code>\</code>进行转义</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="center">特殊字符</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>\</code></td>
+<td align="center">标记一个转义字符</td>
+</tr>
+<tr>
+<td align="center"><code>.</code></td>
+<td align="center">匹配除换行符以外的任意字符</td>
+</tr>
+<tr>
+<td align="center"><code>(</code></td>
+<td align="center">标记捕获组的开始</td>
+</tr>
+<tr>
+<td align="center"><code>)</code></td>
+<td align="center">标记捕获组的结束</td>
+</tr>
+<tr>
+<td align="center"><code>[</code></td>
+<td align="center">标记字符类的开始</td>
+</tr>
+<tr>
+<td align="center"><code>]</code></td>
+<td align="center">标记字符类的结束</td>
+</tr>
+<tr>
+<td align="center"><code>&#123;</code></td>
+<td align="center">标记限定符的开始</td>
+</tr>
+<tr>
+<td align="center"><code>&#125;</code></td>
+<td align="center">标记限定符的结束</td>
+</tr>
+<tr>
+<td align="center">&#96;</td>
+<td align="center">&#96;</td>
+</tr>
+</tbody></table>
+<h3 id="字符类"><a href="#字符类" class="headerlink" title="字符类"></a>字符类</h3><blockquote>
+<p>用于定义一组字符，以匹配单个字符</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="center">字符类</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>字符</code></td>
+<td align="center">匹配指定字符</td>
+</tr>
+<tr>
+<td align="center"><code>.</code></td>
+<td align="center">匹配除换行符以外的任意字符</td>
+</tr>
+<tr>
+<td align="center"><code>[0-9]</code></td>
+<td align="center">匹配任意数字</td>
+</tr>
+<tr>
+<td align="center"><code>[^0-9]</code></td>
+<td align="center">匹配任意非数字</td>
+</tr>
+<tr>
+<td align="center"><code>[a-z]</code></td>
+<td align="center">匹配任意小写字母</td>
+</tr>
+<tr>
+<td align="center"><code>[^a-z]</code></td>
+<td align="center">匹配任意非小写字母</td>
+</tr>
+<tr>
+<td align="center"><code>[A-Z]</code></td>
+<td align="center">匹配任意大写字母</td>
+</tr>
+<tr>
+<td align="center"><code>[^A-Z]</code></td>
+<td align="center">匹配任意非大写字母</td>
+</tr>
+<tr>
+<td align="center"><code>[\u4e00-\u9fa5]</code></td>
+<td align="center">匹配任意汉字</td>
+</tr>
+<tr>
+<td align="center"><code>[^\u4e00-\u9fa5]</code></td>
+<td align="center">匹配任意非汉字</td>
+</tr>
+<tr>
+<td align="center"><code>\s</code></td>
+<td align="center">匹配任意空白字符，包括空格、制表符、换行符等</td>
+</tr>
+<tr>
+<td align="center"><code>\S</code></td>
+<td align="center">匹配任意非空白字符</td>
+</tr>
+<tr>
+<td align="center"><code>\d</code></td>
+<td align="center">匹配任意数字，等同于<code>[0-9]</code></td>
+</tr>
+<tr>
+<td align="center"><code>\D</code></td>
+<td align="center">匹配任意非数字，等同于<code>[^0-9]</code></td>
+</tr>
+<tr>
+<td align="center"><code>\w</code></td>
+<td align="center">匹配任意字母、数字或下划线，等同于<code>[a-zA-Z0-9_]</code></td>
+</tr>
+<tr>
+<td align="center"><code>\W</code></td>
+<td align="center">匹配任意非字母、数字或下划线，等同于<code>[^a-zA-Z0-9_]</code></td>
+</tr>
+</tbody></table>
+<h3 id="限定符"><a href="#限定符" class="headerlink" title="限定符"></a>限定符</h3><blockquote>
+<p>用于指定模式中某个元素出现的次数</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="center">限定符</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>&#123;n&#125;</code></td>
+<td align="center">精确匹配前面的表达式 n 次</td>
+</tr>
+<tr>
+<td align="center"><code>&#123;n,&#125;</code></td>
+<td align="center">匹配前面的表达式至少 n 次</td>
+</tr>
+<tr>
+<td align="center"><code>&#123;n,m&#125;</code></td>
+<td align="center">匹配前面的表达式至少 n 次，但不超过 m 次</td>
+</tr>
+<tr>
+<td align="center"><code>*</code></td>
+<td align="center">匹配前面的表达式零次或多次，等同于<code>&#123;0,&#125;</code></td>
+</tr>
+<tr>
+<td align="center"><code>+</code></td>
+<td align="center">匹配前面的表达式一次或多次，等同于<code>&#123;1,&#125;</code></td>
+</tr>
+<tr>
+<td align="center"><code>?</code></td>
+<td align="center">匹配前面的表达式零次或一次，等同于<code>&#123;0,1&#125;</code></td>
+</tr>
+</tbody></table>
+<h3 id="定位符"><a href="#定位符" class="headerlink" title="定位符"></a>定位符</h3><blockquote>
+<p>用于定义模式在字符串中的位置</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="center">定位符</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>^</code></td>
+<td align="center">匹配字符串的开始位置</td>
+</tr>
+<tr>
+<td align="center"><code>$</code></td>
+<td align="center">匹配字符串的结束位置</td>
+</tr>
+<tr>
+<td align="center"><code>\A</code></td>
+<td align="center">匹配字符串的绝对开始位置</td>
+</tr>
+<tr>
+<td align="center"><code>\Z</code></td>
+<td align="center">匹配字符串的绝对结束位置</td>
+</tr>
+<tr>
+<td align="center"><code>\b</code></td>
+<td align="center">匹配单词的边界，即字母和非字母之间的位置</td>
+</tr>
+<tr>
+<td align="center"><code>\B</code></td>
+<td align="center">匹配非单词边界，即字母与字母或数字与数字之间的位置</td>
+</tr>
+</tbody></table>
+<ul>
+<li><p><code>\A</code>和<code>\Z</code>是用于匹配整个字符串的开始和结束，始终匹配文本的第一和最后部分</p>
+<p>而<code>^</code>和<code>$</code>在多行模式下可以匹配每行的开始和结束</p>
+</li>
+</ul>
+<h2 id="Pattern"><a href="#Pattern" class="headerlink" title="Pattern"></a>Pattern</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Pattern</span> <span class="variable">pattern</span> <span class="operator">=</span> Pattern.compile(正则表达式)</span><br></pre></td></tr></table></figure>
+
+<h2 id="Matcher"><a href="#Matcher" class="headerlink" title="Matcher"></a>Matcher</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Matcher</span> <span class="variable">matcher</span> <span class="operator">=</span> pattern.matcher(字符串)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">matcher.find() <span class="comment">// 判断是否还有下一个匹配的子字符串，如果找到了匹配，会将匹配器的状态更新为匹配的子字符串</span></span><br><span class="line">matcher.hasNext() <span class="comment">// 判断是否还有下一个匹配的子字符串，它不会改变匹配器的状态，只是检查是否存在下一个匹配项</span></span><br><span class="line"></span><br><span class="line">matcher.group() <span class="comment">// 返回最后一次匹配的子字符串</span></span><br><span class="line">matcher.group(组) <span class="comment">// 返回指定组的匹配子字符串</span></span><br><span class="line">matcher.start() <span class="comment">// 返回当前匹配的起始索引</span></span><br><span class="line">matcher.end() <span class="comment">// 返回当前匹配的结束索引</span></span><br><span class="line">matcher.lookingAt() <span class="comment">// 检查字符串的开头是否与正则表达式匹配</span></span><br><span class="line">matcher.matches() <span class="comment">// 尝试将整个字符串与模式进行匹配</span></span><br><span class="line"></span><br><span class="line">matcher.replaceAll(字符串) <span class="comment">// 用指定的字符串替换所有匹配的子字符串</span></span><br><span class="line">matcher.replaceFirst(字符串) <span class="comment">// 用指定的字符串替换第一个匹配的子字符串</span></span><br><span class="line">matcher.reset(新字符串) <span class="comment">// 重置匹配器以准备匹配新字符串</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h1><h2 id="路径"><a href="#路径" class="headerlink" title="路径"></a>路径</h2><h3 id="绝对路径"><a href="#绝对路径" class="headerlink" title="绝对路径"></a>绝对路径</h3><p>绝对路径是指文件或目录在文件系统中的完整地址，它从根目录开始，描述了文件或目录的确切位置</p>
+<p><code>C:\Users\Kokoa_Chino\Desktop\Learning materials\Java\Java_Code\Tools\data\file.txt</code>是一个绝对路径</p>
+<h3 id="相对路径"><a href="#相对路径" class="headerlink" title="相对路径"></a>相对路径</h3><p>相对路径是基于当前工作目录开始的</p>
+<p>当前工作目录通常是运行<code>Java</code>程序时的目录</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(System.getProperty(<span class="string">&quot;user.dir&quot;</span>)); <span class="comment">// 获取当前工作目录</span></span><br></pre></td></tr></table></figure>
+
+<p>比如，如果当前工作目录是<code>C:\Users\Kokoa_Chino\Desktop\Learning materials\Java\Java_Code\Tools</code></p>
+<p>而使用相对路径<code>data\file.txt</code></p>
+<p>那么实际访问的文件路径就是<code>C:\Users\Kokoa_Chino\Desktop\Learning materials\Java\Java_Code\Tools\data\file.txt</code></p>
+<h2 id="文件对象"><a href="#文件对象" class="headerlink" title="文件对象"></a>文件对象</h2><blockquote>
+<p>用于表示文件和目录路径的一个重要类</p>
+<p>它属于<code>java.io</code>包，提供了与文件系统交互的方法</p>
+<p>尽管对象本身并不直接用于读取或写入文件内容，但它为处理文件和目录提供了许多有用的方法</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">File</span> <span class="variable">file</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">File</span>(<span class="string">&quot;路径&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">file.exists() <span class="comment">// 文件是否存在</span></span><br><span class="line">file.canRead() <span class="comment">// 文件是否可读</span></span><br><span class="line">file.canWrite() <span class="comment">// 文件是否可写</span></span><br><span class="line">file.canExecute() <span class="comment">// 文件是否可执行</span></span><br><span class="line">file.isDirectory() <span class="comment">// 文件是否为一个文件夹</span></span><br><span class="line"></span><br><span class="line">file.length() <span class="comment">// 获取文件的大小（字节数）</span></span><br><span class="line">file.listFiles() <span class="comment">// 获取文件夹内部的文件列表</span></span><br><span class="line">file.getAbsolutePath() <span class="comment">// 获取文件的绝对路径</span></span><br><span class="line">file.getName() <span class="comment">// 获取文件或文件夹的名称</span></span><br><span class="line">file.getPath() <span class="comment">// 获取文件的路径</span></span><br><span class="line">file.getParent() <span class="comment">// 获取文件的父目录路径</span></span><br><span class="line"></span><br><span class="line">file.createNewFile() <span class="comment">// 创建新文件，如果文件已存在则返回 false</span></span><br><span class="line">file.delete() <span class="comment">// 删除文件或空目录</span></span><br><span class="line">file.mkdir() <span class="comment">// 创建单个目录</span></span><br><span class="line">file.mkdirs() <span class="comment">// 创建多级目录</span></span><br><span class="line">file.renameTo(文件对象) <span class="comment">// 重命名文件或目录</span></span><br><span class="line">file.lastModified() <span class="comment">// 获取文件的最后修改时间</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="路径对象"><a href="#路径对象" class="headerlink" title="路径对象"></a>路径对象</h2><blockquote>
+<p>Java NIO 中用于表示文件和目录路径的一个重要类</p>
+<p>它提供了一种更灵活和强大的方式来处理文件系统中的路径</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Paths.get(<span class="string">&quot;路径&quot;</span>)</span><br><span class="line">Paths.get(<span class="string">&quot;父目录&quot;</span>, <span class="string">&quot;子目录&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">path.toFile() <span class="comment">// 将 Path 转换为 File 对象</span></span><br><span class="line">path.exists() <span class="comment">// 文件是否存在</span></span><br><span class="line">path.toAbsolutePath() <span class="comment">// 获取文件的绝对路径</span></span><br><span class="line">path.getFileName() <span class="comment">// 获取文件或目录的名称</span></span><br><span class="line">path.getParent() <span class="comment">// 获取文件的父目录路径</span></span><br><span class="line">path.getRoot() <span class="comment">// 获取路径的根部分</span></span><br><span class="line"></span><br><span class="line">Files.exists(path) <span class="comment">// 检查文件是否存在</span></span><br><span class="line">Files.isReadable(path) <span class="comment">// 检查文件是否可读</span></span><br><span class="line">Files.isWritable(path) <span class="comment">// 检查文件是否可写</span></span><br><span class="line">Files.isExecutable(path) <span class="comment">// 检查文件是否可执行</span></span><br><span class="line">Files.isDirectory(path) <span class="comment">// 检查路径是否为一个文件夹</span></span><br><span class="line">Files.size(path) <span class="comment">// 获取文件的大小（字节数）</span></span><br><span class="line">Files.list(path) <span class="comment">// 获取文件夹内部的文件列表</span></span><br><span class="line"></span><br><span class="line">Files.createFile(path) <span class="comment">// 创建新文件，如果已存在则抛出异常</span></span><br><span class="line">Files.delete(path) <span class="comment">// 删除文件或空目录</span></span><br><span class="line">Files.createDirectory(path) <span class="comment">// 创建单个目录</span></span><br><span class="line">Files.createDirectories(path) <span class="comment">// 创建多级目录</span></span><br><span class="line">Files.move(sourcePath, targetPath) <span class="comment">// 重命名文件或目录</span></span><br><span class="line">Files.getLastModifiedTime(path) <span class="comment">// 获取文件的最后修改时间</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="文件字节流"><a href="#文件字节流" class="headerlink" title="文件字节流"></a>文件字节流</h2><blockquote>
+<p>以字节为单位对文件进行读写操作的一种数据流</p>
+<p>它允许程序以原始字节的形式处理文件中的数据，适合处理所有类型的文件，包括文本文件、图像、音频和视频等</p>
+</blockquote>
+<p><strong>输入</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> (<span class="type">FileInputStream</span> <span class="variable">inputStream</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(<span class="string">&quot;路径 / 文件对象&quot;</span>)) &#123;</span><br><span class="line">    </span><br><span class="line">&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">    e.printStackTrace()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">inputStream.read() <span class="comment">// 读取一个字节，为空时返回 -1</span></span><br><span class="line">inputStream.read(<span class="type">byte</span> 数组) <span class="comment">// 读取数组大小的字节数存到 byte 数组中，为空时返回 -1</span></span><br><span class="line">inputStream.read(<span class="type">byte</span> 数组, 起始位置, 读取数量) <span class="comment">// 读取指定字节数存到 byte 数组中，为空时返回 -1</span></span><br><span class="line">inputStream.available() <span class="comment">// 查看当前可读的剩余字节数量</span></span><br><span class="line">inputStream.skip(字节数) <span class="comment">// 跳过指定数量的字节</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>输出</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> (<span class="type">FileOutputStream</span> <span class="variable">outputStream</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(<span class="string">&quot;路径 / 文件对象&quot;</span>);</span><br><span class="line">     <span class="type">FileOutputStream</span> <span class="variable">outputStream</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(<span class="string">&quot;路径 / 文件对象&quot;</span>, <span class="literal">true</span>)) &#123; <span class="comment">// 开启追加写入模式</span></span><br><span class="line">    </span><br><span class="line">&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">    e.printStackTrace()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">outputStream.write(字节) <span class="comment">// 写入一个字节</span></span><br><span class="line">outputStream.write(<span class="type">byte</span> 数组) <span class="comment">// 写入一个 byte 数组</span></span><br><span class="line">outputStream.write(<span class="type">byte</span> 数组, 起始位置, 写入数量) <span class="comment">// 写入一个 byte 数组</span></span><br><span class="line">outputStream.flush() <span class="comment">// 刷新输出流</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="文件字符流"><a href="#文件字符流" class="headerlink" title="文件字符流"></a>文件字符流</h2><blockquote>
+<p>以字符为单位对文本文件进行读写操作的一种数据流</p>
+<p>它主要用于处理字符数据，适合读取和写入文本文件，能够自动处理字符编码</p>
+</blockquote>
+<p><strong>输入</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> (<span class="type">FileReader</span> <span class="variable">reader</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileReader</span>(<span class="string">&quot;路径 / 文件对象&quot;</span>)) &#123;</span><br><span class="line">    </span><br><span class="line">&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">    e.printStackTrace()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">reader.read() <span class="comment">// 读取一个字符，为空时返回 -1</span></span><br><span class="line">reader.read(<span class="type">char</span> 数组) <span class="comment">// 读取数组大小的字符数存到 char 数组中，为空时返回 -1</span></span><br><span class="line">reader.read(<span class="type">char</span> 数组, 起始位置, 读取数量) <span class="comment">// 读取指定字符数存到 char 数组中，为空时返回 -1</span></span><br><span class="line">reader.available() <span class="comment">// 查看当前可读的剩余字符数量</span></span><br><span class="line">reader.skip(字符数) <span class="comment">// 跳过指定数量的字符</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>输出</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> (<span class="type">FileWriter</span> <span class="variable">writer</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileWriter</span>(<span class="string">&quot;路径 / 文件对象&quot;</span>);</span><br><span class="line">     <span class="type">FileWriter</span> <span class="variable">writer</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileWriter</span>(<span class="string">&quot;路径 / 文件对象&quot;</span>, <span class="literal">true</span>)) &#123; <span class="comment">// 开启追加写入模式</span></span><br><span class="line">    </span><br><span class="line">&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">    e.printStackTrace()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">writer.write(字符) <span class="comment">// 写入一个字符</span></span><br><span class="line">writer.write(<span class="type">char</span> 数组) <span class="comment">// 写入一个 char 数组</span></span><br><span class="line">writer.write(<span class="type">char</span> 数组, 起始位置, 写入数量) <span class="comment">// 写入一个 char 数组</span></span><br><span class="line">writer.flush() <span class="comment">// 刷新输出流</span></span><br><span class="line">writer.getEncoding() <span class="comment">// 获取编码</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="缓冲流"><a href="#缓冲流" class="headerlink" title="缓冲流"></a>缓冲流</h2><blockquote>
+<p>Java 中处理输入和输出的一个重要概念，主要用于提高文件读写操作的效率</p>
+<p>通过在内存中使用缓冲区，缓冲流能够减少频繁的磁盘 I&#x2F;O 操作，从而提升性能</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">BufferedInputStream</span> <span class="variable">inputStream</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedInputStream</span>(<span class="keyword">new</span> <span class="title class_">FileInputStream</span>(<span class="string">&quot;路径 / 文件对象&quot;</span>))</span><br><span class="line"><span class="type">BufferedOutputStream</span> <span class="variable">outputStream</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedOutputStream</span>(<span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(<span class="string">&quot;路径 / 文件对象&quot;</span>))</span><br><span class="line"><span class="type">BufferedReader</span> <span class="variable">reader</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedReader</span>(<span class="keyword">new</span> <span class="title class_">FileReader</span>(<span class="string">&quot;路径 / 文件对象&quot;</span>)))</span><br><span class="line"><span class="type">BufferedWriter</span> <span class="variable">writer</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedWriter</span>(<span class="keyword">new</span> <span class="title class_">FileWriter</span>(<span class="string">&quot;路径 / 文件对象&quot;</span>)))</span><br><span class="line">    </span><br><span class="line"><span class="type">BufferedInputStream</span> <span class="variable">inputStream</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedInputStream</span>(<span class="keyword">new</span> <span class="title class_">FileInputStream</span>(<span class="string">&quot;路径 / 文件对象&quot;</span>), 缓冲区大小)</span><br><span class="line"><span class="type">BufferedOutputStream</span> <span class="variable">outputStream</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedOutputStream</span>(<span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(<span class="string">&quot;路径 / 文件对象&quot;</span>), 缓冲区大小)</span><br><span class="line"><span class="type">BufferedReader</span> <span class="variable">reader</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedReader</span>(<span class="keyword">new</span> <span class="title class_">FileReader</span>(<span class="string">&quot;路径 / 文件对象&quot;</span>)), 缓冲区大小)</span><br><span class="line"><span class="type">BufferedWriter</span> <span class="variable">writer</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedWriter</span>(<span class="keyword">new</span> <span class="title class_">FileWriter</span>(<span class="string">&quot;路径 / 文件对象&quot;</span>)), 缓冲区大小)</span><br></pre></td></tr></table></figure>
+
+<p>缓冲流与其他文件流之间的关系可以被视为一种封装关系，可以使用其他文件流原本的全部方法，并且提供了一些额外的方法</p>
+<p>对于<code>BufferedInputStream</code>，额外的方法如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">inputStream.mark(限制大小) <span class="comment">// 标记当前流的位置。调用此方法后，可以在流中随便读取数据，直到读取的数据量达到指定的限制</span></span><br><span class="line">inputStream.reset() <span class="comment">// 将流的位置重置回上一个调用 mark() 方法时的位置</span></span><br></pre></td></tr></table></figure>
+
+<p>对于<code>BufferedReader</code>，额外的方法如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">reader.mark(限制大小) <span class="comment">// 标记当前流的位置。调用此方法后，可以在流中随便读取数据，直到读取的数据量达到指定的限制</span></span><br><span class="line">reader.reset() <span class="comment">// 将流的位置重置回上一个调用 mark() 方法时的位置</span></span><br><span class="line">reader.readLine() <span class="comment">// 读取一行</span></span><br><span class="line">reader.lines() <span class="comment">// 返回一个 Stream 流，该流按行读取文本文件</span></span><br></pre></td></tr></table></figure>
+
+<p>对于<code>BufferedWriter</code>，额外的方法如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">writer.write(字符串) <span class="comment">// 写入一个字符串</span></span><br><span class="line">writer.newLine() <span class="comment">// 写入平台默认的换行符</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="转换流"><a href="#转换流" class="headerlink" title="转换流"></a>转换流</h2><blockquote>
+<p>Java I&#x2F;O 中的一种流，用于在字节流和字符流之间进行转换</p>
+<p>它们主要用于处理字符编码问题，使得对文本文件的读取和写入变得更加灵活和方便</p>
+</blockquote>
+<p><strong>输入</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> (<span class="type">InputStreamReader</span> <span class="variable">reader</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">InputStreamReader</span>(<span class="keyword">new</span> <span class="title class_">FileInputStream</span>(<span class="string">&quot;路径 / 文件对象&quot;</span>), <span class="string">&quot;编码格式&quot;</span>)) &#123;</span><br><span class="line">    </span><br><span class="line">&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">    e.printStackTrace()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>将字节流转换为字符流</li>
+<li>可以指定字符编码格式</li>
+</ul>
+<p><strong>输出</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> (<span class="type">OutputStreamWriter</span> <span class="variable">writer</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">OutputStreamWriter</span>(<span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(<span class="string">&quot;路径 / 文件对象&quot;</span>), <span class="string">&quot;编码格式&quot;</span>)) &#123;</span><br><span class="line">    </span><br><span class="line">&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">    e.printStackTrace()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>将字符流转换为字节流</li>
+<li>可以指定字符编码格式</li>
+</ul>
+<h2 id="数据流"><a href="#数据流" class="headerlink" title="数据流"></a>数据流</h2><blockquote>
+<p>用于处理基本数据类型的流类，允许以机器无关的方式读取和写入二进制数据</p>
+<p>这些类通常用于从文件或网络流中输入和输出原始数据类型</p>
+</blockquote>
+<p><strong>输入</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> (<span class="type">DataInputStream</span> <span class="variable">dis</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">DataInputStream</span>(<span class="keyword">new</span> <span class="title class_">FileInputStream</span>(<span class="string">&quot;路径 / 文件对象&quot;</span>))) &#123;</span><br><span class="line">    </span><br><span class="line">&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">    e.printStackTrace()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">number</span> <span class="operator">=</span> dis.readInt()</span><br><span class="line"><span class="type">float</span> <span class="variable">decimal</span> <span class="operator">=</span> dis.readFloat()</span><br><span class="line"><span class="type">double</span> <span class="variable">decimal</span> <span class="operator">=</span> dis.readDouble()</span><br><span class="line"><span class="type">boolean</span> <span class="variable">boolValue</span> <span class="operator">=</span> dis.readBoolean()</span><br><span class="line"><span class="type">char</span> <span class="variable">c</span> <span class="operator">=</span> dis.readChar()</span><br><span class="line"><span class="type">String</span> <span class="variable">text</span> <span class="operator">=</span> dis.readUTF()</span><br></pre></td></tr></table></figure>
+
+<p><strong>输出</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> (<span class="type">DataOutputStream</span> <span class="variable">dos</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">DataOutputStream</span>(<span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(<span class="string">&quot;路径 / 文件对象&quot;</span>))) &#123;</span><br><span class="line">    </span><br><span class="line">&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">    e.printStackTrace()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">dos.writeInt(<span class="number">123</span>)</span><br><span class="line">dos.writeFloat(<span class="number">45.67f</span>)</span><br><span class="line">dos.writeDouble(<span class="number">45.67</span>)</span><br><span class="line">dos.writeBoolean(<span class="literal">true</span>)</span><br><span class="line">dos.writeChar(<span class="string">&#x27;a&#x27;</span>)</span><br><span class="line">dos.writeUTF(<span class="string">&quot;Hello, World!&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="对象流"><a href="#对象流" class="headerlink" title="对象流"></a>对象流</h2><blockquote>
+<p>用于对象序列化和反序列化的类</p>
+</blockquote>
+<p><strong>输入</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> (<span class="type">ObjectInputStream</span> <span class="variable">inputStream</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectInputStream</span>(<span class="keyword">new</span> <span class="title class_">FileInputStream</span>(<span class="string">&quot;路径 / 文件对象&quot;</span>))) &#123;</span><br><span class="line">    </span><br><span class="line">&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">    e.printStackTrace()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">people = (People) inputStream.readObject() <span class="comment">// 读取为对象</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>输出</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> (<span class="type">ObjectOutputStream</span> <span class="variable">outputStream</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectOutputStream</span>(<span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(<span class="string">&quot;路径 / 文件对象&quot;</span>))) &#123;</span><br><span class="line">    </span><br><span class="line">&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">    e.printStackTrace()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">outputStream.writeObject(people) <span class="comment">// 以对象的形式输入</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="打印流"><a href="#打印流" class="headerlink" title="打印流"></a>打印流</h2><blockquote>
+<p>Java I&#x2F;O 系统中的一种特定类型的输出流，专门用于将数据以文本格式写入输出设备</p>
+<p>可以自动刷新流，并且支持输出不同类型的数据</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">PrintStream</span> <span class="variable">ps</span> <span class="operator">=</span> System.out <span class="comment">// 输出到控制台</span></span><br><span class="line"><span class="keyword">try</span> (<span class="type">PrintStream</span> <span class="variable">ps</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">PrintStream</span>(<span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(<span class="string">&quot;路径 / 文件对象&quot;</span>))) &#123; <span class="comment">// 输出到文件</span></span><br><span class="line">    </span><br><span class="line">&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">    e.printStackTrace()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ps.print(<span class="string">&quot;Hello, &quot;</span>); <span class="comment">// 不换行输出</span></span><br><span class="line">ps.println(<span class="string">&quot;World!&quot;</span>); <span class="comment">// 换行输出</span></span><br><span class="line">ps.printf(<span class="string">&quot;%.2f\n&quot;</span>, <span class="number">3.14159</span>); <span class="comment">// 格式化输出</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h1><h2 id="线程的创建和启动"><a href="#线程的创建和启动" class="headerlink" title="线程的创建和启动"></a>线程的创建和启动</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Thread</span> <span class="variable">t</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Thread</span>(函数) <span class="comment">// 创建线程</span></span><br><span class="line">Thread.currentThread() <span class="comment">// 获取当前线程</span></span><br><span class="line">t.start() <span class="comment">// 启动线程</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="线程的优先级"><a href="#线程的优先级" class="headerlink" title="线程的优先级"></a>线程的优先级</h2><table>
+<thead>
+<tr>
+<th align="center">线程的优先级</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>MIN_PRIORITY</code></td>
+<td align="center">最低优先级</td>
+</tr>
+<tr>
+<td align="center"><code>MAX_PRIORITY</code></td>
+<td align="center">最高优先级</td>
+</tr>
+<tr>
+<td align="center"><code>NOM_PRIORITY</code></td>
+<td align="center">常规优先级</td>
+</tr>
+</tbody></table>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">t.setPriority(线程优先级) <span class="comment">// 设定线程的优先级</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="线程的休眠和中断"><a href="#线程的休眠和中断" class="headerlink" title="线程的休眠和中断"></a>线程的休眠和中断</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Thread.sleep(毫秒) <span class="comment">// 休眠当前线程</span></span><br><span class="line">t.stop() <span class="comment">// 终止线程（不推荐）</span></span><br><span class="line"></span><br><span class="line">t.interrupt() <span class="comment">// 中断线程</span></span><br><span class="line">t.isInterrupted() <span class="comment">// 判断线程是否有中断标志</span></span><br><span class="line">Thread.interrupted() <span class="comment">// 立即清除当前线程的中断标记</span></span><br><span class="line"></span><br><span class="line">t.suspend() <span class="comment">// 暂停线程</span></span><br><span class="line">t.resume() <span class="comment">// 恢复暂停的线程</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="线程的礼让和加入"><a href="#线程的礼让和加入" class="headerlink" title="线程的礼让和加入"></a>线程的礼让和加入</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Thread.<span class="keyword">yield</span>() <span class="comment">// 将当前资源让位给其他同优先级线程</span></span><br><span class="line">t.join() <span class="comment">// 加入线程，等待新加入的线程的待执行内容全部执行完成之后，再继续执行原线程的内容</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="ThreadLocal"><a href="#ThreadLocal" class="headerlink" title="ThreadLocal"></a>ThreadLocal</h2><blockquote>
+<p>用于线程局部存储的类</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ThreadLocal&lt;T&gt; local = <span class="keyword">new</span> <span class="title class_">ThreadLocal</span>&lt;&gt;() <span class="comment">// 每个线程都拥有自己的独立变量副本，其他线程无法访问</span></span><br><span class="line">ThreadLocal&lt;T&gt; local = <span class="keyword">new</span> <span class="title class_">InheritableThreadLocal</span>&lt;&gt;() <span class="comment">// 允许子线程继承父线程的值</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">local.set(值) <span class="comment">// 设置值</span></span><br><span class="line">local.get() <span class="comment">// 获取值</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="守护线程"><a href="#守护线程" class="headerlink" title="守护线程"></a>守护线程</h2><blockquote>
+<p>一个在后台运行的线程，提供服务或支持其他线程的操作</p>
+<p>它的存在并不阻碍程序的终止</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">Thread</span> <span class="variable">daemonThread</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; &#123;</span><br><span class="line">        <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;守护线程正在运行...&quot;</span>);</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    daemonThread.setDaemon(<span class="literal">true</span>); <span class="comment">// 设置为守护线程，必须要在开始之前，而且中途是不允许转换的</span></span><br><span class="line">    daemonThread.start();</span><br><span class="line"></span><br><span class="line">    System.out.println(<span class="string">&quot;主线程正在运行...&quot;</span>); <span class="comment">// 主线程</span></span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        Thread.sleep(<span class="number">3000</span>);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(<span class="string">&quot;主线程结束&quot;</span>); <span class="comment">// 当主线程结束时，守护线程会被 JVM 终止</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="线程锁和线程同步"><a href="#线程锁和线程同步" class="headerlink" title="线程锁和线程同步"></a>线程锁和线程同步</h2><blockquote>
+<p>能够确保多个线程之间安全地共享资源，避免竞争条件和数据不一致的问题</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">synchronized</span> (实例 / 类) &#123; <span class="comment">// 将代码块加锁，对于使用同一个锁的多个代码块，会保证其代码块同步</span></span><br><span class="line">    <span class="comment">// 代码块</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title function_">fun</span><span class="params">()</span> &#123; <span class="comment">// 也可以加在方法上，调用此方法时也会保证其代码块同步</span></span><br><span class="line">    <span class="comment">// 代码块</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h3><blockquote>
+<p>两个或多个线程在执行过程中，因为争夺资源而造成的一种互相等待的状态，导致它们无法继续执行</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Object</span> <span class="variable">o1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Object</span>(), o2 = <span class="keyword">new</span> <span class="title class_">Object</span>();</span><br><span class="line"><span class="type">Thread</span> <span class="variable">t1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; &#123;</span><br><span class="line">    <span class="keyword">synchronized</span> (o1) &#123; <span class="comment">// 获取到 o1 这个锁</span></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">            <span class="keyword">synchronized</span> (o2) &#123; <span class="comment">// 想要获取 o2 这个锁，但是获取不到，因为已经被线程 2 拥有，只能等待线程 2 释放锁</span></span><br><span class="line">                System.out.println(<span class="string">&quot;线程 1&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="type">Thread</span> <span class="variable">t2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; &#123;</span><br><span class="line">    <span class="keyword">synchronized</span> (o2) &#123; <span class="comment">// 获取到 o2 这个锁</span></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">            <span class="keyword">synchronized</span> (o1) &#123; <span class="comment">// 想要获取 o1 这个锁，但是获取不到，因为已经被线程 1 拥有，只能等待线程 1 释放锁</span></span><br><span class="line">                System.out.println(<span class="string">&quot;线程 2&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">t1.start();</span><br><span class="line">t2.start();</span><br></pre></td></tr></table></figure>
+
+<h3 id="wait-和-notify-方法"><a href="#wait-和-notify-方法" class="headerlink" title="wait 和 notify 方法"></a>wait 和 notify 方法</h3><blockquote>
+<p>用于实现线程的协作与同步，以确保线程在访问共享资源时的协调</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Object</span> <span class="variable">o</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Object</span>()</span><br><span class="line"><span class="keyword">synchronized</span> (o) &#123;</span><br><span class="line">    o.wait() <span class="comment">// 进入等待状态，并释放锁</span></span><br><span class="line">    o.notify() <span class="comment">// 唤醒处于等待状态的线程（随机选择一个）</span></span><br><span class="line">    o.notifyAll() <span class="comment">// 唤醒处于等待状态的线程（全部）</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="定时器"><a href="#定时器" class="headerlink" title="定时器"></a>定时器</h2><h3 id="延迟执行"><a href="#延迟执行" class="headerlink" title="延迟执行"></a>延迟执行</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Timer</span> <span class="variable">timer</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Timer</span>(); <span class="comment">// 创建定时器对象</span></span><br><span class="line"></span><br><span class="line"><span class="type">TimerTask</span> <span class="variable">task</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">TimerTask</span>() &#123; <span class="comment">// 创建一个任务</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;任务执行：延迟执行&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">timer.schedule(task, 延迟时间（毫秒）); <span class="comment">// 执行任务</span></span><br><span class="line">timer.cancel(); <span class="comment">// 关闭定时器，可以取消任务</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="定时重复"><a href="#定时重复" class="headerlink" title="定时重复"></a>定时重复</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Timer</span> <span class="variable">timer</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Timer</span>(); <span class="comment">// 创建定时器对象</span></span><br><span class="line"></span><br><span class="line"><span class="type">TimerTask</span> <span class="variable">task</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">TimerTask</span>() &#123; <span class="comment">// 创建一个任务</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;任务执行：定时重复执行&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">timer.scheduleAtFixedRate(task,  延迟时间（毫秒）,  间隔时间（毫秒）); <span class="comment">// 执行任务</span></span><br><span class="line">timer.cancel(); <span class="comment">// 关闭定时器，可以取消任务</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h1><blockquote>
+<p>一种特殊类型的标记，可以被附加到代码的各个元素上，如类、方法、字段、参数等</p>
+<p>它提供了一种为程序元素添加元数据的方式，这些元数据可以在编译时、类加载时或运行时被读取和处理</p>
+</blockquote>
+<h2 id="预设注解"><a href="#预设注解" class="headerlink" title="预设注解"></a>预设注解</h2><blockquote>
+<p>在 Java 语言中定义的标准注解</p>
+</blockquote>
+<ul>
+<li><p><code>@Override</code>：</p>
+<p>用于指示一个方法覆盖超类中的方法</p>
+<p>编译器会检查此注解所标记的方法是否确实重写了超类中的方法，如果没有，将会抛出编译错误</p>
+</li>
+<li><p><code>@Deprecated</code>：</p>
+<p>标记一个方法、类或字段为不推荐使用</p>
+<p>这意味着该元素在未来的版本中可能会被移除或不再支持</p>
+<p>使用这个注解的元素通常有替代方案，编译器在使用该元素时会发出警告</p>
+</li>
+<li><p><code>@FunctionalInterface</code>：</p>
+<p>标记一个接口为函数式接口，即该接口只能有一个抽象方法</p>
+<p>函数式接口可以被隐式转换为 lambda 表达式或方法引用，使得代码更加简洁和可读</p>
+</li>
+<li><p><code>@SuppressWarnings</code>：</p>
+<p>用于指示编译器忽略特定的警告信息</p>
+<p>它可以用来压制多种类型的警告，如未使用的变量、unchecked 类型转换等</p>
+<p>通过指定警告的名称，可以控制编译器在编译时的行为，以提高代码的可读性和可维护性</p>
+</li>
+<li><p><code>@SafeVarargs</code>：</p>
+<p>用于标记一个方法的可变参数是安全的</p>
+<p>通常用于静态方法或实例方法中，防止出现类型安全的问题</p>
+<p>当使用泛型时，编译器会检查类型安全性，而使用此注解可以告知编译器该方法不会导致不安全的操作</p>
+</li>
+</ul>
+<h2 id="元注解"><a href="#元注解" class="headerlink" title="元注解"></a>元注解</h2><blockquote>
+<p>用于描述其他注解的注解</p>
+</blockquote>
+<ul>
+<li><p><code>@Retention</code>：标识这个注解的生命周期，确定注解的可见性</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Retention(值)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> MyAnnotation &#123;</span><br><span class="line">    String <span class="title function_">value</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="center">值</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>RetentionPolicy.SOURCE</code></td>
+<td align="center">注解只在源代码中存在，编译后会被丢弃</td>
+</tr>
+<tr>
+<td align="center"><code>RetentionPolicy.CLASS</code></td>
+<td align="center">注解在编译后会保留在 class 文件中，但在运行时不可用</td>
+</tr>
+<tr>
+<td align="center"><code>RetentionPolicy.RUNTIME</code></td>
+<td align="center">注解在运行时仍然可用，可以通过反射访问</td>
+</tr>
+</tbody></table>
+</li>
+<li><p><code>@Target</code>：标记注解可以应用于哪些 Java 成员，限制注解的使用范围</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target(ElementType.METHOD)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> MyAnnotation &#123;</span><br><span class="line">    String <span class="title function_">value</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="center">值</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>ElementType.TYPE</code></td>
+<td align="center">可以应用于类、接口或枚举</td>
+</tr>
+<tr>
+<td align="center"><code>ElementType.FIELD</code></td>
+<td align="center">可以应用于字段</td>
+</tr>
+<tr>
+<td align="center"><code>ElementType.METHOD</code></td>
+<td align="center">可以应用于方法</td>
+</tr>
+<tr>
+<td align="center"><code>ElementType.PARAMETER</code></td>
+<td align="center">可以应用于方法参数</td>
+</tr>
+<tr>
+<td align="center"><code>ElementType.CONSTRUCTOR</code></td>
+<td align="center">可以应用于构造器</td>
+</tr>
+<tr>
+<td align="center"><code>ElementType.LOCAL_VARIABLE</code></td>
+<td align="center">可以应用于局部变量</td>
+</tr>
+<tr>
+<td align="center"><code>ElementType.ANNOTATION_TYPE</code></td>
+<td align="center">可以应用于注解类型</td>
+</tr>
+<tr>
+<td align="center"><code>ElementType.PACKAGE</code></td>
+<td align="center">可以应用于包</td>
+</tr>
+</tbody></table>
+</li>
+<li><p><code>@Inherited</code>：标记一个注解可以被子类继承。如果一个注解被标记为<code>@Inherited</code>，那么如果父类使用了这个注解，子类在未显式声明的情况下，也会继承这个注解</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Inherited</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> MyAnnotation &#123;</span><br><span class="line">    String <span class="title function_">value</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>@Documented</code>：标记这些注解是否包含在用户文档中</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> MyAnnotation &#123;</span><br><span class="line">    String <span class="title function_">value</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>@Repeatable</code>：允许同一个注解可以在同一声明上使用多次</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Repeatable(MyAnnotations.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> MyAnnotation &#123;</span><br><span class="line">    String <span class="title function_">value</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> MyAnnotations &#123;</span><br><span class="line">    MyAnnotation[] value();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="自定义注解"><a href="#自定义注解" class="headerlink" title="自定义注解"></a>自定义注解</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 元注解...</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> MyAnnotation &#123; <span class="comment">// 自定义注解</span></span><br><span class="line">    String <span class="title function_">value</span><span class="params">()</span> <span class="keyword">default</span> <span class="string">&quot;默认值&quot;</span>;</span><br><span class="line">    String[] test();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用自定义注解</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyClass</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@MyAnnotation(value = &quot;AAA&quot;, test = &#123;&quot;value1&quot;, &quot;value2&quot;&#125;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">myMethod</span><span class="params">()</span> &#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h1><blockquote>
+<p>允许程序在运行时检查和操作类及其成员（如字段、方法和构造函数）</p>
+<p>通过反射，Java 程序能够动态加载类、创建对象、调用方法和访问字段，而无需在编译时知道这些类的详细信息</p>
+</blockquote>
+<h2 id="Class-类"><a href="#Class-类" class="headerlink" title="Class 类"></a>Class 类</h2><blockquote>
+<p>Java 中的一个核心类，提供了关于类和对象的信息</p>
+<p>在 Java 中，每个类在运行时都有一个对应的<code>Class</code>对象，可以通过这个对象来获取类的元数据</p>
+<p>包括类的名称、父类、实现的接口、字段、方法等</p>
+</blockquote>
+<p>获取<code>Class</code>类对象（以<code>String</code>类为例）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Class&lt;String&gt; clazz1 = String.class <span class="comment">// 通过类名获取</span></span><br><span class="line">Class&lt;?&gt; clazz2 = Class.forName(<span class="string">&quot;java.lang.String&quot;</span>) <span class="comment">// 通过包名.类名获取</span></span><br><span class="line">Class&lt;?&gt; clazz3 = <span class="keyword">new</span> <span class="title class_">String</span>(<span class="string">&quot;&quot;</span>).getClass() <span class="comment">// 通过实例对象获取</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">clazz.getSimpleName() <span class="comment">// 获取类的简单名称（不包括包名）</span></span><br><span class="line">clazz.getSuperclass() <span class="comment">// 获取该类的父类 Class 对象</span></span><br><span class="line">clazz.getInterfaces() <span class="comment">// 获取该类实现的所有接口</span></span><br><span class="line">clazz.getDeclaredFields() <span class="comment">// 获取该类声明的所有字段</span></span><br><span class="line">clazz.getDeclaredMethods() <span class="comment">// 获取该类声明的所有方法</span></span><br><span class="line">clazz.getDeclaredConstructors() <span class="comment">// 获取该类声明的所有构造函数</span></span><br><span class="line"></span><br><span class="line">clazz.isArray() <span class="comment">// 判断该类是否是数组类</span></span><br><span class="line">clazz.isPrimitive() <span class="comment">// 判断该类是否是基本数据类型</span></span><br><span class="line">clazz.cast(对象) <span class="comment">// 将对象强制转换为该类</span></span><br><span class="line">clazz.asSubclass(子类) <span class="comment">// 将 Class 对象转换为指定子类类型</span></span><br><span class="line">clazz.getClassLoader() <span class="comment">// 获取加载该类的类加载器</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="创建类对象"><a href="#创建类对象" class="headerlink" title="创建类对象"></a>创建类对象</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Student</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Student</span><span class="params">(String str)</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test</span><span class="params">()</span> &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Class&lt;Student&gt; clazz = Student.class; <span class="comment">// 获取 Student 类的 Class 对象</span></span><br><span class="line"><span class="type">Student</span> <span class="variable">student</span> <span class="operator">=</span> clazz.getConstructor(String.class).newInstance(<span class="string">&quot;AAA&quot;</span>); <span class="comment">// 使用反射获取构造函数并创建该对象</span></span><br><span class="line">student.test();</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>getConstructor</code>：获取指定参数类型的 public 构造函数</li>
+<li><code>newInstance</code>：通过获取到的构造函数实例化一个对象</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Student</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="title function_">Student</span><span class="params">(String str)</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test</span><span class="params">()</span> &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Class&lt;Student&gt; clazz = Student.class; <span class="comment">// 获取 Student 类的 Class 对象</span></span><br><span class="line">Constructor&lt;Student&gt; constructor = clazz.getDeclaredConstructor(String.class); <span class="comment">// 使用反射获取构造函数</span></span><br><span class="line">constructor.setAccessible(<span class="literal">true</span>); <span class="comment">// 设置构造函数可访问</span></span><br><span class="line"><span class="type">Student</span> <span class="variable">student</span> <span class="operator">=</span> constructor.newInstance(<span class="string">&quot;AAA&quot;</span>); <span class="comment">// 通过构造函数创建该对象</span></span><br><span class="line">student.test();</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><code>getDeclaredConstructor</code>：获取指定参数类型的非 public 构造函数</p>
+</li>
+<li><p><code>setAccessible</code>：设置为 true 时，表示允许访问具有非 public 权限的成员，包括构造函数、方法和字段</p>
+</li>
+</ul>
+<h2 id="调用类方法"><a href="#调用类方法" class="headerlink" title="调用类方法"></a>调用类方法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Student</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">test</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> a + <span class="string">&quot; : &quot;</span> + b;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Class&lt;?&gt; clazz = Student.class; <span class="comment">// 获取 Student 类的 Class 对象</span></span><br><span class="line"><span class="type">Method</span> <span class="variable">method</span> <span class="operator">=</span> clazz.getMethod(<span class="string">&quot;test&quot;</span>, <span class="type">int</span>.class, <span class="type">int</span>.class); <span class="comment">// 获取 test 方法，指定参数类型为 int, int</span></span><br><span class="line"><span class="type">String</span> <span class="variable">result</span> <span class="operator">=</span> (String) method.invoke(student, <span class="number">5</span>, <span class="number">10</span>); <span class="comment">// 调用 test 方法，传入参数</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>getMethod</code>：获取指定名称和参数类型的 public 方法</li>
+<li><code>invoke</code>：在指定对象上调用该方法</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Student</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String <span class="title function_">test</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> a + <span class="string">&quot; : &quot;</span> + b;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Class&lt;?&gt; clazz = Student.class; <span class="comment">// 获取 Student 类的 Class 对象</span></span><br><span class="line"><span class="type">Method</span> <span class="variable">method</span> <span class="operator">=</span> clazz.getDeclaredMethod(<span class="string">&quot;test&quot;</span>, <span class="type">int</span>.class, <span class="type">int</span>.class); <span class="comment">// 获取私有方法 test</span></span><br><span class="line">method.setAccessible(<span class="literal">true</span>); <span class="comment">// 设置方法可访问</span></span><br><span class="line"><span class="type">String</span> <span class="variable">result</span> <span class="operator">=</span> (String) method.invoke(student, <span class="number">5</span>, <span class="number">10</span>); <span class="comment">// 调用 test 方法，传入参数</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>getDeclaredMethod</code>：获取指定名称和参数类型的非 public 方法</li>
+</ul>
+<h2 id="修改类属性"><a href="#修改类属性" class="headerlink" title="修改类属性"></a>修改类属性</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Student</span> &#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Student</span> <span class="variable">student</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>();</span><br><span class="line">Class&lt;?&gt; clazz = student.getClass(); <span class="comment">// 获取 Student 类的 Class 对象</span></span><br><span class="line"><span class="type">Field</span> <span class="variable">field</span> <span class="operator">=</span> clazz.getField(<span class="string">&quot;i&quot;</span>); <span class="comment">// 使用 getField 获取公共字段 i</span></span><br><span class="line">field.setInt(student, <span class="number">2</span>); <span class="comment">// 将 i 的值修改为 2</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>getField</code>：获取指定名称的 public 字段的 Field 对象</li>
+<li><code>setInt</code>：修改指定对象的 int 类型字段的值（其他数据类型同理，也可直接用 set）</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Student</span> &#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> <span class="string">&quot;AAA&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Student</span> <span class="variable">student</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>();</span><br><span class="line">Class&lt;?&gt; clazz = student.getClass(); <span class="comment">// 获取 Student 类的 Class 对象</span></span><br><span class="line"><span class="type">Field</span> <span class="variable">field</span> <span class="operator">=</span> clazz.getDeclaredField(<span class="string">&quot;s&quot;</span>); <span class="comment">// 使用 getDeclaredField 获取私有 final 字段 s</span></span><br><span class="line">field.setAccessible(<span class="literal">true</span>); <span class="comment">// 设置字段可访问</span></span><br><span class="line"><span class="type">Field</span> <span class="variable">modifiersField</span> <span class="operator">=</span> Field.class.getDeclaredField(<span class="string">&quot;modifiers&quot;</span>);</span><br><span class="line">modifiersField.setAccessible(<span class="literal">true</span>);</span><br><span class="line">modifiersField.setInt(field, field.getModifiers() &amp; ~java.lang.reflect.Modifier.FINAL); <span class="comment">// 去除 final 标记</span></span><br><span class="line">field.set(student, <span class="string">&quot;BBB&quot;</span>); <span class="comment">// 将 s 的值修改为 &quot;BBB&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="获取类注解"><a href="#获取类注解" class="headerlink" title="获取类注解"></a>获取类注解</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="meta">@Target(ElementType.METHOD)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> MyAnnotation &#123;</span><br><span class="line">    String <span class="title function_">value</span><span class="params">()</span> <span class="keyword">default</span> <span class="string">&quot;default value&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyClass</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@MyAnnotation(&quot;Hello, World!&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">myMethod</span><span class="params">()</span> &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Class&lt;MyClass&gt; myClass = MyClass.class;</span><br><span class="line"><span class="type">Method</span> <span class="variable">method</span> <span class="operator">=</span> myClass.getMethod(<span class="string">&quot;myMethod&quot;</span>);</span><br><span class="line"><span class="keyword">if</span> (method.isAnnotationPresent(MyAnnotation.class)) &#123; <span class="comment">// 检查是否有 MyAnnotation 注解</span></span><br><span class="line">    <span class="type">MyAnnotation</span> <span class="variable">annotation</span> <span class="operator">=</span> method.getAnnotation(MyAnnotation.class); <span class="comment">// 获取注解</span></span><br><span class="line">    <span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> annotation.value(); <span class="comment">// 获取注解的值</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h2><h3 id="双亲委派机制"><a href="#双亲委派机制" class="headerlink" title="双亲委派机制"></a>双亲委派机制</h3><blockquote>
+<p>Java 类加载的一种机制，用于确保 Java 类加载的安全性和效率</p>
+<p>它的核心思想是：</p>
+<p>当一个类加载器接收到类加载请求时，它并不会自己直接去加载这个类，而是会把这个请求委派给它的父加载器去处理</p>
+<p>只有在父加载器无法找到该类的情况下，当前加载器才会尝试加载该类</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../images/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/01%20JavaSE-1.jpg"></p>
+<p><strong>工作原理</strong></p>
+<ol>
+<li><p><strong>类加载器层次结构</strong>：</p>
+<p>在 Java 中，类加载器是以层次结构组织的</p>
+<p>每个类加载器都有一个父类加载器，通常是 Java 的根类加载器（Bootstrap ClassLoader）是层次结构的最上层</p>
+</li>
+<li><p><strong>加载流程</strong>：</p>
+<p>当一个类加载器接收到类加载请求时，它首先将请求转发给父加载器</p>
+<p>父加载器尝试加载这个类：</p>
+<ul>
+<li><p>如果父加载器能够加载该类，则返回这个类</p>
+</li>
+<li><p>如果父加载器无法加载该类，当前类加载器才会尝试去加载这个类</p>
+</li>
+</ul>
+</li>
+</ol>
+<p><strong>例子</strong></p>
+<p>假设我们有一个类<code>A</code>，它被定义在用户项目中，同时也存在于 Java 核心库中</p>
+<p>按照双亲委派机制，加载<code>A</code>的请求会首先被委派给根类加载器，根类加载器会查找核心库中的<code>A</code>类</p>
+<p>如果找到了，加载器就会返回这个类；如果没有找到，委派给应用程序类加载器，然后才会去加载用户自定义的<code>A</code>类</p>
+<p><strong>总结</strong></p>
+<p>双亲委派机制是 Java 类加载的基础，确保了类加载过程的安全性和高效性</p>
+<p>通过这一机制，Java 能够有效地管理类的加载和使用，维护 Java 应用程序的稳定性</p>
+<h3 id="自定义类加载器"><a href="#自定义类加载器" class="headerlink" title="自定义类加载器"></a>自定义类加载器</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.test;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String text;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test</span><span class="params">(String str)</span> &#123;</span><br><span class="line">        System.out.println(text + <span class="string">&quot; : &quot;</span> + str);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过<code>javac</code>命令，手动编译一个<code>.class</code>文件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">javac src/main/java/com/test/Test.java</span><br></pre></td></tr></table></figure>
+
+<p>编写自定义类加载器</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">MyClassLoader</span> <span class="keyword">extends</span> <span class="title class_">ClassLoader</span> &#123; <span class="comment">// 自定义类加载器</span></span><br><span class="line">    <span class="keyword">public</span> Class&lt;?&gt; defineClass(String name, <span class="type">byte</span>[] b) &#123;</span><br><span class="line">        <span class="keyword">return</span> defineClass(name, b, <span class="number">0</span>, b.length); <span class="comment">// 调用 protected 方法，支持载入外部 class 文件</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">    <span class="type">MyClassLoader</span> <span class="variable">classLoader</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MyClassLoader</span>();</span><br><span class="line">    <span class="type">FileInputStream</span> <span class="variable">stream</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(<span class="string">&quot;Test.class&quot;</span>);</span><br><span class="line">    <span class="type">byte</span>[] bytes = <span class="keyword">new</span> <span class="title class_">byte</span>[stream.available()];</span><br><span class="line">    stream.read(bytes);</span><br><span class="line">    Class&lt;?&gt; clazz = classLoader.defineClass(<span class="string">&quot;com.test.Test&quot;</span>, bytes); <span class="comment">// 类名必须和定义的保持一致</span></span><br><span class="line">    System.out.println(clazz.getName()); <span class="comment">// 成功加载外部 class 文件</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gitee.com/kokoachino/picture-bed/raw/master/%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/head.jpg" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gitee.com/kokoachino/picture-bed/raw/master/%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/head.jpg" title="头像" alt="头像"></a><div class="post-copyright__author_name">星开祈灵</div><div class="post-copyright__author_desc">( ´•̥̥̥ω•̥̥̥` )</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://kokoachino.github.io/2023/07/12/01%20JavaSE/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://kokoachino.github.io/2023/07/12/01%20JavaSE/')">JavaSE</span></a></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://KokoaChino.github.io" target="_blank">星开祈灵的个人博客</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/Java/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>Java<span class="tagsPageCount">7</span></a><a class="post-meta__box__tags" href="/tags/API/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>API<span class="tagsPageCount">1</span></a><a class="post-meta__box__tags" href="/tags/%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>函数式接口<span class="tagsPageCount">1</span></a><a class="post-meta__box__tags" href="/tags/Stream-%E6%B5%81/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>Stream 流<span class="tagsPageCount">1</span></a><a class="post-meta__box__tags" href="/tags/%E6%AD%A3%E5%88%99%E5%8C%B9%E9%85%8D/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>正则匹配<span class="tagsPageCount">1</span></a><a class="post-meta__box__tags" href="/tags/%E6%96%87%E4%BB%B6/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>文件<span class="tagsPageCount">1</span></a><a class="post-meta__box__tags" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>多线程<span class="tagsPageCount">1</span></a><a class="post-meta__box__tags" href="/tags/%E6%B3%A8%E8%A7%A3/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>注解<span class="tagsPageCount">5</span></a><a class="post-meta__box__tags" href="/tags/%E5%8F%8D%E5%B0%84/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>反射<span class="tagsPageCount">1</span></a><a class="post-meta__box__tags" href="/tags/%E9%94%81/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>锁<span class="tagsPageCount">4</span></a><a class="post-meta__box__tags" href="/tags/%E5%AE%9A%E6%97%B6%E5%99%A8/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>定时器<span class="tagsPageCount">2</span></a></div></div></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2023/07/22/01%20HTML/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gitee.com/kokoachino/picture-bed/raw/master/%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87.jpg?_r_=4dcf31a1-f82a-3d10-5a0c-e6795ea9103a" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">HTML</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/2024/11/16/13%20JavaJUC%20%E5%A4%9A%E7%BA%BF%E7%A8%8B/" title="JavaJUC 多线程"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gitee.com/kokoachino/picture-bed/raw/master/%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87.jpg?_r_=bd31497d-fe89-a8a0-d0d5-bb8e5bbf5de1" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-11-16</div><div class="title">JavaJUC 多线程</div></div></a></div><div><a href="/2023/10/10/02%20JavaSE%20%E6%96%B0%E7%89%B9%E6%80%A7/" title="JavaSE 新特性"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gitee.com/kokoachino/picture-bed/raw/master/%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87.jpg?_r_=fe40420e-0920-133a-4c3d-8b4f487af0fa" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2023-10-10</div><div class="title">JavaSE 新特性</div></div></a></div><div><a href="/2024/02/01/04%20Java%20%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" title="Java 设计模式"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gitee.com/kokoachino/picture-bed/raw/master/%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87.jpg?_r_=f694a06c-6328-fdd4-844b-14f2bae98913" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-02-01</div><div class="title">Java 设计模式</div></div></a></div><div><a href="/2024/06/01/06%20JavaWeb%20%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" title="JavaWeb 后端开发"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gitee.com/kokoachino/picture-bed/raw/master/%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87.jpg?_r_=6795ba84-9f70-294c-2a6c-4fc94d0a35f1" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-06-01</div><div class="title">JavaWeb 后端开发</div></div></a></div><div><a href="/2024/04/20/05%20JavaGUI%20%E5%8F%AF%E8%A7%86%E5%8C%96%E5%BC%80%E5%8F%91/" title="JavaGUI 可视化开发"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gitee.com/kokoachino/picture-bed/raw/master/%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87.jpg?_r_=419018ea-5cf4-a90e-5a43-3e4d71dd716f" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-04-20</div><div class="title">JavaGUI 可视化开发</div></div></a></div><div><a href="/2024/11/01/12%20JavaJVM%20%E8%99%9A%E6%8B%9F%E6%9C%BA/" title="JavaJVM 虚拟机"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gitee.com/kokoachino/picture-bed/raw/master/%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87.jpg?_r_=eb731b2e-9028-4489-94ca-8ae7eab745d5" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-11-01</div><div class="title">JavaJVM 虚拟机</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#API"><span class="toc-number">1.</span> <span class="toc-text">API</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB"><span class="toc-number">1.1.</span> <span class="toc-text">类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A5%E5%8F%A3"><span class="toc-number">1.2.</span> <span class="toc-text">接口</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA"><span class="toc-number">2.</span> <span class="toc-text">输入输出</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%85%A5"><span class="toc-number">2.1.</span> <span class="toc-text">输入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%87%BA"><span class="toc-number">2.2.</span> <span class="toc-text">输出</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3"><span class="toc-number">3.</span> <span class="toc-text">函数式接口</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BE%9B%E7%BB%99%E5%9E%8B%E6%8E%A5%E5%8F%A3"><span class="toc-number">3.1.</span> <span class="toc-text">供给型接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B6%88%E8%B4%B9%E5%9E%8B%E6%8E%A5%E5%8F%A3"><span class="toc-number">3.2.</span> <span class="toc-text">消费型接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%9E%8B%E6%8E%A5%E5%8F%A3"><span class="toc-number">3.3.</span> <span class="toc-text">函数型接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%AD%E8%A8%80%E5%9E%8B%E6%8E%A5%E5%8F%A3"><span class="toc-number">3.4.</span> <span class="toc-text">断言型接口</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Stream-%E6%B5%81"><span class="toc-number">4.</span> <span class="toc-text">Stream 流</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%81%E7%9A%84%E5%88%9B%E5%BB%BA"><span class="toc-number">4.1.</span> <span class="toc-text">流的创建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%AD%E9%97%B4%E6%93%8D%E4%BD%9C"><span class="toc-number">4.2.</span> <span class="toc-text">中间操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%88%E7%BB%93%E6%93%8D%E4%BD%9C"><span class="toc-number">4.3.</span> <span class="toc-text">终结操作</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%AD%A3%E5%88%99%E5%8C%B9%E9%85%8D"><span class="toc-number">5.</span> <span class="toc-text">正则匹配</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">5.1.</span> <span class="toc-text">正则表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%9E%E6%89%93%E5%8D%B0%E5%AD%97%E7%AC%A6"><span class="toc-number">5.1.1.</span> <span class="toc-text">非打印字符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%B9%E6%AE%8A%E5%AD%97%E7%AC%A6"><span class="toc-number">5.1.2.</span> <span class="toc-text">特殊字符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E7%B1%BB"><span class="toc-number">5.1.3.</span> <span class="toc-text">字符类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%99%90%E5%AE%9A%E7%AC%A6"><span class="toc-number">5.1.4.</span> <span class="toc-text">限定符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%BD%8D%E7%AC%A6"><span class="toc-number">5.1.5.</span> <span class="toc-text">定位符</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pattern"><span class="toc-number">5.2.</span> <span class="toc-text">Pattern</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Matcher"><span class="toc-number">5.3.</span> <span class="toc-text">Matcher</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%87%E4%BB%B6"><span class="toc-number">6.</span> <span class="toc-text">文件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B7%AF%E5%BE%84"><span class="toc-number">6.1.</span> <span class="toc-text">路径</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%9D%E5%AF%B9%E8%B7%AF%E5%BE%84"><span class="toc-number">6.1.1.</span> <span class="toc-text">绝对路径</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84"><span class="toc-number">6.1.2.</span> <span class="toc-text">相对路径</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E5%AF%B9%E8%B1%A1"><span class="toc-number">6.2.</span> <span class="toc-text">文件对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B7%AF%E5%BE%84%E5%AF%B9%E8%B1%A1"><span class="toc-number">6.3.</span> <span class="toc-text">路径对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E5%AD%97%E8%8A%82%E6%B5%81"><span class="toc-number">6.4.</span> <span class="toc-text">文件字节流</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E5%AD%97%E7%AC%A6%E6%B5%81"><span class="toc-number">6.5.</span> <span class="toc-text">文件字符流</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%93%E5%86%B2%E6%B5%81"><span class="toc-number">6.6.</span> <span class="toc-text">缓冲流</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BD%AC%E6%8D%A2%E6%B5%81"><span class="toc-number">6.7.</span> <span class="toc-text">转换流</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%B5%81"><span class="toc-number">6.8.</span> <span class="toc-text">数据流</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1%E6%B5%81"><span class="toc-number">6.9.</span> <span class="toc-text">对象流</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%93%E5%8D%B0%E6%B5%81"><span class="toc-number">6.10.</span> <span class="toc-text">打印流</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B"><span class="toc-number">7.</span> <span class="toc-text">多线程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E5%92%8C%E5%90%AF%E5%8A%A8"><span class="toc-number">7.1.</span> <span class="toc-text">线程的创建和启动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E7%9A%84%E4%BC%98%E5%85%88%E7%BA%A7"><span class="toc-number">7.2.</span> <span class="toc-text">线程的优先级</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E7%9A%84%E4%BC%91%E7%9C%A0%E5%92%8C%E4%B8%AD%E6%96%AD"><span class="toc-number">7.3.</span> <span class="toc-text">线程的休眠和中断</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%A4%BC%E8%AE%A9%E5%92%8C%E5%8A%A0%E5%85%A5"><span class="toc-number">7.4.</span> <span class="toc-text">线程的礼让和加入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ThreadLocal"><span class="toc-number">7.5.</span> <span class="toc-text">ThreadLocal</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%88%E6%8A%A4%E7%BA%BF%E7%A8%8B"><span class="toc-number">7.6.</span> <span class="toc-text">守护线程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E9%94%81%E5%92%8C%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5"><span class="toc-number">7.7.</span> <span class="toc-text">线程锁和线程同步</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%BB%E9%94%81"><span class="toc-number">7.7.1.</span> <span class="toc-text">死锁</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#wait-%E5%92%8C-notify-%E6%96%B9%E6%B3%95"><span class="toc-number">7.7.2.</span> <span class="toc-text">wait 和 notify 方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E6%97%B6%E5%99%A8"><span class="toc-number">7.8.</span> <span class="toc-text">定时器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BB%B6%E8%BF%9F%E6%89%A7%E8%A1%8C"><span class="toc-number">7.8.1.</span> <span class="toc-text">延迟执行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E6%97%B6%E9%87%8D%E5%A4%8D"><span class="toc-number">7.8.2.</span> <span class="toc-text">定时重复</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B3%A8%E8%A7%A3"><span class="toc-number">8.</span> <span class="toc-text">注解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%84%E8%AE%BE%E6%B3%A8%E8%A7%A3"><span class="toc-number">8.1.</span> <span class="toc-text">预设注解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%83%E6%B3%A8%E8%A7%A3"><span class="toc-number">8.2.</span> <span class="toc-text">元注解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3"><span class="toc-number">8.3.</span> <span class="toc-text">自定义注解</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%8D%E5%B0%84"><span class="toc-number">9.</span> <span class="toc-text">反射</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Class-%E7%B1%BB"><span class="toc-number">9.1.</span> <span class="toc-text">Class 类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E7%B1%BB%E5%AF%B9%E8%B1%A1"><span class="toc-number">9.2.</span> <span class="toc-text">创建类对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B0%83%E7%94%A8%E7%B1%BB%E6%96%B9%E6%B3%95"><span class="toc-number">9.3.</span> <span class="toc-text">调用类方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E7%B1%BB%E5%B1%9E%E6%80%A7"><span class="toc-number">9.4.</span> <span class="toc-text">修改类属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E7%B1%BB%E6%B3%A8%E8%A7%A3"><span class="toc-number">9.5.</span> <span class="toc-text">获取类注解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8"><span class="toc-number">9.6.</span> <span class="toc-text">类加载器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6"><span class="toc-number">9.6.1.</span> <span class="toc-text">双亲委派机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8"><span class="toc-number">9.6.2.</span> <span class="toc-text">自定义类加载器</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/05/15/05%20Python%20%E7%AE%97%E6%B3%95%E6%A8%A1%E7%89%88/" title="Python 算法模版">Python 算法模版</a><time datetime="2025-05-14T16:00:00.000Z" title="发表于 2025-05-15 00:00:00">2025-05-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/04/18/04%20C++%20%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80/" title="C++ 语法基础">C++ 语法基础</a><time datetime="2025-04-17T16:00:00.000Z" title="发表于 2025-04-18 00:00:00">2025-04-18</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/05/03%20Python%20%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E5%9F%BA%E7%A1%80/" title="Python 数学建模基础">Python 数学建模基础</a><time datetime="2024-12-04T16:00:00.000Z" title="发表于 2024-12-05 00:00:00">2024-12-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/11/16/13%20JavaJUC%20%E5%A4%9A%E7%BA%BF%E7%A8%8B/" title="JavaJUC 多线程">JavaJUC 多线程</a><time datetime="2024-11-15T16:00:00.000Z" title="发表于 2024-11-16 00:00:00">2024-11-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/11/01/12%20JavaJVM%20%E8%99%9A%E6%8B%9F%E6%9C%BA/" title="JavaJVM 虚拟机">JavaJVM 虚拟机</a><time datetime="2024-10-31T16:00:00.000Z" title="发表于 2024-11-01 00:00:00">2024-11-01</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2024 - 2025 By <a class="footer-bar-link" href="/" title="星开祈灵" target="_blank">星开祈灵</a></div></div><div id="footer-type-tips"></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu" title="主题">主题</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">26</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">131</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">4</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://blog.anheyu.com/" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://image.anheyu.com/" title="安知鱼图床"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://image.anheyu.com/favicon.ico" alt="安知鱼图床"/><span class="back-menu-item-text">安知鱼图床</span></a></div></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/API/" style="font-size: 0.88rem;">API<sup>1</sup></a><a href="/tags/CSS/" style="font-size: 0.88rem;">CSS<sup>1</sup></a><a href="/tags/Git/" style="font-size: 0.88rem;">Git<sup>1</sup></a><a href="/tags/HTML/" style="font-size: 0.88rem;">HTML<sup>1</sup></a><a href="/tags/Java/" style="font-size: 0.88rem;">Java<sup>7</sup></a><a href="/tags/Lambda/" style="font-size: 0.88rem;">Lambda<sup>1</sup></a><a href="/tags/Matlab/" style="font-size: 0.88rem;">Matlab<sup>1</sup></a><a href="/tags/MySQL/" style="font-size: 0.88rem;">MySQL<sup>1</sup></a><a href="/tags/Optional/" style="font-size: 0.88rem;">Optional<sup>1</sup></a><a href="/tags/Stream-%E6%B5%81/" style="font-size: 0.88rem;">Stream 流<sup>1</sup></a><a href="/tags/Web/" style="font-size: 0.88rem;">Web<sup>6</sup></a><a href="/tags/%E4%BA%8B%E5%8A%A1/" style="font-size: 0.88rem;">事务<sup>4</sup></a><a href="/tags/%E5%87%BD%E6%95%B0/" style="font-size: 0.88rem;">函数<sup>4</sup></a><a href="/tags/%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3/" style="font-size: 0.88rem;">函数式接口<sup>1</sup></a><a href="/tags/%E5%88%86%E6%94%AF/" style="font-size: 0.88rem;">分支<sup>1</sup></a><a href="/tags/%E5%8F%8D%E5%B0%84/" style="font-size: 0.88rem;">反射<sup>1</sup></a><a href="/tags/%E5%91%BD%E4%BB%A4/" style="font-size: 0.88rem;">命令<sup>2</sup></a><a href="/tags/%E5%9B%BE%E5%83%8F%E7%BB%98%E5%88%B6/" style="font-size: 0.88rem;">图像绘制<sup>1</sup></a><a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 0.88rem;">多线程<sup>1</sup></a><a href="/tags/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/" style="font-size: 0.88rem;">存储过程<sup>1</sup></a><a href="/tags/%E5%AE%9A%E6%97%B6%E5%99%A8/" style="font-size: 0.88rem;">定时器<sup>2</sup></a><a href="/tags/%E5%B1%9E%E6%80%A7/" style="font-size: 0.88rem;">属性<sup>2</sup></a><a href="/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E5%99%A8/" style="font-size: 0.88rem;">异常处理器<sup>1</sup></a><a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 0.88rem;">数学<sup>2</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 0.88rem;">数据库<sup>2</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" style="font-size: 0.88rem;">数据类型<sup>4</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1%E4%B8%8E%E8%AE%A1%E7%AE%97/" style="font-size: 0.88rem;">数据统计与计算<sup>1</sup></a><a href="/tags/%E6%96%87%E4%BB%B6/" style="font-size: 0.88rem;">文件<sup>1</sup></a><a href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" style="font-size: 0.88rem;">新特性<sup>1</sup></a><a href="/tags/%E6%AD%A3%E5%88%99%E5%8C%B9%E9%85%8D/" style="font-size: 0.88rem;">正则匹配<sup>1</sup></a><a href="/tags/%E6%B3%A8%E8%A7%A3/" style="font-size: 0.88rem;">注解<sup>5</sup></a><a href="/tags/%E6%B8%B8%E6%A0%87/" style="font-size: 0.88rem;">游标<sup>1</sup></a><a href="/tags/%E7%AC%A6%E5%8F%B7%E5%AF%B9%E8%B1%A1/" style="font-size: 0.88rem;">符号对象<sup>1</sup></a><a href="/tags/%E7%B4%A2%E5%BC%95/" style="font-size: 0.88rem;">索引<sup>1</sup></a><a href="/tags/%E8%A7%86%E5%9B%BE/" style="font-size: 0.88rem;">视图<sup>1</sup></a><a href="/tags/%E8%A7%A6%E5%8F%91%E5%99%A8/" style="font-size: 0.88rem;">触发器<sup>1</sup></a><a href="/tags/%E8%AF%AD%E6%B3%95/" style="font-size: 0.88rem;">语法<sup>8</sup></a><a href="/tags/%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/" style="font-size: 0.88rem;">远程仓库<sup>1</sup></a><a href="/tags/%E9%80%89%E6%8B%A9%E5%99%A8/" style="font-size: 0.88rem;">选择器<sup>1</sup></a><a href="/tags/%E9%94%81/" style="font-size: 0.88rem;">锁<sup>4</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("11/1/2024 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2024 By 安知鱼 V1.6.14",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 星开祈灵 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><div class="js-pjax"><input type="hidden" name="page-type" id="page-type" value="post"></div><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>

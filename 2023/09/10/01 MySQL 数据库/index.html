@@ -1,0 +1,778 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>MySQL 数据库 | 星开祈灵的个人博客</title><meta name="keywords" content="锁,语法,MySQL,数据库,存储过程,事务,游标,视图,异常处理器,索引,触发器,函数,数据类型"><meta name="author" content="星开祈灵"><meta name="copyright" content="星开祈灵"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="MySQL 数据库"><meta name="application-name" content="MySQL 数据库"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="MySQL 数据库"><meta property="og:url" content="https://kokoachino.github.io/2023/09/10/01%20MySQL%20%E6%95%B0%E6%8D%AE%E5%BA%93/index.html"><meta property="og:site_name" content="星开祈灵的个人博客"><meta property="og:description" content="数据类型字符串   数据类型 说明    char(长度) 长度固定为设定值。如果插入的长度小于设定长度时，则用空格填充   varchar(长度) 长度不固定，但不能超过设定值。不会用空格填充   tinytext 极短文本字符串   text 短文本字符串   mediumtext 中等"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://gitee.com/kokoachino/picture-bed/raw/master/%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87.jpg?_r_=373504bb-35ab-4082-9702-1f4ac20bda41"><meta property="article:author" content="星开祈灵"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://gitee.com/kokoachino/picture-bed/raw/master/%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87.jpg?_r_=373504bb-35ab-4082-9702-1f4ac20bda41"><meta name="description" content="数据类型字符串   数据类型 说明    char(长度) 长度固定为设定值。如果插入的长度小于设定长度时，则用空格填充   varchar(长度) 长度不固定，但不能超过设定值。不会用空格填充   tinytext 极短文本字符串   text 短文本字符串   mediumtext 中等"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://kokoachino.github.io/2023/09/10/01%20MySQL%20%E6%95%B0%E6%8D%AE%E5%BA%93/"><link rel="preconnect" href="//cdn.cbd.int"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: undefined,
+  postHeadAiDescription: {"enable":true,"gptName":"AnZhiYu","mode":"local","switchBtn":false,"btnLink":"https://afdian.net/item/886a79d4db6711eda42a52540025c377","randomNum":3,"basicWordCount":1000,"key":"xxxx","Referer":"https://xx.xx/"},
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: undefined,
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  music_page_default: "nav_music",
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: false,
+  mainTone: undefined,
+  authorStatus: undefined,
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":100,"languages":{"author":"作者: 星开祈灵","link":"链接: ","source":"来源: 星开祈灵的个人博客","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: '星开祈灵的个人博客',
+  title: 'MySQL 数据库',
+  postAI: '',
+  pageFillDescription: '数据类型, 字符串, 整数, 小数, 时间, 条件, 查询条件, 约束条件, 列级约束条件, 表级约束条件, 数据库语言, 数据库定义语言, 数据库操纵语言, 数据库查询语言, 单表查询, 多表查询, 数据库控制语言, 函数, 聚集函数, 类型转换函数, 流程控制函数, 字符串函数, 数学函数, 日期函数, 自定义函数, 存储过程, 存储过程, 存储过程中的参数传递, 语句, 变量定义赋值语句, 流程控制语句, 循环语句, explain 语句, 异常处理器, 游标, 视图, 触发器, 索引, 事务, 锁, 锁的类型数据类型字符串数据类型说明长度长度固定为设定值如果插入的长度小于设定长度时则用空格填充长度长度不固定但不能超过设定值不会用空格填充极短文本字符串短文本字符串中等文本字符串长文本字符串极短二进制字符串短二进制字符串中等二进制字符串长二进制字符串整数数据类型说明占字节数有符号整数默认无符号整数极小范围整数小范围整数一般范围整数大范围整数小数数据类型说明占字节数单精度小数双精度小数时间数据类型说明占字节数日期时间年份日期时间条件查询条件一般的比较运算符是否在集合中字符模糊匹配多重条件连接查询约束条件列级约束条件约束条件含义主键外键唯一检查默认空值非空表级约束条件约束条件含义主键外键唯一检查数据库语言数据库定义语言创建数据库数据库名删除数据库数据库名创建表表名列名数据类型列级约束条件列名数据类型列级约束条件列名数据类型列级约束条件删除表表名增加列表名新列名数据类型列级约束条件删除列表名列名修改列的数据类型表名列名新数据类型如果该元素被其他表的约束或视图引用时将无法删除默认选项强制连带引用该元素的约束视图一起删除数据库操纵语言插入数据表名值值值表名列名列名值值表名列名列名值值值值值值修改数据表名列名值列名值条件删除数据表名条件数据库查询语言单表查询查询所有列的数据表名条件查询某些列的数据列名列名表名条件对某列的值进行去重列名列名表名条件以别名显示列的数据列名别名列名别名表名条件对查询结果进行排序列名列名表名条件列名列名模糊查询表名列名匹配字符串使用全文索引进行模糊查询表名列名匹配字符串分组查询聚集函数表名条件列名约束条件分页查询表名数量表名起始位置数量升序排序默认选项逆序排序多表查询多表查询表名表名条件自连接查询表名别名表名别名条件外连接查询表名表名约束条件嵌套查询表名列名列名表名条件数据库控制语言创建用户用户名密码查看当前用户能访问的数据库给予用户权限权限权限权限数据库表用户回收用户权限权限权限权限数据库表用户使被授权的用户还能将已获得的权限继续授权给其他用户函数聚集函数求一列的行数列名表名条件求一列的和列名表名条件求一列的平均值列名表名条件求一列的最小值列名表名条件求一列的最大值列名表名条件类型转换函数显示类型转换数据数据类型数据类型说明字符串转换后长度小于个字符二进制字符串转换后长度小于个字节有符号整数无符号整数浮点数为数字的总位数为小数点后的位数日期时间日期时间流程控制函数条件表达式值值三目运算符值判断值是否为空值值值为空时返回值否则返回值值值两值相等时返回否则返回值秒程序睡眠字符串函数截取字符串字符串起始位置结束位置从最左边向右截取字符串字符串长度从最右边向左截取字符串字符串长度转换为大写字母字符串转换为小写字母字符串替换字符串字符串原文替换文字符串拼接字符串字符串分组字符串拼接字段字段分隔符获取字符串长度字符串数学函数绝对值值向上取整值向下取整值四舍五入值自然对数值平方根值正弦函数值余弦函数值正切函数值的次方之间的随机数日期函数获取当前的日期获取当前的时间获取当前的日期时间获取日期是几号日期获取日期是几月日期获取日期是哪年日期将日期增加单位日期增量计算日期之间的的间隔天数日期日期自定义函数函数名参数列表返回值类型函数主体返回值存储过程存储过程存储过程名参数列表语句集合调用格式过程名参数列表存储过程中的参数传递存储过程名参数名数据类型只传入数据无法为其赋值默认方式存储过程名参数名数据类型只传出数据无法访问其值存储过程名参数名数据类型双向语句变量定义赋值语句局部变量定义变量名数据类型默认值全局变量定义全局变量名值变量赋值变量名值将数据赋值给变量函数变量名表名流程控制语句条件表达式语句条件表达式语句语句变量名条件表达式语句条件表达式语句语句循环语句循环条件语句标签名语句条件表达式标签名标签名语句循环条件语句分析语句的执行计划语句返回的结果说明查询的类型查询的表决定如何查找对应的记录效率从高到低执行查询时可能会用到的索引实际使用的索引在索引里使用的字节数字段的最大可能长度扫描的行数附加说明异常处理器异常语句异常被捕获后程序将继续执行下一个语句而不会跳出当前的代码块异常被捕获后程序将跳出当前代码块继续执行后续的代码游标定义游标游标名表名开启游标游标名获取游标信息游标名变量变量关闭游标游标名视图创建视图视图名列名子查询语句删除视图视图名是指当视图创建后如果更新视图中的数据是否要满足子查询中的条件表达式触发器创建触发器触发器名表名视图名子语句查看触发器删除触发器触发器名索引创建索引索引类型索引名表名列名删除索引索引名表名列名查看表中的索引表名索引类型索引类型说明普通索引完完全全相当于一本书的目录唯一索引一旦建立那么整列中将不允许出现重复数据空间索引是对空间数据类型的字段建立的索引全文索引是模糊匹配的一种更好的解决方案它的效率要比使用更高并且它还支持多种匹配方式空间数据类型只有字段的数据类型为及其系列才可以建全文索引事务开始事务提交事务回滚事务创建回滚点回滚点回滚到指定回滚点回滚点设置当前会话的事务隔离级别隔离级别事务隔离级别含义说明读未提交能够读取到其他事务中未提交的内容存在脏读问题读已提交只能读取其他事务已经提交的内容存在不可重复读问题可重复读默认选项在读取某行后不允许其他事务操作此行直到事务结束串行读一个事务的开始必须等待另一个事务的完成锁锁的类型从对数据的操作类型上来划分读锁共享锁当一个事务添加了读锁后其他的事务也可以添加读锁或是读取数据但是不能进行写操作只能等到所有的读锁全部释放写锁排它锁当一个事务添加了写锁后其他事务不能读不能写也不能添加任何锁只能等待当前事务释放锁从锁的作用范围上来划分全局锁作用于整个数据库表锁作用于整个表行锁作用于某些行又可以细分为以下几种记录锁仅仅锁住索引记录的一行在单条索引记录上加锁间隙锁仅仅锁住一个索引区间开区间不包括双端端点临键锁仅仅锁住一个索引区间左开右闭区间默认选项上全局锁锁的类型上表锁表名锁的类型上行的读锁表名条件上行的写锁表名条件释放当前会话的全部锁除了手动释放锁之外当我们的会话结束后锁也会被自动释放',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-05-15 17:48:34',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://gitee.com/kokoachino/picture-bed/raw/master/%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/head.jpg"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><a id="site-name" href="/" accesskey="h"><div class="title">星开祈灵的个人博客</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="http://8.138.214.176:5174/%E9%A1%B9%E7%9B%AE%E5%9B%BE%E5%BA%8A/%E6%98%9F%E5%BC%80%E7%A5%88%E7%81%B5%E7%99%BE%E5%AE%9D%E7%AE%B1%20%E9%A1%B9%E7%9B%AE%E6%96%87%E6%A1%A3-29.png" target="_blank"><img class="post-qr-code-img" alt="微信" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="http://8.138.214.176:5174/%E9%A1%B9%E7%9B%AE%E5%9B%BE%E5%BA%8A/%E6%98%9F%E5%BC%80%E7%A5%88%E7%81%B5%E7%99%BE%E5%AE%9D%E7%AE%B1%20%E9%A1%B9%E7%9B%AE%E6%96%87%E6%A1%A3-29.png"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png" target="_blank"><img class="post-qr-code-img" alt="支付宝" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/API/" style="font-size: 1.05rem;">API<sup>1</sup></a><a href="/tags/CSS/" style="font-size: 1.05rem;">CSS<sup>1</sup></a><a href="/tags/Git/" style="font-size: 1.05rem;">Git<sup>1</sup></a><a href="/tags/HTML/" style="font-size: 1.05rem;">HTML<sup>1</sup></a><a href="/tags/Java/" style="font-size: 1.05rem;">Java<sup>7</sup></a><a href="/tags/Lambda/" style="font-size: 1.05rem;">Lambda<sup>1</sup></a><a href="/tags/Matlab/" style="font-size: 1.05rem;">Matlab<sup>1</sup></a><a href="/tags/MySQL/" style="font-size: 1.05rem;">MySQL<sup>1</sup></a><a href="/tags/Optional/" style="font-size: 1.05rem;">Optional<sup>1</sup></a><a href="/tags/Stream-%E6%B5%81/" style="font-size: 1.05rem;">Stream 流<sup>1</sup></a><a href="/tags/Web/" style="font-size: 1.05rem;">Web<sup>6</sup></a><a href="/tags/%E4%BA%8B%E5%8A%A1/" style="font-size: 1.05rem;">事务<sup>4</sup></a><a href="/tags/%E5%87%BD%E6%95%B0/" style="font-size: 1.05rem;">函数<sup>4</sup></a><a href="/tags/%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3/" style="font-size: 1.05rem;">函数式接口<sup>1</sup></a><a href="/tags/%E5%88%86%E6%94%AF/" style="font-size: 1.05rem;">分支<sup>1</sup></a><a href="/tags/%E5%8F%8D%E5%B0%84/" style="font-size: 1.05rem;">反射<sup>1</sup></a><a href="/tags/%E5%91%BD%E4%BB%A4/" style="font-size: 1.05rem;">命令<sup>2</sup></a><a href="/tags/%E5%9B%BE%E5%83%8F%E7%BB%98%E5%88%B6/" style="font-size: 1.05rem;">图像绘制<sup>1</sup></a><a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 1.05rem;">多线程<sup>1</sup></a><a href="/tags/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/" style="font-size: 1.05rem;">存储过程<sup>1</sup></a><a href="/tags/%E5%AE%9A%E6%97%B6%E5%99%A8/" style="font-size: 1.05rem;">定时器<sup>2</sup></a><a href="/tags/%E5%B1%9E%E6%80%A7/" style="font-size: 1.05rem;">属性<sup>2</sup></a><a href="/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E5%99%A8/" style="font-size: 1.05rem;">异常处理器<sup>1</sup></a><a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 1.05rem;">数学<sup>2</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 1.05rem;">数据库<sup>2</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" style="font-size: 1.05rem;">数据类型<sup>4</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1%E4%B8%8E%E8%AE%A1%E7%AE%97/" style="font-size: 1.05rem;">数据统计与计算<sup>1</sup></a><a href="/tags/%E6%96%87%E4%BB%B6/" style="font-size: 1.05rem;">文件<sup>1</sup></a><a href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" style="font-size: 1.05rem;">新特性<sup>1</sup></a><a href="/tags/%E6%AD%A3%E5%88%99%E5%8C%B9%E9%85%8D/" style="font-size: 1.05rem;">正则匹配<sup>1</sup></a><a href="/tags/%E6%B3%A8%E8%A7%A3/" style="font-size: 1.05rem;">注解<sup>5</sup></a><a href="/tags/%E6%B8%B8%E6%A0%87/" style="font-size: 1.05rem;">游标<sup>1</sup></a><a href="/tags/%E7%AC%A6%E5%8F%B7%E5%AF%B9%E8%B1%A1/" style="font-size: 1.05rem;">符号对象<sup>1</sup></a><a href="/tags/%E7%B4%A2%E5%BC%95/" style="font-size: 1.05rem;">索引<sup>1</sup></a><a href="/tags/%E8%A7%86%E5%9B%BE/" style="font-size: 1.05rem;">视图<sup>1</sup></a><a href="/tags/%E8%A7%A6%E5%8F%91%E5%99%A8/" style="font-size: 1.05rem;">触发器<sup>1</sup></a><a href="/tags/%E8%AF%AD%E6%B3%95/" style="font-size: 1.05rem;">语法<sup>8</sup></a><a href="/tags/%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/" style="font-size: 1.05rem;">远程仓库<sup>1</sup></a><a href="/tags/%E9%80%89%E6%8B%A9%E5%99%A8/" style="font-size: 1.05rem;">选择器<sup>1</sup></a><a href="/tags/%E9%94%81/" style="font-size: 1.05rem;">锁<sup>4</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/05/"><span class="card-archive-list-date">五月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/04/"><span class="card-archive-list-date">四月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/12/"><span class="card-archive-list-date">十二月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/11/"><span class="card-archive-list-date">十一月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/09/"><span class="card-archive-list-date">九月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/08/"><span class="card-archive-list-date">八月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/07/"><span class="card-archive-list-date">七月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/06/"><span class="card-archive-list-date">六月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">3</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/" itemprop="url">中间件</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/%E9%94%81/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>锁</span></a><a class="article-meta__tags" href="/tags/%E8%AF%AD%E6%B3%95/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>语法</span></a><a class="article-meta__tags" href="/tags/MySQL/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>MySQL</span></a><a class="article-meta__tags" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>数据库</span></a><a class="article-meta__tags" href="/tags/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>存储过程</span></a><a class="article-meta__tags" href="/tags/%E4%BA%8B%E5%8A%A1/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>事务</span></a><a class="article-meta__tags" href="/tags/%E6%B8%B8%E6%A0%87/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>游标</span></a><a class="article-meta__tags" href="/tags/%E8%A7%86%E5%9B%BE/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>视图</span></a><a class="article-meta__tags" href="/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E5%99%A8/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>异常处理器</span></a><a class="article-meta__tags" href="/tags/%E7%B4%A2%E5%BC%95/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>索引</span></a><a class="article-meta__tags" href="/tags/%E8%A7%A6%E5%8F%91%E5%99%A8/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>触发器</span></a><a class="article-meta__tags" href="/tags/%E5%87%BD%E6%95%B0/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>函数</span></a><a class="article-meta__tags" href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>数据类型</span></a></span></div></div><h1 class="post-title" itemprop="name headline">MySQL 数据库</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2023-09-09T16:00:00.000Z" title="发表于 2023-09-10 00:00:00">2023-09-10</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2025-05-15T09:48:34.613Z" title="更新于 2025-05-15 17:48:34">2025-05-15</time></span></div><div class="meta-secondline"><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为广州"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>广州</span></div></div></div><article class="post-content" id="article-container" itemscope itemtype="https://kokoachino.github.io/2023/09/10/01%20MySQL%20%E6%95%B0%E6%8D%AE%E5%BA%93/"><header><a class="post-meta-categories" href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/" itemprop="url">中间件</a><a href="/tags/%E9%94%81/" tabindex="-1" itemprop="url">锁</a><a href="/tags/%E8%AF%AD%E6%B3%95/" tabindex="-1" itemprop="url">语法</a><a href="/tags/MySQL/" tabindex="-1" itemprop="url">MySQL</a><a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" tabindex="-1" itemprop="url">数据库</a><a href="/tags/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/" tabindex="-1" itemprop="url">存储过程</a><a href="/tags/%E4%BA%8B%E5%8A%A1/" tabindex="-1" itemprop="url">事务</a><a href="/tags/%E6%B8%B8%E6%A0%87/" tabindex="-1" itemprop="url">游标</a><a href="/tags/%E8%A7%86%E5%9B%BE/" tabindex="-1" itemprop="url">视图</a><a href="/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E5%99%A8/" tabindex="-1" itemprop="url">异常处理器</a><a href="/tags/%E7%B4%A2%E5%BC%95/" tabindex="-1" itemprop="url">索引</a><a href="/tags/%E8%A7%A6%E5%8F%91%E5%99%A8/" tabindex="-1" itemprop="url">触发器</a><a href="/tags/%E5%87%BD%E6%95%B0/" tabindex="-1" itemprop="url">函数</a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" tabindex="-1" itemprop="url">数据类型</a><h1 id="CrawlerTitle" itemprop="name headline">MySQL 数据库</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">星开祈灵</span><time itemprop="dateCreated datePublished" datetime="2023-09-09T16:00:00.000Z" title="发表于 2023-09-10 00:00:00">2023-09-10</time><time itemprop="dateCreated datePublished" datetime="2025-05-15T09:48:34.613Z" title="更新于 2025-05-15 17:48:34">2025-05-15</time></header><span id="more"></span>
+
+
+
+<h1 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h1><h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><table>
+<thead>
+<tr>
+<th align="center">数据类型</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">char(长度)</td>
+<td align="center">长度固定为设定值。如果插入的长度小于设定长度时，则用空格填充</td>
+</tr>
+<tr>
+<td align="center">varchar(长度)</td>
+<td align="center">长度不固定，但不能超过设定值。不会用空格填充</td>
+</tr>
+<tr>
+<td align="center">tinytext</td>
+<td align="center">极短文本字符串</td>
+</tr>
+<tr>
+<td align="center">text</td>
+<td align="center">短文本字符串</td>
+</tr>
+<tr>
+<td align="center">mediumtext</td>
+<td align="center">中等文本字符串</td>
+</tr>
+<tr>
+<td align="center">longtext</td>
+<td align="center">长文本字符串</td>
+</tr>
+<tr>
+<td align="center">tinyblob</td>
+<td align="center">极短二进制字符串</td>
+</tr>
+<tr>
+<td align="center">blob</td>
+<td align="center">短二进制字符串</td>
+</tr>
+<tr>
+<td align="center">mediumblob</td>
+<td align="center">中等二进制字符串</td>
+</tr>
+<tr>
+<td align="center">longblob</td>
+<td align="center">长二进制字符串</td>
+</tr>
+</tbody></table>
+<h2 id="整数"><a href="#整数" class="headerlink" title="整数"></a>整数</h2><table>
+<thead>
+<tr>
+<th align="center">数据类型</th>
+<th align="center">说明</th>
+<th align="center">占字节数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">signed</td>
+<td align="center">有符号整数，默认</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">unsigned</td>
+<td align="center">无符号整数</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">tinyint</td>
+<td align="center">极小范围整数</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">smallint</td>
+<td align="center">小范围整数</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td align="center">int</td>
+<td align="center">一般范围整数</td>
+<td align="center">4</td>
+</tr>
+<tr>
+<td align="center">bigint</td>
+<td align="center">大范围整数</td>
+<td align="center">8</td>
+</tr>
+</tbody></table>
+<h2 id="小数"><a href="#小数" class="headerlink" title="小数"></a>小数</h2><table>
+<thead>
+<tr>
+<th align="center">数据类型</th>
+<th align="center">说明</th>
+<th align="center">占字节数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">float</td>
+<td align="center">单精度小数</td>
+<td align="center">4</td>
+</tr>
+<tr>
+<td align="center">double</td>
+<td align="center">双精度小数</td>
+<td align="center">8</td>
+</tr>
+</tbody></table>
+<h2 id="时间"><a href="#时间" class="headerlink" title="时间"></a>时间</h2><table>
+<thead>
+<tr>
+<th align="center">数据类型</th>
+<th align="center">说明</th>
+<th align="center">占字节数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">date</td>
+<td align="center">日期</td>
+<td align="center">3</td>
+</tr>
+<tr>
+<td align="center">time</td>
+<td align="center">时间</td>
+<td align="center">3</td>
+</tr>
+<tr>
+<td align="center">year</td>
+<td align="center">年份</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">datetime</td>
+<td align="center">日期 + 时间</td>
+<td align="center">8</td>
+</tr>
+</tbody></table>
+<h1 id="条件"><a href="#条件" class="headerlink" title="条件"></a>条件</h1><h2 id="查询条件"><a href="#查询条件" class="headerlink" title="查询条件"></a>查询条件</h2><ul>
+<li><strong>一般的比较运算符：</strong><code>=</code> <code>&gt;</code> <code>&lt;</code> <code>&gt;=</code> <code>&lt;=</code> <code>!=</code> </li>
+<li><strong>是否在集合中：</strong><code>in</code> <code>not in</code></li>
+<li><strong>字符模糊匹配：</strong><code>like</code> <code>not like</code></li>
+<li><strong>多重条件连接查询：</strong><code>and </code> <code>or</code> <code>not</code></li>
+</ul>
+<h2 id="约束条件"><a href="#约束条件" class="headerlink" title="约束条件"></a>约束条件</h2><h3 id="列级约束条件"><a href="#列级约束条件" class="headerlink" title="列级约束条件"></a>列级约束条件</h3><table>
+<thead>
+<tr>
+<th align="center">约束条件</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">primary key</td>
+<td align="center">主键</td>
+</tr>
+<tr>
+<td align="center">foreign key</td>
+<td align="center">外键</td>
+</tr>
+<tr>
+<td align="center">unique</td>
+<td align="center">唯一</td>
+</tr>
+<tr>
+<td align="center">check</td>
+<td align="center">检查</td>
+</tr>
+<tr>
+<td align="center">default</td>
+<td align="center">默认</td>
+</tr>
+<tr>
+<td align="center">null</td>
+<td align="center">空值</td>
+</tr>
+<tr>
+<td align="center">not null</td>
+<td align="center">非空</td>
+</tr>
+</tbody></table>
+<h3 id="表级约束条件"><a href="#表级约束条件" class="headerlink" title="表级约束条件"></a>表级约束条件</h3><table>
+<thead>
+<tr>
+<th align="center">约束条件</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">primary key</td>
+<td align="center">主键</td>
+</tr>
+<tr>
+<td align="center">foreign key</td>
+<td align="center">外键</td>
+</tr>
+<tr>
+<td align="center">unique</td>
+<td align="center">唯一</td>
+</tr>
+<tr>
+<td align="center">check</td>
+<td align="center">检查</td>
+</tr>
+</tbody></table>
+<h1 id="数据库语言"><a href="#数据库语言" class="headerlink" title="数据库语言"></a>数据库语言</h1><h2 id="数据库定义语言"><a href="#数据库定义语言" class="headerlink" title="数据库定义语言"></a>数据库定义语言</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">创建数据库：create database 数据库名</span><br><span class="line">删除数据库：drop database 数据库名</span><br><span class="line"></span><br><span class="line">创建表：create table 表名(列名 数据类型 列级约束条件,</span><br><span class="line">                        列名 数据类型 列级约束条件,</span><br><span class="line">                        ...</span><br><span class="line">                        列名 数据类型 列级约束条件)</span><br><span class="line">删除表：drop table 表名 [restrict|cascade]</span><br><span class="line">增加列：alter table 表名 add 新列名 数据类型 列级约束条件</span><br><span class="line">删除列：alter table 表名 drop column 列名 [restrict|cascade]</span><br><span class="line">修改列的数据类型：alter table 表名 alter column 列名 新数据类型</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>restrict</code>：如果该元素被其他表的约束或视图引用时，将无法删除。默认选项</li>
+<li><code>cascade</code>：强制连带引用该元素的约束、视图一起删除</li>
+</ul>
+<h2 id="数据库操纵语言"><a href="#数据库操纵语言" class="headerlink" title="数据库操纵语言"></a>数据库操纵语言</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">插入数据：insert into 表名 values(值1, 值2, 值3)</span><br><span class="line">         insert into 表名(列名1, 列名2) values(值1, 值2)</span><br><span class="line">         insert into 表名(列名1, 列名2) values(值1, 值2), (值1, 值2), (值1, 值2)</span><br><span class="line">修改数据：update 表名 set 列名1=值1, 列名2=值2, ... where 条件</span><br><span class="line">删除数据：delete from 表名 where 条件</span><br></pre></td></tr></table></figure>
+
+<h2 id="数据库查询语言"><a href="#数据库查询语言" class="headerlink" title="数据库查询语言"></a>数据库查询语言</h2><h3 id="单表查询"><a href="#单表查询" class="headerlink" title="单表查询"></a>单表查询</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">查询所有列的数据：select * from 表名 where 条件</span><br><span class="line">查询某些列的数据：select 列名1, 列名2 from 表名 where 条件</span><br><span class="line">对某列的值进行去重：select 列名1 distinct 列名2 from 表名 where 条件</span><br><span class="line">以别名显示列的数据：select 列名1 别名1, 列名2 别名2 from 表名 where 条件</span><br><span class="line">对查询结果进行排序：select 列名1, 列名2 from 表名 where 条件 order by 列名1 [asc|desc], 列名2 [asc|desc]</span><br><span class="line">模糊查询：select * from 表名 where 列名 like 匹配字符串</span><br><span class="line">使用全文索引进行模糊查询：select * from 表名 where match (列名) against (匹配字符串)</span><br><span class="line">分组查询：select 聚集函数 from 表名 where 条件 group by 列名 having 约束条件</span><br><span class="line">分页查询：select * from 表名 limit 数量</span><br><span class="line">         select * from 表名 limit 起始位置, 数量</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>asc</code>：升序排序，默认选项</li>
+<li><code>desc</code>：逆序排序</li>
+</ul>
+<h3 id="多表查询"><a href="#多表查询" class="headerlink" title="多表查询"></a>多表查询</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">多表查询：select * from 表名1, 表名2 where 条件</span><br><span class="line">自连接查询：select * from 表名 别名1, 表名 别名2 where 条件</span><br><span class="line">外连接查询：select * from 表名1 [inner|left|right] join 表名2 on 约束条件</span><br><span class="line">嵌套查询：select * from 表名 where 列名 = (select 列名 from 表名 where 条件)</span><br></pre></td></tr></table></figure>
+
+<h2 id="数据库控制语言"><a href="#数据库控制语言" class="headerlink" title="数据库控制语言"></a>数据库控制语言</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">创建用户：create user 用户名 identified by 密码</span><br><span class="line">查看当前用户能访问的数据库：show databases</span><br><span class="line">给予用户权限：grant all 权限1, 权限2, 权限3 on 数据库.表 to 用户 [with grant option]</span><br><span class="line">回收用户权限：revoke all 权限1, 权限2, 权限3 on 数据库.表 from 用户</span><br></pre></td></tr></table></figure>
+
+<p><code>with grant option</code>：使被授权的用户还能将已获得的权限继续授权给其他用户</p>
+<h1 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h1><h2 id="聚集函数"><a href="#聚集函数" class="headerlink" title="聚集函数"></a>聚集函数</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">求一列的行数：select count(列名) from 表名 where 条件</span><br><span class="line">求一列的和：select sum(列名) from 表名 where 条件</span><br><span class="line">求一列的平均值：select avg(列名) from 表名 where 条件</span><br><span class="line">求一列的最小值：select min(列名) from 表名 where 条件</span><br><span class="line">求一列的最大值：select max(列名) from 表名 where 条件</span><br></pre></td></tr></table></figure>
+
+<h2 id="类型转换函数"><a href="#类型转换函数" class="headerlink" title="类型转换函数"></a>类型转换函数</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">显示类型转换：cast(数据 as 数据类型)</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="center">数据类型</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">char [(n)]</td>
+<td align="center">字符串，转换后长度小于 n 个字符</td>
+</tr>
+<tr>
+<td align="center">binary [(n)]</td>
+<td align="center">二进制字符串，转换后长度小于 n 个字节</td>
+</tr>
+<tr>
+<td align="center">signed</td>
+<td align="center">有符号整数</td>
+</tr>
+<tr>
+<td align="center">unsigned</td>
+<td align="center">无符号整数</td>
+</tr>
+<tr>
+<td align="center">decimal [(m [, n])]</td>
+<td align="center">浮点数，m 为数字的总位数，n 为小数点后的位数</td>
+</tr>
+<tr>
+<td align="center">date</td>
+<td align="center">日期</td>
+</tr>
+<tr>
+<td align="center">time</td>
+<td align="center">时间</td>
+</tr>
+<tr>
+<td align="center">datetime</td>
+<td align="center">日期时间</td>
+</tr>
+</tbody></table>
+<h2 id="流程控制函数"><a href="#流程控制函数" class="headerlink" title="流程控制函数"></a>流程控制函数</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">if(条件表达式，值1，值2)：三目运算符</span><br><span class="line">isnull(值)：判断值是否为空</span><br><span class="line">ifnull(值1，值2)：值1为空时返回值2，否则返回值1</span><br><span class="line">nullif(值1，值2)：两值相等时返回null，否则返回值1</span><br><span class="line"></span><br><span class="line">sleep(秒)：程序睡眠</span><br></pre></td></tr></table></figure>
+
+<h2 id="字符串函数"><a href="#字符串函数" class="headerlink" title="字符串函数"></a>字符串函数</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">截取字符串：substring(字符串，起始位置，结束位置)</span><br><span class="line">从最左边向右截取字符串：left(字符串，长度)</span><br><span class="line">从最右边向左截取字符串：right(字符串，长度)</span><br><span class="line"></span><br><span class="line">转换为大写字母：upper(字符串)</span><br><span class="line">转换为小写字母：lower(字符串)</span><br><span class="line"></span><br><span class="line">替换字符串：replace(字符串，原文，替换文)</span><br><span class="line">字符串拼接：concat(字符串1，字符串2)</span><br><span class="line">分组字符串拼接：group_concat(字段1, 字段2 ... separator 分隔符)</span><br><span class="line">获取字符串长度：char_length(字符串)</span><br></pre></td></tr></table></figure>
+
+<h2 id="数学函数"><a href="#数学函数" class="headerlink" title="数学函数"></a>数学函数</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">绝对值：abs(值)</span><br><span class="line">向上取整：ceiling(值)</span><br><span class="line">向下取整：floor(值)</span><br><span class="line">四舍五入：round(值)</span><br><span class="line">自然对数：log(值)</span><br><span class="line">平方根：sqrt(值)</span><br><span class="line"></span><br><span class="line">正弦函数：sin(值)</span><br><span class="line">余弦函数：cos(值)</span><br><span class="line">正切函数：tan(值)</span><br><span class="line"></span><br><span class="line">x 的 n 次方：power(x，n)</span><br><span class="line">[0, 1)之间的随机数：rand()</span><br><span class="line">π：pi()</span><br></pre></td></tr></table></figure>
+
+<h2 id="日期函数"><a href="#日期函数" class="headerlink" title="日期函数"></a>日期函数</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">获取当前的日期：curdate()</span><br><span class="line">获取当前的时间：curtime()</span><br><span class="line">获取当前的日期 + 时间：now()</span><br><span class="line"></span><br><span class="line">获取日期是几号：day(日期)</span><br><span class="line">获取日期是几月：month(日期)</span><br><span class="line">获取日期是哪年：year(日期)</span><br><span class="line"></span><br><span class="line">将日期增加 x 单位：date_add(日期，interval 增量 [year|month|day|hour|minute|second])</span><br><span class="line">计算日期之间的的间隔天数：datediff(日期1，日期2)</span><br></pre></td></tr></table></figure>
+
+<h2 id="自定义函数"><a href="#自定义函数" class="headerlink" title="自定义函数"></a>自定义函数</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">create function 函数名([参数列表]) return 返回值类型</span><br><span class="line">       begin</span><br><span class="line">       (函数主体)</span><br><span class="line">             return 返回值</span><br><span class="line">       end</span><br></pre></td></tr></table></figure>
+
+<h1 id="存储过程"><a href="#存储过程" class="headerlink" title="存储过程"></a>存储过程</h1><h2 id="存储过程-1"><a href="#存储过程-1" class="headerlink" title="存储过程"></a>存储过程</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">create procedure 存储过程名([参数列表])</span><br><span class="line">       begin</span><br><span class="line">       (语句集合)</span><br><span class="line">       end</span><br></pre></td></tr></table></figure>
+
+<p><strong>调用格式：</strong><code>call 过程名([参数列表])</code></p>
+<h2 id="存储过程中的参数传递"><a href="#存储过程中的参数传递" class="headerlink" title="存储过程中的参数传递"></a>存储过程中的参数传递</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">create procedure 存储过程名(in 参数名 数据类型)：只传入数据，无法为其赋值。默认方式</span><br><span class="line">create procedure 存储过程名(out 参数名 数据类型)：只传出数据，无法访问其值</span><br><span class="line">create procedure 存储过程名(inout 参数名 数据类型)：双向</span><br></pre></td></tr></table></figure>
+
+<h1 id="语句"><a href="#语句" class="headerlink" title="语句"></a>语句</h1><h2 id="变量定义赋值语句"><a href="#变量定义赋值语句" class="headerlink" title="变量定义赋值语句"></a>变量定义赋值语句</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">局部变量定义：declare 变量名 数据类型 [default 默认值]</span><br><span class="line">全局变量定义：set @全局变量名 = 值</span><br><span class="line">变量赋值：set 变量名 = 值</span><br><span class="line">将数据赋值给变量：select 函数() into 变量名 from 表名</span><br></pre></td></tr></table></figure>
+
+<h2 id="流程控制语句"><a href="#流程控制语句" class="headerlink" title="流程控制语句"></a>流程控制语句</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if 条件表达式 then 语句1</span><br><span class="line">else if 条件表达式 then 语句2</span><br><span class="line">else 语句3</span><br><span class="line">end if</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">case 变量名</span><br><span class="line">    when 条件表达式 then 语句1</span><br><span class="line">    when 条件表达式 then 语句2</span><br><span class="line">    else 语句3</span><br><span class="line">end case</span><br></pre></td></tr></table></figure>
+
+<h2 id="循环语句"><a href="#循环语句" class="headerlink" title="循环语句"></a>循环语句</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">while 循环条件 do</span><br><span class="line">    语句</span><br><span class="line">end while</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">标签名: loop</span><br><span class="line">    语句</span><br><span class="line">    if 条件表达式 then</span><br><span class="line">        leave 标签名</span><br><span class="line">    end if</span><br><span class="line">end loop 标签名</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">repeat</span><br><span class="line">    语句</span><br><span class="line">until 循环条件</span><br><span class="line">end repeat</span><br></pre></td></tr></table></figure>
+
+<h2 id="explain-语句"><a href="#explain-语句" class="headerlink" title="explain 语句"></a>explain 语句</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">分析 select 语句的执行计划：explain select语句</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="center">返回的结果</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">select_type</td>
+<td align="center">查询的类型</td>
+</tr>
+<tr>
+<td align="center">table</td>
+<td align="center">查询的表</td>
+</tr>
+<tr>
+<td align="center">type</td>
+<td align="center">MySQL决定如何查找对应的记录，效率从高到低：system &gt; const &gt; eq_ref &gt; ref &gt; range &gt; index &gt; all</td>
+</tr>
+<tr>
+<td align="center">possible_keys</td>
+<td align="center">执行查询时可能会用到的索引</td>
+</tr>
+<tr>
+<td align="center">key</td>
+<td align="center">实际使用的索引</td>
+</tr>
+<tr>
+<td align="center">key_len</td>
+<td align="center">MySQL在索引里使用的字节数，字段的最大可能长度</td>
+</tr>
+<tr>
+<td align="center">rows</td>
+<td align="center">扫描的行数</td>
+</tr>
+<tr>
+<td align="center">extra</td>
+<td align="center">附加说明</td>
+</tr>
+</tbody></table>
+<h1 id="异常处理器"><a href="#异常处理器" class="headerlink" title="异常处理器"></a>异常处理器</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">declear [continue|exit] handler for 异常ID 语句</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>continue</code>：异常被捕获后，程序将继续执行下一个语句，而不会跳出当前的代码块</li>
+<li><code>exit</code>：异常被捕获后，程序将跳出当前代码块，继续执行后续的代码</li>
+</ul>
+<h1 id="游标"><a href="#游标" class="headerlink" title="游标"></a>游标</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">定义游标：declare 游标名 cursor for 表名</span><br><span class="line">开启游标：open 游标名</span><br><span class="line">获取游标信息：fetch 游标名 into 变量1，变量2，...</span><br><span class="line">关闭游标：close 游标名</span><br></pre></td></tr></table></figure>
+
+<h1 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">创建视图：cerate view 视图名(列名) as 子查询语句 [with check option]</span><br><span class="line">删除视图：drop view 视图名</span><br></pre></td></tr></table></figure>
+
+<p><code>with check option</code>：是指当视图创建后，如果更新视图中的数据，是否要满足子查询中的条件表达式</p>
+<h1 id="触发器"><a href="#触发器" class="headerlink" title="触发器"></a>触发器</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">创建触发器：cerate trigger 触发器名 [before|after] [insert|update|delete] on 表名/视图名 for each row 子语句</span><br><span class="line">查看触发器：show triggers</span><br><span class="line">删除触发器：drop trigger 触发器名</span><br></pre></td></tr></table></figure>
+
+<h1 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">创建索引：cerate 索引类型 index 索引名 on 表名(列名)</span><br><span class="line">删除索引：drop index 索引名 on 表名(列名)</span><br><span class="line">查看表中的索引：show index from 表名</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="center">索引类型</th>
+<th align="center">索引类型</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">normal</td>
+<td align="center">普通索引</td>
+<td align="center">完完全全相当于一本书的目录</td>
+</tr>
+<tr>
+<td align="center">unique</td>
+<td align="center">唯一索引</td>
+<td align="center">一旦建立，那么整列中将不允许出现重复数据</td>
+</tr>
+<tr>
+<td align="center">spatial</td>
+<td align="center">空间索引</td>
+<td align="center">是对空间数据类型的字段建立的索引</td>
+</tr>
+<tr>
+<td align="center">fulltext</td>
+<td align="center">全文索引</td>
+<td align="center">是模糊匹配的一种更好的解决方案，它的效率要比使用 like % 更高，并且它还支持多种匹配方式</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>空间数据类型：</strong><code>GEOMETRY</code> <code>POINT</code> <code>LINESTRING</code> <code>POLYGON</code></li>
+<li><strong>只有字段的数据类型为</strong><code>char</code> <code>varchar</code> <code>text</code><strong>及其系列才可以建全文索引</strong></li>
+</ul>
+<h1 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">开始事务：begin</span><br><span class="line">提交事务：commit</span><br><span class="line">回滚事务：rollback</span><br><span class="line">创建回滚点：savepoint 回滚点</span><br><span class="line">回滚到指定回滚点：rollback to 回滚点</span><br></pre></td></tr></table></figure>
+
+<p><strong>设置当前会话的事务隔离级别：</strong><code>set session transaction isolation level 隔离级别</code></p>
+<table>
+<thead>
+<tr>
+<th align="center">事务隔离级别</th>
+<th align="center">含义</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Read Uncommitted</td>
+<td align="center">读未提交</td>
+<td align="center">能够读取到其他事务中未提交的内容，存在脏读问题</td>
+</tr>
+<tr>
+<td align="center">Read Committed</td>
+<td align="center">读已提交</td>
+<td align="center">只能读取其他事务已经提交的内容，存在不可重复读问题</td>
+</tr>
+<tr>
+<td align="center">Repeated Read</td>
+<td align="center">可重复读（默认选项）</td>
+<td align="center">在读取某行后不允许其他事务操作此行，直到事务结束</td>
+</tr>
+<tr>
+<td align="center">Serializable</td>
+<td align="center">串行读</td>
+<td align="center">一个事务的开始必须等待另一个事务的完成</td>
+</tr>
+</tbody></table>
+<h1 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h1><h2 id="锁的类型"><a href="#锁的类型" class="headerlink" title="锁的类型"></a>锁的类型</h2><ul>
+<li><strong>从对数据的操作类型上来划分</strong><ul>
+<li><strong>读锁（read lock，共享锁）：</strong>当一个事务添加了读锁后，其他的事务也可以添加读锁或是读取数据，但是不能进行写操作，只能等到所有的读锁全部释放</li>
+<li><strong>写锁（write lock，排它锁）：</strong>当一个事务添加了写锁后，其他事务不能读不能写也不能添加任何锁，只能等待当前事务释放锁</li>
+</ul>
+</li>
+<li><strong>从锁的作用范围上来划分</strong><ul>
+<li><strong>全局锁：</strong>作用于整个数据库</li>
+<li><strong>表锁：</strong>作用于整个表</li>
+<li><strong>行锁：</strong>作用于某些行，又可以细分为以下几种：<ul>
+<li><strong>记录锁 Record Locks</strong><br>                            仅仅锁住索引记录的一行，在单条索引记录上加锁</li>
+<li><strong>间隙锁 Gap Locks</strong><br>                            仅仅锁住一个索引区间（开区间，不包括双端端点）</li>
+<li><strong>临键锁 Next-Key Locks</strong><br>                            仅仅锁住一个索引区间（左开右闭区间），默认选项</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">上全局锁：flush tables with 锁的类型</span><br><span class="line">上表锁：lock table 表名 锁的类型</span><br><span class="line">上行的读锁：select * from 表名 where 条件 lock in share mode</span><br><span class="line">上行的写锁：select * from 表名 where 条件 for update</span><br><span class="line"></span><br><span class="line">释放当前会话的全部锁：unlock tables</span><br></pre></td></tr></table></figure>
+
+<p>除了手动释放锁之外，当我们的会话结束后，锁也会被自动释放</p>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gitee.com/kokoachino/picture-bed/raw/master/%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/head.jpg" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gitee.com/kokoachino/picture-bed/raw/master/%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/head.jpg" title="头像" alt="头像"></a><div class="post-copyright__author_name">星开祈灵</div><div class="post-copyright__author_desc">( ´•̥̥̥ω•̥̥̥` )</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://kokoachino.github.io/2023/09/10/01%20MySQL%20%E6%95%B0%E6%8D%AE%E5%BA%93/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://kokoachino.github.io/2023/09/10/01%20MySQL%20%E6%95%B0%E6%8D%AE%E5%BA%93/')">MySQL 数据库</span></a></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://KokoaChino.github.io" target="_blank">星开祈灵的个人博客</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/%E9%94%81/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>锁<span class="tagsPageCount">4</span></a><a class="post-meta__box__tags" href="/tags/%E8%AF%AD%E6%B3%95/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>语法<span class="tagsPageCount">8</span></a><a class="post-meta__box__tags" href="/tags/MySQL/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>MySQL<span class="tagsPageCount">1</span></a><a class="post-meta__box__tags" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>数据库<span class="tagsPageCount">2</span></a><a class="post-meta__box__tags" href="/tags/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>存储过程<span class="tagsPageCount">1</span></a><a class="post-meta__box__tags" href="/tags/%E4%BA%8B%E5%8A%A1/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>事务<span class="tagsPageCount">4</span></a><a class="post-meta__box__tags" href="/tags/%E6%B8%B8%E6%A0%87/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>游标<span class="tagsPageCount">1</span></a><a class="post-meta__box__tags" href="/tags/%E8%A7%86%E5%9B%BE/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>视图<span class="tagsPageCount">1</span></a><a class="post-meta__box__tags" href="/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E5%99%A8/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>异常处理器<span class="tagsPageCount">1</span></a><a class="post-meta__box__tags" href="/tags/%E7%B4%A2%E5%BC%95/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>索引<span class="tagsPageCount">1</span></a><a class="post-meta__box__tags" href="/tags/%E8%A7%A6%E5%8F%91%E5%99%A8/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>触发器<span class="tagsPageCount">1</span></a><a class="post-meta__box__tags" href="/tags/%E5%87%BD%E6%95%B0/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>函数<span class="tagsPageCount">4</span></a><a class="post-meta__box__tags" href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>数据类型<span class="tagsPageCount">4</span></a></div></div></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/08/05/01%20Markdown%20%E8%AF%AD%E6%B3%95/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gitee.com/kokoachino/picture-bed/raw/master/%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87.jpg?_r_=56da21f5-a2c0-741b-d5f2-5b48f3cd3724" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Markdown 语法</div></div></a></div><div class="next-post pull-right"><a href="/2023/09/18/02%20CSS/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gitee.com/kokoachino/picture-bed/raw/master/%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87.jpg?_r_=b92851c8-0e8f-783b-1891-a01fbaba429c" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">CSS</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/2024/02/20/04%20Redis%20%E6%95%B0%E6%8D%AE%E5%BA%93/" title="Redis 数据库"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gitee.com/kokoachino/picture-bed/raw/master/%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87.jpg?_r_=8b070d2b-a3c0-f0db-a876-9fbf3e877e52" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-02-20</div><div class="title">Redis 数据库</div></div></a></div><div><a href="/2024/01/05/02%20Matlab/" title="Matlab"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gitee.com/kokoachino/picture-bed/raw/master/%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87.jpg?_r_=993a9fbc-7d74-4787-4aa9-97960e6aa3dc" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-01-05</div><div class="title">Matlab</div></div></a></div><div><a href="/2023/11/12/03%20JavaSrcipt/" title="JavaScript"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gitee.com/kokoachino/picture-bed/raw/master/%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87.jpg?_r_=3173c3cb-d706-0a50-6392-77cd7c36facf" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2023-11-12</div><div class="title">JavaScript</div></div></a></div><div><a href="/2023/07/12/01%20JavaSE/" title="JavaSE"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gitee.com/kokoachino/picture-bed/raw/master/%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87.jpg?_r_=86b497bf-c817-03b8-11c3-92bf1525deb5" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2023-07-12</div><div class="title">JavaSE</div></div></a></div><div><a href="/2024/11/16/13%20JavaJUC%20%E5%A4%9A%E7%BA%BF%E7%A8%8B/" title="JavaJUC 多线程"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gitee.com/kokoachino/picture-bed/raw/master/%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87.jpg?_r_=bd31497d-fe89-a8a0-d0d5-bb8e5bbf5de1" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-11-16</div><div class="title">JavaJUC 多线程</div></div></a></div><div><a href="/2023/07/22/01%20HTML/" title="HTML"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gitee.com/kokoachino/picture-bed/raw/master/%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87.jpg?_r_=4dcf31a1-f82a-3d10-5a0c-e6795ea9103a" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2023-07-22</div><div class="title">HTML</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.</span> <span class="toc-text">数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">1.1.</span> <span class="toc-text">字符串</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B4%E6%95%B0"><span class="toc-number">1.2.</span> <span class="toc-text">整数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%8F%E6%95%B0"><span class="toc-number">1.3.</span> <span class="toc-text">小数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%B6%E9%97%B4"><span class="toc-number">1.4.</span> <span class="toc-text">时间</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6"><span class="toc-number">2.</span> <span class="toc-text">条件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E8%AF%A2%E6%9D%A1%E4%BB%B6"><span class="toc-number">2.1.</span> <span class="toc-text">查询条件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%A6%E6%9D%9F%E6%9D%A1%E4%BB%B6"><span class="toc-number">2.2.</span> <span class="toc-text">约束条件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%97%E7%BA%A7%E7%BA%A6%E6%9D%9F%E6%9D%A1%E4%BB%B6"><span class="toc-number">2.2.1.</span> <span class="toc-text">列级约束条件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A8%E7%BA%A7%E7%BA%A6%E6%9D%9F%E6%9D%A1%E4%BB%B6"><span class="toc-number">2.2.2.</span> <span class="toc-text">表级约束条件</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%AD%E8%A8%80"><span class="toc-number">3.</span> <span class="toc-text">数据库语言</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AE%9A%E4%B9%89%E8%AF%AD%E8%A8%80"><span class="toc-number">3.1.</span> <span class="toc-text">数据库定义语言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E7%BA%B5%E8%AF%AD%E8%A8%80"><span class="toc-number">3.2.</span> <span class="toc-text">数据库操纵语言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E6%9F%A5%E8%AF%A2%E8%AF%AD%E8%A8%80"><span class="toc-number">3.3.</span> <span class="toc-text">数据库查询语言</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E8%A1%A8%E6%9F%A5%E8%AF%A2"><span class="toc-number">3.3.1.</span> <span class="toc-text">单表查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2"><span class="toc-number">3.3.2.</span> <span class="toc-text">多表查询</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8E%A7%E5%88%B6%E8%AF%AD%E8%A8%80"><span class="toc-number">3.4.</span> <span class="toc-text">数据库控制语言</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%87%BD%E6%95%B0"><span class="toc-number">4.</span> <span class="toc-text">函数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%81%9A%E9%9B%86%E5%87%BD%E6%95%B0"><span class="toc-number">4.1.</span> <span class="toc-text">聚集函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E5%87%BD%E6%95%B0"><span class="toc-number">4.2.</span> <span class="toc-text">类型转换函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6%E5%87%BD%E6%95%B0"><span class="toc-number">4.3.</span> <span class="toc-text">流程控制函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%87%BD%E6%95%B0"><span class="toc-number">4.4.</span> <span class="toc-text">字符串函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E5%AD%A6%E5%87%BD%E6%95%B0"><span class="toc-number">4.5.</span> <span class="toc-text">数学函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A5%E6%9C%9F%E5%87%BD%E6%95%B0"><span class="toc-number">4.6.</span> <span class="toc-text">日期函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0"><span class="toc-number">4.7.</span> <span class="toc-text">自定义函数</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B"><span class="toc-number">5.</span> <span class="toc-text">存储过程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B-1"><span class="toc-number">5.1.</span> <span class="toc-text">存储过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E4%B8%AD%E7%9A%84%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92"><span class="toc-number">5.2.</span> <span class="toc-text">存储过程中的参数传递</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AF%AD%E5%8F%A5"><span class="toc-number">6.</span> <span class="toc-text">语句</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E5%AE%9A%E4%B9%89%E8%B5%8B%E5%80%BC%E8%AF%AD%E5%8F%A5"><span class="toc-number">6.1.</span> <span class="toc-text">变量定义赋值语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5"><span class="toc-number">6.2.</span> <span class="toc-text">流程控制语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5"><span class="toc-number">6.3.</span> <span class="toc-text">循环语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#explain-%E8%AF%AD%E5%8F%A5"><span class="toc-number">6.4.</span> <span class="toc-text">explain 语句</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E5%99%A8"><span class="toc-number">7.</span> <span class="toc-text">异常处理器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B8%B8%E6%A0%87"><span class="toc-number">8.</span> <span class="toc-text">游标</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A7%86%E5%9B%BE"><span class="toc-number">9.</span> <span class="toc-text">视图</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A7%A6%E5%8F%91%E5%99%A8"><span class="toc-number">10.</span> <span class="toc-text">触发器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95"><span class="toc-number">11.</span> <span class="toc-text">索引</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8B%E5%8A%A1"><span class="toc-number">12.</span> <span class="toc-text">事务</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%94%81"><span class="toc-number">13.</span> <span class="toc-text">锁</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%94%81%E7%9A%84%E7%B1%BB%E5%9E%8B"><span class="toc-number">13.1.</span> <span class="toc-text">锁的类型</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/05/15/05%20Python%20%E7%AE%97%E6%B3%95%E6%A8%A1%E7%89%88/" title="Python 算法模版">Python 算法模版</a><time datetime="2025-05-14T16:00:00.000Z" title="发表于 2025-05-15 00:00:00">2025-05-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/04/18/04%20C++%20%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80/" title="C++ 语法基础">C++ 语法基础</a><time datetime="2025-04-17T16:00:00.000Z" title="发表于 2025-04-18 00:00:00">2025-04-18</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/05/03%20Python%20%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E5%9F%BA%E7%A1%80/" title="Python 数学建模基础">Python 数学建模基础</a><time datetime="2024-12-04T16:00:00.000Z" title="发表于 2024-12-05 00:00:00">2024-12-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/11/16/13%20JavaJUC%20%E5%A4%9A%E7%BA%BF%E7%A8%8B/" title="JavaJUC 多线程">JavaJUC 多线程</a><time datetime="2024-11-15T16:00:00.000Z" title="发表于 2024-11-16 00:00:00">2024-11-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/11/01/12%20JavaJVM%20%E8%99%9A%E6%8B%9F%E6%9C%BA/" title="JavaJVM 虚拟机">JavaJVM 虚拟机</a><time datetime="2024-10-31T16:00:00.000Z" title="发表于 2024-11-01 00:00:00">2024-11-01</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2024 - 2025 By <a class="footer-bar-link" href="/" title="星开祈灵" target="_blank">星开祈灵</a></div></div><div id="footer-type-tips"></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu" title="主题">主题</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">26</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">131</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">4</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://blog.anheyu.com/" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://image.anheyu.com/" title="安知鱼图床"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://image.anheyu.com/favicon.ico" alt="安知鱼图床"/><span class="back-menu-item-text">安知鱼图床</span></a></div></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/API/" style="font-size: 0.88rem;">API<sup>1</sup></a><a href="/tags/CSS/" style="font-size: 0.88rem;">CSS<sup>1</sup></a><a href="/tags/Git/" style="font-size: 0.88rem;">Git<sup>1</sup></a><a href="/tags/HTML/" style="font-size: 0.88rem;">HTML<sup>1</sup></a><a href="/tags/Java/" style="font-size: 0.88rem;">Java<sup>7</sup></a><a href="/tags/Lambda/" style="font-size: 0.88rem;">Lambda<sup>1</sup></a><a href="/tags/Matlab/" style="font-size: 0.88rem;">Matlab<sup>1</sup></a><a href="/tags/MySQL/" style="font-size: 0.88rem;">MySQL<sup>1</sup></a><a href="/tags/Optional/" style="font-size: 0.88rem;">Optional<sup>1</sup></a><a href="/tags/Stream-%E6%B5%81/" style="font-size: 0.88rem;">Stream 流<sup>1</sup></a><a href="/tags/Web/" style="font-size: 0.88rem;">Web<sup>6</sup></a><a href="/tags/%E4%BA%8B%E5%8A%A1/" style="font-size: 0.88rem;">事务<sup>4</sup></a><a href="/tags/%E5%87%BD%E6%95%B0/" style="font-size: 0.88rem;">函数<sup>4</sup></a><a href="/tags/%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3/" style="font-size: 0.88rem;">函数式接口<sup>1</sup></a><a href="/tags/%E5%88%86%E6%94%AF/" style="font-size: 0.88rem;">分支<sup>1</sup></a><a href="/tags/%E5%8F%8D%E5%B0%84/" style="font-size: 0.88rem;">反射<sup>1</sup></a><a href="/tags/%E5%91%BD%E4%BB%A4/" style="font-size: 0.88rem;">命令<sup>2</sup></a><a href="/tags/%E5%9B%BE%E5%83%8F%E7%BB%98%E5%88%B6/" style="font-size: 0.88rem;">图像绘制<sup>1</sup></a><a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 0.88rem;">多线程<sup>1</sup></a><a href="/tags/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/" style="font-size: 0.88rem;">存储过程<sup>1</sup></a><a href="/tags/%E5%AE%9A%E6%97%B6%E5%99%A8/" style="font-size: 0.88rem;">定时器<sup>2</sup></a><a href="/tags/%E5%B1%9E%E6%80%A7/" style="font-size: 0.88rem;">属性<sup>2</sup></a><a href="/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E5%99%A8/" style="font-size: 0.88rem;">异常处理器<sup>1</sup></a><a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 0.88rem;">数学<sup>2</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 0.88rem;">数据库<sup>2</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" style="font-size: 0.88rem;">数据类型<sup>4</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1%E4%B8%8E%E8%AE%A1%E7%AE%97/" style="font-size: 0.88rem;">数据统计与计算<sup>1</sup></a><a href="/tags/%E6%96%87%E4%BB%B6/" style="font-size: 0.88rem;">文件<sup>1</sup></a><a href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" style="font-size: 0.88rem;">新特性<sup>1</sup></a><a href="/tags/%E6%AD%A3%E5%88%99%E5%8C%B9%E9%85%8D/" style="font-size: 0.88rem;">正则匹配<sup>1</sup></a><a href="/tags/%E6%B3%A8%E8%A7%A3/" style="font-size: 0.88rem;">注解<sup>5</sup></a><a href="/tags/%E6%B8%B8%E6%A0%87/" style="font-size: 0.88rem;">游标<sup>1</sup></a><a href="/tags/%E7%AC%A6%E5%8F%B7%E5%AF%B9%E8%B1%A1/" style="font-size: 0.88rem;">符号对象<sup>1</sup></a><a href="/tags/%E7%B4%A2%E5%BC%95/" style="font-size: 0.88rem;">索引<sup>1</sup></a><a href="/tags/%E8%A7%86%E5%9B%BE/" style="font-size: 0.88rem;">视图<sup>1</sup></a><a href="/tags/%E8%A7%A6%E5%8F%91%E5%99%A8/" style="font-size: 0.88rem;">触发器<sup>1</sup></a><a href="/tags/%E8%AF%AD%E6%B3%95/" style="font-size: 0.88rem;">语法<sup>8</sup></a><a href="/tags/%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/" style="font-size: 0.88rem;">远程仓库<sup>1</sup></a><a href="/tags/%E9%80%89%E6%8B%A9%E5%99%A8/" style="font-size: 0.88rem;">选择器<sup>1</sup></a><a href="/tags/%E9%94%81/" style="font-size: 0.88rem;">锁<sup>4</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("11/1/2024 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2024 By 安知鱼 V1.6.14",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 星开祈灵 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><div class="js-pjax"><input type="hidden" name="page-type" id="page-type" value="post"></div><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>

@@ -1,0 +1,984 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>JavaJVM 虚拟机 | 星开祈灵的个人博客</title><meta name="keywords" content="Java,JVM,JNI,JRE,垃圾回收机制,引用类型,类与类加载,内存管理"><meta name="author" content="星开祈灵"><meta name="copyright" content="星开祈灵"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="JavaJVM 虚拟机"><meta name="application-name" content="JavaJVM 虚拟机"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="JavaJVM 虚拟机"><meta property="og:url" content="https://kokoachino.github.io/2024/11/01/12%20JavaJVM%20%E8%99%9A%E6%8B%9F%E6%9C%BA/index.html"><meta property="og:site_name" content="星开祈灵的个人博客"><meta property="og:description" content="JVM 启动流程 虚拟机的启动入口位于jdk&amp;#x2F;src&amp;#x2F;share&amp;#x2F;bin&amp;#x2F;java.c的JLI_Launch函数 123456789101112int JLI_Launch(int argc, char ** argv,                 &amp;#x2F;* 主函数参数个数, argc *&amp;#x2F;"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://gitee.com/kokoachino/picture-bed/raw/master/%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87.jpg?_r_=eb731b2e-9028-4489-94ca-8ae7eab745d5"><meta property="article:author" content="星开祈灵"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://gitee.com/kokoachino/picture-bed/raw/master/%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87.jpg?_r_=eb731b2e-9028-4489-94ca-8ae7eab745d5"><meta name="description" content="JVM 启动流程 虚拟机的启动入口位于jdk&amp;#x2F;src&amp;#x2F;share&amp;#x2F;bin&amp;#x2F;java.c的JLI_Launch函数 123456789101112int JLI_Launch(int argc, char ** argv,                 &amp;#x2F;* 主函数参数个数, argc *&amp;#x2F;"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://kokoachino.github.io/2024/11/01/12%20JavaJVM%20%E8%99%9A%E6%8B%9F%E6%9C%BA/"><link rel="preconnect" href="//cdn.cbd.int"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: undefined,
+  postHeadAiDescription: {"enable":true,"gptName":"AnZhiYu","mode":"local","switchBtn":false,"btnLink":"https://afdian.net/item/886a79d4db6711eda42a52540025c377","randomNum":3,"basicWordCount":1000,"key":"xxxx","Referer":"https://xx.xx/"},
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: undefined,
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  music_page_default: "nav_music",
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: false,
+  mainTone: undefined,
+  authorStatus: undefined,
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":100,"languages":{"author":"作者: 星开祈灵","link":"链接: ","source":"来源: 星开祈灵的个人博客","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: '星开祈灵的个人博客',
+  title: 'JavaJVM 虚拟机',
+  postAI: '',
+  pageFillDescription: 'JVM 启动流程, 1. 进行初始化操作, 2. 选择 JRE 版本, 3. 创建 JVM 执行环境, 4. 加载 JVM, 5. 初始化 JVM, 6. 初始化虚拟机, 7. 加载主类, 8. 初始化完成, 9. 获取主方法, 10. 调用主方法, 11. 主方法结束销毁 JVM, JNI 调用本地方法, 1. 创建本地方法, 2. 生成 C 头文件, 3. 新建 C++ 项目, 4. 修改 CMake 文件, 5. 编写本地方法实现, 6. 编译为动态链接库, 7. 加载动态链接库文件, JVM 内存管理, 内存区域划分, 元空间, 申请堆外内存, 垃圾回收机制, 对象存活判定算法, 引用计数算法, 可达性分析算法, 最终判定算法, 垃圾回收算法, 分代收集机制, 空间分配担保, 标记清除算法, 标记复制算法, 标记整理算法, 垃圾收集器实现, Serial 收集器, ParNew 收集器, Parallel Scavenge x2F Parallel Old 收集器, CMS 收集器, Garbage First (G1) 收集器, 引用类型, 强引用, 软引用, 弱引用, 虚引用, 类与类加载, 类文件结构, 类文件信息, 1. 模数, 2. 版本号, 3. 常量池大小, 4. 常量池数据, 5. 常量池数据表, 6. 访问标志, 7. 类索引、父类索引、接口索引, 8. 字段表, 9. 方法表, 10.  属性表, 11. 本地变量表, 12. 类属性, 字节码指令, ASM 字节码编程, 1. 获取 ClassWriter 对象, 2. 指定类的一些基本信息, 3. 添加无参构造方法, 4. 调用父类构造方法, 5. 编写 main 方法, 6. 保存字节码文件, 7. IDEA 反编译, 类加载机制, 类加载触发条件, 类加载过程, 1. 加载, 2. 校验, 3. 准备, 4. 解析, 5. 初始化, 6. 使用, 7. 卸载, 类加载器启动流程虚拟机的启动入口位于的函数主函数参数个数参数应用类路径定义的完整版本定义的小版本程序名称启动器名称类路径通配符专用人机工程政策进行初始化操作还有信息打印配置等选择版本确保指定版本的正在运行关于例程有三点需要注意如果正在运行的版本不正确该例程不会返回要么是正确的版本已被执行要么是发生了错误在此作用域中的和不会被该例程修改后续代码有责任忽略由该例程处理的参数作为副作用变量确保被设置如果它应该被设置的话这并不是结构化编程的典型示例但为了不重复处理文件操作数这是一个小代价注意该副作用已被禁用请参见下面关于的注释创建执行环境此函数只在头文件中定义具体的实现是根据不同平台而定的加载动态加载共享库并把中的相关函数导出并且初始化启动的函数也在其中实现初始化实现无需关心正常情况下走这个如果调用者认为发生了错误我们直接返回该错误否则返回被调用者的返回值如果由于某种原因例如内存不足无法创建新线程则继续在当前线程中执行这可能会在后续的中失败因为仍然需要创建许多新线程但可以先尝试一下初始化虚拟机如果报错会直接退出初始化虚拟机加载主类获取应用程序的主类参见名称已经从清单中解析出来但并没有正确支持因此这里的代码忽略之前提取的值而是使用现有代码重新提取该值这可能是发布周期结束时的权宜之计然而已经发现通过环境传递某些字符集在某些变种上会有奇怪的行为因此启动器本地的清单解析代码可能永远不应该增强因此未来的工作应该是修正本地解析代码确保属性能够在所有环境中正确传递删除通过环境维护的遗留物并移除这些注释该方法还正确处理启动现有的应用程序这些应用程序可能有或没有清单条目对于某些没有主方法的程序比如应用会获取在某些情况下当启动需要助手的应用程序时例如没有主方法的应用程序不会是应用程序自身的主类而是一个助手类为了保持中的一致性我们需要跟踪并报告应用程序的主类初始化完成使用类名作为目的的应用程序名称例如在上这将设置菜单栏中的应用程序名称适用于和因此我们将在这里传递实际的应用程序类而不是因为可能是启动器或助手类而不是应用程序类获取主方法不仅加载主类还将确保主方法的签名正确因此不需要进一步检查这里调用主方法是为了避免多余的栈出现在应用程序的栈跟踪中调用主方法调用主方法主方法结束销毁启动器的退出代码在没有调用的情况下如果抛出异常将为非零销毁至此一个程序的运行流程结束调用本地方法创建本地方法本地方法生成头文件点击构建按钮会出现一个文件夹也就是生成的文件在其中生成对应的头文件生成的头文件位于文件夹下新建项目新建一个项目并引入刚刚生成的头文件和导入相关头文件在文件夹中修改文件编写本地方法实现引用类型对照表编写实现编写实现编译为动态链接库在下会生成文件下会生成文件这里就只以为例编译完成后得到文件加载动态链接库文件最后就可以调用本地方法了文件路径加载文件本地方法内存管理内存区域划分内存区域描述方法区类信息即时编译器的代码缓存运行时常量池堆保存所有的对象和数组程序计数器线程独有保存当前程序的执行位置虚拟机栈线程独有通过栈帧来维持方法调用顺序帮助控制程序有序运行本地方法栈线程独有同上作用于本地方法元空间在之前虚拟机的方法区实际上是采用永久代实现的在之后虚拟机不再使用永久代而是采用了全新的元空间类的元信息被存储在元空间中元空间没有使用堆内存而是与堆不相连的本地内存区域所以理论上系统可以使用的内存有多大元空间就有多大所以不会出现永久代存在时的内存溢出问题申请堆外内存申请字节大小的内存空间并得到对应位置的地址在对应的地址上设定的值获取释放再次获取已经获取不到了垃圾回收机制对象存活判定算法引用计数算法跟踪对象的引用数量以确定对象是否可以被回收基本概念引用计数每个对象都维护一个计数器表示有多少个引用指向该对象当一个对象被创建时它的引用计数初始化为当有新的引用指向该对象时计数器当引用不再指向该对象时计数器存活判定如果一个对象的引用计数为说明没有任何引用指向它这时该对象就可以被回收优缺点优点简单直观易于实现回收时可以立即释放内存因为只要引用计数为就可以立即进行回收缺点循环引用问题如果两个对象互相引用即使它们不再被外部引用它们的引用计数仍然不为导致无法被回收需要频繁地更新计数器性能开销相对较高循环引用示例和互相引用在使用引用计数法时它们的引用计数都不会降到因此它们不会被垃圾回收可达性分析算法通过检查对象之间的引用关系来确定哪些对象是可达的即哪些对象仍在使用中哪些对象可以被回收基本思想从一组称为根的对象根集开始递归地检查所有可以访问到的对象根对象通常包括以下几类栈上的引用活动线程的栈中引用的对象静态字段类的静态字段所引用的对象本地变量方法中的局部变量所引用的对象常量常量池中的对象例如字符串常量引用通过获得的引用具体实现遍历阶段通常使用深度优先搜索或广度优先搜索遍历对象图标记可达对象标记阶段对于每个可达对象设置一个标志位表示该对象是可达的清理阶段遍历堆中所有对象查找未被标记的对象并将其回收优缺点优点简单易懂准确性高动态性无需预定义内存区域缺点性能开销不可预测的暂停时间内存占用问题复杂的实现最终判定算法每个对象都有一个方法当该对象即将被垃圾收集器回收时这个方法会被调用在方法执行完成后如果该对象在方法中仍然被其他对象引用它就不会被回收否则它将被标记为可回收虽然在经历了可达性分析算法之后基本可能判定哪些对象能够被回收但是并不代表此对象一定会被回收依然可以在最终判定阶段对其进行挽留当垃圾收集器确定对象没有更多引用时将调用该对象的此方法子类重写方法以释放系统资源或执行其他清理操作此方法正是最终判定方法如果子类重写了此方法那么子类对象在被判定为可回收时会进行二次确认也就是执行方法而在此方法中当前对象是完全有可能重新建立的所以如果在二次确认后对象不满足可回收的条件那么此对象不会被回收示例取消引用手动申请执行垃圾回收操作等垃圾回收一下还可以获取到重写方法重新建立引用同一个对象的方法只会有一次调用机会也就是说如果连续两次这样操作那么第二次对象必定被回收示例取消引用手动申请执行垃圾回收操作等垃圾回收一下还可以获取到再次取消引用手动申请执行垃圾回收操作等垃圾回收一下不能再获取到重写方法重新建立引用垃圾回收算法分代收集机制虚拟机将堆内存划分为新生代老年代和永久代在之前方法区采用永久代作为实现而在之后方法区采用元空间作为实现并且使用的是本地内存容量大小取决于物理机实际大小在虚拟机中新生代被划分为三块一块较大的空间和两块较小的空间默认比例为老年代的频率相对较低永久代一般存放类信息等具体实现所有新创建的对象在一开始都会进入到新生代的区如果是大对象会被直接丢进老年代初始会对所有新生代区域的对象进行一次扫描并回收那些不再使用对象一开始和都是空的而之后所有区域存活的对象都会直接被放入到区最后和会发生一次交换对于下一次垃圾回收操作与上面是一样的不过这时由于区域中已经存在对象了所以在区的存活对象复制到区之后所有区域中的对象会进行年龄判定每经历一轮年龄如果对象的年龄默认值那么会直接进入到老年代否则移动到区最后和会发生一次交换不断重复步骤垃圾收集次要垃圾回收主要进行新生代区域的垃圾收集触发条件新生代的区容量已满时主要垃圾回收主要进行老年代的垃圾收集完全垃圾回收对整个堆内存和方法区进行垃圾回收触发条件每次晋升到老年代的对象平均大小大于老年代剩余空间触发条件后存活的对象超过了老年代剩余空间触发条件永久代内存不足之前触发条件手动调用方法空间分配担保当新生代无法容纳更多的的对象时可以把新生代中的对象移动到老年代中这样新生代就腾出了空间来容纳更多的对象首先会判断一下之前的每次垃圾回收进入老年代的平均大小是否小于当前老年代的剩余空间如果小于那么说明也许可以放得下否则会先来一次进行一次大规模垃圾回收来尝试腾出空间再次判断老年代是否有空间存放要是还是装不下直接抛出错误的整个过程标记清除算法标记出所有需要回收的对象然后再依次回收掉被标记的对象或是标记出所有不需要回收的对象只回收未标记的对象缺点连续的内存空间可能会出现许许多多的空隙碎片化会导致连续内存空间利用率降低标记复制算法将内存区域划分为大小相同的两块区域每次只使用其中的一块区域每次垃圾回收结束后将所有存活的对象全部复制到另一块区域中并一次性清空当前区域虽然浪费了一些时间进行复制操作但是这样能够很好地解决对象大面积回收后空间碎片化严重的问题这种算法就非常适用于新生代因为新生代的回收效率极高一般不会留下太多的对象的垃圾回收标记整理算法在标记所有待回收对象之后不急着去进行回收操作而是将所有待回收的对象整齐排列在一段内存空间中而需要回收的对象全部往后丢这样前半部分的所有对象都是无需进行回收的而后半部分直接一次性清除即可缺点它的效率比前两者都低甚至由于需要修改对象在内存中的位置此时程序必须要暂停才可以而且在极端情况下可能会导致整个程序发生停顿所以可以将标记清除算法和标记整理算法混合使用在内存空间还不是很凌乱的时候采用标记清除算法当内存空间凌乱到一定程度后进行一次标记整理算法这种算法就非常适用于老年代因为老年代的回收效率较低对象的生命周期较长的垃圾回收垃圾收集器实现收集器这是一款单线程的垃圾收集器也就是说当开始进行垃圾回收时需要暂停所有的线程直到垃圾收集工作结束它的新生代收集算法采用的是标记复制算法老年代采用的是标记整理算法收集器相当于是收集器的多线程版本它能够支持多线程垃圾收集除了多线程支持以外其他内容基本与收集器一致收集器是一款面向新生代的垃圾收集器采用标记复制算法实现是一款面向老年代的垃圾收集器采用标记整理算法实现与收集器不同的是它会自动衡量一个吞吐量并根据吞吐量来决定每次垃圾回收的时间这种自适应机制能够很好地权衡当前机器的性能根据性能选择最优方案目前采用的就是这种的垃圾回收方案收集器它主要采用标记清除算法第一次实现了让垃圾收集线程与用户线程同时工作它的垃圾回收分为个阶段初始标记标记出能够直接关联到的对象速度比较快并发标记从的直接关联对象开始遍历整个对象图的过程这个过程耗时较长但是不需要停顿用户线程重新标记再次暂停所有线程进行并行标记耗时会比初始标记的时间长一点并发清除最后直接将所有标记好的无用对象进行删除与用户线程并发运行收集器在时取代了默认的的回收方案它将整个堆划分成个大小相同的独立块每个块的大小根据堆空间的实际大小而定整体被控制在到之间且都为的次幂所有的块大小相同且在的整个生命周期内不会发生改变每一个块都可以根据需要自由决定扮演哪个角色和老年代收集器会根据对应的角色采用不同的回收策略此外收集器还存在一个区域它专门用于存放大对象一般认为大小超过了容量的一半的对象为大对象这样新生代老年代在物理上不再是一个连续的内存区域而是到处分布的它的回收过程与大体类似它的垃圾回收分为个阶段初始标记标记出能够直接关联到的对象并且修改指针的值让下一阶段用户线程并发运行时能正确地在可用的中分配新对象这个阶段耗时很短而且是借用进行的时候同步完成的所以收集器在这个阶段实际并没有额外的停顿并发标记从的直接关联对象开始遍历整个对象图的过程这个过程耗时较长但是不需要停顿用户线程最终标记对用户线程做一个短暂的暂停用于处理并发标记阶段漏标的那一部分对象筛选回收负责更新的统计数据对各个的回收价值和成本进行排序根据用户所期望的停顿时间来制定回收计划可以自由选择任意多个构成回收集然后把决定回收的那一部分的存活对象复制到空的中再清理掉整个旧的的全部空间这里的操作涉及存活对象的移动是必须暂停用户线程由多个收集器线程并行完成的引用类型强引用只要强引用存在就不会回收被引用的对象即使系统内存不足强引用对象也不会被回收软引用会在内存不足时回收软引用指向的对象但如果内存充足软引用对象会一直存在弱引用当进行垃圾回收时如果发现一个对象只被弱引用指向则无论内存是否充足该对象都会被回收虚引用虚引用的存在不会影响对象的生命周期只有在对象被回收后虚引用才会被加入到一个引用队列中类与类加载类文件结构类文件信息可以使用软件来以十六进制查看字节码文件之后的演示以下面的代码为例将在中编译出来的文件拖动进模数前个字节组成了魔数字节码文件的魔数为它在字节码文件中的作用是帮助确认文件的格式是否正确当读取一个文件时会首先检查这个标识符以确保它是一个合法的类文件版本号紧接着个字节存储的是字节码文件的版本号前个字节是次要版本号后个字节是主要版本号像上面的主要版本号为转为十进制后为它代表的是的字节码文件主要版本号版本会根据版本号决定是否能够运行版本是向下兼容的常量池大小紧接着个字节存放了类中常量池大小这里的常量并不是指手动创建的类型常量而是程序运行一些需要用到的常量数据比如字面量和符号引用等由于常量的数量不是确定的所以在最开始的位置会存放常量池中常量的数量比如这里是翻译为十进制就是从开始算所以实际上有个常量常量池数据每一项常量池里面的数据都是一个表它们都是以结尾的常量池数据表号常量第一行是一个个字节的无符号数用于表示当前常量类型常量类型标志描述编码格式的字符串整形字面量类或接口的符号引用字符串类型的字面量字段的符号引用方法的符号引用方法类型字段或方法的部分符号引用第二三行项目类型描述指向声明方法的类描述父索引项指向名称及类型描述符索引项第一个索引项指向了第号常量号常量号常量指向的字符串值为说明这个方法是由类定义的第二项指向了号常量也就是字段或方法的部分符号引用号和号常量方法名称为说明这是一个构造方法的名称普通方法名称是什么就是什么方法描述符为表示此方法没有任何参数并且返回值类型为描述符对照表方法名称描述符所以这里表示的实际上就是此方法是一个无参构造方法并且是属于类的访问标志访问标志就是类的种类以及类上添加的一些关键字等内容访问标志值按类的属性按位异或进行运算类索引父类索引接口索引它们的值也是指向常量池中的值其中号常量正是存储的当前类信息号常量存储的是父类信息字段表之后的演示以下面的代码为例一共有四个字节的数据第一个数据是字段的访问标志第二个数据是字段的名称常量这里指向的是号常量第三个数据是描述符第四个数据是属性计数器用于描述一些额外信息方法表一共有三个方法其中第一个方法的方法名称为表示它是一个构造方法第二个方法看名称很显然就是方法最后一个方法名称为这个是类在初始化时会调用的方法是隐式的自动生成的它主要是用于静态变量初始化语句和静态块的执行属性表实际上在类中字段中方法中都可以携带自己的属性表属性表存放的正是代码本地变量等数据比如方法就存在个本地变量属性信息呈现套娃状态在此方法中的属性包括了一个属性存放代码编译之后的字节码指令而且又嵌套了本地变量表和源码行号表中存放的就是所有的字节码指令本地变量表存放了方法中要用到的局部变量一共有四个本地变量并且表中存放了本地变量的长度名称描述符等内容类属性此属性记录的是源文件名称字节码指令虚拟机的指令是由一个字节长度的代表某种特定操作含义的数字操作码类似于机器语言操作码后面也可以携带个或多个参数一起执行编译为字节码文件将送至操作数栈顶将操作数栈顶的值存进号本地变量也就是变量中将号本地变量中的值推向操作数栈顶将号本地变量的值增加将操作数栈顶的值存入号本地变量将号本地变量的值增加将号本地变量中的值推向操作数栈顶将操作数栈顶的值存入号本地变量结束字节码编程演示使用字节码编程创建下面的类获取对象参数不会自动计算操作数栈和局部临时变量表大小需要自己手动来指定会自动计算上述操作数栈和局部临时变量表大小但需要手动触发不仅会计算上述操作数栈和局部临时变量表大小而且会自动计算指定类的一些基本信息参数字节码文件的版本访问权限类名称标签父类接口添加无参构造方法添加一个新方法参数访问权限方法名称方法修饰符描述符异常调用父类构造方法创建一个公共构造方法开始生成方法的字节码创建一个标签用于标记代码位置将标签添加到当前代码流指定源代码行号与标签关联将当前对象引用推入操作数栈调用父类的构造函数的方法返回方法无返回值创建另一个标签用于结束位置将标签添加到当前代码流在本地变量表中添加变量设置方法的最大栈深度和本地变量数量结束方法的字节码生成编写方法创建一个方法开始生成方法的字节码记录起始行信息将标签添加到当前代码流指定源代码行号与标签关联首先是的操作执行指令依次为将推向操作数栈顶将操作数栈顶元素保存到号本地变量中将推入操作数栈将栈顶元素存入本地变量创建并添加标签指定源代码行号与标签关联获取加载本地变量的值调用方法创建并添加标签指定源代码行号与标签关联返回方法无返回值创建并添加标签最后是本地变量表中的各个变量变量变量设置方法的最大栈深度和本地变量数量结束方法的字节码生成保存字节码文件无参构造将当前对象引用推入操作数栈调用父类构造函数在本地变量表中添加变量设置方法的最大栈深度和本地变量数量创建一个方法将推入操作数栈将栈顶元素存入本地变量获取加载本地变量的值调用方法变量变量设置方法的最大栈深度和本地变量数量结束编辑将字节码文件转换为数组并保存到根目录下反编译结果类加载机制类加载触发条件一般在这些情况下如果类没有被加载那么会被自动加载使用关键字创建对象使用类的非类型的静态字段或静态方法使用反射对类信息进行获取的时候加载一个类的子类加载接口的实现类且接口带有的方法默认实现类加载过程加载将类的二进制字节流读入内存并创建一个对象来表示这个类校验校验阶段主要是为了确保加载的类符合语言规范保证安全性校验主要包括以下几个方面文件格式验证检查字节码文件是否符合文件的格式魔数主次版号元数据验证检查类的结构是否符合语言规范包括字段方法等的访问修饰符等字节码验证检查字节码指令是否合法确保没有使用不安全的操作如非法的类型转换准备会为类中的静态变量分配内存并将它们初始化为默认值如等解析将常量池中的符号引用转换为直接引用符号引用是一种更高层次的抽象直接引用则是内存地址会将类字段和方法的符号引用转换为具体的内存地址初始化执行类的静态初始化块和静态变量赋值这是类生命周期中的最后一个阶段会执行方法确保所有静态变量和静态代码块都被正确初始化使用类的信息已经完全加载到内存中并且可以直接使用卸载当类不再被使用时可以将其从内存中卸载类的卸载并不频繁发生通常在以下情况下进行类加载器被卸载如应用程序关闭类没有被任何对象引用类加载器对于任意一个类都必须由加载它的类加载器和这个类本身一起共同确立其在虚拟机中的唯一性使用两个不同的类加载器加载类使用系统类加载器加载类自定义类加载器实例使用自定义类加载器加载类获取类加载器获取类的对象强制类型转换自定义类加载器读取类文件的字节流如果数据为空则调用父类的加载方法定义类并返回处理异常调用父类的加载方法结论即使两个类是同一个文件加载的只要类加载器不同那么这两个类就是不同的两个类',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-05-15 17:51:55',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://gitee.com/kokoachino/picture-bed/raw/master/%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/head.jpg"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><a id="site-name" href="/" accesskey="h"><div class="title">星开祈灵的个人博客</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="http://8.138.214.176:5174/%E9%A1%B9%E7%9B%AE%E5%9B%BE%E5%BA%8A/%E6%98%9F%E5%BC%80%E7%A5%88%E7%81%B5%E7%99%BE%E5%AE%9D%E7%AE%B1%20%E9%A1%B9%E7%9B%AE%E6%96%87%E6%A1%A3-29.png" target="_blank"><img class="post-qr-code-img" alt="微信" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="http://8.138.214.176:5174/%E9%A1%B9%E7%9B%AE%E5%9B%BE%E5%BA%8A/%E6%98%9F%E5%BC%80%E7%A5%88%E7%81%B5%E7%99%BE%E5%AE%9D%E7%AE%B1%20%E9%A1%B9%E7%9B%AE%E6%96%87%E6%A1%A3-29.png"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png" target="_blank"><img class="post-qr-code-img" alt="支付宝" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/API/" style="font-size: 1.05rem;">API<sup>1</sup></a><a href="/tags/CSS/" style="font-size: 1.05rem;">CSS<sup>1</sup></a><a href="/tags/Git/" style="font-size: 1.05rem;">Git<sup>1</sup></a><a href="/tags/HTML/" style="font-size: 1.05rem;">HTML<sup>1</sup></a><a href="/tags/Java/" style="font-size: 1.05rem;">Java<sup>7</sup></a><a href="/tags/Lambda/" style="font-size: 1.05rem;">Lambda<sup>1</sup></a><a href="/tags/Matlab/" style="font-size: 1.05rem;">Matlab<sup>1</sup></a><a href="/tags/MySQL/" style="font-size: 1.05rem;">MySQL<sup>1</sup></a><a href="/tags/Optional/" style="font-size: 1.05rem;">Optional<sup>1</sup></a><a href="/tags/Stream-%E6%B5%81/" style="font-size: 1.05rem;">Stream 流<sup>1</sup></a><a href="/tags/Web/" style="font-size: 1.05rem;">Web<sup>6</sup></a><a href="/tags/%E4%BA%8B%E5%8A%A1/" style="font-size: 1.05rem;">事务<sup>4</sup></a><a href="/tags/%E5%87%BD%E6%95%B0/" style="font-size: 1.05rem;">函数<sup>4</sup></a><a href="/tags/%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3/" style="font-size: 1.05rem;">函数式接口<sup>1</sup></a><a href="/tags/%E5%88%86%E6%94%AF/" style="font-size: 1.05rem;">分支<sup>1</sup></a><a href="/tags/%E5%8F%8D%E5%B0%84/" style="font-size: 1.05rem;">反射<sup>1</sup></a><a href="/tags/%E5%91%BD%E4%BB%A4/" style="font-size: 1.05rem;">命令<sup>2</sup></a><a href="/tags/%E5%9B%BE%E5%83%8F%E7%BB%98%E5%88%B6/" style="font-size: 1.05rem;">图像绘制<sup>1</sup></a><a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 1.05rem;">多线程<sup>1</sup></a><a href="/tags/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/" style="font-size: 1.05rem;">存储过程<sup>1</sup></a><a href="/tags/%E5%AE%9A%E6%97%B6%E5%99%A8/" style="font-size: 1.05rem;">定时器<sup>2</sup></a><a href="/tags/%E5%B1%9E%E6%80%A7/" style="font-size: 1.05rem;">属性<sup>2</sup></a><a href="/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E5%99%A8/" style="font-size: 1.05rem;">异常处理器<sup>1</sup></a><a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 1.05rem;">数学<sup>2</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 1.05rem;">数据库<sup>2</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" style="font-size: 1.05rem;">数据类型<sup>4</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1%E4%B8%8E%E8%AE%A1%E7%AE%97/" style="font-size: 1.05rem;">数据统计与计算<sup>1</sup></a><a href="/tags/%E6%96%87%E4%BB%B6/" style="font-size: 1.05rem;">文件<sup>1</sup></a><a href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" style="font-size: 1.05rem;">新特性<sup>1</sup></a><a href="/tags/%E6%AD%A3%E5%88%99%E5%8C%B9%E9%85%8D/" style="font-size: 1.05rem;">正则匹配<sup>1</sup></a><a href="/tags/%E6%B3%A8%E8%A7%A3/" style="font-size: 1.05rem;">注解<sup>5</sup></a><a href="/tags/%E6%B8%B8%E6%A0%87/" style="font-size: 1.05rem;">游标<sup>1</sup></a><a href="/tags/%E7%AC%A6%E5%8F%B7%E5%AF%B9%E8%B1%A1/" style="font-size: 1.05rem;">符号对象<sup>1</sup></a><a href="/tags/%E7%B4%A2%E5%BC%95/" style="font-size: 1.05rem;">索引<sup>1</sup></a><a href="/tags/%E8%A7%86%E5%9B%BE/" style="font-size: 1.05rem;">视图<sup>1</sup></a><a href="/tags/%E8%A7%A6%E5%8F%91%E5%99%A8/" style="font-size: 1.05rem;">触发器<sup>1</sup></a><a href="/tags/%E8%AF%AD%E6%B3%95/" style="font-size: 1.05rem;">语法<sup>8</sup></a><a href="/tags/%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/" style="font-size: 1.05rem;">远程仓库<sup>1</sup></a><a href="/tags/%E9%80%89%E6%8B%A9%E5%99%A8/" style="font-size: 1.05rem;">选择器<sup>1</sup></a><a href="/tags/%E9%94%81/" style="font-size: 1.05rem;">锁<sup>4</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/05/"><span class="card-archive-list-date">五月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/04/"><span class="card-archive-list-date">四月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/12/"><span class="card-archive-list-date">十二月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/11/"><span class="card-archive-list-date">十一月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/09/"><span class="card-archive-list-date">九月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/08/"><span class="card-archive-list-date">八月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/07/"><span class="card-archive-list-date">七月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/06/"><span class="card-archive-list-date">六月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">3</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%90%8E%E7%AB%AF/" itemprop="url">后端</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/Java/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Java</span></a><a class="article-meta__tags" href="/tags/JVM/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>JVM</span></a><a class="article-meta__tags" href="/tags/JNI/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>JNI</span></a><a class="article-meta__tags" href="/tags/JRE/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>JRE</span></a><a class="article-meta__tags" href="/tags/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>垃圾回收机制</span></a><a class="article-meta__tags" href="/tags/%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>引用类型</span></a><a class="article-meta__tags" href="/tags/%E7%B1%BB%E4%B8%8E%E7%B1%BB%E5%8A%A0%E8%BD%BD/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>类与类加载</span></a><a class="article-meta__tags" href="/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>内存管理</span></a></span></div></div><h1 class="post-title" itemprop="name headline">JavaJVM 虚拟机</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2024-10-31T16:00:00.000Z" title="发表于 2024-11-01 00:00:00">2024-11-01</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2025-05-15T09:51:55.081Z" title="更新于 2025-05-15 17:51:55">2025-05-15</time></span></div><div class="meta-secondline"><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为广州"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>广州</span></div></div></div><article class="post-content" id="article-container" itemscope itemtype="https://kokoachino.github.io/2024/11/01/12%20JavaJVM%20%E8%99%9A%E6%8B%9F%E6%9C%BA/"><header><a class="post-meta-categories" href="/categories/%E5%90%8E%E7%AB%AF/" itemprop="url">后端</a><a href="/tags/Java/" tabindex="-1" itemprop="url">Java</a><a href="/tags/JVM/" tabindex="-1" itemprop="url">JVM</a><a href="/tags/JNI/" tabindex="-1" itemprop="url">JNI</a><a href="/tags/JRE/" tabindex="-1" itemprop="url">JRE</a><a href="/tags/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/" tabindex="-1" itemprop="url">垃圾回收机制</a><a href="/tags/%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/" tabindex="-1" itemprop="url">引用类型</a><a href="/tags/%E7%B1%BB%E4%B8%8E%E7%B1%BB%E5%8A%A0%E8%BD%BD/" tabindex="-1" itemprop="url">类与类加载</a><a href="/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" tabindex="-1" itemprop="url">内存管理</a><h1 id="CrawlerTitle" itemprop="name headline">JavaJVM 虚拟机</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">星开祈灵</span><time itemprop="dateCreated datePublished" datetime="2024-10-31T16:00:00.000Z" title="发表于 2024-11-01 00:00:00">2024-11-01</time><time itemprop="dateCreated datePublished" datetime="2025-05-15T09:51:55.081Z" title="更新于 2025-05-15 17:51:55">2025-05-15</time></header><span id="more"></span>
+
+
+
+<h1 id="JVM-启动流程"><a href="#JVM-启动流程" class="headerlink" title="JVM 启动流程"></a>JVM 启动流程</h1><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../images/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/12%20JavaJVM%20%E8%99%9A%E6%8B%9F%E6%9C%BA-1.jpg"></p>
+<p>虚拟机的启动入口位于<code>jdk/src/share/bin/java.c</code>的<code>JLI_Launch</code>函数</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">JLI_Launch</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> ** argv,                 <span class="comment">/* 主函数参数个数, argc */</span></span></span><br><span class="line"><span class="params">               <span class="type">int</span> jargc, <span class="type">const</span> <span class="type">char</span>** jargv,          <span class="comment">/* Java 参数 */</span></span></span><br><span class="line"><span class="params">               <span class="type">int</span> appclassc, <span class="type">const</span> <span class="type">char</span>** appclassv,  <span class="comment">/* 应用类路径 */</span></span></span><br><span class="line"><span class="params">               <span class="type">const</span> <span class="type">char</span>* fullversion,                <span class="comment">/* 定义的完整版本 */</span></span></span><br><span class="line"><span class="params">               <span class="type">const</span> <span class="type">char</span>* dotversion,                 <span class="comment">/* 定义的小版本 */</span></span></span><br><span class="line"><span class="params">               <span class="type">const</span> <span class="type">char</span>* pname,                      <span class="comment">/* 程序名称 */</span></span></span><br><span class="line"><span class="params">               <span class="type">const</span> <span class="type">char</span>* lname,                      <span class="comment">/* 启动器名称 */</span></span></span><br><span class="line"><span class="params">               jboolean javaargs,                      <span class="comment">/* JAVA_ARGS */</span></span></span><br><span class="line"><span class="params">               jboolean cpwildcard,                    <span class="comment">/* 类路径通配符 */</span></span></span><br><span class="line"><span class="params">               jboolean javaw,                         <span class="comment">/* Windows 专用 javaw */</span></span></span><br><span class="line"><span class="params">               jint ergo_class                         <span class="comment">/* 人机工程政策 */</span></span></span><br><span class="line"><span class="params">)</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-进行初始化操作"><a href="#1-进行初始化操作" class="headerlink" title="1. 进行初始化操作"></a>1. 进行初始化操作</h2><p>还有<code>Debug</code>信息打印配置等</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">InitLauncher(javaw);</span><br><span class="line">DumpState();</span><br><span class="line"><span class="keyword">if</span> (JLI_IsTraceLauncher()) &#123;</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Command line args:\n&quot;</span>);</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; argc ; i++) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;argv[%d] = %s\n&quot;</span>, i, argv[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    AddOption(<span class="string">&quot;-Dsun.java.launcher.diag=true&quot;</span>, <span class="literal">NULL</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-选择-JRE-版本"><a href="#2-选择-JRE-版本" class="headerlink" title="2. 选择 JRE 版本"></a>2. 选择 JRE 版本</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 确保指定版本的 JRE 正在运行</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 关于 SelectVersion() 例程，有三点需要注意：</span></span><br><span class="line"><span class="comment"> *  1) 如果正在运行的版本不正确，该例程不会返回（要么是正确的版本已被执行，要么是发生了错误）</span></span><br><span class="line"><span class="comment"> *  2) 在此作用域中的 Argc 和 Argv 不会被该例程修改</span></span><br><span class="line"><span class="comment"> *     后续代码有责任忽略由该例程处理的参数</span></span><br><span class="line"><span class="comment"> *  3) 作为副作用，变量 &quot;main_class&quot; 确保被设置（如果它应该被设置的话）</span></span><br><span class="line"><span class="comment"> *     这并不是结构化编程的典型示例，但为了不重复处理 jar 文件操作数，这是一个小代价</span></span><br><span class="line"><span class="comment"> *     （注意：该副作用已被禁用。请参见下面关于 bugid 5030265 的注释）</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">SelectVersion(argc, argv, &amp;main_class);</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-创建-JVM-执行环境"><a href="#3-创建-JVM-执行环境" class="headerlink" title="3. 创建 JVM 执行环境"></a>3. 创建 JVM 执行环境</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CreateExecutionEnvironment(&amp;argc, &amp;argv, jrepath, <span class="keyword">sizeof</span>(jrepath),</span><br><span class="line">                           jvmpath, <span class="keyword">sizeof</span>(jvmpath), jvmcfg,  <span class="keyword">sizeof</span>(jvmcfg));</span><br></pre></td></tr></table></figure>
+
+<p>此函数只在头文件中定义，具体的实现是根据不同平台而定的</p>
+<h2 id="4-加载-JVM"><a href="#4-加载-JVM" class="headerlink" title="4. 加载 JVM"></a>4. 加载 JVM</h2><p>动态加载<code>jvm.so</code>共享库，并把<code>jvm.so</code>中的相关函数导出并且初始化</p>
+<p>启动<code>JVM</code>的函数也在其中</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!LoadJavaVM(jvmpath, &amp;ifn)) &#123;</span><br><span class="line">    <span class="keyword">return</span>(<span class="number">6</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">jboolean <span class="title function_">LoadJavaVM</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *jvmpath, InvocationFunctions *ifn)</span> &#123; <span class="comment">// Mac 实现</span></span><br><span class="line">    Dl_info dlinfo;</span><br><span class="line">    <span class="type">void</span> *libjvm;</span><br><span class="line"></span><br><span class="line">    JLI_TraceLauncher(<span class="string">&quot;JVM path is %s\n&quot;</span>, jvmpath);</span><br><span class="line"></span><br><span class="line">    libjvm = dlopen(jvmpath, RTLD_NOW + RTLD_GLOBAL);</span><br><span class="line">    <span class="keyword">if</span> (libjvm == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        JLI_ReportErrorMessage(DLL_ERROR1, __LINE__);</span><br><span class="line">        JLI_ReportErrorMessage(DLL_ERROR2, jvmpath, dlerror());</span><br><span class="line">        <span class="keyword">return</span> JNI_FALSE;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ifn-&gt;CreateJavaVM = (CreateJavaVM_t)</span><br><span class="line">        dlsym(libjvm, <span class="string">&quot;JNI_CreateJavaVM&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (ifn-&gt;CreateJavaVM == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        JLI_ReportErrorMessage(DLL_ERROR2, jvmpath, dlerror());</span><br><span class="line">        <span class="keyword">return</span> JNI_FALSE;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ifn-&gt;GetDefaultJavaVMInitArgs = (GetDefaultJavaVMInitArgs_t)</span><br><span class="line">        dlsym(libjvm, <span class="string">&quot;JNI_GetDefaultJavaVMInitArgs&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (ifn-&gt;GetDefaultJavaVMInitArgs == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        JLI_ReportErrorMessage(DLL_ERROR2, jvmpath, dlerror());</span><br><span class="line">        <span class="keyword">return</span> JNI_FALSE;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ifn-&gt;GetCreatedJavaVMs = (GetCreatedJavaVMs_t)</span><br><span class="line">    dlsym(libjvm, <span class="string">&quot;JNI_GetCreatedJavaVMs&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (ifn-&gt;GetCreatedJavaVMs == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        JLI_ReportErrorMessage(DLL_ERROR2, jvmpath, dlerror());</span><br><span class="line">        <span class="keyword">return</span> JNI_FALSE;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> JNI_TRUE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-初始化-JVM"><a href="#5-初始化-JVM" class="headerlink" title="5. 初始化 JVM"></a>5. 初始化 JVM</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> JVMInit(&amp;ifn, threadStackSize, argc, argv, mode, what, ret);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">JVMInit</span><span class="params">(InvocationFunctions* ifn, jlong threadStackSize,</span></span><br><span class="line"><span class="params">                 <span class="type">int</span> argc, <span class="type">char</span> **argv,</span></span><br><span class="line"><span class="params">                 <span class="type">int</span> mode, <span class="type">char</span> *what, <span class="type">int</span> ret)</span> &#123; <span class="comment">// Mac 实现</span></span><br><span class="line">    <span class="keyword">if</span> (sameThread) &#123;</span><br><span class="line">        <span class="comment">// 无需关心...</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      	<span class="comment">// 正常情况下走这个</span></span><br><span class="line">        <span class="keyword">return</span> ContinueInNewThread(ifn, threadStackSize, argc, argv, mode, what, ret);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">ContinueInNewThread</span><span class="params">(InvocationFunctions* ifn, jlong threadStackSize,</span></span><br><span class="line"><span class="params">                    <span class="type">int</span> argc, <span class="type">char</span> **argv,</span></span><br><span class="line"><span class="params">                    <span class="type">int</span> mode, <span class="type">char</span> *what, <span class="type">int</span> ret)</span> &#123;</span><br><span class="line">        ...</span><br><span class="line">        rslt = ContinueInNewThread0(JavaMain, threadStackSize, (<span class="type">void</span>*)&amp;args);</span><br><span class="line">        <span class="comment">/* 如果调用者认为发生了错误</span></span><br><span class="line"><span class="comment">         * 我们直接返回该错误，否则返回被调用者的返回值</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="keyword">return</span> (ret != <span class="number">0</span>) ? ret : rslt;</span><br><span class="line">    &#125;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">ContinueInNewThread0</span><span class="params">(<span class="type">int</span> (JNICALL *continuation)(<span class="type">void</span> *), jlong stack_size, <span class="type">void</span> * args)</span> &#123;</span><br><span class="line">    <span class="type">int</span> rslt;</span><br><span class="line">    <span class="type">pthread_t</span> tid;</span><br><span class="line">    <span class="type">pthread_attr_t</span> attr;</span><br><span class="line">    pthread_attr_init(&amp;attr);</span><br><span class="line">    pthread_attr_setdetachstate(&amp;attr, PTHREAD_CREATE_JOINABLE);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (stack_size &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        pthread_attr_setstacksize(&amp;attr, stack_size);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (pthread_create(&amp;tid, &amp;attr, (<span class="type">void</span> *(*)(<span class="type">void</span>*))continuation, (<span class="type">void</span>*)args) == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="type">void</span> * tmp;</span><br><span class="line">        pthread_join(tid, &amp;tmp);</span><br><span class="line">        rslt = (<span class="type">int</span>)tmp;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">/*</span></span><br><span class="line"><span class="comment">       * 如果由于某种原因（例如内存不足/LWP）无法创建新线程，</span></span><br><span class="line"><span class="comment">       * 则继续在当前线程中执行。这可能会在后续的 continuation 中失败，</span></span><br><span class="line"><span class="comment">       * 因为 JNI_CreateJavaVM 仍然需要创建许多新线程，但可以先尝试一下</span></span><br><span class="line"><span class="comment">       */</span></span><br><span class="line">      rslt = continuation(args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    pthread_attr_destroy(&amp;attr);</span><br><span class="line">    <span class="keyword">return</span> rslt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-初始化虚拟机"><a href="#6-初始化虚拟机" class="headerlink" title="6. 初始化虚拟机"></a>6. 初始化虚拟机</h2><p>如果报错会直接退出</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 初始化虚拟机 */</span></span><br><span class="line">start = CounterGet();</span><br><span class="line"><span class="keyword">if</span> (!InitializeJVM(&amp;vm, &amp;env, &amp;ifn)) &#123;</span><br><span class="line">    JLI_ReportErrorMessage(JVM_ERROR1);</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="7-加载主类"><a href="#7-加载主类" class="headerlink" title="7. 加载主类"></a>7. 加载主类</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 获取应用程序的主类</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 参见 bugid 5030265。Main-Class 名称已经从清单中解析出来，</span></span><br><span class="line"><span class="comment"> * 但并没有正确支持 UTF-8。因此，这里的代码忽略之前提取的值，</span></span><br><span class="line"><span class="comment"> * 而是使用现有代码重新提取该值。这可能是发布周期结束时的权宜之计</span></span><br><span class="line"><span class="comment"> * 然而，已经发现通过环境传递某些字符集在某些 Windows 变种上</span></span><br><span class="line"><span class="comment"> * 会有“奇怪”的行为。因此，启动器本地的清单解析代码可能永远不应该增强</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * 因此，未来的工作应该是：</span></span><br><span class="line"><span class="comment"> *     1)   修正本地解析代码，确保 Main-Class 属性</span></span><br><span class="line"><span class="comment"> *          能够在所有环境中正确传递，</span></span><br><span class="line"><span class="comment"> *     2)   删除通过环境维护 main_class 的遗留物（并移除这些注释）</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 该方法还正确处理启动现有的 JavaFX 应用程序，这些应用程序可能</span></span><br><span class="line"><span class="comment"> * 有或没有 Main-Class 清单条目</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">mainClass = LoadMainClass(env, mode, what);</span><br></pre></td></tr></table></figure>
+
+<p>对于某些没有主方法的<code>Java</code>程序</p>
+<p>比如<code>JavaFX</code>应用，会获取<code>ApplicationMainClass</code></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 在某些情况下，当启动需要助手的应用程序时，例如，</span></span><br><span class="line"><span class="comment"> * 没有主方法的 JavaFX 应用程序，mainClass 不会是应用程序</span></span><br><span class="line"><span class="comment"> * 自身的主类，而是一个助手类。为了保持 UI 中的一致性，</span></span><br><span class="line"><span class="comment"> * 我们需要跟踪并报告应用程序的主类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">appClass = GetApplicationClass(env);</span><br></pre></td></tr></table></figure>
+
+<h2 id="8-初始化完成"><a href="#8-初始化完成" class="headerlink" title="8. 初始化完成"></a>8. 初始化完成</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * PostJVMInit 使用类名作为 GUI 目的的应用程序名称，</span></span><br><span class="line"><span class="comment"> * 例如，在 OSX 上，这将设置菜单栏中的应用程序名称，</span></span><br><span class="line"><span class="comment"> * 适用于 SWT 和 JavaFX。因此，我们将在这里传递实际的应用程序类，</span></span><br><span class="line"><span class="comment"> * 而不是 mainClass，因为 mainClass 可能是启动器或助手类，</span></span><br><span class="line"><span class="comment"> * 而不是应用程序类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">PostJVMInit(env, appClass, vm);</span><br></pre></td></tr></table></figure>
+
+<h2 id="9-获取主方法"><a href="#9-获取主方法" class="headerlink" title="9. 获取主方法"></a>9. 获取主方法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * LoadMainClass 不仅加载主类，还将确保主方法的签名正确，</span></span><br><span class="line"><span class="comment"> * 因此不需要进一步检查。这里调用主方法是为了避免</span></span><br><span class="line"><span class="comment"> * 多余的 Java 栈出现在应用程序的栈跟踪中</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">mainID = (*env)-&gt;GetStaticMethodID(env, mainClass, <span class="string">&quot;main&quot;</span>, <span class="string">&quot;([Ljava/lang/String;)V&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="10-调用主方法"><a href="#10-调用主方法" class="headerlink" title="10. 调用主方法"></a>10. 调用主方法</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 调用主方法 */</span></span><br><span class="line">(*env)-&gt;CallStaticVoidMethod(env, mainClass, mainID, mainArgs);</span><br></pre></td></tr></table></figure>
+
+<h2 id="11-主方法结束，销毁-JVM"><a href="#11-主方法结束，销毁-JVM" class="headerlink" title="11. 主方法结束，销毁 JVM"></a>11. 主方法结束，销毁 JVM</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 启动器的退出代码（在没有调用</span></span><br><span class="line"><span class="comment"> * System.exit 的情况下）如果 main 抛出异常将为非零</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">ret = (*env)-&gt;ExceptionOccurred(env) == <span class="literal">NULL</span> ? <span class="number">0</span> : <span class="number">1</span>;</span><br><span class="line">LEAVE(); <span class="comment">// 销毁 JVM</span></span><br></pre></td></tr></table></figure>
+
+<p>至此，一个<code>Java</code>程序的运行流程结束</p>
+<h1 id="JNI-调用本地方法"><a href="#JNI-调用本地方法" class="headerlink" title="JNI 调用本地方法"></a>JNI 调用本地方法</h1><h2 id="1-创建本地方法"><a href="#1-创建本地方法" class="headerlink" title="1. 创建本地方法"></a>1. 创建本地方法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        System.out.println(sum(<span class="number">1</span>, <span class="number">2</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">native</span> <span class="type">int</span> <span class="title function_">sum</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span>; <span class="comment">// 本地方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-生成-C-头文件"><a href="#2-生成-C-头文件" class="headerlink" title="2. 生成 C 头文件"></a>2. 生成 C 头文件</h2><p>点击构建按钮，会出现一个<code>out</code>文件夹，也就是生成的<code>class</code>文件在其中</p>
+<p>生成对应的<code>C</code>头文件</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">javah -classpath out/production/SimpleHelloWorld -d ./jni com.test.Main</span><br></pre></td></tr></table></figure>
+
+<p>生成的头文件位于<code>jni</code>文件夹下</p>
+<h2 id="3-新建-C-项目"><a href="#3-新建-C-项目" class="headerlink" title="3. 新建 C++ 项目"></a>3. 新建 C++ 项目</h2><p>新建一个<code>C++</code>项目，并引入刚刚生成的头文件和导入<code>jni</code>相关头文件（在<code>JDK</code>文件夹中）</p>
+<h2 id="4-修改-CMake-文件"><a href="#4-修改-CMake-文件" class="headerlink" title="4. 修改 CMake 文件"></a>4. 修改 CMake 文件</h2><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">3.21</span>)</span><br><span class="line"><span class="keyword">project</span>(JNITest)</span><br><span class="line"></span><br><span class="line"><span class="keyword">include_directories</span>(/Library/Java/JavaVirtualMachines/zulu-<span class="number">8</span>.jdk/Contents/Home/<span class="keyword">include</span>)</span><br><span class="line"><span class="keyword">include_directories</span>(/Library/Java/JavaVirtualMachines/zulu-<span class="number">8</span>.jdk/Contents/Home/<span class="keyword">include</span>/darwin)</span><br><span class="line"><span class="keyword">set</span>(CMAKE_CXX_STANDARD <span class="number">14</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">add_executable</span>(JNITest com_test_Main.cpp com_test_Main.h)</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-编写本地方法实现"><a href="#5-编写本地方法实现" class="headerlink" title="5. 编写本地方法实现"></a>5. 编写本地方法实现</h2><p>引用类型对照表</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../images/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/12%20JavaJVM%20%E8%99%9A%E6%8B%9F%E6%9C%BA-2.jpg"></p>
+<p>编写实现</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;com_test_Main.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function">JNIEXPORT jint JNICALL <span class="title">Java_com_test_Main_sum</span></span></span><br><span class="line"><span class="function">        <span class="params">(JNIEnv * env, jclass clazz, jint a, jint b)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a + b; <span class="comment">// 编写 C++ 实现</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-编译为动态链接库"><a href="#6-编译为动态链接库" class="headerlink" title="6. 编译为动态链接库"></a>6. 编译为动态链接库</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc com_test_Main.cpp -I /Library/Java/JavaVirtualMachines/zulu-8.jdk/Contents/Home/include -I /Library/Java/JavaVirtualMachines/zulu-8.jdk/Contents/Home/include/darwin -fPIC -shared -o test.dll -lstdc++</span><br></pre></td></tr></table></figure>
+
+<p>在 MacOS 下会生成<code>.dylib</code>文件，Windows 下会生成<code>.dll</code>文件（这里就只以 Windows 为例）</p>
+<p>编译完成后，得到<code>test.dll</code>文件</p>
+<h2 id="7-加载动态链接库文件"><a href="#7-加载动态链接库文件" class="headerlink" title="7. 加载动态链接库文件"></a>7. 加载动态链接库文件</h2><p>最后就可以调用本地方法了</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        System.load(<span class="string">&quot;.dll 文件路径&quot;</span>); <span class="comment">// 加载 .dll 文件</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        System.out.println(sum(<span class="number">1</span>, <span class="number">2</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">native</span> <span class="type">int</span> <span class="title function_">sum</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span>; <span class="comment">// 本地方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="JVM-内存管理"><a href="#JVM-内存管理" class="headerlink" title="JVM 内存管理"></a>JVM 内存管理</h1><h2 id="内存区域划分"><a href="#内存区域划分" class="headerlink" title="内存区域划分"></a>内存区域划分</h2><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../images/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/12%20JavaJVM%20%E8%99%9A%E6%8B%9F%E6%9C%BA-3.jpg"></p>
+<table>
+<thead>
+<tr>
+<th align="center">内存区域</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">方法区</td>
+<td align="center">类信息、即时编译器的代码缓存、运行时常量池</td>
+</tr>
+<tr>
+<td align="center">堆</td>
+<td align="center">保存所有的对象和数组</td>
+</tr>
+<tr>
+<td align="center">程序计数器（线程独有）</td>
+<td align="center">保存当前程序的执行位置</td>
+</tr>
+<tr>
+<td align="center">虚拟机栈（线程独有）</td>
+<td align="center">通过栈帧来维持方法调用顺序，帮助控制程序有序运行</td>
+</tr>
+<tr>
+<td align="center">本地方法栈（线程独有）</td>
+<td align="center">同上，作用于本地方法</td>
+</tr>
+</tbody></table>
+<h2 id="元空间"><a href="#元空间" class="headerlink" title="元空间"></a>元空间</h2><p>在 JDK8 之前，<code>Hotspot</code>虚拟机的方法区实际上是采用永久代实现的</p>
+<p>在 JDK8 之后，<code>Hotspot</code>虚拟机不再使用永久代，而是采用了全新的<strong>元空间</strong></p>
+<p>类的元信息被存储在元空间中。元空间没有使用堆内存，而是与堆不相连的本地内存区域</p>
+<p>所以，理论上系统可以使用的内存有多大，元空间就有多大，所以不会出现永久代存在时的内存溢出问题</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../images/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/12%20JavaJVM%20%E8%99%9A%E6%8B%9F%E6%9C%BA-4.jpg"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../images/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/12%20JavaJVM%20%E8%99%9A%E6%8B%9F%E6%9C%BA-48.jpg"></p>
+<h2 id="申请堆外内存"><a href="#申请堆外内存" class="headerlink" title="申请堆外内存"></a>申请堆外内存</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IllegalAccessException &#123;</span><br><span class="line">    <span class="type">Field</span> <span class="variable">unsafeField</span> <span class="operator">=</span> Unsafe.class.getDeclaredFields()[<span class="number">0</span>];</span><br><span class="line">    unsafeField.setAccessible(<span class="literal">true</span>);</span><br><span class="line">    <span class="type">Unsafe</span> <span class="variable">unsafe</span> <span class="operator">=</span> (Unsafe) unsafeField.get(<span class="literal">null</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">long</span> <span class="variable">address</span> <span class="operator">=</span> unsafe.allocateMemory(<span class="number">4</span>); <span class="comment">// 申请 4 字节大小的内存空间，并得到对应位置的地址</span></span><br><span class="line">unsafe.putInt(address, <span class="number">6666666</span>); <span class="comment">// 在对应的地址上设定 int 的值</span></span><br><span class="line">System.out.println(unsafe.getInt(address)); <span class="comment">// 获取</span></span><br><span class="line">unsafe.freeMemory(address); <span class="comment">// 释放</span></span><br><span class="line"></span><br><span class="line">System.out.println(unsafe.getInt(address)); <span class="comment">// 再次获取已经获取不到了</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="垃圾回收机制"><a href="#垃圾回收机制" class="headerlink" title="垃圾回收机制"></a>垃圾回收机制</h1><h2 id="对象存活判定算法"><a href="#对象存活判定算法" class="headerlink" title="对象存活判定算法"></a>对象存活判定算法</h2><h3 id="引用计数算法"><a href="#引用计数算法" class="headerlink" title="引用计数算法"></a>引用计数算法</h3><blockquote>
+<p>跟踪对象的引用数量，以确定对象是否可以被回收</p>
+</blockquote>
+<p><strong>基本概念</strong></p>
+<ol>
+<li><p><strong>引用计数</strong>：</p>
+<p>每个对象都维护一个计数器，表示有多少个引用指向该对象</p>
+<p>当一个对象被创建时，它的引用计数初始化为 1</p>
+<p>当有新的引用指向该对象时，计数器 +1；当引用不再指向该对象时，计数器 -1</p>
+</li>
+<li><p><strong>存活判定</strong>：</p>
+<p>如果一个对象的引用计数为 0，说明没有任何引用指向它，这时该对象就可以被回收</p>
+</li>
+</ol>
+<p><strong>优缺点</strong></p>
+<ol>
+<li><p><strong>优点</strong>：</p>
+<p>简单直观，易于实现</p>
+<p>回收时可以立即释放内存，因为只要引用计数为 0，就可以立即进行回收</p>
+</li>
+<li><p><strong>缺点</strong>：</p>
+<p>循环引用问题：如果两个对象互相引用，即使它们不再被外部引用，它们的引用计数仍然不为 0，导致无法被回收</p>
+<p>需要频繁地更新计数器，性能开销相对较高</p>
+</li>
+</ol>
+<p><strong>循环引用示例</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Node</span> &#123;</span><br><span class="line">    Node next;</span><br><span class="line">    Node(Node next) &#123;</span><br><span class="line">        <span class="built_in">this</span>.next = next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Node</span> <span class="variable">node1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Node</span>(<span class="literal">null</span>);</span><br><span class="line"><span class="type">Node</span> <span class="variable">node2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Node</span>(node1);</span><br><span class="line">node1.next = node2; <span class="comment">// node1 和 node2 互相引用</span></span><br></pre></td></tr></table></figure>
+
+<p>在使用引用计数法时，它们的引用计数都不会降到 0，因此它们不会被垃圾回收</p>
+<h3 id="可达性分析算法"><a href="#可达性分析算法" class="headerlink" title="可达性分析算法"></a>可达性分析算法</h3><blockquote>
+<p>通过检查对象之间的引用关系，来确定哪些对象是<strong>可达的</strong></p>
+<p>即哪些对象仍在使用中，哪些对象可以被回收</p>
+</blockquote>
+<p><strong>基本思想</strong></p>
+<p>从一组称为<strong>根</strong>的对象（根集）开始，递归地检查所有可以访问到的对象</p>
+<p>根对象通常包括以下几类：</p>
+<ol>
+<li><strong>栈上的引用</strong>：活动线程的栈中引用的对象</li>
+<li><strong>静态字段</strong>：类的静态字段所引用的对象</li>
+<li><strong>本地变量</strong>：方法中的局部变量所引用的对象</li>
+<li><strong>常量</strong>：常量池中的对象（例如字符串常量）</li>
+<li><strong>JNI 引用</strong>：通过 <strong>JNI</strong> 获得的引用</li>
+</ol>
+<p><strong>具体实现</strong></p>
+<ol>
+<li><strong>遍历阶段</strong>：通常使用深度优先搜索或广度优先搜索遍历对象图，标记可达对象</li>
+<li><strong>标记阶段</strong>：对于每个可达对象，设置一个标志位，表示该对象是可达的</li>
+<li><strong>清理阶段</strong>：遍历堆中所有对象，查找未被标记的对象并将其回收</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../images/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/12%20JavaJVM%20%E8%99%9A%E6%8B%9F%E6%9C%BA-5.jpg"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../images/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/12%20JavaJVM%20%E8%99%9A%E6%8B%9F%E6%9C%BA-6.jpg"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../images/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/12%20JavaJVM%20%E8%99%9A%E6%8B%9F%E6%9C%BA-7.jpg"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../images/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/12%20JavaJVM%20%E8%99%9A%E6%8B%9F%E6%9C%BA-8.jpg"></p>
+<p><strong>优缺点</strong></p>
+<ol>
+<li><strong>优点</strong>：简单易懂，准确性高，动态性，无需预定义内存区域</li>
+<li><strong>缺点</strong>：性能开销，不可预测的暂停时间，内存占用问题，复杂的实现</li>
+</ol>
+<h3 id="最终判定算法"><a href="#最终判定算法" class="headerlink" title="最终判定算法"></a>最终判定算法</h3><blockquote>
+<p>每个对象都有一个<code>finalize</code>方法，当该对象即将被垃圾收集器回收时，这个方法会被调用</p>
+<p>在<code>finalize</code>方法执行完成后，如果该对象在<code>finalize</code>方法中仍然被其他对象引用，它就不会被回收</p>
+<p>否则，它将被标记为可回收</p>
+</blockquote>
+<p>虽然在经历了可达性分析算法之后基本可能判定哪些对象能够被回收，但是并不代表此对象一定会被回收</p>
+<p>依然可以在最终判定阶段对其进行挽留</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 当垃圾收集器确定对象没有更多引用时，将调用该对象的此方法</span></span><br><span class="line"><span class="comment"> * 子类重写 &#123;<span class="doctag">@code</span> finalize&#125; 方法以释放系统资源或执行其他清理操作</span></span><br><span class="line"><span class="comment"> * ...</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">finalize</span><span class="params">()</span> <span class="keyword">throws</span> Throwable &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此方法正是最终判定方法</p>
+<p>如果子类重写了此方法，那么子类对象在被判定为可回收时，会进行二次确认，也就是执行<code>finalize()</code>方法</p>
+<p>而在此方法中，当前对象是完全有可能重新建立<code>GC Roots</code>的！</p>
+<p>所以，如果在二次确认后对象不满足可回收的条件，那么此对象不会被回收</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../images/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/12%20JavaJVM%20%E8%99%9A%E6%8B%9F%E6%9C%BA-9.jpg"></p>
+<p><strong>示例</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Test a;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">        a = <span class="keyword">new</span> <span class="title class_">Test</span>();</span><br><span class="line">        a  = <span class="literal">null</span>; <span class="comment">// 取消引用</span></span><br><span class="line">        System.gc(); <span class="comment">// 手动申请执行垃圾回收操作</span></span><br><span class="line">        Thread.sleep(<span class="number">1000</span>); <span class="comment">// 等垃圾回收一下</span></span><br><span class="line">        System.out.println(a); <span class="comment">// 还可以获取到</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Test</span> &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">finalize</span><span class="params">()</span> <span class="keyword">throws</span> Throwable &#123; <span class="comment">// 重写 finalize 方法</span></span><br><span class="line">            a = <span class="built_in">this</span>; <span class="comment">// 重新建立引用</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>同一个对象的<code>finalize()</code>方法只会有一次调用机会</p>
+<p>也就是说，如果连续两次这样操作，那么第二次，对象必定被回收</p>
+<p><strong>示例</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Test a;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">        a = <span class="keyword">new</span> <span class="title class_">Test</span>();</span><br><span class="line">        a  = <span class="literal">null</span>; <span class="comment">// 取消引用</span></span><br><span class="line">        System.gc(); <span class="comment">// 手动申请执行垃圾回收操作</span></span><br><span class="line">        Thread.sleep(<span class="number">1000</span>); <span class="comment">// 等垃圾回收一下</span></span><br><span class="line">        System.out.println(a); <span class="comment">// 还可以获取到</span></span><br><span class="line">        </span><br><span class="line">        a  = <span class="literal">null</span>; <span class="comment">// 再次取消引用</span></span><br><span class="line">        System.gc(); <span class="comment">// 手动申请执行垃圾回收操作</span></span><br><span class="line">        Thread.sleep(<span class="number">1000</span>); <span class="comment">// 等垃圾回收一下</span></span><br><span class="line">        System.out.println(a); <span class="comment">// 不能再获取到</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Test</span> &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">finalize</span><span class="params">()</span> <span class="keyword">throws</span> Throwable &#123; <span class="comment">// 重写 finalize 方法</span></span><br><span class="line">            a = <span class="built_in">this</span>; <span class="comment">// 重新建立引用</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="垃圾回收算法"><a href="#垃圾回收算法" class="headerlink" title="垃圾回收算法"></a>垃圾回收算法</h2><h3 id="分代收集机制"><a href="#分代收集机制" class="headerlink" title="分代收集机制"></a>分代收集机制</h3><p><code>Java</code>虚拟机将堆内存划分为<strong>新生代</strong>、<strong>老年代</strong>和<strong>永久代</strong></p>
+<blockquote>
+<p>在<code>JDK8</code>之前，方法区采用永久代作为实现</p>
+<p>而在<code>JDK8</code>之后，方法区采用元空间作为实现，并且使用的是本地内存，容量大小取决于物理机实际大小</p>
+</blockquote>
+<p>在<code>HotSpot</code>虚拟机中，<strong>新生代</strong>被划分为三块，一块较大的<code>Eden</code>空间和两块较小的<code>Survivor</code>空间，默认比例为<code>8 : 1 : 1</code></p>
+<p><strong>老年代</strong>的<code>GC</code>频率相对较低</p>
+<p><strong>永久代</strong>一般存放类信息等</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../images/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/12%20JavaJVM%20%E8%99%9A%E6%8B%9F%E6%9C%BA-10.jpg"></p>
+<p><strong>具体实现</strong></p>
+<ol>
+<li><p>所有新创建的对象，在一开始都会进入到新生代的<code>Eden</code>区（如果是大对象会被直接丢进老年代）</p>
+<p>初始会对所有新生代区域的对象进行一次扫描，并回收那些不再使用对象</p>
+</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../images/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/12%20JavaJVM%20%E8%99%9A%E6%8B%9F%E6%9C%BA-11.jpg"></p>
+<ol start="2">
+<li><p>一开始<code>From</code>和<code>To</code>都是空的</p>
+<p>而<code>GC</code>之后，所有<code>Eden</code>区域存活的对象都会直接被放入到<code>From</code>区</p>
+<p>最后<code>From</code>和<code>To</code>会发生一次交换</p>
+</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../images/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/12%20JavaJVM%20%E8%99%9A%E6%8B%9F%E6%9C%BA-12.jpg"></p>
+<ol start="3">
+<li><p>对于下一次垃圾回收，操作与上面是一样的</p>
+<p>不过这时由于<code>From</code>区域中已经存在对象了</p>
+<p>所以，在<code>Eden</code>区的存活对象复制到<code>From</code>区之后，所有<code>To</code>区域中的对象会进行<strong>年龄判定</strong></p>
+<blockquote>
+<p>每经历一轮<code>GC</code>年龄 +1</p>
+<p>如果对象的年龄 &gt; 15（默认值），那么会直接进入到老年代</p>
+<p>否则移动到<code>From</code>区</p>
+</blockquote>
+<p>最后<code>From</code>和<code>To</code>会发生一次交换</p>
+</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../images/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/12%20JavaJVM%20%E8%99%9A%E6%8B%9F%E6%9C%BA-13.jpg"></p>
+<ol start="4">
+<li>不断重复步骤 3</li>
+</ol>
+<p><strong>垃圾收集</strong></p>
+<ul>
+<li><strong>Minor GC</strong>：次要垃圾回收，主要进行新生代区域的垃圾收集<ul>
+<li>触发条件：新生代的<code>Eden</code>区容量已满时</li>
+</ul>
+</li>
+<li><strong>Major GC</strong>：主要垃圾回收，主要进行老年代的垃圾收集</li>
+<li><strong>Full GC</strong>：完全垃圾回收，对整个<code>Java</code>堆内存和方法区进行垃圾回收<ul>
+<li>触发条件 1：每次晋升到老年代的对象平均大小大于老年代剩余空间</li>
+<li>触发条件 2：<code>Minor GC</code>后存活的对象超过了老年代剩余空间</li>
+<li>触发条件 3：永久代内存不足（<code>JDK8</code>之前）</li>
+<li>触发条件 4：手动调用<code>System.gc()</code>方法</li>
+</ul>
+</li>
+</ul>
+<h3 id="空间分配担保"><a href="#空间分配担保" class="headerlink" title="空间分配担保"></a>空间分配担保</h3><p>当新生代无法容纳更多的的对象时，可以把新生代中的对象移动到老年代中，这样新生代就腾出了空间来容纳更多的对象</p>
+<p>首先会判断一下之前的每次垃圾回收进入老年代的平均大小是否小于当前老年代的剩余空间</p>
+<p>如果小于，那么说明也许可以放得下</p>
+<p>否则，会先来一次<code>Full GC</code>，进行一次大规模垃圾回收，来尝试腾出空间</p>
+<p>再次判断老年代是否有空间存放，要是还是装不下，直接抛出<code>OutOfMemoryError</code>错误</p>
+<p><strong>Minor GC 的整个过程</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../images/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/12%20JavaJVM%20%E8%99%9A%E6%8B%9F%E6%9C%BA-14.jpg"></p>
+<h3 id="标记清除算法"><a href="#标记清除算法" class="headerlink" title="标记清除算法"></a>标记清除算法</h3><p>标记出所有需要回收的对象，然后再依次回收掉被标记的对象</p>
+<p>（或是标记出所有不需要回收的对象，只回收未标记的对象）</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../images/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/12%20JavaJVM%20%E8%99%9A%E6%8B%9F%E6%9C%BA-15.jpg"></p>
+<p><strong>缺点</strong></p>
+<p>连续的内存空间可能会出现许许多多的空隙，碎片化会导致连续内存空间利用率降低</p>
+<h3 id="标记复制算法"><a href="#标记复制算法" class="headerlink" title="标记复制算法"></a>标记复制算法</h3><p>将内存区域划分为大小相同的两块区域，每次只使用其中的一块区域</p>
+<p>每次垃圾回收结束后，将所有存活的对象全部复制到另一块区域中，并一次性清空当前区域</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../images/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/12%20JavaJVM%20%E8%99%9A%E6%8B%9F%E6%9C%BA-16.jpg"></p>
+<p>虽然浪费了一些时间进行复制操作，但是这样能够很好地解决对象大面积回收后空间碎片化严重的问题</p>
+<p>这种算法就非常适用于新生代（因为新生代的回收效率极高，一般不会留下太多的对象）的垃圾回收</p>
+<h3 id="标记整理算法"><a href="#标记整理算法" class="headerlink" title="标记整理算法"></a>标记整理算法</h3><p>在标记所有待回收对象之后，不急着去进行回收操作</p>
+<p>而是将所有待回收的对象整齐排列在一段内存空间中，而需要回收的对象全部往后丢</p>
+<p>这样，前半部分的所有对象都是无需进行回收的，而后半部分直接一次性清除即可</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../images/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/12%20JavaJVM%20%E8%99%9A%E6%8B%9F%E6%9C%BA-17.jpg"></p>
+<p><strong>缺点</strong></p>
+<p>它的效率比前两者都低</p>
+<p>甚至，由于需要修改对象在内存中的位置，此时程序必须要暂停才可以</p>
+<p>而且，在极端情况下，可能会导致整个程序发生停顿</p>
+<p>所以，可以将标记清除算法和标记整理算法混合使用</p>
+<p>在内存空间还不是很凌乱的时候，采用标记清除算法；当内存空间凌乱到一定程度后，进行一次标记整理算法</p>
+<p>这种算法就非常适用于老年代（因为老年代的回收效率较低，对象的生命周期较长）的垃圾回收</p>
+<h2 id="垃圾收集器实现"><a href="#垃圾收集器实现" class="headerlink" title="垃圾收集器实现"></a>垃圾收集器实现</h2><h3 id="Serial-收集器"><a href="#Serial-收集器" class="headerlink" title="Serial 收集器"></a>Serial 收集器</h3><p>这是一款单线程的垃圾收集器</p>
+<p>也就是说，当开始进行垃圾回收时，需要暂停所有的线程，直到垃圾收集工作结束</p>
+<p>它的新生代收集算法采用的是标记复制算法，老年代采用的是标记整理算法</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../images/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/12%20JavaJVM%20%E8%99%9A%E6%8B%9F%E6%9C%BA-18.jpg"></p>
+<h3 id="ParNew-收集器"><a href="#ParNew-收集器" class="headerlink" title="ParNew 收集器"></a>ParNew 收集器</h3><p>相当于是 Serial 收集器的多线程版本，它能够支持多线程垃圾收集</p>
+<p>除了多线程支持以外，其他内容基本与 Serial 收集器一致</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../images/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/12%20JavaJVM%20%E8%99%9A%E6%8B%9F%E6%9C%BA-19.jpg"></p>
+<h3 id="Parallel-Scavenge-Parallel-Old-收集器"><a href="#Parallel-Scavenge-Parallel-Old-收集器" class="headerlink" title="Parallel Scavenge &#x2F; Parallel Old 收集器"></a>Parallel Scavenge &#x2F; Parallel Old 收集器</h3><p>Parallel Scavenge 是一款面向新生代的垃圾收集器，采用标记复制算法实现</p>
+<p>Parallel Old 是一款面向老年代的垃圾收集器，采用标记整理算法实现</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../images/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/12%20JavaJVM%20%E8%99%9A%E6%8B%9F%E6%9C%BA-20.jpg"></p>
+<p>与 ParNew 收集器不同的是，它会自动衡量一个吞吐量，并根据吞吐量来决定每次垃圾回收的时间</p>
+<p>这种自适应机制，能够很好地权衡当前机器的性能，根据性能选择最优方案</p>
+<p>目前 JDK8 采用的就是这种 Parallel Scavenge + Parallel Old 的垃圾回收方案</p>
+<h3 id="CMS-收集器"><a href="#CMS-收集器" class="headerlink" title="CMS 收集器"></a>CMS 收集器</h3><p>它主要采用标记清除算法，第一次实现了让垃圾收集线程与用户线程同时工作</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../images/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/12%20JavaJVM%20%E8%99%9A%E6%8B%9F%E6%9C%BA-21.jpg"></p>
+<p>它的垃圾回收分为 4 个阶段：</p>
+<ul>
+<li><p><strong>初始标记</strong>：标记出<code>GC Roots</code>能够直接关联到的对象，速度比较快</p>
+</li>
+<li><p><strong>并发标记</strong>：从<code>GC Roots</code>的直接关联对象开始遍历整个对象图的过程</p>
+<p>​                   这个过程耗时较长，但是不需要停顿用户线程</p>
+</li>
+<li><p><strong>重新标记</strong>：再次暂停所有线程进行并行标记，耗时会比初始标记的时间长一点</p>
+</li>
+<li><p><strong>并发清除</strong>：最后直接将所有标记好的无用对象进行删除，与用户线程并发运行</p>
+</li>
+</ul>
+<h3 id="Garbage-First-G1-收集器"><a href="#Garbage-First-G1-收集器" class="headerlink" title="Garbage First (G1) 收集器"></a>Garbage First (G1) 收集器</h3><p>在 JDK9 时，取代了 JDK8 默认的 Parallel Scavenge + Parallel Old 的回收方案</p>
+<p>它将整个 Java 堆划分成<code>2048</code>个大小相同的独立<code>Region</code>块，每个<code>Region</code>块的大小根据堆空间的实际大小而定</p>
+<p>整体被控制在<code>1MB</code>到<code>32MB</code>之间，且都为<code>2</code>的<code>N</code>次幂</p>
+<p>所有的<code>Region</code>块大小相同，且在 JVM 的整个生命周期内不会发生改变</p>
+<p>每一个<code>Region</code>块都可以根据需要，自由决定扮演哪个角色（<code>Eden</code>、<code>Survivor</code>和老年代）</p>
+<p>收集器会根据对应的角色采用不同的回收策略</p>
+<p>此外，G1 收集器还存在一个<code>Humongous</code>区域，它专门用于存放大对象（一般认为大小超过了<code>Region</code>容量的一半的对象为大对象）</p>
+<p>这样，新生代、老年代在物理上，不再是一个连续的内存区域，而是到处分布的</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../images/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/12%20JavaJVM%20%E8%99%9A%E6%8B%9F%E6%9C%BA-22.jpg"></p>
+<p>它的回收过程与 CMS 大体类似：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../images/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/12%20JavaJVM%20%E8%99%9A%E6%8B%9F%E6%9C%BA-23.jpg"></p>
+<p>它的垃圾回收分为 4 个阶段：</p>
+<ul>
+<li><p><strong>初始标记</strong>：标记出<code>GC Roots</code>能够直接关联到的对象，并且修改<code>TAMS</code>指针的值</p>
+<p>​                   让下一阶段用户线程并发运行时，能正确地在可用的<code>Region</code>中分配新对象</p>
+<p>​                   这个阶段耗时很短，而且是借用进行<code>Minor GC</code>的时候同步完成的，所以 G1 收集器在这个阶段实际并没有额外的停顿</p>
+</li>
+<li><p><strong>并发标记</strong>：从<code>GC Roots</code>的直接关联对象开始遍历整个对象图的过程</p>
+<p>​                   这个过程耗时较长，但是不需要停顿用户线程</p>
+</li>
+<li><p><strong>最终标记</strong>：对用户线程做一个短暂的暂停，用于处理并发标记阶段漏标的那一部分对象</p>
+</li>
+<li><p><strong>筛选回收</strong>：负责更新<code>Region</code>的统计数据，对各个<code>Region</code>的回收价值和成本进行排序</p>
+<p>​				   根据用户所期望的停顿时间来制定回收计划，可以自由选择任意多个<code>Region</code>构成回收集</p>
+<p>​		     	  然后把决定回收的那一部分<code>Region</code>的存活对象复制到空的<code>Region</code>中，再清理掉整个旧的<code>Region</code>的全部空间</p>
+<p>​				   这里的操作涉及存活对象的移动，是必须暂停用户线程，由多个收集器线程并行完成的</p>
+</li>
+</ul>
+<h1 id="引用类型"><a href="#引用类型" class="headerlink" title="引用类型"></a>引用类型</h1><h2 id="强引用"><a href="#强引用" class="headerlink" title="强引用"></a>强引用</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Object</span> <span class="variable">obj</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Object</span>();</span><br></pre></td></tr></table></figure>
+
+<p>只要强引用存在，JVM 就不会回收被引用的对象</p>
+<p>即使系统内存不足，强引用对象也不会被回收</p>
+<h2 id="软引用"><a href="#软引用" class="headerlink" title="软引用"></a>软引用</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SoftReference&lt;Object&gt; softRef = <span class="keyword">new</span> <span class="title class_">SoftReference</span>&lt;&gt;(<span class="keyword">new</span> <span class="title class_">Object</span>());</span><br></pre></td></tr></table></figure>
+
+<p>JVM 会在内存不足时回收软引用指向的对象</p>
+<p>但如果内存充足，软引用对象会一直存在</p>
+<h2 id="弱引用"><a href="#弱引用" class="headerlink" title="弱引用"></a>弱引用</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">WeakReference&lt;Object&gt; weakRef = <span class="keyword">new</span> <span class="title class_">WeakReference</span>&lt;&gt;(<span class="keyword">new</span> <span class="title class_">Object</span>());</span><br></pre></td></tr></table></figure>
+
+<p>当 JVM 进行垃圾回收时，如果发现一个对象只被弱引用指向</p>
+<p>则无论内存是否充足，该对象都会被回收</p>
+<h2 id="虚引用"><a href="#虚引用" class="headerlink" title="虚引用"></a>虚引用</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PhantomReference&lt;Object&gt; phantomRef = <span class="keyword">new</span> <span class="title class_">PhantomReference</span>&lt;&gt;(<span class="keyword">new</span> <span class="title class_">Object</span>(), <span class="keyword">new</span> <span class="title class_">ReferenceQueue</span>&lt;&gt;());</span><br></pre></td></tr></table></figure>
+
+<p>虚引用的存在不会影响对象的生命周期，只有在对象被回收后，虚引用才会被加入到一个引用队列中</p>
+<h1 id="类与类加载"><a href="#类与类加载" class="headerlink" title="类与类加载"></a>类与类加载</h1><h2 id="类文件结构"><a href="#类文件结构" class="headerlink" title="类文件结构"></a>类文件结构</h2><h3 id="类文件信息"><a href="#类文件信息" class="headerlink" title="类文件信息"></a>类文件信息</h3><p>可以使用<code>WinHex</code>软件来以十六进制查看字节码文件</p>
+<p>之后的演示以下面的代码为例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">10</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">a</span> <span class="operator">=</span> i++;</span><br><span class="line">        <span class="type">int</span> <span class="variable">b</span> <span class="operator">=</span> ++i;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>将在 IDEA 中编译出来的<code>class</code>文件拖动进<code>WinHex</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../images/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/12%20JavaJVM%20%E8%99%9A%E6%8B%9F%E6%9C%BA-24.jpg"></p>
+<h4 id="1-模数"><a href="#1-模数" class="headerlink" title="1. 模数"></a>1. 模数</h4><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../images/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/12%20JavaJVM%20%E8%99%9A%E6%8B%9F%E6%9C%BA-25.jpg"></p>
+<p>前<code>4</code>个字节组成了魔数，字节码文件的魔数为：<code>CAFEBABE</code></p>
+<p>它在字节码文件中的作用是帮助 JVM 确认文件的格式是否正确</p>
+<p>当 JVM 读取一个<code>.class</code>文件时，会首先检查这个标识符，以确保它是一个合法的 Java 类文件</p>
+<h4 id="2-版本号"><a href="#2-版本号" class="headerlink" title="2. 版本号"></a>2. 版本号</h4><p>紧接着<code>4</code>个字节存储的是字节码文件的版本号</p>
+<p>前<code>2</code>个字节是次要版本号，后<code>2</code>个字节是主要版本号</p>
+<p>像上面的主要版本号为<code>34</code>，转为十进制后为<code>52</code>，它代表的是 JDK8 的字节码文件</p>
+<table>
+<thead>
+<tr>
+<th align="center">主要版本号</th>
+<th align="center">JDK 版本</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">49</td>
+<td align="center">JDK 5</td>
+</tr>
+<tr>
+<td align="center">50</td>
+<td align="center">JDK 6</td>
+</tr>
+<tr>
+<td align="center">51</td>
+<td align="center">JDK 7</td>
+</tr>
+<tr>
+<td align="center">52</td>
+<td align="center">JDK 8</td>
+</tr>
+<tr>
+<td align="center">53</td>
+<td align="center">JDK 9</td>
+</tr>
+<tr>
+<td align="center">…</td>
+<td align="center">…</td>
+</tr>
+<tr>
+<td align="center">64</td>
+<td align="center">JDK 20</td>
+</tr>
+</tbody></table>
+<p>JVM 会根据版本号决定是否能够运行，Java 版本是向下兼容的</p>
+<h4 id="3-常量池大小"><a href="#3-常量池大小" class="headerlink" title="3. 常量池大小"></a>3. 常量池大小</h4><p>紧接着<code>2</code>个字节存放了类中常量池大小</p>
+<p>（这里的常量并不是指手动创建的<code>final</code>类型常量，而是程序运行一些需要用到的常量数据，比如字面量和符号引用等）</p>
+<p>由于常量的数量不是确定的，所以在最开始的位置会存放常量池中常量的数量</p>
+<p>（比如这里是<code>18</code>，翻译为十进制就是<code>24</code>，从<code>1</code>开始算，所以实际上有<code>23</code>个常量）</p>
+<h4 id="4-常量池数据"><a href="#4-常量池数据" class="headerlink" title="4. 常量池数据"></a>4. 常量池数据</h4><p>每一项常量池里面的数据都是一个表，它们都是以<code>_info</code>结尾的</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../images/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/12%20JavaJVM%20%E8%99%9A%E6%8B%9F%E6%9C%BA-26.jpg"></p>
+<h4 id="5-常量池数据表"><a href="#5-常量池数据表" class="headerlink" title="5. 常量池数据表"></a>5. 常量池数据表</h4><p><code>1</code>号常量：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../images/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/12%20JavaJVM%20%E8%99%9A%E6%8B%9F%E6%9C%BA-27.jpg"></p>
+<p>第一行是一个<code>1</code>个字节的无符号数，用于表示当前常量类型</p>
+<table>
+<thead>
+<tr>
+<th align="center">常量类型</th>
+<th align="center">标志</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>CONSTANT_Utf8_info</code></td>
+<td align="center">1</td>
+<td align="center"><code>UTF-8</code>编码格式的字符串</td>
+</tr>
+<tr>
+<td align="center"><code>CONSTANT_Integer_info</code></td>
+<td align="center">3</td>
+<td align="center">整形字面量</td>
+</tr>
+<tr>
+<td align="center"><code>CONSTANT_Class_info</code></td>
+<td align="center">7</td>
+<td align="center">类或接口的符号引用</td>
+</tr>
+<tr>
+<td align="center"><code>CONSTANT_String_info</code></td>
+<td align="center">8</td>
+<td align="center">字符串类型的字面量</td>
+</tr>
+<tr>
+<td align="center"><code>CONSTANT_Fieldref_info</code></td>
+<td align="center">9</td>
+<td align="center">字段的符号引用</td>
+</tr>
+<tr>
+<td align="center"><code>CONSTANT_Methodref_info</code></td>
+<td align="center">10</td>
+<td align="center">方法的符号引用</td>
+</tr>
+<tr>
+<td align="center"><code>CONSTANT_MethodType_info</code></td>
+<td align="center">16</td>
+<td align="center">方法类型</td>
+</tr>
+<tr>
+<td align="center"><code>CONSTANT_NameAndType_info</code></td>
+<td align="center">12</td>
+<td align="center">字段或方法的部分符号引用</td>
+</tr>
+</tbody></table>
+<p>第二三行：</p>
+<table>
+<thead>
+<tr>
+<th align="center">项目</th>
+<th align="center">类型</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">index</td>
+<td align="center">u2</td>
+<td align="center">指向声明方法的类描述父<code>CONSTANT_Class_info</code>索引项</td>
+</tr>
+<tr>
+<td align="center">index</td>
+<td align="center">u2</td>
+<td align="center">指向名称及类型描述符<code>CONSTANT_NameAndType_info</code>索引项</td>
+</tr>
+</tbody></table>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../images/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/12%20JavaJVM%20%E8%99%9A%E6%8B%9F%E6%9C%BA-28.jpg"></p>
+<p>第一个索引项指向了第<code>3</code>号常量</p>
+<p><code>3</code>号常量：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../images/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/12%20JavaJVM%20%E8%99%9A%E6%8B%9F%E6%9C%BA-29.jpg"></p>
+<p><code>23</code>号常量：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../images/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/12%20JavaJVM%20%E8%99%9A%E6%8B%9F%E6%9C%BA-30.jpg"></p>
+<p>指向的<code>UTF-8</code>字符串值为<code>java/lang/Object</code>，说明这个方法是由<code>Object</code>类定义的</p>
+<p>第二项<code>name_and_type_index</code>，指向了<code>21</code>号常量，也就是字段或方法的部分符号引用</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../images/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/12%20JavaJVM%20%E8%99%9A%E6%8B%9F%E6%9C%BA-31.jpg"></p>
+<p><code>4</code>号和<code>5</code>号常量：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../images/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/12%20JavaJVM%20%E8%99%9A%E6%8B%9F%E6%9C%BA-32.jpg"></p>
+<p>方法名称为<code>&lt;init&gt;</code>，说明这是一个构造方法的名称；普通方法名称是什么就是什么</p>
+<p>方法描述符为<code>()V</code>，表示此方法没有任何参数，并且返回值类型为<code>void</code></p>
+<p>描述符对照表：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../images/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/12%20JavaJVM%20%E8%99%9A%E6%8B%9F%E6%9C%BA-33.jpg"></p>
+<table>
+<thead>
+<tr>
+<th align="center">方法名称</th>
+<th align="center">描述符</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>public int test(double a, char c)&#123;&#125;</code></td>
+<td align="center"><code>(DC)I</code></td>
+</tr>
+<tr>
+<td align="center"><code>public String test(Object obj)&#123;&#125;</code></td>
+<td align="center"><code>(Ljava/lang/Object;)Ljava/lang/String</code></td>
+</tr>
+<tr>
+<td align="center"><code>public void test(int[][] arr)</code></td>
+<td align="center"><code>([[I)V</code></td>
+</tr>
+</tbody></table>
+<p>所以，这里表示的实际上就是此方法是一个无参构造方法，并且是属于<code>Object</code>类的</p>
+<h4 id="6-访问标志"><a href="#6-访问标志" class="headerlink" title="6. 访问标志"></a>6. 访问标志</h4><p>访问标志就是类的种类以及类上添加的一些关键字等内容</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../images/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/12%20JavaJVM%20%E8%99%9A%E6%8B%9F%E6%9C%BA-34.jpg"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../images/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/12%20JavaJVM%20%E8%99%9A%E6%8B%9F%E6%9C%BA-35.jpg"></p>
+<p>访问标志值按类的属性按位异或进行运算</p>
+<h4 id="7-类索引、父类索引、接口索引"><a href="#7-类索引、父类索引、接口索引" class="headerlink" title="7. 类索引、父类索引、接口索引"></a>7. 类索引、父类索引、接口索引</h4><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../images/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/12%20JavaJVM%20%E8%99%9A%E6%8B%9F%E6%9C%BA-36.jpg"></p>
+<p>它们的值也是指向常量池中的值</p>
+<p>其中<code>2</code>号常量正是存储的当前类信息，<code>3</code>号常量存储的是父类信息</p>
+<h4 id="8-字段表"><a href="#8-字段表" class="headerlink" title="8. 字段表"></a>8. 字段表</h4><p>之后的演示以下面的代码为例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="variable">a</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">10</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">a</span> <span class="operator">=</span> i++;</span><br><span class="line">        <span class="type">int</span> <span class="variable">b</span> <span class="operator">=</span> ++i;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../images/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/12%20JavaJVM%20%E8%99%9A%E6%8B%9F%E6%9C%BA-37.jpg"></p>
+<p>一共有四个<code>2</code>字节的数据</p>
+<p>第一个数据<code>access_flags</code>是字段的访问标志</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../images/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/12%20JavaJVM%20%E8%99%9A%E6%8B%9F%E6%9C%BA-38.jpg"></p>
+<p>第二个数据<code>name_index</code>是字段的名称常量，这里指向的是<code>5</code>号常量</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../images/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/12%20JavaJVM%20%E8%99%9A%E6%8B%9F%E6%9C%BA-39.jpg"></p>
+<p>第三个数据<code>descirptor_index</code>是描述符</p>
+<p>第四个数据<code>attrbutes_count</code>是属性计数器，用于描述一些额外信息</p>
+<h4 id="9-方法表"><a href="#9-方法表" class="headerlink" title="9. 方法表"></a>9. 方法表</h4><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../images/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/12%20JavaJVM%20%E8%99%9A%E6%8B%9F%E6%9C%BA-40.jpg"></p>
+<p>一共有三个方法</p>
+<p>其中第一个方法的方法名称为<code>&lt;init&gt;</code>，表示它是一个构造方法</p>
+<p>第二个方法看名称，很显然就是<code>main</code>方法</p>
+<p>最后一个方法名称为<code>&lt;clinit&gt;</code>，这个是类在初始化时会调用的方法（是隐式的，自动生成的）</p>
+<p>它主要是用于静态变量初始化语句和静态块的执行</p>
+<h4 id="10-属性表"><a href="#10-属性表" class="headerlink" title="10.  属性表"></a>10.  属性表</h4><p>实际上在类中、字段中、方法中都可以携带自己的属性表</p>
+<p>属性表存放的正是代码、本地变量等数据</p>
+<p>比如<code>main</code>方法就存在<code>4</code>个本地变量：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../images/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/12%20JavaJVM%20%E8%99%9A%E6%8B%9F%E6%9C%BA-41.jpg"></p>
+<p>属性信息呈现套娃状态</p>
+<p>在此方法中的属性包括了一个<code>Code</code>属性，存放代码编译之后的字节码指令，而且又嵌套了本地变量表和源码行号表</p>
+<p><code>Code</code>中存放的就是所有的字节码指令：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../images/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/12%20JavaJVM%20%E8%99%9A%E6%8B%9F%E6%9C%BA-42.jpg"></p>
+<h4 id="11-本地变量表"><a href="#11-本地变量表" class="headerlink" title="11. 本地变量表"></a>11. 本地变量表</h4><p>存放了方法中要用到的局部变量：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../images/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/12%20JavaJVM%20%E8%99%9A%E6%8B%9F%E6%9C%BA-43.jpg"></p>
+<p>一共有四个本地变量（<code>args, i, a, b</code>）</p>
+<p>并且表中存放了本地变量的长度、名称、描述符等内容</p>
+<h4 id="12-类属性"><a href="#12-类属性" class="headerlink" title="12. 类属性"></a>12. 类属性</h4><p>此属性记录的是源文件名称</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../images/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/12%20JavaJVM%20%E8%99%9A%E6%8B%9F%E6%9C%BA-44.jpg"></p>
+<h3 id="字节码指令"><a href="#字节码指令" class="headerlink" title="字节码指令"></a>字节码指令</h3><p>虚拟机的指令是由一个字节长度的、代表某种特定操作含义的数字（操作码，类似于机器语言）</p>
+<p>操作码后面也可以携带<code>0</code>个或多个参数一起执行</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">10</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">a</span> <span class="operator">=</span> i++;</span><br><span class="line">    <span class="type">int</span> <span class="variable">b</span> <span class="operator">=</span> ++i;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>编译为字节码文件：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../images/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/12%20JavaJVM%20%E8%99%9A%E6%8B%9F%E6%9C%BA-45.jpg"></p>
+<ul>
+<li><code>bipush</code>：将<code>10</code>送至操作数栈顶</li>
+<li><code>istore_1</code>：将操作数栈顶的值存进<code>1</code>号本地变量，也就是变量<code>i</code>中</li>
+<li><code>iload_1</code>：将<code>1</code>号本地变量中的值推向操作数栈顶</li>
+<li><code>iinc 1 by 1</code>：将<code>1</code>号本地变量的值增加<code>1</code></li>
+<li><code>istore_2</code>：将操作数栈顶的值<code>10</code>存入<code>2</code>号本地变量</li>
+<li><code>iinc 1 by 1</code>：将<code>1</code>号本地变量的值增加<code>1</code></li>
+<li><code>iload_1</code>：将<code>1</code>号本地变量中的值推向操作数栈顶</li>
+<li><code>istore_3</code>：将操作数栈顶的值<code>12</code>存入<code>2</code>号本地变量</li>
+<li><code>return</code>：结束</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../images/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/12%20JavaJVM%20%E8%99%9A%E6%8B%9F%E6%9C%BA-46.jpg"></p>
+<h3 id="ASM-字节码编程"><a href="#ASM-字节码编程" class="headerlink" title="ASM 字节码编程"></a>ASM 字节码编程</h3><p><strong>演示</strong>：使用 <strong>ASM 字节码编程</strong>创建下面的<code>Main</code>类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.test;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Main</span><span class="params">()</span> &#123;&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">a</span> <span class="operator">=</span> <span class="number">10</span>;</span><br><span class="line">        System.out.println(a);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-获取-ClassWriter-对象"><a href="#1-获取-ClassWriter-对象" class="headerlink" title="1. 获取 ClassWriter 对象"></a>1. 获取 ClassWriter 对象</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">ClassWriter</span> <span class="variable">writer</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ClassWriter</span>(ClassWriter.COMPUTE_MAXS);</span><br></pre></td></tr></table></figure>
+
+<p><strong>参数</strong></p>
+<ul>
+<li><code> </code>：不会自动计算操作数栈和局部临时变量表大小，需要自己手动来指定</li>
+<li><code>ClassWriter.COMPUTE_MAXS</code>：会自动计算上述操作数栈和局部临时变量表大小，但需要手动触发</li>
+<li><code>ClassWriter.COMPUTE_FRAMES</code>：不仅会计算上述操作数栈和局部临时变量表大小，而且会自动计算<code>StackMapFrames</code></li>
+</ul>
+<h4 id="2-指定类的一些基本信息"><a href="#2-指定类的一些基本信息" class="headerlink" title="2. 指定类的一些基本信息"></a>2. 指定类的一些基本信息</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">writer.visit(V1_8, ACC_PUBLIC, <span class="string">&quot;com/test/Main&quot;</span>, <span class="literal">null</span>, <span class="string">&quot;java/lang/Object&quot;</span>, <span class="literal">null</span>);</span><br></pre></td></tr></table></figure>
+
+<p><strong>参数</strong></p>
+<ul>
+<li><code>V1_8</code>：字节码文件的版本</li>
+<li><code>ACC_PUBLIC</code>：访问权限</li>
+<li><code>&quot;com/test/Main&quot;</code>：类名称</li>
+<li><code>null</code>：标签</li>
+<li><code>&quot;java/lang/Object&quot;</code>：父类</li>
+<li><code>null</code>：接口</li>
+</ul>
+<h4 id="3-添加无参构造方法"><a href="#3-添加无参构造方法" class="headerlink" title="3. 添加无参构造方法"></a>3. 添加无参构造方法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">writer.visitMethod(ACC_PUBLIC, <span class="string">&quot;&lt;init&gt;&quot;</span>, <span class="string">&quot;()V&quot;</span>, <span class="literal">null</span>, <span class="literal">null</span>); <span class="comment">// 添加一个新方法</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>参数</strong></p>
+<ul>
+<li><code>ACC_PUBLIC</code>：访问权限</li>
+<li><code>&quot;&lt;init&gt;&quot;</code>：方法名称</li>
+<li><code>&quot;()V&quot;</code>：方法修饰符</li>
+<li><code>null</code>：描述符</li>
+<li><code>null</code>：异常</li>
+</ul>
+<h4 id="4-调用父类构造方法"><a href="#4-调用父类构造方法" class="headerlink" title="4. 调用父类构造方法"></a>4. 调用父类构造方法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">MethodVisitor</span> <span class="variable">visitor</span> <span class="operator">=</span> writer.visitMethod(ACC_PUBLIC, <span class="string">&quot;&lt;init&gt;&quot;</span>, <span class="string">&quot;()V&quot;</span>, <span class="literal">null</span>, <span class="literal">null</span>); <span class="comment">// 创建一个公共构造方法</span></span><br><span class="line">visitor.visitCode(); <span class="comment">// 开始生成方法的字节码</span></span><br><span class="line"></span><br><span class="line"><span class="type">Label</span> <span class="variable">l1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Label</span>(); <span class="comment">// 创建一个标签用于标记代码位置</span></span><br><span class="line">visitor.visitLabel(l1); <span class="comment">// 将标签 l1 添加到当前代码流</span></span><br><span class="line">visitor.visitLineNumber(<span class="number">11</span>, l1); <span class="comment">// 指定源代码行号与标签 l1 关联</span></span><br><span class="line"></span><br><span class="line">visitor.visitVarInsn(ALOAD, <span class="number">0</span>); <span class="comment">// 将当前对象引用（this）推入操作数栈</span></span><br><span class="line">visitor.visitMethodInsn(INVOKESPECIAL, <span class="string">&quot;java/lang/Object&quot;</span>, <span class="string">&quot;&lt;init&gt;&quot;</span>, <span class="string">&quot;()V&quot;</span>, <span class="literal">false</span>); <span class="comment">// 调用父类的构造函数 java/lang/Object 的 &lt;init&gt; 方法</span></span><br><span class="line">visitor.visitInsn(RETURN); <span class="comment">// 返回方法，无返回值</span></span><br><span class="line"></span><br><span class="line"><span class="type">Label</span> <span class="variable">l2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Label</span>(); <span class="comment">// 创建另一个标签用于结束位置</span></span><br><span class="line">visitor.visitLabel(l2); <span class="comment">// 将标签 l2 添加到当前代码流</span></span><br><span class="line">visitor.visitLocalVariable(<span class="string">&quot;this&quot;</span>, <span class="string">&quot;Lcom/test/Main;&quot;</span>, <span class="literal">null</span>, l1, l2, <span class="number">0</span>); <span class="comment">// 在本地变量表中添加 this 变量</span></span><br><span class="line"></span><br><span class="line">visitor.visitMaxs(<span class="number">1</span>, <span class="number">1</span>); <span class="comment">// 设置方法的最大栈深度和本地变量数量</span></span><br><span class="line">visitor.visitEnd(); <span class="comment">// 结束方法的字节码生成</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="5-编写-main-方法"><a href="#5-编写-main-方法" class="headerlink" title="5. 编写 main 方法"></a>5. 编写 main 方法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">MethodVisitor</span> <span class="variable">v2</span> <span class="operator">=</span> writer.visitMethod(ACC_PUBLIC | ACC_STATIC, <span class="string">&quot;main&quot;</span>, <span class="string">&quot;([Ljava/lang/String;)V&quot;</span>, <span class="literal">null</span>, <span class="literal">null</span>); <span class="comment">// 创建一个 main 方法</span></span><br><span class="line">v2.visitCode(); <span class="comment">// 开始生成方法的字节码</span></span><br><span class="line"></span><br><span class="line"><span class="type">Label</span> <span class="variable">l3</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Label</span>(); <span class="comment">// 记录起始行信息</span></span><br><span class="line">v2.visitLabel(l3); <span class="comment">// 将标签 l3 添加到当前代码流</span></span><br><span class="line">v2.visitLineNumber(<span class="number">13</span>, l3); <span class="comment">// 指定源代码行号与标签 l3 关联</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 首先是 int a = 10 的操作，执行指令依次为：</span></span><br><span class="line"><span class="comment">// bipush 10     将 10 推向操作数栈顶</span></span><br><span class="line"><span class="comment">// istore_1      将操作数栈顶元素保存到 1 号本地变量 a 中</span></span><br><span class="line">v2.visitIntInsn(BIPUSH, <span class="number">10</span>); <span class="comment">// 将 10 推入操作数栈</span></span><br><span class="line">v2.visitVarInsn(ISTORE, <span class="number">1</span>); <span class="comment">// 将栈顶元素存入本地变量 a</span></span><br><span class="line"></span><br><span class="line"><span class="type">Label</span> <span class="variable">l4</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Label</span>();</span><br><span class="line">v2.visitLabel(l4); <span class="comment">// 创建并添加标签 l4</span></span><br><span class="line">v2.visitLineNumber(<span class="number">14</span>, l4); <span class="comment">// 指定源代码行号与标签 l4 关联</span></span><br><span class="line"></span><br><span class="line">v2.visitFieldInsn(GETSTATIC, <span class="string">&quot;java/lang/System&quot;</span>, <span class="string">&quot;out&quot;</span>, <span class="string">&quot;Ljava/io/PrintStream;&quot;</span>); <span class="comment">// 获取 System.out</span></span><br><span class="line">v2.visitVarInsn(ILOAD, <span class="number">1</span>); <span class="comment">// 加载本地变量 a 的值</span></span><br><span class="line">v2.visitMethodInsn(INVOKEVIRTUAL, <span class="string">&quot;java/io/PrintStream&quot;</span>, <span class="string">&quot;println&quot;</span>, <span class="string">&quot;(I)V&quot;</span>, <span class="literal">false</span>); <span class="comment">// 调用 println 方法</span></span><br><span class="line"></span><br><span class="line"><span class="type">Label</span> <span class="variable">l6</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Label</span>();</span><br><span class="line">v2.visitLabel(l6); <span class="comment">// 创建并添加标签 l6</span></span><br><span class="line">v2.visitLineNumber(<span class="number">15</span>, l6); <span class="comment">// 指定源代码行号与标签 l6 关联</span></span><br><span class="line"></span><br><span class="line">v2.visitInsn(RETURN); <span class="comment">// 返回方法，无返回值</span></span><br><span class="line"><span class="type">Label</span> <span class="variable">l7</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Label</span>();</span><br><span class="line">v2.visitLabel(l7); <span class="comment">// 创建并添加标签 l7</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 最后是本地变量表中的各个变量</span></span><br><span class="line">v2.visitLocalVariable(<span class="string">&quot;args&quot;</span>, <span class="string">&quot;[Ljava/lang/String;&quot;</span>, <span class="literal">null</span>, l3, l7, <span class="number">0</span>); <span class="comment">// args 变量</span></span><br><span class="line">v2.visitLocalVariable(<span class="string">&quot;a&quot;</span>, <span class="string">&quot;I&quot;</span>, <span class="literal">null</span>, l4, l7, <span class="number">1</span>); <span class="comment">// a 变量</span></span><br><span class="line">v2.visitMaxs(<span class="number">1</span>, <span class="number">2</span>); <span class="comment">// 设置方法的最大栈深度和本地变量数量</span></span><br><span class="line">v2.visitEnd(); <span class="comment">// 结束方法的字节码生成</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="6-保存字节码文件"><a href="#6-保存字节码文件" class="headerlink" title="6. 保存字节码文件"></a>6. 保存字节码文件</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">ClassWriter</span> <span class="variable">writer</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ClassWriter</span>(ClassWriter.COMPUTE_MAXS);</span><br><span class="line">        writer.visit(V1_8, ACC_PUBLIC,<span class="string">&quot;com/test/Main&quot;</span>, <span class="literal">null</span>, <span class="string">&quot;java/lang/Object&quot;</span>,<span class="literal">null</span>);</span><br><span class="line">        writer.visitMethod(ACC_PUBLIC, <span class="string">&quot;&lt;init&gt;&quot;</span>, <span class="string">&quot;()V&quot;</span>, <span class="literal">null</span>, <span class="literal">null</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="type">MethodVisitor</span> <span class="variable">visitor</span> <span class="operator">=</span> writer.visitMethod(ACC_PUBLIC, <span class="string">&quot;&lt;init&gt;&quot;</span>, <span class="string">&quot;()V&quot;</span>, <span class="literal">null</span>, <span class="literal">null</span>); <span class="comment">// 无参构造</span></span><br><span class="line">        visitor.visitCode();</span><br><span class="line">        <span class="type">Label</span> <span class="variable">l1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Label</span>();</span><br><span class="line">        visitor.visitLabel(l1);</span><br><span class="line">        visitor.visitLineNumber(<span class="number">11</span>, l1);</span><br><span class="line">        visitor.visitVarInsn(ALOAD, <span class="number">0</span>); <span class="comment">// 将当前对象引用（this）推入操作数栈</span></span><br><span class="line">        visitor.visitMethodInsn(INVOKESPECIAL, <span class="string">&quot;java/lang/Object&quot;</span>, <span class="string">&quot;&lt;init&gt;&quot;</span>, <span class="string">&quot;()V&quot;</span>, <span class="literal">false</span>); <span class="comment">// 调用父类构造函数</span></span><br><span class="line">        visitor.visitInsn(RETURN);</span><br><span class="line">        <span class="type">Label</span> <span class="variable">l2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Label</span>();</span><br><span class="line">        visitor.visitLabel(l2);</span><br><span class="line">        visitor.visitLocalVariable(<span class="string">&quot;this&quot;</span>, <span class="string">&quot;Lcom/test/Main;&quot;</span>, <span class="literal">null</span>, l1, l2, <span class="number">0</span>); <span class="comment">// 在本地变量表中添加 this 变量</span></span><br><span class="line">        visitor.visitMaxs(<span class="number">1</span>, <span class="number">1</span>); <span class="comment">// 设置方法的最大栈深度和本地变量数量</span></span><br><span class="line">        visitor.visitEnd();</span><br><span class="line">        </span><br><span class="line">        <span class="type">MethodVisitor</span> <span class="variable">v2</span> <span class="operator">=</span> writer.visitMethod(ACC_PUBLIC | ACC_STATIC, <span class="string">&quot;main&quot;</span>, <span class="string">&quot;([Ljava/lang/String;)V&quot;</span>, <span class="literal">null</span>, <span class="literal">null</span>); <span class="comment">// 创建一个 main 方法</span></span><br><span class="line">        v2.visitCode();</span><br><span class="line">        <span class="type">Label</span> <span class="variable">l3</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Label</span>();</span><br><span class="line">        v2.visitLabel(l3);</span><br><span class="line">        v2.visitLineNumber(<span class="number">13</span>, l3);</span><br><span class="line">        v2.visitIntInsn(BIPUSH, <span class="number">10</span>); <span class="comment">// 将 10 推入操作数栈</span></span><br><span class="line">        v2.visitVarInsn(ISTORE, <span class="number">1</span>); <span class="comment">// 将栈顶元素存入本地变量 a</span></span><br><span class="line">        <span class="type">Label</span> <span class="variable">l4</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Label</span>();</span><br><span class="line">        v2.visitLabel(l4);</span><br><span class="line">        v2.visitLineNumber(<span class="number">14</span>, l4);</span><br><span class="line">        v2.visitFieldInsn(GETSTATIC, <span class="string">&quot;java/lang/System&quot;</span>, <span class="string">&quot;out&quot;</span>, <span class="string">&quot;Ljava/io/PrintStream;&quot;</span>); <span class="comment">// 获取 System.out</span></span><br><span class="line">        v2.visitVarInsn(ILOAD, <span class="number">1</span>); <span class="comment">// 加载本地变量 a 的值</span></span><br><span class="line">        v2.visitMethodInsn(INVOKEVIRTUAL, <span class="string">&quot;java/io/PrintStream&quot;</span>, <span class="string">&quot;println&quot;</span>, <span class="string">&quot;(I)V&quot;</span>, <span class="literal">false</span>); <span class="comment">// 调用 println 方法</span></span><br><span class="line">        <span class="type">Label</span> <span class="variable">l6</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Label</span>();</span><br><span class="line">        v2.visitLabel(l6);</span><br><span class="line">        v2.visitLineNumber(<span class="number">15</span>, l6);</span><br><span class="line">        v2.visitInsn(RETURN);</span><br><span class="line">        <span class="type">Label</span> <span class="variable">l7</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Label</span>();</span><br><span class="line">        v2.visitLabel(l7);</span><br><span class="line">        v2.visitLocalVariable(<span class="string">&quot;args&quot;</span>, <span class="string">&quot;[Ljava/lang/String;&quot;</span>, <span class="literal">null</span>, l3, l7, <span class="number">0</span>); <span class="comment">// args 变量</span></span><br><span class="line">        v2.visitLocalVariable(<span class="string">&quot;a&quot;</span>, <span class="string">&quot;I&quot;</span>, <span class="literal">null</span>, l4, l7, <span class="number">1</span>); <span class="comment">// a 变量</span></span><br><span class="line">        v2.visitMaxs(<span class="number">1</span>, <span class="number">2</span>); <span class="comment">// 设置方法的最大栈深度和本地变量数量</span></span><br><span class="line">        v2.visitEnd();</span><br><span class="line">        </span><br><span class="line">        writer.visitEnd(); <span class="comment">// 结束编辑</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span>(<span class="type">FileOutputStream</span> <span class="variable">stream</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(<span class="string">&quot;./Main.class&quot;</span>)) &#123;</span><br><span class="line">            stream.write(writer.toByteArray()); <span class="comment">// 将字节码文件转换为 byte 数组，并保存到根目录下</span></span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="7-IDEA-反编译"><a href="#7-IDEA-反编译" class="headerlink" title="7. IDEA 反编译"></a>7. IDEA 反编译</h4><p>结果：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.test;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Main</span><span class="params">()</span> &#123;&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">a</span> <span class="operator">=</span> <span class="number">10</span>;</span><br><span class="line">        System.out.println(a);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="类加载机制"><a href="#类加载机制" class="headerlink" title="类加载机制"></a>类加载机制</h2><h3 id="类加载触发条件"><a href="#类加载触发条件" class="headerlink" title="类加载触发条件"></a>类加载触发条件</h3><p>一般在这些情况下，如果类没有被加载，那么会被自动加载：</p>
+<ul>
+<li>使用<code>new</code>关键字创建对象</li>
+<li>使用类的非<code>final</code>类型的静态字段或静态方法</li>
+<li>使用反射对类信息进行获取的时候</li>
+<li>加载一个类的子类</li>
+<li>加载接口的实现类，且接口带有<code>default</code>的方法默认实现</li>
+</ul>
+<h3 id="类加载过程"><a href="#类加载过程" class="headerlink" title="类加载过程"></a>类加载过程</h3><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../images/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/12%20JavaJVM%20%E8%99%9A%E6%8B%9F%E6%9C%BA-47.jpg"></p>
+<h4 id="1-加载"><a href="#1-加载" class="headerlink" title="1. 加载"></a>1. 加载</h4><p>JVM 将类的二进制字节流读入内存，并创建一个<code>Class</code>对象来表示这个类</p>
+<h4 id="2-校验"><a href="#2-校验" class="headerlink" title="2. 校验"></a>2. 校验</h4><p>校验阶段主要是为了确保加载的类符合 Java 语言规范，保证安全性</p>
+<p>校验主要包括以下几个方面：</p>
+<ul>
+<li><strong>文件格式验证</strong>：检查字节码文件是否符合 <code>.class</code> 文件的格式（魔数，主次版号…）</li>
+<li><strong>元数据验证</strong>：检查类的结构是否符合 Java 语言规范，包括字段、方法等的访问修饰符等</li>
+<li><strong>字节码验证</strong>：检查字节码指令是否合法，确保没有使用不安全的操作，如非法的类型转换</li>
+</ul>
+<h4 id="3-准备"><a href="#3-准备" class="headerlink" title="3. 准备"></a>3. 准备</h4><p>JVM 会为类中的静态变量分配内存，并将它们初始化为默认值（如<code>0</code>、<code>null</code>等）</p>
+<h4 id="4-解析"><a href="#4-解析" class="headerlink" title="4. 解析"></a>4. 解析</h4><p>将常量池中的符号引用转换为直接引用（符号引用是一种更高层次的抽象，直接引用则是内存地址）</p>
+<p>JVM 会将类、字段和方法的符号引用转换为具体的内存地址</p>
+<h4 id="5-初始化"><a href="#5-初始化" class="headerlink" title="5. 初始化"></a>5. 初始化</h4><p>执行类的静态初始化块和静态变量赋值，这是类生命周期中的最后一个阶段</p>
+<p>JVM 会执行<code>&lt;clinit&gt;</code>方法，确保所有静态变量和静态代码块都被正确初始化</p>
+<h4 id="6-使用"><a href="#6-使用" class="headerlink" title="6. 使用"></a>6. 使用</h4><p>类的信息已经完全加载到内存中，并且可以直接使用</p>
+<h4 id="7-卸载"><a href="#7-卸载" class="headerlink" title="7. 卸载"></a>7. 卸载</h4><p>当类不再被使用时，JVM 可以将其从内存中卸载</p>
+<p>类的卸载并不频繁发生，通常在以下情况下进行：</p>
+<ul>
+<li>类加载器被卸载（如应用程序关闭）</li>
+<li>类没有被任何对象引用</li>
+</ul>
+<h3 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h3><p>对于任意一个类，都必须由加载它的类加载器和这个类本身一起共同确立其在 Java 虚拟机中的唯一性</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test</span> &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用两个不同的类加载器加载<code>Test</code>类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> ReflectiveOperationException &#123;</span><br><span class="line">        Class&lt;?&gt; testClass1 = Main.class.getClassLoader().loadClass(<span class="string">&quot;com.test.Test&quot;</span>); <span class="comment">// 使用系统类加载器加载类</span></span><br><span class="line">        <span class="type">CustomClassLoader</span> <span class="variable">customClassLoader</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">CustomClassLoader</span>(); <span class="comment">// 自定义类加载器实例</span></span><br><span class="line">        Class&lt;?&gt; testClass2 = customClassLoader.loadClass(<span class="string">&quot;com.test.Test&quot;</span>); <span class="comment">// 使用自定义类加载器加载类</span></span><br><span class="line"></span><br><span class="line">        System.out.println(testClass1.getClassLoader()); <span class="comment">// 获取类加载器</span></span><br><span class="line">        System.out.println(testClass2.getClassLoader());</span><br><span class="line"></span><br><span class="line">        System.out.println(testClass1); <span class="comment">// 获取类的 Class 对象</span></span><br><span class="line">        System.out.println(testClass2);</span><br><span class="line"></span><br><span class="line">        System.out.println(testClass1 == testClass2); <span class="comment">// false</span></span><br><span class="line">        </span><br><span class="line">        <span class="type">Test</span> <span class="variable">test</span> <span class="operator">=</span> (Test) testClass2.newInstance(); <span class="comment">// 强制类型转换 -&gt; ClassCastException</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">CustomClassLoader</span> <span class="keyword">extends</span> <span class="title class_">ClassLoader</span> &#123; <span class="comment">// 自定义类加载器</span></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="keyword">public</span> Class&lt;?&gt; loadClass(String name) <span class="keyword">throws</span> ClassNotFoundException &#123;</span><br><span class="line">            <span class="keyword">try</span> (<span class="type">FileInputStream</span> <span class="variable">stream</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(<span class="string">&quot;./target/classes/&quot;</span>+name.replace(<span class="string">&quot;.&quot;</span>, <span class="string">&quot;/&quot;</span>)+<span class="string">&quot;.class&quot;</span>)) &#123; <span class="comment">// 读取类文件的字节流</span></span><br><span class="line">                <span class="type">byte</span>[] data = <span class="keyword">new</span> <span class="title class_">byte</span>[stream.available()];</span><br><span class="line">                stream.read(data);</span><br><span class="line">                <span class="keyword">if</span>(data.length == <span class="number">0</span>) <span class="keyword">return</span> <span class="built_in">super</span>.loadClass(name); <span class="comment">// 如果数据为空，则调用父类的加载方法</span></span><br><span class="line">                <span class="keyword">return</span> defineClass(name, data, <span class="number">0</span>, data.length); <span class="comment">// 定义类并返回</span></span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="built_in">super</span>.loadClass(name); <span class="comment">// 处理 IO 异常，调用父类的加载方法</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>结论</strong>：</p>
+<blockquote>
+<p>即使两个类是同一个 Class 文件加载的，只要类加载器不同，那么这两个类就是不同的两个类</p>
+</blockquote>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gitee.com/kokoachino/picture-bed/raw/master/%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/head.jpg" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gitee.com/kokoachino/picture-bed/raw/master/%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/head.jpg" title="头像" alt="头像"></a><div class="post-copyright__author_name">星开祈灵</div><div class="post-copyright__author_desc">( ´•̥̥̥ω•̥̥̥` )</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://kokoachino.github.io/2024/11/01/12%20JavaJVM%20%E8%99%9A%E6%8B%9F%E6%9C%BA/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://kokoachino.github.io/2024/11/01/12%20JavaJVM%20%E8%99%9A%E6%8B%9F%E6%9C%BA/')">JavaJVM 虚拟机</span></a></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://KokoaChino.github.io" target="_blank">星开祈灵的个人博客</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/Java/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>Java<span class="tagsPageCount">7</span></a><a class="post-meta__box__tags" href="/tags/JVM/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>JVM<span class="tagsPageCount">1</span></a><a class="post-meta__box__tags" href="/tags/JNI/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>JNI<span class="tagsPageCount">1</span></a><a class="post-meta__box__tags" href="/tags/JRE/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>JRE<span class="tagsPageCount">1</span></a><a class="post-meta__box__tags" href="/tags/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>垃圾回收机制<span class="tagsPageCount">1</span></a><a class="post-meta__box__tags" href="/tags/%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>引用类型<span class="tagsPageCount">1</span></a><a class="post-meta__box__tags" href="/tags/%E7%B1%BB%E4%B8%8E%E7%B1%BB%E5%8A%A0%E8%BD%BD/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>类与类加载<span class="tagsPageCount">1</span></a><a class="post-meta__box__tags" href="/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>内存管理<span class="tagsPageCount">1</span></a></div></div></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/09/13/11%20SpringBoot%20%E6%A1%86%E6%9E%B6/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gitee.com/kokoachino/picture-bed/raw/master/%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87.jpg?_r_=1ce7ad0e-b5d9-9335-0bda-76356c779637" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">SpringBoot 框架</div></div></a></div><div class="next-post pull-right"><a href="/2024/11/16/13%20JavaJUC%20%E5%A4%9A%E7%BA%BF%E7%A8%8B/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gitee.com/kokoachino/picture-bed/raw/master/%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87.jpg?_r_=bd31497d-fe89-a8a0-d0d5-bb8e5bbf5de1" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">JavaJUC 多线程</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/2023/07/12/01%20JavaSE/" title="JavaSE"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gitee.com/kokoachino/picture-bed/raw/master/%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87.jpg?_r_=86b497bf-c817-03b8-11c3-92bf1525deb5" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2023-07-12</div><div class="title">JavaSE</div></div></a></div><div><a href="/2023/10/10/02%20JavaSE%20%E6%96%B0%E7%89%B9%E6%80%A7/" title="JavaSE 新特性"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gitee.com/kokoachino/picture-bed/raw/master/%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87.jpg?_r_=fe40420e-0920-133a-4c3d-8b4f487af0fa" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2023-10-10</div><div class="title">JavaSE 新特性</div></div></a></div><div><a href="/2024/02/01/04%20Java%20%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" title="Java 设计模式"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gitee.com/kokoachino/picture-bed/raw/master/%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87.jpg?_r_=f694a06c-6328-fdd4-844b-14f2bae98913" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-02-01</div><div class="title">Java 设计模式</div></div></a></div><div><a href="/2024/06/01/06%20JavaWeb%20%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" title="JavaWeb 后端开发"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gitee.com/kokoachino/picture-bed/raw/master/%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87.jpg?_r_=6795ba84-9f70-294c-2a6c-4fc94d0a35f1" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-06-01</div><div class="title">JavaWeb 后端开发</div></div></a></div><div><a href="/2024/04/20/05%20JavaGUI%20%E5%8F%AF%E8%A7%86%E5%8C%96%E5%BC%80%E5%8F%91/" title="JavaGUI 可视化开发"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gitee.com/kokoachino/picture-bed/raw/master/%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87.jpg?_r_=419018ea-5cf4-a90e-5a43-3e4d71dd716f" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-04-20</div><div class="title">JavaGUI 可视化开发</div></div></a></div><div><a href="/2024/11/16/13%20JavaJUC%20%E5%A4%9A%E7%BA%BF%E7%A8%8B/" title="JavaJUC 多线程"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gitee.com/kokoachino/picture-bed/raw/master/%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87.jpg?_r_=bd31497d-fe89-a8a0-d0d5-bb8e5bbf5de1" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-11-16</div><div class="title">JavaJUC 多线程</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JVM-%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">JVM 启动流程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E8%BF%9B%E8%A1%8C%E5%88%9D%E5%A7%8B%E5%8C%96%E6%93%8D%E4%BD%9C"><span class="toc-number">1.1.</span> <span class="toc-text">1. 进行初始化操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E9%80%89%E6%8B%A9-JRE-%E7%89%88%E6%9C%AC"><span class="toc-number">1.2.</span> <span class="toc-text">2. 选择 JRE 版本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%88%9B%E5%BB%BA-JVM-%E6%89%A7%E8%A1%8C%E7%8E%AF%E5%A2%83"><span class="toc-number">1.3.</span> <span class="toc-text">3. 创建 JVM 执行环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%8A%A0%E8%BD%BD-JVM"><span class="toc-number">1.4.</span> <span class="toc-text">4. 加载 JVM</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%88%9D%E5%A7%8B%E5%8C%96-JVM"><span class="toc-number">1.5.</span> <span class="toc-text">5. 初始化 JVM</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E5%88%9D%E5%A7%8B%E5%8C%96%E8%99%9A%E6%8B%9F%E6%9C%BA"><span class="toc-number">1.6.</span> <span class="toc-text">6. 初始化虚拟机</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E5%8A%A0%E8%BD%BD%E4%B8%BB%E7%B1%BB"><span class="toc-number">1.7.</span> <span class="toc-text">7. 加载主类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-%E5%88%9D%E5%A7%8B%E5%8C%96%E5%AE%8C%E6%88%90"><span class="toc-number">1.8.</span> <span class="toc-text">8. 初始化完成</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-%E8%8E%B7%E5%8F%96%E4%B8%BB%E6%96%B9%E6%B3%95"><span class="toc-number">1.9.</span> <span class="toc-text">9. 获取主方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-%E8%B0%83%E7%94%A8%E4%B8%BB%E6%96%B9%E6%B3%95"><span class="toc-number">1.10.</span> <span class="toc-text">10. 调用主方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-%E4%B8%BB%E6%96%B9%E6%B3%95%E7%BB%93%E6%9D%9F%EF%BC%8C%E9%94%80%E6%AF%81-JVM"><span class="toc-number">1.11.</span> <span class="toc-text">11. 主方法结束，销毁 JVM</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#JNI-%E8%B0%83%E7%94%A8%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text">JNI 调用本地方法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%88%9B%E5%BB%BA%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95"><span class="toc-number">2.1.</span> <span class="toc-text">1. 创建本地方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E7%94%9F%E6%88%90-C-%E5%A4%B4%E6%96%87%E4%BB%B6"><span class="toc-number">2.2.</span> <span class="toc-text">2. 生成 C 头文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%96%B0%E5%BB%BA-C-%E9%A1%B9%E7%9B%AE"><span class="toc-number">2.3.</span> <span class="toc-text">3. 新建 C++ 项目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E4%BF%AE%E6%94%B9-CMake-%E6%96%87%E4%BB%B6"><span class="toc-number">2.4.</span> <span class="toc-text">4. 修改 CMake 文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E7%BC%96%E5%86%99%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E5%AE%9E%E7%8E%B0"><span class="toc-number">2.5.</span> <span class="toc-text">5. 编写本地方法实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E7%BC%96%E8%AF%91%E4%B8%BA%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5%E5%BA%93"><span class="toc-number">2.6.</span> <span class="toc-text">6. 编译为动态链接库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E5%8A%A0%E8%BD%BD%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5%E5%BA%93%E6%96%87%E4%BB%B6"><span class="toc-number">2.7.</span> <span class="toc-text">7. 加载动态链接库文件</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#JVM-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86"><span class="toc-number">3.</span> <span class="toc-text">JVM 内存管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E5%88%92%E5%88%86"><span class="toc-number">3.1.</span> <span class="toc-text">内存区域划分</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%83%E7%A9%BA%E9%97%B4"><span class="toc-number">3.2.</span> <span class="toc-text">元空间</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%B3%E8%AF%B7%E5%A0%86%E5%A4%96%E5%86%85%E5%AD%98"><span class="toc-number">3.3.</span> <span class="toc-text">申请堆外内存</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6"><span class="toc-number">4.</span> <span class="toc-text">垃圾回收机制</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1%E5%AD%98%E6%B4%BB%E5%88%A4%E5%AE%9A%E7%AE%97%E6%B3%95"><span class="toc-number">4.1.</span> <span class="toc-text">对象存活判定算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0%E7%AE%97%E6%B3%95"><span class="toc-number">4.1.1.</span> <span class="toc-text">引用计数算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E8%BE%BE%E6%80%A7%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95"><span class="toc-number">4.1.2.</span> <span class="toc-text">可达性分析算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E7%BB%88%E5%88%A4%E5%AE%9A%E7%AE%97%E6%B3%95"><span class="toc-number">4.1.3.</span> <span class="toc-text">最终判定算法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AE%97%E6%B3%95"><span class="toc-number">4.2.</span> <span class="toc-text">垃圾回收算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E4%BB%A3%E6%94%B6%E9%9B%86%E6%9C%BA%E5%88%B6"><span class="toc-number">4.2.1.</span> <span class="toc-text">分代收集机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A9%BA%E9%97%B4%E5%88%86%E9%85%8D%E6%8B%85%E4%BF%9D"><span class="toc-number">4.2.2.</span> <span class="toc-text">空间分配担保</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%87%E8%AE%B0%E6%B8%85%E9%99%A4%E7%AE%97%E6%B3%95"><span class="toc-number">4.2.3.</span> <span class="toc-text">标记清除算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%87%E8%AE%B0%E5%A4%8D%E5%88%B6%E7%AE%97%E6%B3%95"><span class="toc-number">4.2.4.</span> <span class="toc-text">标记复制算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%87%E8%AE%B0%E6%95%B4%E7%90%86%E7%AE%97%E6%B3%95"><span class="toc-number">4.2.5.</span> <span class="toc-text">标记整理算法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%E5%AE%9E%E7%8E%B0"><span class="toc-number">4.3.</span> <span class="toc-text">垃圾收集器实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Serial-%E6%94%B6%E9%9B%86%E5%99%A8"><span class="toc-number">4.3.1.</span> <span class="toc-text">Serial 收集器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ParNew-%E6%94%B6%E9%9B%86%E5%99%A8"><span class="toc-number">4.3.2.</span> <span class="toc-text">ParNew 收集器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Parallel-Scavenge-Parallel-Old-%E6%94%B6%E9%9B%86%E5%99%A8"><span class="toc-number">4.3.3.</span> <span class="toc-text">Parallel Scavenge &#x2F; Parallel Old 收集器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CMS-%E6%94%B6%E9%9B%86%E5%99%A8"><span class="toc-number">4.3.4.</span> <span class="toc-text">CMS 收集器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Garbage-First-G1-%E6%94%B6%E9%9B%86%E5%99%A8"><span class="toc-number">4.3.5.</span> <span class="toc-text">Garbage First (G1) 收集器</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B"><span class="toc-number">5.</span> <span class="toc-text">引用类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%BA%E5%BC%95%E7%94%A8"><span class="toc-number">5.1.</span> <span class="toc-text">强引用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BD%AF%E5%BC%95%E7%94%A8"><span class="toc-number">5.2.</span> <span class="toc-text">软引用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%B1%E5%BC%95%E7%94%A8"><span class="toc-number">5.3.</span> <span class="toc-text">弱引用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%99%9A%E5%BC%95%E7%94%A8"><span class="toc-number">5.4.</span> <span class="toc-text">虚引用</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%B1%BB%E4%B8%8E%E7%B1%BB%E5%8A%A0%E8%BD%BD"><span class="toc-number">6.</span> <span class="toc-text">类与类加载</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84"><span class="toc-number">6.1.</span> <span class="toc-text">类文件结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B1%BB%E6%96%87%E4%BB%B6%E4%BF%A1%E6%81%AF"><span class="toc-number">6.1.1.</span> <span class="toc-text">类文件信息</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%A8%A1%E6%95%B0"><span class="toc-number">6.1.1.1.</span> <span class="toc-text">1. 模数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E7%89%88%E6%9C%AC%E5%8F%B7"><span class="toc-number">6.1.1.2.</span> <span class="toc-text">2. 版本号</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E5%B8%B8%E9%87%8F%E6%B1%A0%E5%A4%A7%E5%B0%8F"><span class="toc-number">6.1.1.3.</span> <span class="toc-text">3. 常量池大小</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E5%B8%B8%E9%87%8F%E6%B1%A0%E6%95%B0%E6%8D%AE"><span class="toc-number">6.1.1.4.</span> <span class="toc-text">4. 常量池数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E5%B8%B8%E9%87%8F%E6%B1%A0%E6%95%B0%E6%8D%AE%E8%A1%A8"><span class="toc-number">6.1.1.5.</span> <span class="toc-text">5. 常量池数据表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-%E8%AE%BF%E9%97%AE%E6%A0%87%E5%BF%97"><span class="toc-number">6.1.1.6.</span> <span class="toc-text">6. 访问标志</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-%E7%B1%BB%E7%B4%A2%E5%BC%95%E3%80%81%E7%88%B6%E7%B1%BB%E7%B4%A2%E5%BC%95%E3%80%81%E6%8E%A5%E5%8F%A3%E7%B4%A2%E5%BC%95"><span class="toc-number">6.1.1.7.</span> <span class="toc-text">7. 类索引、父类索引、接口索引</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-%E5%AD%97%E6%AE%B5%E8%A1%A8"><span class="toc-number">6.1.1.8.</span> <span class="toc-text">8. 字段表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9-%E6%96%B9%E6%B3%95%E8%A1%A8"><span class="toc-number">6.1.1.9.</span> <span class="toc-text">9. 方法表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#10-%E5%B1%9E%E6%80%A7%E8%A1%A8"><span class="toc-number">6.1.1.10.</span> <span class="toc-text">10.  属性表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#11-%E6%9C%AC%E5%9C%B0%E5%8F%98%E9%87%8F%E8%A1%A8"><span class="toc-number">6.1.1.11.</span> <span class="toc-text">11. 本地变量表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#12-%E7%B1%BB%E5%B1%9E%E6%80%A7"><span class="toc-number">6.1.1.12.</span> <span class="toc-text">12. 类属性</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E8%8A%82%E7%A0%81%E6%8C%87%E4%BB%A4"><span class="toc-number">6.1.2.</span> <span class="toc-text">字节码指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ASM-%E5%AD%97%E8%8A%82%E7%A0%81%E7%BC%96%E7%A8%8B"><span class="toc-number">6.1.3.</span> <span class="toc-text">ASM 字节码编程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E8%8E%B7%E5%8F%96-ClassWriter-%E5%AF%B9%E8%B1%A1"><span class="toc-number">6.1.3.1.</span> <span class="toc-text">1. 获取 ClassWriter 对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E6%8C%87%E5%AE%9A%E7%B1%BB%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9F%BA%E6%9C%AC%E4%BF%A1%E6%81%AF"><span class="toc-number">6.1.3.2.</span> <span class="toc-text">2. 指定类的一些基本信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E6%B7%BB%E5%8A%A0%E6%97%A0%E5%8F%82%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95"><span class="toc-number">6.1.3.3.</span> <span class="toc-text">3. 添加无参构造方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E8%B0%83%E7%94%A8%E7%88%B6%E7%B1%BB%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95"><span class="toc-number">6.1.3.4.</span> <span class="toc-text">4. 调用父类构造方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E7%BC%96%E5%86%99-main-%E6%96%B9%E6%B3%95"><span class="toc-number">6.1.3.5.</span> <span class="toc-text">5. 编写 main 方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-%E4%BF%9D%E5%AD%98%E5%AD%97%E8%8A%82%E7%A0%81%E6%96%87%E4%BB%B6"><span class="toc-number">6.1.3.6.</span> <span class="toc-text">6. 保存字节码文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-IDEA-%E5%8F%8D%E7%BC%96%E8%AF%91"><span class="toc-number">6.1.3.7.</span> <span class="toc-text">7. IDEA 反编译</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6"><span class="toc-number">6.2.</span> <span class="toc-text">类加载机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%A7%A6%E5%8F%91%E6%9D%A1%E4%BB%B6"><span class="toc-number">6.2.1.</span> <span class="toc-text">类加载触发条件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B"><span class="toc-number">6.2.2.</span> <span class="toc-text">类加载过程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%8A%A0%E8%BD%BD"><span class="toc-number">6.2.2.1.</span> <span class="toc-text">1. 加载</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E6%A0%A1%E9%AA%8C"><span class="toc-number">6.2.2.2.</span> <span class="toc-text">2. 校验</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E5%87%86%E5%A4%87"><span class="toc-number">6.2.2.3.</span> <span class="toc-text">3. 准备</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E8%A7%A3%E6%9E%90"><span class="toc-number">6.2.2.4.</span> <span class="toc-text">4. 解析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number">6.2.2.5.</span> <span class="toc-text">5. 初始化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-%E4%BD%BF%E7%94%A8"><span class="toc-number">6.2.2.6.</span> <span class="toc-text">6. 使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-%E5%8D%B8%E8%BD%BD"><span class="toc-number">6.2.2.7.</span> <span class="toc-text">7. 卸载</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8"><span class="toc-number">6.2.3.</span> <span class="toc-text">类加载器</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/05/15/05%20Python%20%E7%AE%97%E6%B3%95%E6%A8%A1%E7%89%88/" title="Python 算法模版">Python 算法模版</a><time datetime="2025-05-14T16:00:00.000Z" title="发表于 2025-05-15 00:00:00">2025-05-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/04/18/04%20C++%20%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80/" title="C++ 语法基础">C++ 语法基础</a><time datetime="2025-04-17T16:00:00.000Z" title="发表于 2025-04-18 00:00:00">2025-04-18</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/05/03%20Python%20%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E5%9F%BA%E7%A1%80/" title="Python 数学建模基础">Python 数学建模基础</a><time datetime="2024-12-04T16:00:00.000Z" title="发表于 2024-12-05 00:00:00">2024-12-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/11/16/13%20JavaJUC%20%E5%A4%9A%E7%BA%BF%E7%A8%8B/" title="JavaJUC 多线程">JavaJUC 多线程</a><time datetime="2024-11-15T16:00:00.000Z" title="发表于 2024-11-16 00:00:00">2024-11-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/11/01/12%20JavaJVM%20%E8%99%9A%E6%8B%9F%E6%9C%BA/" title="JavaJVM 虚拟机">JavaJVM 虚拟机</a><time datetime="2024-10-31T16:00:00.000Z" title="发表于 2024-11-01 00:00:00">2024-11-01</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2024 - 2025 By <a class="footer-bar-link" href="/" title="星开祈灵" target="_blank">星开祈灵</a></div></div><div id="footer-type-tips"></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu" title="主题">主题</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">26</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">131</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">4</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://blog.anheyu.com/" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://image.anheyu.com/" title="安知鱼图床"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://image.anheyu.com/favicon.ico" alt="安知鱼图床"/><span class="back-menu-item-text">安知鱼图床</span></a></div></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/API/" style="font-size: 0.88rem;">API<sup>1</sup></a><a href="/tags/CSS/" style="font-size: 0.88rem;">CSS<sup>1</sup></a><a href="/tags/Git/" style="font-size: 0.88rem;">Git<sup>1</sup></a><a href="/tags/HTML/" style="font-size: 0.88rem;">HTML<sup>1</sup></a><a href="/tags/Java/" style="font-size: 0.88rem;">Java<sup>7</sup></a><a href="/tags/Lambda/" style="font-size: 0.88rem;">Lambda<sup>1</sup></a><a href="/tags/Matlab/" style="font-size: 0.88rem;">Matlab<sup>1</sup></a><a href="/tags/MySQL/" style="font-size: 0.88rem;">MySQL<sup>1</sup></a><a href="/tags/Optional/" style="font-size: 0.88rem;">Optional<sup>1</sup></a><a href="/tags/Stream-%E6%B5%81/" style="font-size: 0.88rem;">Stream 流<sup>1</sup></a><a href="/tags/Web/" style="font-size: 0.88rem;">Web<sup>6</sup></a><a href="/tags/%E4%BA%8B%E5%8A%A1/" style="font-size: 0.88rem;">事务<sup>4</sup></a><a href="/tags/%E5%87%BD%E6%95%B0/" style="font-size: 0.88rem;">函数<sup>4</sup></a><a href="/tags/%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3/" style="font-size: 0.88rem;">函数式接口<sup>1</sup></a><a href="/tags/%E5%88%86%E6%94%AF/" style="font-size: 0.88rem;">分支<sup>1</sup></a><a href="/tags/%E5%8F%8D%E5%B0%84/" style="font-size: 0.88rem;">反射<sup>1</sup></a><a href="/tags/%E5%91%BD%E4%BB%A4/" style="font-size: 0.88rem;">命令<sup>2</sup></a><a href="/tags/%E5%9B%BE%E5%83%8F%E7%BB%98%E5%88%B6/" style="font-size: 0.88rem;">图像绘制<sup>1</sup></a><a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 0.88rem;">多线程<sup>1</sup></a><a href="/tags/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/" style="font-size: 0.88rem;">存储过程<sup>1</sup></a><a href="/tags/%E5%AE%9A%E6%97%B6%E5%99%A8/" style="font-size: 0.88rem;">定时器<sup>2</sup></a><a href="/tags/%E5%B1%9E%E6%80%A7/" style="font-size: 0.88rem;">属性<sup>2</sup></a><a href="/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E5%99%A8/" style="font-size: 0.88rem;">异常处理器<sup>1</sup></a><a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 0.88rem;">数学<sup>2</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 0.88rem;">数据库<sup>2</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" style="font-size: 0.88rem;">数据类型<sup>4</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1%E4%B8%8E%E8%AE%A1%E7%AE%97/" style="font-size: 0.88rem;">数据统计与计算<sup>1</sup></a><a href="/tags/%E6%96%87%E4%BB%B6/" style="font-size: 0.88rem;">文件<sup>1</sup></a><a href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" style="font-size: 0.88rem;">新特性<sup>1</sup></a><a href="/tags/%E6%AD%A3%E5%88%99%E5%8C%B9%E9%85%8D/" style="font-size: 0.88rem;">正则匹配<sup>1</sup></a><a href="/tags/%E6%B3%A8%E8%A7%A3/" style="font-size: 0.88rem;">注解<sup>5</sup></a><a href="/tags/%E6%B8%B8%E6%A0%87/" style="font-size: 0.88rem;">游标<sup>1</sup></a><a href="/tags/%E7%AC%A6%E5%8F%B7%E5%AF%B9%E8%B1%A1/" style="font-size: 0.88rem;">符号对象<sup>1</sup></a><a href="/tags/%E7%B4%A2%E5%BC%95/" style="font-size: 0.88rem;">索引<sup>1</sup></a><a href="/tags/%E8%A7%86%E5%9B%BE/" style="font-size: 0.88rem;">视图<sup>1</sup></a><a href="/tags/%E8%A7%A6%E5%8F%91%E5%99%A8/" style="font-size: 0.88rem;">触发器<sup>1</sup></a><a href="/tags/%E8%AF%AD%E6%B3%95/" style="font-size: 0.88rem;">语法<sup>8</sup></a><a href="/tags/%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/" style="font-size: 0.88rem;">远程仓库<sup>1</sup></a><a href="/tags/%E9%80%89%E6%8B%A9%E5%99%A8/" style="font-size: 0.88rem;">选择器<sup>1</sup></a><a href="/tags/%E9%94%81/" style="font-size: 0.88rem;">锁<sup>4</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("11/1/2024 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2024 By 安知鱼 V1.6.14",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 星开祈灵 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><div class="js-pjax"><input type="hidden" name="page-type" id="page-type" value="post"></div><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>

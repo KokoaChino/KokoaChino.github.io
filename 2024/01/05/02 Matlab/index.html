@@ -1,0 +1,741 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>Matlab | 星开祈灵的个人博客</title><meta name="keywords" content="语法,函数,数据类型,Matlab,图像绘制,数据统计与计算,符号对象,数学"><meta name="author" content="星开祈灵"><meta name="copyright" content="星开祈灵"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="Matlab"><meta name="application-name" content="Matlab"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="Matlab"><meta property="og:url" content="https://kokoachino.github.io/2024/01/05/02%20Matlab/index.html"><meta property="og:site_name" content="星开祈灵的个人博客"><meta property="og:description" content="变量定义和基本运算数字整数11;  小数11.1;  矩阵矩阵的生成直接生成123[1, 2, 3; 4, 5, 6; 7, 8, 9]; % 【矩阵】1: 1: 10; % 起始值: 步长: 结束值【矩阵】1: 10; % 起始值: 结束值【矩阵】(步长为 1 时可省略，等价于上面)  函"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://gitee.com/kokoachino/picture-bed/raw/master/%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87.jpg?_r_=993a9fbc-7d74-4787-4aa9-97960e6aa3dc"><meta property="article:author" content="星开祈灵"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://gitee.com/kokoachino/picture-bed/raw/master/%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87.jpg?_r_=993a9fbc-7d74-4787-4aa9-97960e6aa3dc"><meta name="description" content="变量定义和基本运算数字整数11;  小数11.1;  矩阵矩阵的生成直接生成123[1, 2, 3; 4, 5, 6; 7, 8, 9]; % 【矩阵】1: 1: 10; % 起始值: 步长: 结束值【矩阵】1: 10; % 起始值: 结束值【矩阵】(步长为 1 时可省略，等价于上面)  函"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://kokoachino.github.io/2024/01/05/02%20Matlab/"><link rel="preconnect" href="//cdn.cbd.int"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: undefined,
+  postHeadAiDescription: {"enable":true,"gptName":"AnZhiYu","mode":"local","switchBtn":false,"btnLink":"https://afdian.net/item/886a79d4db6711eda42a52540025c377","randomNum":3,"basicWordCount":1000,"key":"xxxx","Referer":"https://xx.xx/"},
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: undefined,
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  music_page_default: "nav_music",
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: false,
+  mainTone: undefined,
+  authorStatus: undefined,
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":100,"languages":{"author":"作者: 星开祈灵","link":"链接: ","source":"来源: 星开祈灵的个人博客","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: '星开祈灵的个人博客',
+  title: 'Matlab',
+  postAI: '',
+  pageFillDescription: '变量定义和基本运算, 数字, 整数, 小数, 矩阵, 矩阵的生成, 直接生成, 函数生成, 矩阵的运算, 基本运算, 高级运算, 矩阵的修改, 元素替换, 矩阵拼接, 矩阵变维, 信息获取, 数组, 一维数组, 二维数组, 多维数组, 多项式, 多项式的创建, 多项式求值, 多项式求根, 字符串, 字符串的创建, 直接生成, 函数生成, 字符串的操作, 比较, 查找, 截取, 替换, 转大小写, 对齐, 其他, 语句, 选择语句, if - elseif - else - end, switch - case - otherwise - end, try - catch, 循环语句, for, while, 程序控制, 文件, 脚本文件, 函数文件, 图像绘制, 二维曲线, 基本函数, 格式设置, 图形修饰, 标题标签, 图形保持, 分割绘制, 二维特殊图形, 柱状图, 饼形图, 直方图, 离散数据图, 三维曲线曲面, 三维曲线, 三维曲面, 数据统计与计算, 数据统计, 最值, 均值, 中值, 排序, 求和, 求积, 累加, 累乘, 数据计算, 函数极值, 函数零点, 符号对象, 符号对象的创建, 符号常量, 符号变量, 符号函数, 内置的符号函数, 三角函数, 虚数函数, 符号对象精度转换, 符号多项式函数, 符号函数的计算, 极限, 求和, 求导, 单变量求导, 多元偏导, 积分, 定积分, 不定积分, 一维泰勒展开变量定义和基本运算数字整数小数矩阵矩阵的生成直接生成矩阵起始值步长结束值矩阵起始值结束值矩阵步长为时可省略等价于上面函数生成起始值结束值生成个数默认等差生成指定个数的一维矩阵维数单位阵行列全零阵行列全一阵维数分布随机阵维数高斯分布随机阵矩阵的运算基本运算矩阵乘法点乘点除点除点幂高级运算矩阵行列式矩阵矩阵的秩矩阵转置矩阵矩阵逆矩阵矩阵伪逆矩阵矩阵伴随矩阵矩阵特征向量特征值对角阵矩阵主对角线上方第条斜线对角矩阵矩阵主对角线上方第条斜线上三角矩阵矩阵主对角线上方第条斜线下三角矩阵矩阵的修改元素替换全局替换行列元素替换行列替换行表示删除该行行列替换列表示删除该列矩阵拼接矩阵矩阵垂直拼接矩阵矩阵水平拼接矩阵变维矩阵行列矩阵变维信息获取矩阵行数列数矩阵行数列数数组一维数组行向量二维数组矩阵多维数组前两维设定为给定矩阵放在第三维的第个位置前两维设定为给定矩阵放在第三维的第个位置默认放在第三维的第个位置扩展第三维的第个位置维数数组数组多维数组多项式多项式的创建系数向量按降幂排列最右边是常数项系数向量自变量字符字符串生成好看的字符串不被认可的运算式系数向量字符串生成可用的符号函数多项式求值系数向量的值数字代入求值系数向量向量向量对每个值单独求值多项式求根系数向量根植矩阵根植矩阵系数向量字符串字符串的创建直接生成字符串中单引号写两遍方括号连接多个字符串函数生成字符串字符串字符串拼接字符串字符串字符串多行字符串拼接多行字符串字符串字符串取的值字符串字符串取的值字符串字符串将值读取为字符串整数字符串数字转字符串整数字符串十进制转十六进制字符串的操作比较字符串字符串整数相等为不等为字符串字符串整数整数判断前个字符是否相等字符串字符串整数忽略大小写的比较字符串字符串整数整数忽略大小写比较前个字符是否相等查找字符串字符串整数在中找出现的位置字符串字符串数组整数在中找以为前缀的字符串个数截取字符串字符串截取第一个分隔符前的部分替换字符串字符串字符串字符串在中用替换转大小写字符串字符串转小写字符串字符串转大写对齐字符串字符串左对齐字符串字符串居中对齐字符串字符串右对齐其他字符串字符串删除中的开头和结尾的空格字符串将作为代码执行语句选择语句显示函数其他情况若出错则执行循环语句初始值步长结束值循环体内不可修改循环变量程序控制跳过本轮循环跳出当前循环跳出程序并返回文件脚本文件用于执行一系列命令或语句通常用于快速执行一组指令而不需要函数接口或参数传递文件名假设为调用格式函数文件可以通过输入参数和返回值与其他代码进行交互并且可以在程序中多次调用主函数返回值参数列表子函数文件命名应与函数名一致文件名调用格式函数输入输出参数可以不确定输入参数内容的元胞数组输出参数内容的元胞数组图像绘制首先为例子设定一系列散点和函数轴取样点实际上是一个向量本质是将向量的每一个元素做一个映射实际上是一个向量二维曲线基本函数下一次绘图在新窗口向量绘制函数横坐标向量纵坐标向量绘制函数向量矩阵同时绘制多个函数横坐标向量纵坐标向量同时绘制多个函数格式设置横坐标向量纵坐标向量线性图形格式设置字符串绘制函数横坐标范围纵坐标范围设定横纵坐标范围颜色符号黑白蓝绿红青紫黄曲线样式符号实线虚线点线点画线点样式符号实点圆圈叉十字星号方块钻石下三角上三角左三角右三角五角星六角星图形修饰标题标签字符串图像标题字符串轴标记字符串轴标记字符串轴标记图形保持在原有窗口曲线上增加绘制下一个图形在同一窗口内被绘制分割绘制整数整数整数分割成的区域在第块区域绘制下一个图形被绘制在块区域的第块整数整数整数分割成的区域在第块区域绘制下一个图形被绘制在块区域的第块二维特殊图形柱状图横坐标向量纵坐标向量宽度样式垂直柱状图横坐标向量纵坐标向量宽度样式水平柱状图横坐标向量纵坐标向量宽度样式三维柱状图横坐标向量纵坐标向量宽度样式水平三维柱状图宽度默认为大于各条会重叠样式默认为分组式还有另一种堆栈式饼形图向量向量标签数组二维饼形图向量向量标签数组三维饼形图向量与同长度为表示该元素被分离突出显示为表示不分离默认为标签数组与同长度每个元素的标签直方图向量把横坐标分为段绘制直方图向量用于指定每段中间值的向量直方图离散数据图横坐标向量纵坐标向量线性图形格式设置字符串阶梯图最高价格向量最低价格向量收盘价格向量开盘价格向量蜡烛图三维曲线曲面三维曲线轴向量轴向量轴向量绘制函数三维曲面轴的采样点轴的采样点得到面网格点网格点网格点网格点三维网格网格点网格点网格点三维表面图数据统计与计算数据统计最值向量向量的最小值矩阵每一列的最小值的行向量矩阵每一行的最小值的列向量矩阵每一列的最小值的行向量该最小值在矩阵中第一次出现的索引向量向量的最大值矩阵每一列的最大值的行向量矩阵每一行的最大值的列向量矩阵每一列的最大值的行向量该最大值在矩阵中第一次出现的索引均值向量向量的均值矩阵每一列的均值的行向量矩阵每一行的均值的列向量中值向量向量的中值矩阵每一列的中值的行向量矩阵每一行的中值的列向量排序矩阵排序后的矩阵按列排序默认选项按行排序升序排序默认选项逆序排序求和矩阵值求和后的值求积矩阵值求积后的值累加矩阵矩阵累加后的矩阵累乘矩阵矩阵累乘后的矩阵数据计算函数极值函数数字数字在给定的值附近寻找最小值点函数数字数字在给定的值附近寻找最大值点函数零点函数数字数字在给定的值附近寻找零点符号对象符号对象的创建符号常量数字符号常量符号含义浮点数有理分式的浮点数有理数带估计误差有理数符号变量声明符号变量符号函数创建符号函数内置的符号函数三角函数三角函数含义正弦余弦正切反正弦反余弦反正切双曲正弦双曲余弦双曲正切反双曲正弦反双曲余弦反双曲正切虚数函数虚数函数含义复数共轭复数实部复数虚部复数模复数幅角符号对象精度转换显示当前用于计算的精度将计算精度改为位使运算按照规定的精度执行在内控制精度离开这一步精度恢复符号多项式函数函数符号变量反函数对中的变量求反函数符号函数的计算极限求求求默认变量默认变量求和计算表达式变量从到的级数和计算表达式默认变量从到的级数和计算默认变量从到的级数和求导单变量求导对的阶导对的阶导对默认变量的阶导默认变量阶导多元偏导先对求偏导再对求偏导先对求偏导再对求偏导再对求偏导积分定积分函数变量在区间定积分函数默认变量在区间定积分不定积分函数变量的不定积分函数默认变量的不定积分一维泰勒展开在处展开为五阶泰勒级数在处展开为五阶泰勒级数在默认变量处展开为五阶泰勒级数',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-05-15 17:50:11',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://gitee.com/kokoachino/picture-bed/raw/master/%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/head.jpg"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><a id="site-name" href="/" accesskey="h"><div class="title">星开祈灵的个人博客</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="http://8.138.214.176:5174/%E9%A1%B9%E7%9B%AE%E5%9B%BE%E5%BA%8A/%E6%98%9F%E5%BC%80%E7%A5%88%E7%81%B5%E7%99%BE%E5%AE%9D%E7%AE%B1%20%E9%A1%B9%E7%9B%AE%E6%96%87%E6%A1%A3-29.png" target="_blank"><img class="post-qr-code-img" alt="微信" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="http://8.138.214.176:5174/%E9%A1%B9%E7%9B%AE%E5%9B%BE%E5%BA%8A/%E6%98%9F%E5%BC%80%E7%A5%88%E7%81%B5%E7%99%BE%E5%AE%9D%E7%AE%B1%20%E9%A1%B9%E7%9B%AE%E6%96%87%E6%A1%A3-29.png"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png" target="_blank"><img class="post-qr-code-img" alt="支付宝" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/API/" style="font-size: 1.05rem;">API<sup>1</sup></a><a href="/tags/CSS/" style="font-size: 1.05rem;">CSS<sup>1</sup></a><a href="/tags/Git/" style="font-size: 1.05rem;">Git<sup>1</sup></a><a href="/tags/HTML/" style="font-size: 1.05rem;">HTML<sup>1</sup></a><a href="/tags/Java/" style="font-size: 1.05rem;">Java<sup>7</sup></a><a href="/tags/Lambda/" style="font-size: 1.05rem;">Lambda<sup>1</sup></a><a href="/tags/Matlab/" style="font-size: 1.05rem;">Matlab<sup>1</sup></a><a href="/tags/MySQL/" style="font-size: 1.05rem;">MySQL<sup>1</sup></a><a href="/tags/Optional/" style="font-size: 1.05rem;">Optional<sup>1</sup></a><a href="/tags/Stream-%E6%B5%81/" style="font-size: 1.05rem;">Stream 流<sup>1</sup></a><a href="/tags/Web/" style="font-size: 1.05rem;">Web<sup>6</sup></a><a href="/tags/%E4%BA%8B%E5%8A%A1/" style="font-size: 1.05rem;">事务<sup>4</sup></a><a href="/tags/%E5%87%BD%E6%95%B0/" style="font-size: 1.05rem;">函数<sup>4</sup></a><a href="/tags/%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3/" style="font-size: 1.05rem;">函数式接口<sup>1</sup></a><a href="/tags/%E5%88%86%E6%94%AF/" style="font-size: 1.05rem;">分支<sup>1</sup></a><a href="/tags/%E5%8F%8D%E5%B0%84/" style="font-size: 1.05rem;">反射<sup>1</sup></a><a href="/tags/%E5%91%BD%E4%BB%A4/" style="font-size: 1.05rem;">命令<sup>2</sup></a><a href="/tags/%E5%9B%BE%E5%83%8F%E7%BB%98%E5%88%B6/" style="font-size: 1.05rem;">图像绘制<sup>1</sup></a><a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 1.05rem;">多线程<sup>1</sup></a><a href="/tags/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/" style="font-size: 1.05rem;">存储过程<sup>1</sup></a><a href="/tags/%E5%AE%9A%E6%97%B6%E5%99%A8/" style="font-size: 1.05rem;">定时器<sup>2</sup></a><a href="/tags/%E5%B1%9E%E6%80%A7/" style="font-size: 1.05rem;">属性<sup>2</sup></a><a href="/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E5%99%A8/" style="font-size: 1.05rem;">异常处理器<sup>1</sup></a><a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 1.05rem;">数学<sup>2</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 1.05rem;">数据库<sup>2</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" style="font-size: 1.05rem;">数据类型<sup>4</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1%E4%B8%8E%E8%AE%A1%E7%AE%97/" style="font-size: 1.05rem;">数据统计与计算<sup>1</sup></a><a href="/tags/%E6%96%87%E4%BB%B6/" style="font-size: 1.05rem;">文件<sup>1</sup></a><a href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" style="font-size: 1.05rem;">新特性<sup>1</sup></a><a href="/tags/%E6%AD%A3%E5%88%99%E5%8C%B9%E9%85%8D/" style="font-size: 1.05rem;">正则匹配<sup>1</sup></a><a href="/tags/%E6%B3%A8%E8%A7%A3/" style="font-size: 1.05rem;">注解<sup>5</sup></a><a href="/tags/%E6%B8%B8%E6%A0%87/" style="font-size: 1.05rem;">游标<sup>1</sup></a><a href="/tags/%E7%AC%A6%E5%8F%B7%E5%AF%B9%E8%B1%A1/" style="font-size: 1.05rem;">符号对象<sup>1</sup></a><a href="/tags/%E7%B4%A2%E5%BC%95/" style="font-size: 1.05rem;">索引<sup>1</sup></a><a href="/tags/%E8%A7%86%E5%9B%BE/" style="font-size: 1.05rem;">视图<sup>1</sup></a><a href="/tags/%E8%A7%A6%E5%8F%91%E5%99%A8/" style="font-size: 1.05rem;">触发器<sup>1</sup></a><a href="/tags/%E8%AF%AD%E6%B3%95/" style="font-size: 1.05rem;">语法<sup>8</sup></a><a href="/tags/%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/" style="font-size: 1.05rem;">远程仓库<sup>1</sup></a><a href="/tags/%E9%80%89%E6%8B%A9%E5%99%A8/" style="font-size: 1.05rem;">选择器<sup>1</sup></a><a href="/tags/%E9%94%81/" style="font-size: 1.05rem;">锁<sup>4</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/05/"><span class="card-archive-list-date">五月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/04/"><span class="card-archive-list-date">四月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/12/"><span class="card-archive-list-date">十二月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/11/"><span class="card-archive-list-date">十一月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/09/"><span class="card-archive-list-date">九月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/08/"><span class="card-archive-list-date">八月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/07/"><span class="card-archive-list-date">七月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/06/"><span class="card-archive-list-date">六月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">3</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%85%B6%E4%BB%96/" itemprop="url">其他</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/%E8%AF%AD%E6%B3%95/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>语法</span></a><a class="article-meta__tags" href="/tags/%E5%87%BD%E6%95%B0/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>函数</span></a><a class="article-meta__tags" href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>数据类型</span></a><a class="article-meta__tags" href="/tags/Matlab/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Matlab</span></a><a class="article-meta__tags" href="/tags/%E5%9B%BE%E5%83%8F%E7%BB%98%E5%88%B6/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>图像绘制</span></a><a class="article-meta__tags" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1%E4%B8%8E%E8%AE%A1%E7%AE%97/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>数据统计与计算</span></a><a class="article-meta__tags" href="/tags/%E7%AC%A6%E5%8F%B7%E5%AF%B9%E8%B1%A1/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>符号对象</span></a><a class="article-meta__tags" href="/tags/%E6%95%B0%E5%AD%A6/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>数学</span></a></span></div></div><h1 class="post-title" itemprop="name headline">Matlab</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2024-01-04T16:00:00.000Z" title="发表于 2024-01-05 00:00:00">2024-01-05</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2025-05-15T09:50:11.221Z" title="更新于 2025-05-15 17:50:11">2025-05-15</time></span></div><div class="meta-secondline"><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为广州"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>广州</span></div></div></div><article class="post-content" id="article-container" itemscope itemtype="https://kokoachino.github.io/2024/01/05/02%20Matlab/"><header><a class="post-meta-categories" href="/categories/%E5%85%B6%E4%BB%96/" itemprop="url">其他</a><a href="/tags/%E8%AF%AD%E6%B3%95/" tabindex="-1" itemprop="url">语法</a><a href="/tags/%E5%87%BD%E6%95%B0/" tabindex="-1" itemprop="url">函数</a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" tabindex="-1" itemprop="url">数据类型</a><a href="/tags/Matlab/" tabindex="-1" itemprop="url">Matlab</a><a href="/tags/%E5%9B%BE%E5%83%8F%E7%BB%98%E5%88%B6/" tabindex="-1" itemprop="url">图像绘制</a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1%E4%B8%8E%E8%AE%A1%E7%AE%97/" tabindex="-1" itemprop="url">数据统计与计算</a><a href="/tags/%E7%AC%A6%E5%8F%B7%E5%AF%B9%E8%B1%A1/" tabindex="-1" itemprop="url">符号对象</a><a href="/tags/%E6%95%B0%E5%AD%A6/" tabindex="-1" itemprop="url">数学</a><h1 id="CrawlerTitle" itemprop="name headline">Matlab</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">星开祈灵</span><time itemprop="dateCreated datePublished" datetime="2024-01-04T16:00:00.000Z" title="发表于 2024-01-05 00:00:00">2024-01-05</time><time itemprop="dateCreated datePublished" datetime="2025-05-15T09:50:11.221Z" title="更新于 2025-05-15 17:50:11">2025-05-15</time></header><span id="more"></span>
+
+
+
+<h1 id="变量定义和基本运算"><a href="#变量定义和基本运算" class="headerlink" title="变量定义和基本运算"></a>变量定义和基本运算</h1><h2 id="数字"><a href="#数字" class="headerlink" title="数字"></a>数字</h2><h3 id="整数"><a href="#整数" class="headerlink" title="整数"></a>整数</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="小数"><a href="#小数" class="headerlink" title="小数"></a>小数</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.1</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="矩阵"><a href="#矩阵" class="headerlink" title="矩阵"></a>矩阵</h2><h3 id="矩阵的生成"><a href="#矩阵的生成" class="headerlink" title="矩阵的生成"></a>矩阵的生成</h3><h4 id="直接生成"><a href="#直接生成" class="headerlink" title="直接生成"></a>直接生成</h4><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>; <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>; <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]; <span class="comment">% 【矩阵】</span></span><br><span class="line"><span class="number">1</span>: <span class="number">1</span>: <span class="number">10</span>; <span class="comment">% 起始值: 步长: 结束值【矩阵】</span></span><br><span class="line"><span class="number">1</span>: <span class="number">10</span>; <span class="comment">% 起始值: 结束值【矩阵】(步长为 1 时可省略，等价于上面)</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="函数生成"><a href="#函数生成" class="headerlink" title="函数生成"></a>函数生成</h4><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">linspace</span>(<span class="number">0</span>, <span class="number">10</span>, <span class="number">5</span>); <span class="comment">% 起始值，结束值，生成个数(默认 100)【等差生成指定个数的一维矩阵】</span></span><br><span class="line"><span class="built_in">eye</span>(<span class="number">4</span>); <span class="comment">% 维数【单位阵】</span></span><br><span class="line"><span class="built_in">zeros</span>(<span class="number">1</span>, <span class="number">4</span>); <span class="comment">% 行，列【全零阵】</span></span><br><span class="line"><span class="built_in">ones</span>(<span class="number">4</span>, <span class="number">1</span>); <span class="comment">% 行，列【全一阵】</span></span><br><span class="line"><span class="built_in">rand</span>(<span class="number">4</span>); <span class="comment">% 维数【0-1分布随机阵】</span></span><br><span class="line"><span class="built_in">randn</span>(<span class="number">4</span>); <span class="comment">% 维数【高斯分布随机阵】</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="矩阵的运算"><a href="#矩阵的运算" class="headerlink" title="矩阵的运算"></a>矩阵的运算</h3><h4 id="基本运算"><a href="#基本运算" class="headerlink" title="基本运算"></a>基本运算</h4><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a * b <span class="comment">% 矩阵乘法</span></span><br><span class="line">a .* b <span class="comment">% 点乘</span></span><br><span class="line">a ./ b <span class="comment">% 点除，a / b</span></span><br><span class="line">a .\ b <span class="comment">% 点除，b / a</span></span><br><span class="line">a .^ b <span class="comment">% 点幂</span></span><br></pre></td></tr></table></figure>
+<h4 id="高级运算"><a href="#高级运算" class="headerlink" title="高级运算"></a>高级运算</h4><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">det(a); <span class="comment">% 矩阵【行列式】</span></span><br><span class="line">rank(a); <span class="comment">% 矩阵【矩阵的秩】</span></span><br><span class="line">a&#x27;; <span class="comment">% 矩阵【转置矩阵】</span></span><br><span class="line">inv(a); <span class="comment">% 矩阵【逆矩阵】</span></span><br><span class="line">pinv(a); <span class="comment">% 矩阵【伪逆矩阵】</span></span><br><span class="line"><span class="built_in">compan</span>(a); <span class="comment">% 矩阵【伴随矩阵】</span></span><br><span class="line">eig(a); <span class="comment">% 矩阵【特征向量，特征值对角阵】</span></span><br><span class="line"><span class="built_in">diag</span>(a, <span class="number">0</span>); <span class="comment">% 矩阵，主对角线上方第 k 条斜线【对角矩阵】</span></span><br><span class="line"><span class="built_in">triu</span>(a, <span class="number">0</span>); <span class="comment">% 矩阵，主对角线上方第 k 条斜线【上三角矩阵】</span></span><br><span class="line"><span class="built_in">tril</span>(a, <span class="number">0</span>); <span class="comment">% 矩阵，主对角线上方第 k 条斜线【下三角矩阵】</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="矩阵的修改"><a href="#矩阵的修改" class="headerlink" title="矩阵的修改"></a>矩阵的修改</h3><h4 id="元素替换"><a href="#元素替换" class="headerlink" title="元素替换"></a>元素替换</h4><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a = b; <span class="comment">% 【全局替换】</span></span><br><span class="line">a(<span class="number">2</span>, <span class="number">3</span>) = <span class="number">4</span>; <span class="comment">% 行，列【元素替换】</span></span><br><span class="line">a(<span class="number">1</span>,:) = [<span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>]; <span class="comment">% 行，列【替换行】([]表示删除该行)</span></span><br><span class="line">a(: ,<span class="number">1</span>) = []; <span class="comment">% 行，列【替换列】([]表示删除该列)</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="矩阵拼接"><a href="#矩阵拼接" class="headerlink" title="矩阵拼接"></a>矩阵拼接</h4><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span>(<span class="number">1</span>, a, b); <span class="comment">% 1，矩阵，矩阵【垂直拼接】</span></span><br><span class="line"><span class="built_in">cat</span>(<span class="number">2</span>, a, b); <span class="comment">% 2，矩阵，矩阵【水平拼接】</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="矩阵变维"><a href="#矩阵变维" class="headerlink" title="矩阵变维"></a>矩阵变维</h4><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">reshape</span>(a, <span class="number">1</span>, <span class="number">9</span>); <span class="comment">% 矩阵，行，列【矩阵变维】</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="信息获取"><a href="#信息获取" class="headerlink" title="信息获取"></a>信息获取</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">size</span>(a); <span class="comment">% 矩阵【行数，列数】</span></span><br><span class="line"><span class="built_in">length</span>(a); <span class="comment">% 矩阵【max(行数，列数)】</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><h3 id="一维数组"><a href="#一维数组" class="headerlink" title="一维数组"></a>一维数组</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]; <span class="comment">% 【行向量】</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="二维数组"><a href="#二维数组" class="headerlink" title="二维数组"></a>二维数组</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>; <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>; <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]; <span class="comment">% 【矩阵】</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="多维数组"><a href="#多维数组" class="headerlink" title="多维数组"></a>多维数组</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mul(: ,: ,<span class="number">1</span>) = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>; <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]; <span class="comment">% 前两维设定为给定矩阵，放在第三维的第 1 个位置</span></span><br><span class="line">mul(: ,: ,<span class="number">2</span>) = [<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>; <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]; <span class="comment">% 前两维设定为给定矩阵，放在第三维的第 2 个位置</span></span><br><span class="line"></span><br><span class="line">mul = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>; <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]; <span class="comment">% 默认放在第三维的第 1 个位置</span></span><br><span class="line">mul(: ,: ,<span class="number">2</span>) = [<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>; <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]; <span class="comment">% 扩展第三维的第 2 个位置</span></span><br><span class="line"></span><br><span class="line">mul_1 = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>; <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>];</span><br><span class="line">mul_2 = [<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>; <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>];</span><br><span class="line">mul = <span class="built_in">cat</span>(<span class="number">3</span>, mul_1, mul_2); <span class="comment">% 维数，数组，数组【多维数组】</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="多项式"><a href="#多项式" class="headerlink" title="多项式"></a>多项式</h2><h3 id="多项式的创建"><a href="#多项式的创建" class="headerlink" title="多项式的创建"></a>多项式的创建</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">p = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>] <span class="comment">% 【系数向量】按 x 降幂排列，最右边是常数项</span></span><br><span class="line">f1 = poly2str(p, <span class="string">&#x27;x&#x27;</span>); <span class="comment">% 系数向量，自变量字符【字符串】生成好看的字符串 f1 = x^3 + 2 x^2 + 3 x + 4，不被认可的运算式</span></span><br><span class="line">f2 = poly2sym(p); <span class="comment">% 系数向量【字符串】生成可用的符号函数 f2 = x^3 + 2*x^2 + 3*x + 4</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="多项式求值"><a href="#多项式求值" class="headerlink" title="多项式求值"></a>多项式求值</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">y1 = polyval(p, <span class="number">4</span>); <span class="comment">% 系数向量，x 的值【数字】代入求值</span></span><br><span class="line">y1 = polyval(p, x); <span class="comment">% 系数向量，向量【向量】对每个值单独求值</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="多项式求根"><a href="#多项式求根" class="headerlink" title="多项式求根"></a>多项式求根</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">r = roots(p); <span class="comment">% 系数向量【根植矩阵】</span></span><br><span class="line">p0 = poly(r); <span class="comment">% 根植矩阵【系数向量】</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><h3 id="字符串的创建"><a href="#字符串的创建" class="headerlink" title="字符串的创建"></a>字符串的创建</h3><h4 id="直接生成-1"><a href="#直接生成-1" class="headerlink" title="直接生成"></a>直接生成</h4><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;hello world&#x27;</span>;</span><br><span class="line"><span class="string">&#x27;I&#x27;&#x27;m a student&#x27;</span>; <span class="comment">% 字符串中单引号写两遍</span></span><br><span class="line">[<span class="string">&#x27;I&#x27;&#x27;m&#x27;</span> <span class="string">&#x27;a&#x27;</span> <span class="string">&#x27;student&#x27;</span>]; <span class="comment">% 方括号连接多个字符串</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="函数生成-1"><a href="#函数生成-1" class="headerlink" title="函数生成"></a>函数生成</h4><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">strcat(s1, s2); <span class="comment">% 字符串，字符串【字符串】拼接字符串</span></span><br><span class="line">strvcat(s1, s2); <span class="comment">% 字符串，字符串【多行字符串】拼接多行字符串</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">abs</span>(s); <span class="comment">% 字符串【字符串】取 s 的 ASCII 值</span></span><br><span class="line">double(s); <span class="comment">% 字符串【字符串】取 s 的 ASCII 值</span></span><br><span class="line">char(s); <span class="comment">% 字符串【字符串】将 ASCII 值读取为字符串</span></span><br><span class="line"></span><br><span class="line">num2str(x); <span class="comment">% 整数【字符串】数字转字符串</span></span><br><span class="line">dec2hex(a); <span class="comment">% 整数【字符串】十进制转十六进制</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="字符串的操作"><a href="#字符串的操作" class="headerlink" title="字符串的操作"></a>字符串的操作</h3><h4 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h4><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">strcmp(s1, s2); <span class="comment">% 字符串，字符串【整数】相等为 1，不等为 0</span></span><br><span class="line">strncmp(s1, s2, n); <span class="comment">% 字符串，字符串，整数【整数】判断前 n 个字符是否相等</span></span><br><span class="line">strcmpi(s1, s2); <span class="comment">% 字符串，字符串【整数】忽略大小写的比较</span></span><br><span class="line">strncmpi(s1, s2, n); <span class="comment">% 字符串，字符串，整数【整数】忽略大小写比较前 n 个字符是否相等</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h4><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">strfind(s1, s2); <span class="comment">% 字符串，字符串【整数】在 s1 中找 s2 出现的位置</span></span><br><span class="line">strmatch(s1, s2); <span class="comment">% 字符串，字符串数组【整数】在 s2 中找以 s1 为前缀的字符串个数</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="截取"><a href="#截取" class="headerlink" title="截取"></a>截取</h4><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">strtok(s); <span class="comment">% 字符串【字符串】截取 s 第一个分隔符前的部分</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="替换"><a href="#替换" class="headerlink" title="替换"></a>替换</h4><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">strrep(s0, s1, s2); <span class="comment">% 字符串，字符串，字符串【字符串】在 s0 中用 s2 替换 s1</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="转大小写"><a href="#转大小写" class="headerlink" title="转大小写"></a>转大小写</h4><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lower(s); <span class="comment">% 字符串【字符串】转小写</span></span><br><span class="line">upper(s); <span class="comment">% 字符串【字符串】转大写</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="对齐"><a href="#对齐" class="headerlink" title="对齐"></a>对齐</h4><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">strjust(s, <span class="string">&#x27;left&#x27;</span>); <span class="comment">% 字符串，&#x27;left&#x27;【字符串】左对齐</span></span><br><span class="line">strjust(s, <span class="string">&#x27;center&#x27;</span>); <span class="comment">% 字符串，&#x27;center&#x27;【字符串】居中对齐</span></span><br><span class="line">strjust(s, <span class="string">&#x27;right&#x27;</span>); <span class="comment">% 字符串，&#x27;right&#x27;【字符串】右对齐</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h4><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">strtrim(s); <span class="comment">% 字符串【字符串】删除 s 中的开头和结尾的空格</span></span><br><span class="line">eval(s); <span class="comment">% 字符串【NULL】将 s 作为代码执行</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="语句"><a href="#语句" class="headerlink" title="语句"></a>语句</h1><h2 id="选择语句"><a href="#选择语句" class="headerlink" title="选择语句"></a>选择语句</h2><h3 id="if-elseif-else-end"><a href="#if-elseif-else-end" class="headerlink" title="if - elseif - else - end"></a>if - elseif - else - end</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> a &gt; <span class="number">0</span></span><br><span class="line">	<span class="built_in">disp</span>(a + <span class="number">1</span>); <span class="comment">% 显示函数</span></span><br><span class="line"><span class="keyword">elseif</span> a == <span class="number">0</span></span><br><span class="line">	<span class="built_in">disp</span>(a);</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">	<span class="built_in">disp</span>(a - <span class="number">1</span>);</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="switch-case-otherwise-end"><a href="#switch-case-otherwise-end" class="headerlink" title="switch - case - otherwise - end"></a>switch - case - otherwise - end</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span> a</span><br><span class="line">    <span class="keyword">case</span> <span class="number">0</span></span><br><span class="line">        <span class="built_in">disp</span>(a);</span><br><span class="line">    <span class="keyword">case</span> <span class="number">1</span></span><br><span class="line">        <span class="built_in">disp</span>(a + <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">otherwise</span> <span class="comment">% 其他情况</span></span><br><span class="line">        <span class="built_in">disp</span>(<span class="string">&#x27;aaa&#x27;</span>);</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="try-catch"><a href="#try-catch" class="headerlink" title="try - catch"></a>try - catch</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span></span><br><span class="line">    z = x * y;</span><br><span class="line"><span class="keyword">catch</span> <span class="comment">% 若 try 出错，则执行</span></span><br><span class="line">    z = x .* y;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="循环语句"><a href="#循环语句" class="headerlink" title="循环语句"></a>循环语句</h2><h3 id="for"><a href="#for" class="headerlink" title="for"></a>for</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">0</span>: <span class="number">1</span>: <span class="number">10</span> <span class="comment">% 初始值:步长:结束值</span></span><br><span class="line">	<span class="built_in">disp</span>(<span class="built_in">i</span>); <span class="comment">% 循环体内不可修改循环变量</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="while"><a href="#while" class="headerlink" title="while"></a>while</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="number">5</span>;</span><br><span class="line"><span class="keyword">while</span> a &gt; <span class="number">2</span></span><br><span class="line">	<span class="built_in">disp</span>(a);</span><br><span class="line">	a = a - <span class="number">1</span>;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="程序控制"><a href="#程序控制" class="headerlink" title="程序控制"></a>程序控制</h2><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">continue</span> <span class="comment">% 跳过本轮循环</span></span><br><span class="line"><span class="keyword">break</span> <span class="comment">% 跳出当前循环</span></span><br><span class="line"><span class="keyword">return</span> <span class="comment">% 跳出程序并返回</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h1><h2 id="脚本文件"><a href="#脚本文件" class="headerlink" title="脚本文件"></a>脚本文件</h2><blockquote>
+<p>用于执行一系列 MATLAB 命令或语句，通常用于快速执行一组指令而不需要函数接口或参数传递</p>
+</blockquote>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">clear;</span><br><span class="line">r = <span class="number">5</span>;</span><br><span class="line">s = <span class="built_in">pi</span> * r * r;</span><br><span class="line">p = <span class="number">2</span> * <span class="built_in">pi</span> * r;</span><br><span class="line"><span class="built_in">disp</span>(s);</span><br><span class="line"><span class="built_in">disp</span>(p);</span><br></pre></td></tr></table></figure>
+
+<p>文件名假设为：<code>myexp.m</code></p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">myexp; <span class="comment">% 调用格式</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="函数文件"><a href="#函数文件" class="headerlink" title="函数文件"></a>函数文件</h2><blockquote>
+<p>可以通过输入参数和返回值与其他代码进行交互，并且可以在 MATLAB 程序中多次调用</p>
+</blockquote>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">[s, p]</span> = <span class="title">circ</span><span class="params">(r)</span> % 主函数；返回值，参数列表</span></span><br><span class="line">    s = <span class="built_in">pi</span> * r * type0(r);</span><br><span class="line">    p = <span class="number">2</span> * <span class="built_in">pi</span> * type1(r);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">y0</span> = <span class="title">type0</span><span class="params">(a)</span> % 子函数</span></span><br><span class="line">    y0 = a + <span class="number">1</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">y1</span> = <span class="title">type1</span><span class="params">(a)</span></span></span><br><span class="line">    y1 = a + <span class="number">4</span>;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p>文件命名应与函数名一致，文件名<code>circ.m</code></p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[a, b] = circ(<span class="number">5</span>); <span class="comment">% 调用格式</span></span><br></pre></td></tr></table></figure>
+
+<p>函数输入输出参数可以不确定</p>
+<ul>
+<li><p><code>varargin</code>：输入参数内容的元胞数组</p>
+</li>
+<li><p><code>varargout</code>：输出参数内容的元胞数组</p>
+</li>
+</ul>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">varargout</span> = <span class="title">fun</span><span class="params">(varargin)</span></span></span><br><span class="line">    x = <span class="built_in">length</span>(varargin);</span><br><span class="line">    varargout&#123;<span class="number">1</span>&#125; = x;</span><br><span class="line">    varargout&#123;<span class="number">2</span>&#125; = x + <span class="number">1</span>;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="图像绘制"><a href="#图像绘制" class="headerlink" title="图像绘制"></a>图像绘制</h1><p>首先为例子设定一系列散点<code>x</code>和函数<code>y</code></p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="number">0</span>: <span class="number">0.1</span>: <span class="number">2</span> * <span class="built_in">pi</span>; <span class="comment">% x 轴取样点，实际上是一个向量</span></span><br><span class="line">y1 = <span class="built_in">sin</span>(x); <span class="comment">% 本质是将向量 x 的每一个元素做一个映射，实际上是一个向量</span></span><br><span class="line">y2 = <span class="built_in">cos</span>(x);</span><br></pre></td></tr></table></figure>
+
+<h2 id="二维曲线"><a href="#二维曲线" class="headerlink" title="二维曲线"></a>二维曲线</h2><h3 id="基本函数"><a href="#基本函数" class="headerlink" title="基本函数"></a>基本函数</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">figure</span>; <span class="comment">% 下一次绘图在新窗口</span></span><br><span class="line"><span class="built_in">plot</span>(y1); <span class="comment">% 向量【绘制函数 y1】</span></span><br><span class="line"><span class="built_in">plot</span>(x, y1); <span class="comment">% 横坐标向量，纵坐标向量【绘制函数 y1】</span></span><br><span class="line"><span class="built_in">plot</span>([y1&#x27;, y2&#x27;]); <span class="comment">% 向量矩阵【同时绘制多个函数】</span></span><br><span class="line"><span class="built_in">plot</span>(x, y1, x, y2); <span class="comment">% 横坐标向量，纵坐标向量...【同时绘制多个函数】</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="格式设置"><a href="#格式设置" class="headerlink" title="格式设置"></a>格式设置</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">plot</span>(x, y1, <span class="string">&#x27;b:o&#x27;</span>); <span class="comment">% 横坐标向量，纵坐标向量，线性图形格式设置字符串【绘制函数 y1】</span></span><br><span class="line">axis([<span class="number">-1</span> * <span class="built_in">pi</span>, <span class="number">3</span> * <span class="built_in">pi</span>, <span class="number">-1.5</span>, <span class="number">1.5</span>]); <span class="comment">% 横坐标范围，纵坐标范围【设定横纵坐标范围】</span></span><br></pre></td></tr></table></figure>
+
+
+<table>
+<thead>
+<tr>
+<th align="center">颜色</th>
+<th align="center">符号</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">黑</td>
+<td align="center">k</td>
+</tr>
+<tr>
+<td align="center">白</td>
+<td align="center">w</td>
+</tr>
+<tr>
+<td align="center">蓝</td>
+<td align="center">b</td>
+</tr>
+<tr>
+<td align="center">绿</td>
+<td align="center">g</td>
+</tr>
+<tr>
+<td align="center">红</td>
+<td align="center">r</td>
+</tr>
+<tr>
+<td align="center">青</td>
+<td align="center">c</td>
+</tr>
+<tr>
+<td align="center">紫</td>
+<td align="center">m</td>
+</tr>
+<tr>
+<td align="center">黄</td>
+<td align="center">y</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="center">曲线样式</th>
+<th align="center">符号</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">实线</td>
+<td align="center">-</td>
+</tr>
+<tr>
+<td align="center">虚线</td>
+<td align="center">–</td>
+</tr>
+<tr>
+<td align="center">点线</td>
+<td align="center">:</td>
+</tr>
+<tr>
+<td align="center">点画线</td>
+<td align="center">-.</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="center">点样式</th>
+<th align="center">符号</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">实点</td>
+<td align="center">.</td>
+</tr>
+<tr>
+<td align="center">圆圈</td>
+<td align="center">o</td>
+</tr>
+<tr>
+<td align="center">叉</td>
+<td align="center">x</td>
+</tr>
+<tr>
+<td align="center">十字</td>
+<td align="center">+</td>
+</tr>
+<tr>
+<td align="center">星号</td>
+<td align="center">*</td>
+</tr>
+<tr>
+<td align="center">方块</td>
+<td align="center">s</td>
+</tr>
+<tr>
+<td align="center">钻石</td>
+<td align="center">d</td>
+</tr>
+<tr>
+<td align="center">下三角</td>
+<td align="center">v</td>
+</tr>
+<tr>
+<td align="center">上三角</td>
+<td align="center">^</td>
+</tr>
+<tr>
+<td align="center">左三角</td>
+<td align="center">&lt;</td>
+</tr>
+<tr>
+<td align="center">右三角</td>
+<td align="center">&gt;</td>
+</tr>
+<tr>
+<td align="center">五角星</td>
+<td align="center">p</td>
+</tr>
+<tr>
+<td align="center">六角星</td>
+<td align="center">h</td>
+</tr>
+</tbody></table>
+<h3 id="图形修饰"><a href="#图形修饰" class="headerlink" title="图形修饰"></a>图形修饰</h3><h4 id="标题标签"><a href="#标题标签" class="headerlink" title="标题标签"></a>标题标签</h4><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">title(<span class="string">&#x27;a title&#x27;</span>); <span class="comment">% 字符串【图像标题】</span></span><br><span class="line">xlabel(<span class="string">&#x27;this is x&#x27;</span>); <span class="comment">% 字符串【x 轴标记】</span></span><br><span class="line">ylabel(<span class="string">&#x27;this is y&#x27;</span>); <span class="comment">% 字符串【y 轴标记】</span></span><br><span class="line">zlabel(<span class="string">&#x27;this is z&#x27;</span>); <span class="comment">% 字符串【z 轴标记】</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="图形保持"><a href="#图形保持" class="headerlink" title="图形保持"></a>图形保持</h4><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">plot</span>(x, y1);</span><br><span class="line"><span class="built_in">hold</span> on; <span class="comment">% 在原有窗口 y1 曲线上增加绘制下一个图形</span></span><br><span class="line"><span class="built_in">plot</span>(x, y2); <span class="comment">% y2 在同一窗口内被绘制</span></span><br><span class="line"><span class="built_in">hold</span> off;</span><br></pre></td></tr></table></figure>
+
+<h4 id="分割绘制"><a href="#分割绘制" class="headerlink" title="分割绘制"></a>分割绘制</h4><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">subplot(<span class="number">2</span>, <span class="number">2</span>, <span class="number">1</span>); <span class="comment">% 整数，整数，整数【分割成 2 x 2 的区域，在第 1 块区域绘制下一个图形】</span></span><br><span class="line"><span class="built_in">plot</span>(x, y1); <span class="comment">% y1 被绘制在 4 块区域的第 1 块</span></span><br><span class="line">subplot(<span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>); <span class="comment">% 整数，整数，整数【分割成 2 x 2 的区域，在第 2 块区域绘制下一个图形】</span></span><br><span class="line"><span class="built_in">plot</span>(x, y2); <span class="comment">% y2 被绘制在 4 块区域的第 2 块</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="二维特殊图形"><a href="#二维特殊图形" class="headerlink" title="二维特殊图形"></a>二维特殊图形</h2><h3 id="柱状图"><a href="#柱状图" class="headerlink" title="柱状图"></a>柱状图</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">bar(x, y, <span class="number">0.8</span>, <span class="string">&quot;grouped&quot;</span>); <span class="comment">% 横坐标向量，纵坐标向量，宽度，样式【垂直柱状图】</span></span><br><span class="line">barh(x, y, <span class="number">0.8</span>, <span class="string">&quot;grouped&quot;</span>); <span class="comment">% 横坐标向量，纵坐标向量，宽度，样式【水平柱状图】</span></span><br><span class="line">bar3(x, y, <span class="number">0.8</span>, <span class="string">&quot;grouped&quot;</span>); <span class="comment">% 横坐标向量，纵坐标向量，宽度，样式【三维柱状图】</span></span><br><span class="line">barh3(x, y, <span class="number">0.8</span>, <span class="string">&quot;grouped&quot;</span>); <span class="comment">% 横坐标向量，纵坐标向量，宽度，样式【水平三维柱状图】</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>宽度：</strong>默认为<code>0.8</code>，大于<code>1</code>各条会重叠</li>
+<li><strong>样式：</strong>默认为<code>grouped</code>（分组式），还有另一种<code>stacked</code>（堆栈式）</li>
+</ul>
+<h3 id="饼形图"><a href="#饼形图" class="headerlink" title="饼形图"></a>饼形图</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pie(x, [<span class="number">0</span> <span class="number">1</span> <span class="number">0</span> <span class="number">0</span> <span class="number">1</span>], &#123;<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;d&#x27;</span>, <span class="string">&#x27;e&#x27;</span>&#125;); <span class="comment">% 向量，explode 向量，标签数组【二维饼形图】</span></span><br><span class="line">pie3(x, [<span class="number">0</span> <span class="number">1</span> <span class="number">0</span> <span class="number">0</span> <span class="number">1</span>], &#123;<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;d&#x27;</span>, <span class="string">&#x27;e&#x27;</span>&#125;); <span class="comment">% 向量，explode 向量，标签数组【三维饼形图】</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong><code>explode</code>向量：</strong>与<code>x</code>同长度，为<code>1</code>表示该元素被分离突出显示，为<code>0</code>表示不分离，默认为<code>0</code></li>
+<li><strong>标签数组：</strong>与<code>x</code>同长度，每个元素的标签</li>
+</ul>
+<h3 id="直方图"><a href="#直方图" class="headerlink" title="直方图"></a>直方图</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hist(y, n); <span class="comment">% 向量，把横坐标分为 n 段绘制【直方图】</span></span><br><span class="line">hist(y, x); <span class="comment">% 向量，用于指定每段中间值的向量【直方图】</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="离散数据图"><a href="#离散数据图" class="headerlink" title="离散数据图"></a>离散数据图</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">stairs(x, y, <span class="string">&#x27;b-o&#x27;</span>); <span class="comment">% 横坐标向量，纵坐标向量，线性图形格式设置字符串【阶梯图】</span></span><br><span class="line">candle(HI, LO, CL, OP); <span class="comment">% 最高价格向量，最低价格向量，收盘价格向量，开盘价格向量【蜡烛图】</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="三维曲线曲面"><a href="#三维曲线曲面" class="headerlink" title="三维曲线曲面"></a>三维曲线曲面</h2><h3 id="三维曲线"><a href="#三维曲线" class="headerlink" title="三维曲线"></a>三维曲线</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="number">0</span>: <span class="number">0.1</span>: <span class="number">2</span> * <span class="built_in">pi</span>;</span><br><span class="line">y = <span class="built_in">sin</span>(x);</span><br><span class="line">z = <span class="built_in">cos</span>(x);</span><br><span class="line"><span class="built_in">plot3</span>(x, y, z, <span class="string">&#x27;b-*&#x27;</span>); <span class="comment">% x 轴向量，y 轴向量，z 轴向量【绘制函数】</span></span><br></pre></td></tr></table></figure>
+<h3 id="三维曲面"><a href="#三维曲面" class="headerlink" title="三维曲面"></a>三维曲面</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="number">-5</span>: <span class="number">0.1</span>: <span class="number">5</span>; <span class="comment">% x 轴的采样点</span></span><br><span class="line">y = <span class="number">-4</span>: <span class="number">0.1</span>: <span class="number">4</span>; <span class="comment">% y 轴的采样点</span></span><br><span class="line">[X, Y] = <span class="built_in">meshgrid</span>(x, y); <span class="comment">% 得到 xoy 面网格点</span></span><br><span class="line">Z = X .^ <span class="number">2</span> + Y .^ <span class="number">2</span>;</span><br><span class="line">mesh(X, Y, Z); <span class="comment">% 网格点，网格点，网格点【三维网格】</span></span><br><span class="line">surf(X, Y, Z); <span class="comment">% 网格点，网格点，网格点【三维表面图】</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="数据统计与计算"><a href="#数据统计与计算" class="headerlink" title="数据统计与计算"></a>数据统计与计算</h1><h2 id="数据统计"><a href="#数据统计" class="headerlink" title="数据统计"></a>数据统计</h2><h3 id="最值"><a href="#最值" class="headerlink" title="最值"></a>最值</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">y = <span class="built_in">min</span>(X); <span class="comment">% 向量【向量的最小值】</span></span><br><span class="line">y = <span class="built_in">min</span>(X); <span class="comment">% 矩阵【每一列的最小值的行向量】</span></span><br><span class="line">y = <span class="built_in">min</span>(A, [], <span class="number">2</span>); <span class="comment">% 矩阵【每一行的最小值的列向量】</span></span><br><span class="line">[y, k] = <span class="built_in">min</span>(X); <span class="comment">% 矩阵【每一列的最小值的行向量，该最小值在矩阵中第一次出现的索引】</span></span><br><span class="line"></span><br><span class="line">y = <span class="built_in">max</span>(X); <span class="comment">% 向量【向量的最大值】</span></span><br><span class="line">y = <span class="built_in">max</span>(X); <span class="comment">% 矩阵【每一列的最大值的行向量】</span></span><br><span class="line">y = <span class="built_in">max</span>(A, [], <span class="number">2</span>); <span class="comment">% 矩阵【每一行的最大值的列向量】</span></span><br><span class="line">[y, k] = <span class="built_in">max</span>(X); <span class="comment">% 矩阵【每一列的最大值的行向量，该最大值在矩阵中第一次出现的索引】</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="均值"><a href="#均值" class="headerlink" title="均值"></a>均值</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">y = <span class="built_in">mean</span>(X); <span class="comment">% 向量【向量的均值】</span></span><br><span class="line">y = <span class="built_in">mean</span>(X); <span class="comment">% 矩阵【每一列的均值的行向量】</span></span><br><span class="line">y = <span class="built_in">mean</span>(A, <span class="number">2</span>); <span class="comment">% 矩阵【每一行的均值的列向量】</span></span><br></pre></td></tr></table></figure>
+<h3 id="中值"><a href="#中值" class="headerlink" title="中值"></a>中值</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">y = median(X); <span class="comment">% 向量【向量的中值】</span></span><br><span class="line">y = median(X); <span class="comment">% 矩阵【每一列的中值的行向量】</span></span><br><span class="line">y = median(A, <span class="number">2</span>); <span class="comment">% 矩阵【每一行的中值的列向量】</span></span><br></pre></td></tr></table></figure>
+<h3 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sort</span>(A, <span class="number">1</span>, <span class="string">&#x27;ascend&#x27;</span>); <span class="comment">% 矩阵，[1|2]，[&#x27;ascend&#x27;|&#x27;descend&#x27;]【排序后的矩阵】</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><strong><code>1</code>：</strong>按列排序，默认选项</p>
+</li>
+<li><p><strong><code>2</code>：</strong>按行排序</p>
+</li>
+<li><p><strong><code>ascend</code>：</strong>升序排序，默认选项</p>
+</li>
+<li><p><strong><code>descend</code>：</strong>逆序排序</p>
+</li>
+</ul>
+<h3 id="求和"><a href="#求和" class="headerlink" title="求和"></a>求和</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sum(X); <span class="comment">% 矩阵【值】求和后的值</span></span><br></pre></td></tr></table></figure>
+<h3 id="求积"><a href="#求积" class="headerlink" title="求积"></a>求积</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">prod(X); <span class="comment">% 矩阵【值】求积后的值</span></span><br></pre></td></tr></table></figure>
+<h3 id="累加"><a href="#累加" class="headerlink" title="累加"></a>累加</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cumsum(X); <span class="comment">% 矩阵【矩阵】累加后的矩阵</span></span><br></pre></td></tr></table></figure>
+<h3 id="累乘"><a href="#累乘" class="headerlink" title="累乘"></a>累乘</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cumprod(X); <span class="comment">% 矩阵【矩阵】累乘后的矩阵</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="数据计算"><a href="#数据计算" class="headerlink" title="数据计算"></a>数据计算</h2><h3 id="函数极值"><a href="#函数极值" class="headerlink" title="函数极值"></a>函数极值</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x = fminsearch(fun, x0); <span class="comment">% 函数，数字【数字】在给定的值附近，寻找最小值点</span></span><br><span class="line">x = fmaxsearch(fun, x0); <span class="comment">% 函数，数字【数字】在给定的值附近，寻找最大值点</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="函数零点"><a href="#函数零点" class="headerlink" title="函数零点"></a>函数零点</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x = fzero(fun, x0); <span class="comment">% 函数，数字【数字】在给定的值附近，寻找零点</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="符号对象"><a href="#符号对象" class="headerlink" title="符号对象"></a>符号对象</h1><h2 id="符号对象的创建"><a href="#符号对象的创建" class="headerlink" title="符号对象的创建"></a>符号对象的创建</h2><h3 id="符号常量"><a href="#符号常量" class="headerlink" title="符号常量"></a>符号常量</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">p = sym(<span class="built_in">sin</span>(<span class="built_in">pi</span> / <span class="number">3</span>), <span class="string">&#x27;r&#x27;</span>); <span class="comment">% 数字，[&#x27;d&#x27;|&#x27;f&#x27;|&#x27;e&#x27;|&#x27;r&#x27;]【符号常量】</span></span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th align="center">符号</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">d</td>
+<td align="center">浮点数</td>
+</tr>
+<tr>
+<td align="center">f</td>
+<td align="center">有理分式的浮点数</td>
+</tr>
+<tr>
+<td align="center">e</td>
+<td align="center">有理数（带估计误差）</td>
+</tr>
+<tr>
+<td align="center">r</td>
+<td align="center">有理数</td>
+</tr>
+</tbody></table>
+<h3 id="符号变量"><a href="#符号变量" class="headerlink" title="符号变量"></a>符号变量</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">syms x; <span class="comment">% 声明符号变量</span></span><br></pre></td></tr></table></figure>
+<h3 id="符号函数"><a href="#符号函数" class="headerlink" title="符号函数"></a>符号函数</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">f = <span class="number">7</span> * x ^ <span class="number">2</span> + <span class="number">2</span> * x + <span class="number">9</span>; <span class="comment">% 创建符号函数</span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="内置的符号函数"><a href="#内置的符号函数" class="headerlink" title="内置的符号函数"></a>内置的符号函数</h2><h3 id="三角函数"><a href="#三角函数" class="headerlink" title="三角函数"></a>三角函数</h3><table>
+<thead>
+<tr>
+<th align="center">三角函数</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">sin</td>
+<td align="center">正弦</td>
+</tr>
+<tr>
+<td align="center">cos</td>
+<td align="center">余弦</td>
+</tr>
+<tr>
+<td align="center">tan</td>
+<td align="center">正切</td>
+</tr>
+<tr>
+<td align="center">asin</td>
+<td align="center">反正弦</td>
+</tr>
+<tr>
+<td align="center">acos</td>
+<td align="center">反余弦</td>
+</tr>
+<tr>
+<td align="center">atan</td>
+<td align="center">反正切</td>
+</tr>
+<tr>
+<td align="center">sinh</td>
+<td align="center">双曲正弦</td>
+</tr>
+<tr>
+<td align="center">cosh</td>
+<td align="center">双曲余弦</td>
+</tr>
+<tr>
+<td align="center">tanh</td>
+<td align="center">双曲正切</td>
+</tr>
+<tr>
+<td align="center">asinh</td>
+<td align="center">反双曲正弦</td>
+</tr>
+<tr>
+<td align="center">acosh</td>
+<td align="center">反双曲余弦</td>
+</tr>
+<tr>
+<td align="center">atanh</td>
+<td align="center">反双曲正切</td>
+</tr>
+</tbody></table>
+<h3 id="虚数函数"><a href="#虚数函数" class="headerlink" title="虚数函数"></a>虚数函数</h3><table>
+<thead>
+<tr>
+<th align="center">虚数函数</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">conj</td>
+<td align="center">复数共轭</td>
+</tr>
+<tr>
+<td align="center">real</td>
+<td align="center">复数实部</td>
+</tr>
+<tr>
+<td align="center">imag</td>
+<td align="center">复数虚部</td>
+</tr>
+<tr>
+<td align="center">abs</td>
+<td align="center">复数模</td>
+</tr>
+<tr>
+<td align="center">angle</td>
+<td align="center">复数幅角</td>
+</tr>
+</tbody></table>
+<h2 id="符号对象精度转换"><a href="#符号对象精度转换" class="headerlink" title="符号对象精度转换"></a>符号对象精度转换</h2><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">digits; <span class="comment">% 显示当前用于计算的精度</span></span><br><span class="line">digits(<span class="number">16</span>); <span class="comment">% 将计算精度改为 16 位</span></span><br><span class="line">a16 = vpa(<span class="built_in">sqrt</span>(<span class="number">2</span>)); <span class="comment">% 使 sqrt(2) 运算按照规定的精度执行</span></span><br><span class="line">a8 = vpa(<span class="built_in">sqrt</span>(<span class="number">2</span>), <span class="number">8</span>); <span class="comment">% 在 vpa 内控制精度，离开这一步精度恢复</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="符号多项式函数"><a href="#符号多项式函数" class="headerlink" title="符号多项式函数"></a>符号多项式函数</h2><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">finverse(f, x); <span class="comment">% 函数，符号变量【反函数】对 f 中的变量 x 求反函数</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="符号函数的计算"><a href="#符号函数的计算" class="headerlink" title="符号函数的计算"></a>符号函数的计算</h2><h3 id="极限"><a href="#极限" class="headerlink" title="极限"></a>极限</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">limit(f, x, <span class="number">4</span>); <span class="comment">% 求 f(x), x -&gt; 4</span></span><br><span class="line">limit(f, x, <span class="number">4</span>, <span class="string">&#x27;left&#x27;</span>); <span class="comment">% 求 f(x), x -&gt; 4-</span></span><br><span class="line">limit(f, x, <span class="number">4</span>, <span class="string">&#x27;right&#x27;</span>); <span class="comment">% 求 f(x), x -&gt; 4+</span></span><br><span class="line">limit(f, <span class="number">4</span>); <span class="comment">% 默认变量 -&gt; 4</span></span><br><span class="line">limit(f); <span class="comment">% 默认变量 -&gt; 0</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="求和-1"><a href="#求和-1" class="headerlink" title="求和"></a>求和</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">symsum(s, x, <span class="number">3</span>, <span class="number">5</span>); <span class="comment">% 计算表达式 s 变量 x 从 3 到 5 的级数和</span></span><br><span class="line">symsum(s, <span class="number">3</span>, <span class="number">5</span>); <span class="comment">% 计算表达式 s 默认变量从 3 到 5 的级数和</span></span><br><span class="line">symsum(s); <span class="comment">% 计算 s 默认变量从 0 到 n - 1 的级数和</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="求导"><a href="#求导" class="headerlink" title="求导"></a>求导</h3><h4 id="单变量求导"><a href="#单变量求导" class="headerlink" title="单变量求导"></a>单变量求导</h4><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">diff(f, x, n); <span class="comment">% f 对 x 的 n 阶导</span></span><br><span class="line">diff(f, x); <span class="comment">% f 对 x 的 1 阶导</span></span><br><span class="line">diff(f, n); <span class="comment">% f 对默认变量的 n 阶导</span></span><br><span class="line">diff(f); <span class="comment">% 默认变量 1 阶导</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="多元偏导"><a href="#多元偏导" class="headerlink" title="多元偏导"></a>多元偏导</h4><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">diff(f, x, y); <span class="comment">% 先对 x 求偏导，再对 y 求偏导</span></span><br><span class="line">diff(f, x, y, z); <span class="comment">% 先对 x 求偏导，再对 y 求偏导，再对 z 求偏导</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="积分"><a href="#积分" class="headerlink" title="积分"></a>积分</h3><h4 id="定积分"><a href="#定积分" class="headerlink" title="定积分"></a>定积分</h4><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int(f, x, <span class="number">1</span>, <span class="number">2</span>); <span class="comment">% 函数 f 变量 x 在 1~2 区间定积分</span></span><br><span class="line">int(f, <span class="number">1</span>, <span class="number">2</span>); <span class="comment">% 函数 f 默认变量在 1~2 区间定积分</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="不定积分"><a href="#不定积分" class="headerlink" title="不定积分"></a>不定积分</h4><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int(f, x); <span class="comment">% 函数 f 变量 x 的不定积分</span></span><br><span class="line">int(f); <span class="comment">% 函数 f 默认变量的不定积分</span></span><br></pre></td></tr></table></figure>
+<h3 id="一维泰勒展开"><a href="#一维泰勒展开" class="headerlink" title="一维泰勒展开"></a>一维泰勒展开</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">taylor(f, x, <span class="number">4</span>); <span class="comment">% f 在 x = 4 处展开为五阶泰勒级数</span></span><br><span class="line">taylor(f, x); <span class="comment">% f 在 x = 0 处展开为五阶泰勒级数</span></span><br><span class="line">taylor(f); <span class="comment">% f 在默认变量 = 0 处展开为五阶泰勒级数</span></span><br></pre></td></tr></table></figure>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gitee.com/kokoachino/picture-bed/raw/master/%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/head.jpg" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gitee.com/kokoachino/picture-bed/raw/master/%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/head.jpg" title="头像" alt="头像"></a><div class="post-copyright__author_name">星开祈灵</div><div class="post-copyright__author_desc">( ´•̥̥̥ω•̥̥̥` )</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://kokoachino.github.io/2024/01/05/02%20Matlab/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://kokoachino.github.io/2024/01/05/02%20Matlab/')">Matlab</span></a></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://KokoaChino.github.io" target="_blank">星开祈灵的个人博客</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/%E8%AF%AD%E6%B3%95/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>语法<span class="tagsPageCount">8</span></a><a class="post-meta__box__tags" href="/tags/%E5%87%BD%E6%95%B0/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>函数<span class="tagsPageCount">4</span></a><a class="post-meta__box__tags" href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>数据类型<span class="tagsPageCount">4</span></a><a class="post-meta__box__tags" href="/tags/Matlab/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>Matlab<span class="tagsPageCount">1</span></a><a class="post-meta__box__tags" href="/tags/%E5%9B%BE%E5%83%8F%E7%BB%98%E5%88%B6/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>图像绘制<span class="tagsPageCount">1</span></a><a class="post-meta__box__tags" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1%E4%B8%8E%E8%AE%A1%E7%AE%97/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>数据统计与计算<span class="tagsPageCount">1</span></a><a class="post-meta__box__tags" href="/tags/%E7%AC%A6%E5%8F%B7%E5%AF%B9%E8%B1%A1/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>符号对象<span class="tagsPageCount">1</span></a><a class="post-meta__box__tags" href="/tags/%E6%95%B0%E5%AD%A6/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>数学<span class="tagsPageCount">2</span></a></div></div></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/11/30/03%20Linux%20%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gitee.com/kokoachino/picture-bed/raw/master/%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87.jpg?_r_=c3df303a-39c9-3e26-0281-1da770f33e65" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Linux 操作系统</div></div></a></div><div class="next-post pull-right"><a href="/2024/01/15/03%20Lombok%20%E4%BB%A3%E7%A0%81%E7%AE%80%E5%8C%96%E6%A1%86%E6%9E%B6/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gitee.com/kokoachino/picture-bed/raw/master/%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87.jpg?_r_=b19427cd-4e11-bb51-0ce9-95521a26d72a" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Lombok 代码简化框架</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/2023/09/10/01%20MySQL%20%E6%95%B0%E6%8D%AE%E5%BA%93/" title="MySQL 数据库"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gitee.com/kokoachino/picture-bed/raw/master/%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87.jpg?_r_=373504bb-35ab-4082-9702-1f4ac20bda41" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2023-09-10</div><div class="title">MySQL 数据库</div></div></a></div><div><a href="/2023/08/05/01%20Markdown%20%E8%AF%AD%E6%B3%95/" title="Markdown 语法"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gitee.com/kokoachino/picture-bed/raw/master/%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87.jpg?_r_=56da21f5-a2c0-741b-d5f2-5b48f3cd3724" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2023-08-05</div><div class="title">Markdown 语法</div></div></a></div><div><a href="/2023/11/12/03%20JavaSrcipt/" title="JavaScript"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gitee.com/kokoachino/picture-bed/raw/master/%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87.jpg?_r_=3173c3cb-d706-0a50-6392-77cd7c36facf" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2023-11-12</div><div class="title">JavaScript</div></div></a></div><div><a href="/2023/07/22/01%20HTML/" title="HTML"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gitee.com/kokoachino/picture-bed/raw/master/%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87.jpg?_r_=4dcf31a1-f82a-3d10-5a0c-e6795ea9103a" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2023-07-22</div><div class="title">HTML</div></div></a></div><div><a href="/2023/09/18/02%20CSS/" title="CSS"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gitee.com/kokoachino/picture-bed/raw/master/%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87.jpg?_r_=b92851c8-0e8f-783b-1891-a01fbaba429c" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2023-09-18</div><div class="title">CSS</div></div></a></div><div><a href="/2024/12/05/03%20Python%20%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E5%9F%BA%E7%A1%80/" title="Python 数学建模基础"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gitee.com/kokoachino/picture-bed/raw/master/%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87.jpg?_r_=3845718d-b398-fd4b-e1ed-05c3918ba169" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-12-05</div><div class="title">Python 数学建模基础</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E5%AE%9A%E4%B9%89%E5%92%8C%E5%9F%BA%E6%9C%AC%E8%BF%90%E7%AE%97"><span class="toc-number">1.</span> <span class="toc-text">变量定义和基本运算</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E5%AD%97"><span class="toc-number">1.1.</span> <span class="toc-text">数字</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B4%E6%95%B0"><span class="toc-number">1.1.1.</span> <span class="toc-text">整数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E6%95%B0"><span class="toc-number">1.1.2.</span> <span class="toc-text">小数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%A9%E9%98%B5"><span class="toc-number">1.2.</span> <span class="toc-text">矩阵</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9F%A9%E9%98%B5%E7%9A%84%E7%94%9F%E6%88%90"><span class="toc-number">1.2.1.</span> <span class="toc-text">矩阵的生成</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9B%B4%E6%8E%A5%E7%94%9F%E6%88%90"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">直接生成</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E7%94%9F%E6%88%90"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">函数生成</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9F%A9%E9%98%B5%E7%9A%84%E8%BF%90%E7%AE%97"><span class="toc-number">1.2.2.</span> <span class="toc-text">矩阵的运算</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E8%BF%90%E7%AE%97"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">基本运算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%AB%98%E7%BA%A7%E8%BF%90%E7%AE%97"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">高级运算</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9F%A9%E9%98%B5%E7%9A%84%E4%BF%AE%E6%94%B9"><span class="toc-number">1.2.3.</span> <span class="toc-text">矩阵的修改</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%83%E7%B4%A0%E6%9B%BF%E6%8D%A2"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">元素替换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9F%A9%E9%98%B5%E6%8B%BC%E6%8E%A5"><span class="toc-number">1.2.3.2.</span> <span class="toc-text">矩阵拼接</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9F%A9%E9%98%B5%E5%8F%98%E7%BB%B4"><span class="toc-number">1.2.3.3.</span> <span class="toc-text">矩阵变维</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E8%8E%B7%E5%8F%96"><span class="toc-number">1.2.4.</span> <span class="toc-text">信息获取</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E7%BB%84"><span class="toc-number">1.3.</span> <span class="toc-text">数组</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E7%BB%B4%E6%95%B0%E7%BB%84"><span class="toc-number">1.3.1.</span> <span class="toc-text">一维数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84"><span class="toc-number">1.3.2.</span> <span class="toc-text">二维数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84"><span class="toc-number">1.3.3.</span> <span class="toc-text">多维数组</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E9%A1%B9%E5%BC%8F"><span class="toc-number">1.4.</span> <span class="toc-text">多项式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E9%A1%B9%E5%BC%8F%E7%9A%84%E5%88%9B%E5%BB%BA"><span class="toc-number">1.4.1.</span> <span class="toc-text">多项式的创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E9%A1%B9%E5%BC%8F%E6%B1%82%E5%80%BC"><span class="toc-number">1.4.2.</span> <span class="toc-text">多项式求值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E9%A1%B9%E5%BC%8F%E6%B1%82%E6%A0%B9"><span class="toc-number">1.4.3.</span> <span class="toc-text">多项式求根</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">1.5.</span> <span class="toc-text">字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%88%9B%E5%BB%BA"><span class="toc-number">1.5.1.</span> <span class="toc-text">字符串的创建</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9B%B4%E6%8E%A5%E7%94%9F%E6%88%90-1"><span class="toc-number">1.5.1.1.</span> <span class="toc-text">直接生成</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E7%94%9F%E6%88%90-1"><span class="toc-number">1.5.1.2.</span> <span class="toc-text">函数生成</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="toc-number">1.5.2.</span> <span class="toc-text">字符串的操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AF%94%E8%BE%83"><span class="toc-number">1.5.2.1.</span> <span class="toc-text">比较</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5%E6%89%BE"><span class="toc-number">1.5.2.2.</span> <span class="toc-text">查找</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%88%AA%E5%8F%96"><span class="toc-number">1.5.2.3.</span> <span class="toc-text">截取</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9B%BF%E6%8D%A2"><span class="toc-number">1.5.2.4.</span> <span class="toc-text">替换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BD%AC%E5%A4%A7%E5%B0%8F%E5%86%99"><span class="toc-number">1.5.2.5.</span> <span class="toc-text">转大小写</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%B9%E9%BD%90"><span class="toc-number">1.5.2.6.</span> <span class="toc-text">对齐</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-number">1.5.2.7.</span> <span class="toc-text">其他</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AF%AD%E5%8F%A5"><span class="toc-number">2.</span> <span class="toc-text">语句</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E8%AF%AD%E5%8F%A5"><span class="toc-number">2.1.</span> <span class="toc-text">选择语句</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#if-elseif-else-end"><span class="toc-number">2.1.1.</span> <span class="toc-text">if - elseif - else - end</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#switch-case-otherwise-end"><span class="toc-number">2.1.2.</span> <span class="toc-text">switch - case - otherwise - end</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#try-catch"><span class="toc-number">2.1.3.</span> <span class="toc-text">try - catch</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5"><span class="toc-number">2.2.</span> <span class="toc-text">循环语句</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#for"><span class="toc-number">2.2.1.</span> <span class="toc-text">for</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#while"><span class="toc-number">2.2.2.</span> <span class="toc-text">while</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E6%8E%A7%E5%88%B6"><span class="toc-number">2.3.</span> <span class="toc-text">程序控制</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%87%E4%BB%B6"><span class="toc-number">3.</span> <span class="toc-text">文件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%84%9A%E6%9C%AC%E6%96%87%E4%BB%B6"><span class="toc-number">3.1.</span> <span class="toc-text">脚本文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E6%96%87%E4%BB%B6"><span class="toc-number">3.2.</span> <span class="toc-text">函数文件</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%BE%E5%83%8F%E7%BB%98%E5%88%B6"><span class="toc-number">4.</span> <span class="toc-text">图像绘制</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E7%BB%B4%E6%9B%B2%E7%BA%BF"><span class="toc-number">4.1.</span> <span class="toc-text">二维曲线</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E5%87%BD%E6%95%B0"><span class="toc-number">4.1.1.</span> <span class="toc-text">基本函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%BC%E5%BC%8F%E8%AE%BE%E7%BD%AE"><span class="toc-number">4.1.2.</span> <span class="toc-text">格式设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E5%BD%A2%E4%BF%AE%E9%A5%B0"><span class="toc-number">4.1.3.</span> <span class="toc-text">图形修饰</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%87%E9%A2%98%E6%A0%87%E7%AD%BE"><span class="toc-number">4.1.3.1.</span> <span class="toc-text">标题标签</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%BE%E5%BD%A2%E4%BF%9D%E6%8C%81"><span class="toc-number">4.1.3.2.</span> <span class="toc-text">图形保持</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E5%89%B2%E7%BB%98%E5%88%B6"><span class="toc-number">4.1.3.3.</span> <span class="toc-text">分割绘制</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E7%BB%B4%E7%89%B9%E6%AE%8A%E5%9B%BE%E5%BD%A2"><span class="toc-number">4.2.</span> <span class="toc-text">二维特殊图形</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%B1%E7%8A%B6%E5%9B%BE"><span class="toc-number">4.2.1.</span> <span class="toc-text">柱状图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A5%BC%E5%BD%A2%E5%9B%BE"><span class="toc-number">4.2.2.</span> <span class="toc-text">饼形图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B4%E6%96%B9%E5%9B%BE"><span class="toc-number">4.2.3.</span> <span class="toc-text">直方图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A6%BB%E6%95%A3%E6%95%B0%E6%8D%AE%E5%9B%BE"><span class="toc-number">4.2.4.</span> <span class="toc-text">离散数据图</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E7%BB%B4%E6%9B%B2%E7%BA%BF%E6%9B%B2%E9%9D%A2"><span class="toc-number">4.3.</span> <span class="toc-text">三维曲线曲面</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E7%BB%B4%E6%9B%B2%E7%BA%BF"><span class="toc-number">4.3.1.</span> <span class="toc-text">三维曲线</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E7%BB%B4%E6%9B%B2%E9%9D%A2"><span class="toc-number">4.3.2.</span> <span class="toc-text">三维曲面</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1%E4%B8%8E%E8%AE%A1%E7%AE%97"><span class="toc-number">5.</span> <span class="toc-text">数据统计与计算</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1"><span class="toc-number">5.1.</span> <span class="toc-text">数据统计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E5%80%BC"><span class="toc-number">5.1.1.</span> <span class="toc-text">最值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9D%87%E5%80%BC"><span class="toc-number">5.1.2.</span> <span class="toc-text">均值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%AD%E5%80%BC"><span class="toc-number">5.1.3.</span> <span class="toc-text">中值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%92%E5%BA%8F"><span class="toc-number">5.1.4.</span> <span class="toc-text">排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B1%82%E5%92%8C"><span class="toc-number">5.1.5.</span> <span class="toc-text">求和</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B1%82%E7%A7%AF"><span class="toc-number">5.1.6.</span> <span class="toc-text">求积</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%AF%E5%8A%A0"><span class="toc-number">5.1.7.</span> <span class="toc-text">累加</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%AF%E4%B9%98"><span class="toc-number">5.1.8.</span> <span class="toc-text">累乘</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%AE%A1%E7%AE%97"><span class="toc-number">5.2.</span> <span class="toc-text">数据计算</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E6%9E%81%E5%80%BC"><span class="toc-number">5.2.1.</span> <span class="toc-text">函数极值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E9%9B%B6%E7%82%B9"><span class="toc-number">5.2.2.</span> <span class="toc-text">函数零点</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%A6%E5%8F%B7%E5%AF%B9%E8%B1%A1"><span class="toc-number">6.</span> <span class="toc-text">符号对象</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%A6%E5%8F%B7%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%88%9B%E5%BB%BA"><span class="toc-number">6.1.</span> <span class="toc-text">符号对象的创建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%A6%E5%8F%B7%E5%B8%B8%E9%87%8F"><span class="toc-number">6.1.1.</span> <span class="toc-text">符号常量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%A6%E5%8F%B7%E5%8F%98%E9%87%8F"><span class="toc-number">6.1.2.</span> <span class="toc-text">符号变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%A6%E5%8F%B7%E5%87%BD%E6%95%B0"><span class="toc-number">6.1.3.</span> <span class="toc-text">符号函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E7%BD%AE%E7%9A%84%E7%AC%A6%E5%8F%B7%E5%87%BD%E6%95%B0"><span class="toc-number">6.2.</span> <span class="toc-text">内置的符号函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E8%A7%92%E5%87%BD%E6%95%B0"><span class="toc-number">6.2.1.</span> <span class="toc-text">三角函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%99%9A%E6%95%B0%E5%87%BD%E6%95%B0"><span class="toc-number">6.2.2.</span> <span class="toc-text">虚数函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%A6%E5%8F%B7%E5%AF%B9%E8%B1%A1%E7%B2%BE%E5%BA%A6%E8%BD%AC%E6%8D%A2"><span class="toc-number">6.3.</span> <span class="toc-text">符号对象精度转换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%A6%E5%8F%B7%E5%A4%9A%E9%A1%B9%E5%BC%8F%E5%87%BD%E6%95%B0"><span class="toc-number">6.4.</span> <span class="toc-text">符号多项式函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%A6%E5%8F%B7%E5%87%BD%E6%95%B0%E7%9A%84%E8%AE%A1%E7%AE%97"><span class="toc-number">6.5.</span> <span class="toc-text">符号函数的计算</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%81%E9%99%90"><span class="toc-number">6.5.1.</span> <span class="toc-text">极限</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B1%82%E5%92%8C-1"><span class="toc-number">6.5.2.</span> <span class="toc-text">求和</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B1%82%E5%AF%BC"><span class="toc-number">6.5.3.</span> <span class="toc-text">求导</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%95%E5%8F%98%E9%87%8F%E6%B1%82%E5%AF%BC"><span class="toc-number">6.5.3.1.</span> <span class="toc-text">单变量求导</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%9A%E5%85%83%E5%81%8F%E5%AF%BC"><span class="toc-number">6.5.3.2.</span> <span class="toc-text">多元偏导</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A7%AF%E5%88%86"><span class="toc-number">6.5.4.</span> <span class="toc-text">积分</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E7%A7%AF%E5%88%86"><span class="toc-number">6.5.4.1.</span> <span class="toc-text">定积分</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8D%E5%AE%9A%E7%A7%AF%E5%88%86"><span class="toc-number">6.5.4.2.</span> <span class="toc-text">不定积分</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E7%BB%B4%E6%B3%B0%E5%8B%92%E5%B1%95%E5%BC%80"><span class="toc-number">6.5.5.</span> <span class="toc-text">一维泰勒展开</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/05/15/05%20Python%20%E7%AE%97%E6%B3%95%E6%A8%A1%E7%89%88/" title="Python 算法模版">Python 算法模版</a><time datetime="2025-05-14T16:00:00.000Z" title="发表于 2025-05-15 00:00:00">2025-05-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/04/18/04%20C++%20%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80/" title="C++ 语法基础">C++ 语法基础</a><time datetime="2025-04-17T16:00:00.000Z" title="发表于 2025-04-18 00:00:00">2025-04-18</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/05/03%20Python%20%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E5%9F%BA%E7%A1%80/" title="Python 数学建模基础">Python 数学建模基础</a><time datetime="2024-12-04T16:00:00.000Z" title="发表于 2024-12-05 00:00:00">2024-12-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/11/16/13%20JavaJUC%20%E5%A4%9A%E7%BA%BF%E7%A8%8B/" title="JavaJUC 多线程">JavaJUC 多线程</a><time datetime="2024-11-15T16:00:00.000Z" title="发表于 2024-11-16 00:00:00">2024-11-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/11/01/12%20JavaJVM%20%E8%99%9A%E6%8B%9F%E6%9C%BA/" title="JavaJVM 虚拟机">JavaJVM 虚拟机</a><time datetime="2024-10-31T16:00:00.000Z" title="发表于 2024-11-01 00:00:00">2024-11-01</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2024 - 2025 By <a class="footer-bar-link" href="/" title="星开祈灵" target="_blank">星开祈灵</a></div></div><div id="footer-type-tips"></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu" title="主题">主题</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">26</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">131</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">4</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://blog.anheyu.com/" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://image.anheyu.com/" title="安知鱼图床"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://image.anheyu.com/favicon.ico" alt="安知鱼图床"/><span class="back-menu-item-text">安知鱼图床</span></a></div></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/API/" style="font-size: 0.88rem;">API<sup>1</sup></a><a href="/tags/CSS/" style="font-size: 0.88rem;">CSS<sup>1</sup></a><a href="/tags/Git/" style="font-size: 0.88rem;">Git<sup>1</sup></a><a href="/tags/HTML/" style="font-size: 0.88rem;">HTML<sup>1</sup></a><a href="/tags/Java/" style="font-size: 0.88rem;">Java<sup>7</sup></a><a href="/tags/Lambda/" style="font-size: 0.88rem;">Lambda<sup>1</sup></a><a href="/tags/Matlab/" style="font-size: 0.88rem;">Matlab<sup>1</sup></a><a href="/tags/MySQL/" style="font-size: 0.88rem;">MySQL<sup>1</sup></a><a href="/tags/Optional/" style="font-size: 0.88rem;">Optional<sup>1</sup></a><a href="/tags/Stream-%E6%B5%81/" style="font-size: 0.88rem;">Stream 流<sup>1</sup></a><a href="/tags/Web/" style="font-size: 0.88rem;">Web<sup>6</sup></a><a href="/tags/%E4%BA%8B%E5%8A%A1/" style="font-size: 0.88rem;">事务<sup>4</sup></a><a href="/tags/%E5%87%BD%E6%95%B0/" style="font-size: 0.88rem;">函数<sup>4</sup></a><a href="/tags/%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3/" style="font-size: 0.88rem;">函数式接口<sup>1</sup></a><a href="/tags/%E5%88%86%E6%94%AF/" style="font-size: 0.88rem;">分支<sup>1</sup></a><a href="/tags/%E5%8F%8D%E5%B0%84/" style="font-size: 0.88rem;">反射<sup>1</sup></a><a href="/tags/%E5%91%BD%E4%BB%A4/" style="font-size: 0.88rem;">命令<sup>2</sup></a><a href="/tags/%E5%9B%BE%E5%83%8F%E7%BB%98%E5%88%B6/" style="font-size: 0.88rem;">图像绘制<sup>1</sup></a><a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 0.88rem;">多线程<sup>1</sup></a><a href="/tags/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/" style="font-size: 0.88rem;">存储过程<sup>1</sup></a><a href="/tags/%E5%AE%9A%E6%97%B6%E5%99%A8/" style="font-size: 0.88rem;">定时器<sup>2</sup></a><a href="/tags/%E5%B1%9E%E6%80%A7/" style="font-size: 0.88rem;">属性<sup>2</sup></a><a href="/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E5%99%A8/" style="font-size: 0.88rem;">异常处理器<sup>1</sup></a><a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 0.88rem;">数学<sup>2</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 0.88rem;">数据库<sup>2</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" style="font-size: 0.88rem;">数据类型<sup>4</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1%E4%B8%8E%E8%AE%A1%E7%AE%97/" style="font-size: 0.88rem;">数据统计与计算<sup>1</sup></a><a href="/tags/%E6%96%87%E4%BB%B6/" style="font-size: 0.88rem;">文件<sup>1</sup></a><a href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" style="font-size: 0.88rem;">新特性<sup>1</sup></a><a href="/tags/%E6%AD%A3%E5%88%99%E5%8C%B9%E9%85%8D/" style="font-size: 0.88rem;">正则匹配<sup>1</sup></a><a href="/tags/%E6%B3%A8%E8%A7%A3/" style="font-size: 0.88rem;">注解<sup>5</sup></a><a href="/tags/%E6%B8%B8%E6%A0%87/" style="font-size: 0.88rem;">游标<sup>1</sup></a><a href="/tags/%E7%AC%A6%E5%8F%B7%E5%AF%B9%E8%B1%A1/" style="font-size: 0.88rem;">符号对象<sup>1</sup></a><a href="/tags/%E7%B4%A2%E5%BC%95/" style="font-size: 0.88rem;">索引<sup>1</sup></a><a href="/tags/%E8%A7%86%E5%9B%BE/" style="font-size: 0.88rem;">视图<sup>1</sup></a><a href="/tags/%E8%A7%A6%E5%8F%91%E5%99%A8/" style="font-size: 0.88rem;">触发器<sup>1</sup></a><a href="/tags/%E8%AF%AD%E6%B3%95/" style="font-size: 0.88rem;">语法<sup>8</sup></a><a href="/tags/%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/" style="font-size: 0.88rem;">远程仓库<sup>1</sup></a><a href="/tags/%E9%80%89%E6%8B%A9%E5%99%A8/" style="font-size: 0.88rem;">选择器<sup>1</sup></a><a href="/tags/%E9%94%81/" style="font-size: 0.88rem;">锁<sup>4</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("11/1/2024 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2024 By 安知鱼 V1.6.14",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 星开祈灵 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><div class="js-pjax"><input type="hidden" name="page-type" id="page-type" value="post"></div><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>
