@@ -60,7 +60,7 @@
   isHome: true,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '2025-08-24 11:47:06',
+  postUpdate: '2025-09-13 12:45:01',
   postMainColor: '',
 }</script><noscript><style type="text/css">
   #nav {
@@ -228,7 +228,7 @@ if (true) {
         其他
       </a>
     </div>
-    </div><div class="category-bar-next" id="category-bar-next" onclick="anzhiyu.scrollCategoryBarToRight()"><i class="anzhiyufont anzhiyu-icon-angle-double-right"></i></div><a class="catalog-more" href="/categories/">更多</a></div></div></div><div class="recent-post-item lastestpost-item" onclick="pjax.loadUrl('/2025/08/24/07%20COLA%20%E6%9E%B6%E6%9E%84/')"><div class="recent-post-info no-cover"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><div class="article-categories-original">其他</div><span class="newPost">最新</span><a class="unvisited-post" href="/2025/08/24/07%20COLA%20%E6%9E%B6%E6%9E%84/" title="COLA 架构">未读</a></div><a class="article-title" href="/2025/08/24/07%20COLA%20%E6%9E%B6%E6%9E%84/" title="COLA 架构">COLA 架构</a></div><div class="article-meta-wrap"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days" style="font-size: 15px; display:none"></i><span class="article-meta-label">发表于</span><time datetime="2025-08-23T16:00:00.000Z" title="发表于 2025-08-24 00:00:00" time="2025-08-24 00:00:00">2025-08-24</time><time class="time_hidden" datetime="2025-08-24T03:46:37.134Z" title="更新于 2025-08-24 11:46:37" time="2025-08-24 11:46:37">2025-08-24</time></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/Java/" event.cancelbubble onclick="window.event.cancelBubble=true;"><span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Java</span></a><a class="article-meta__tags" href="/tags/COLA/" event.cancelbubble onclick="window.event.cancelBubble=true;"><span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>COLA</span></a><a class="article-meta__tags" href="/tags/DDD/" event.cancelbubble onclick="window.event.cancelBubble=true;"><span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>DDD</span></a><a class="article-meta__tags" href="/tags/%E6%9E%B6%E6%9E%84/" event.cancelbubble onclick="window.event.cancelBubble=true;"><span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>架构</span></a></span></div><div class="content">
+    </div><div class="category-bar-next" id="category-bar-next" onclick="anzhiyu.scrollCategoryBarToRight()"><i class="anzhiyufont anzhiyu-icon-angle-double-right"></i></div><a class="catalog-more" href="/categories/">更多</a></div></div></div><div class="recent-post-item lastestpost-item" onclick="pjax.loadUrl('/2025/08/24/07%20COLA%20%E6%9E%B6%E6%9E%84/')"><div class="recent-post-info no-cover"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><div class="article-categories-original">其他</div><span class="newPost">最新</span><a class="unvisited-post" href="/2025/08/24/07%20COLA%20%E6%9E%B6%E6%9E%84/" title="COLA 架构">未读</a></div><a class="article-title" href="/2025/08/24/07%20COLA%20%E6%9E%B6%E6%9E%84/" title="COLA 架构">COLA 架构</a></div><div class="article-meta-wrap"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days" style="font-size: 15px; display:none"></i><span class="article-meta-label">发表于</span><time datetime="2025-08-23T16:00:00.000Z" title="发表于 2025-08-24 00:00:00" time="2025-08-24 00:00:00">2025-08-24</time><time class="time_hidden" datetime="2025-09-13T04:39:27.892Z" title="更新于 2025-09-13 12:39:27" time="2025-09-13 12:39:27">2025-09-13</time></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/Java/" event.cancelbubble onclick="window.event.cancelBubble=true;"><span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Java</span></a><a class="article-meta__tags" href="/tags/COLA/" event.cancelbubble onclick="window.event.cancelBubble=true;"><span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>COLA</span></a><a class="article-meta__tags" href="/tags/DDD/" event.cancelbubble onclick="window.event.cancelBubble=true;"><span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>DDD</span></a><a class="article-meta__tags" href="/tags/%E6%9E%B6%E6%9E%84/" event.cancelbubble onclick="window.event.cancelBubble=true;"><span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>架构</span></a></span></div><div class="content">
 
 
 
@@ -245,7 +245,7 @@ COLA 架构
 依赖倒置原则：如图所示，所有依赖都指向中心的领域层（Domain）。业务逻辑不依赖于任何技术实现，而是技术实现来依赖业务逻辑
 ​                           这保证了业务核心的稳定性和纯粹性
 
-业务逻辑内聚：将原本散落在 Service 中的业务逻辑，收敛到领域层的领域对象（DO）中，让代码职责更清晰
+业务逻辑内聚：将原本散落在 Service 中的业务逻辑，收敛到领域层的领域对象中，让代码职责更清晰
 
 命令查询职责分离 (CQRS)：将“改变系统状态”的命令（Command）操作和“不改变状态”的查询（Query）操作分离开，让系统意图更明确
 
@@ -268,11 +268,15 @@ client
 用于应用层与外部（如前端）或系统间（如RPC）的数据交互，是系统的门面
 
 
-DO
-Domain Object
+–
+–
 domain
 领域对象
-业务的核心。封装了业务属性和行为（方 ...</div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/2025/06/27/06%20Java%20%E7%AE%97%E6%B3%95%E6%A8%A1%E7%89%88/')"><div class="recent-post-info no-cover"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><div class="article-categories-original">其他</div><a class="unvisited-post" href="/2025/06/27/06%20Java%20%E7%AE%97%E6%B3%95%E6%A8%A1%E7%89%88/" title="Java 算法模版">未读</a></div><a class="article-title" href="/2025/06/27/06%20Java%20%E7%AE%97%E6%B3%95%E6%A8%A1%E7%89%88/" title="Java 算法模版">Java 算法模版</a></div><div class="article-meta-wrap"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days" style="font-size: 15px; display:none"></i><span class="article-meta-label">发表于</span><time datetime="2025-06-26T16:00:00.000Z" title="发表于 2025-06-27 00:00:00" time="2025-06-27 00:00:00">2025-06-27</time><time class="time_hidden" datetime="2025-06-27T07:35:38.361Z" title="更新于 2025-06-27 15:35:38" time="2025-06-27 15:35:38">2025-06-27</time></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/Java/" event.cancelbubble onclick="window.event.cancelBubble=true;"><span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Java</span></a><a class="article-meta__tags" href="/tags/%E7%AE%97%E6%B3%95/" event.cancelbubble onclick="window.event.cancelBubble=true;"><span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>算法</span></a></span></div><div class="content">
+业务的核心。封装了业务属性和行为（方法），是富血模型
+
+
+DO
+Dat ...</div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/2025/06/27/06%20Java%20%E7%AE%97%E6%B3%95%E6%A8%A1%E7%89%88/')"><div class="recent-post-info no-cover"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><div class="article-categories-original">其他</div><a class="unvisited-post" href="/2025/06/27/06%20Java%20%E7%AE%97%E6%B3%95%E6%A8%A1%E7%89%88/" title="Java 算法模版">未读</a></div><a class="article-title" href="/2025/06/27/06%20Java%20%E7%AE%97%E6%B3%95%E6%A8%A1%E7%89%88/" title="Java 算法模版">Java 算法模版</a></div><div class="article-meta-wrap"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days" style="font-size: 15px; display:none"></i><span class="article-meta-label">发表于</span><time datetime="2025-06-26T16:00:00.000Z" title="发表于 2025-06-27 00:00:00" time="2025-06-27 00:00:00">2025-06-27</time><time class="time_hidden" datetime="2025-06-27T07:35:38.361Z" title="更新于 2025-06-27 15:35:38" time="2025-06-27 15:35:38">2025-06-27</time></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/Java/" event.cancelbubble onclick="window.event.cancelBubble=true;"><span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Java</span></a><a class="article-meta__tags" href="/tags/%E7%AE%97%E6%B3%95/" event.cancelbubble onclick="window.event.cancelBubble=true;"><span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>算法</span></a></span></div><div class="content">
 
 
 
